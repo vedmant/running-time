@@ -1,11 +1,42 @@
+import Vue from 'vue'
+import Vuex from 'vuex';
+import VueRouter from 'vue-router';
+import jQuery from 'jquery';
 
 /**
- * First we will load all of this project's JavaScript dependencies which
- * include Vue and Vue Resource. This gives a great starting point for
- * building robust, powerful web applications using Vue and Laravel.
+ * Assing global variables
  */
 
-require('./bootstrap');
+window.$ = window.jQuery = jQuery;
+window.Vue = Vue;
+
+
+/**
+ * Require jQuery and Vue dependant libaries
+ */
+
+require('bootstrap-sass');
+require('vue-resource');
+
+
+/**
+ * Vue extensions
+ */
+
+Vue.use(Vuex);
+Vue.use(VueRouter);
+
+
+/**
+ * Attach the "CSRF" header to each of the outgoing requests issued by this application.
+ * The CSRF middleware included with Laravel will automatically verify the header's value.
+ */
+Vue.http.interceptors.push((request, next) => {
+   request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
+
+   next();
+});
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

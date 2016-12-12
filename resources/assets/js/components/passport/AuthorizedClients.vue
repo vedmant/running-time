@@ -91,10 +91,9 @@
           */
          getTokens() {
             this.$http.get('/oauth/tokens')
-               .then(response = > {
-               this.tokens = response.data;
-         })
-            ;
+               .then(response => {
+                  this.tokens = response.data;
+               });
          },
 
          /**
@@ -102,10 +101,9 @@
           */
          revoke(token) {
             this.$http.delete('/oauth/tokens/' + token.id)
-               .then(response = > {
-               this.getTokens();
-         })
-            ;
+               .then(response => {
+                  this.getTokens();
+               });
          }
       }
    }
