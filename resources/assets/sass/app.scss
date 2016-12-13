@@ -7,3 +7,10 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+/**
+ * Transitions
+ */
+
+.fade-enter-active, .fade-leave-active { transition: opacity .1s; }
+.fade-enter, .fade-leave-active { opacity: 0; }

@@ -1,7 +1,9 @@
 import Vue from 'vue'
-import Vuex from 'vuex';
-import VueRouter from 'vue-router';
 import jQuery from 'jquery';
+import _ from 'lodash';
+import store from './vuex/store' // vuex store instance
+import router from './router' // vue-router instance
+import { sync } from 'vuex-router-sync';
 
 /**
  * Assing global variables
@@ -9,6 +11,7 @@ import jQuery from 'jquery';
 
 window.$ = window.jQuery = jQuery;
 window.Vue = Vue;
+window._ = _;
 
 
 /**
@@ -20,36 +23,48 @@ require('vue-resource');
 
 
 /**
- * Vue extensions
- */
-
-Vue.use(Vuex);
-Vue.use(VueRouter);
-
-
-/**
  * Attach the "CSRF" header to each of the outgoing requests issued by this application.
  * The CSRF middleware included with Laravel will automatically verify the header's value.
  */
-Vue.http.interceptors.push((request, next) => {
-   request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
-
-   next();
-});
+// Vue.http.interceptors.push((request, next) => {
+//   request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
+//   next();
+// });
 
 
 /**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
+ * Vue Components
  */
-
-Vue.component('example', require('./components/Example.vue'));
-
+Vue.component('navbar', require('./components/layout/Navbar.vue'));
 Vue.component('passport-clients', require('./components/passport/Clients.vue'));
 Vue.component('passport-authorized-clients', require('./components/passport/AuthorizedClients.vue'));
 Vue.component('passport-personal-access-tokens', require('./components/passport/PersonalAccessTokens.vue'));
 
-const app = new Vue({
-    el: '#app'
+/**
+ * Authenticated routes
+ */
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth && ! store.state.user) {
+    // if route requires auth and user isn't authenticated
+    next('/login');
+  } else {
+    next();
+  }
 });
+
+// Sync Vuex and vue-router;
+sync(store, router);
+
+/**
+ * Application
+ *
+ * @type {Vue$2}
+ */
+const app = new Vue({
+  el: '#app',
+  router,
+  store,
+});
+
+// Check user login status
+store.dispatch('checkLogin');

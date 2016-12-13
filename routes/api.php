@@ -14,12 +14,14 @@ use Illuminate\Http\Request;
 */
 
 // API Group Routes
-Route::group(['prefix' => 'api/v1'], function () {
+Route::group(['prefix' => 'v1'], function () {
 
     /*
      * Guest area
      */
 
+    Route::post('auth/login', 'AuthController@login');
+    Route::post('auth/register', 'AuthController@register');
 
 
     /*
@@ -28,9 +30,9 @@ Route::group(['prefix' => 'api/v1'], function () {
 
     Route::group(['middleware' => 'auth:api'], function () {
 
-        Route::get('user', function (Request $request) {
-            return $request->user();
-        });
+        Route::get('user/me', 'UserController@me');
+        Route::resource('user', 'UserController');
+
     });
 
 });
