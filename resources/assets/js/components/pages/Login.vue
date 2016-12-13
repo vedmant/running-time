@@ -12,17 +12,19 @@
 
             <form class="form-horizontal" role="form" @submit.prevent="onSubmit">
 
-              <div class="form-group">
+              <div class="form-group" :class="{ 'has-error': errors.email }">
                 <label for="email" class="col-md-4 control-label">E-Mail Address</label>
                 <div class="col-md-6">
-                  <input id="email" type="email" class="form-control" v-model.trim="form.username" required autofocus>
+                  <input id="email" type="email" class="form-control" v-model.trim="form.email" required autofocus>
+                  <div class="help-block" v-if="errors.email"><div v-for="error in errors.email"><strong>{{ error }}</strong></div></div>
                 </div>
               </div>
 
-              <div class="form-group">
+              <div class="form-group" :class="{ 'has-error': errors.password }">
                 <label for="password" class="col-md-4 control-label">Password</label>
                 <div class="col-md-6">
                   <input id="password" type="password" class="form-control" v-model.trim="form.password" required>
+                  <div class="help-block" v-if="errors.password"><div v-for="error in errors.password"><strong>{{ error }}</strong></div></div>
                 </div>
               </div>
 
@@ -44,37 +46,39 @@ import { mapState, mapActions } from 'vuex';
 
 export default {
 
-    /*
-     * The component's data.
-     */
-    data() {
-      return {
-        form: {
-          username: '',
-          password: '',
-        },
-        error: '',
-      };
-    },
-
-    computed: {
-      ...mapState([
-        'user',
-      ])
-    },
-
-    methods: {
-
-      ...mapActions([
-        'login',
-      ]),
-
-      onSubmit() {
-        this.login(this.form)
-          .then(() => { this.$router.replace('/dashboard'); })
-          .catch((data) => { this.error = data.message; });
+  data() {
+    return {
+      form: {
+        email: '',
+        password: '',
       },
+      error: '',
+      errors: {},
+    };
+  },
 
-    }
+  computed: {
+    ...mapState([
+      'user',
+    ])
+  },
+
+  methods: {
+
+    ...mapActions([
+      'login',
+    ]),
+
+    onSubmit() {
+      this.errors = {};
+      this.login(this.form)
+        .then(() => { this.$router.replace('/dashboard'); })
+        .catch((data) => {
+          this.error = data.message;
+          this.errors = data.validation || {};
+        });
+    },
+
   }
+}
 </script>

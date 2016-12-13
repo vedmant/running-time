@@ -81,7 +81,7 @@ export default {
       this.errors = {};
       this.register(this.form)
         .then(() => { this.$router.replace('/dashboard'); })
-        .catch((data) => { this.errors = data; });
+        .catch((data) => { this.errors = data.validation || {}; });
     },
 
   }

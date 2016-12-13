@@ -3,8 +3,11 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Http\Exception\HttpResponseException;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
 {
@@ -17,7 +20,7 @@ class Handler extends ExceptionHandler
         \Illuminate\Auth\AuthenticationException::class,
         \Illuminate\Auth\Access\AuthorizationException::class,
         \Symfony\Component\HttpKernel\Exception\HttpException::class,
-        \Illuminate\Database\Eloquent\ModelNotFoundException::class,
+        ModelNotFoundException::class,
         \Illuminate\Session\TokenMismatchException::class,
         \Illuminate\Validation\ValidationException::class,
     ];
@@ -40,11 +43,46 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
     {
+        if ($request->expectsJson()) {
+            return $this->renderJson($request, $exception);
+        }
+
         return parent::render($request, $exception);
+    }
+
+    /**
+     * Render JSON exception response
+     *
+     * @param           $request
+     * @param Exception $e
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function renderJson($request, Exception $e)
+    {
+        if ($e instanceof HttpResponseException) {
+            return $e->getResponse();
+        } elseif ($e instanceof AuthenticationException) {
+            return $this->unauthenticated($request, $e);
+        } elseif ($e instanceof ValidationException) {
+            return response()->json(['validation' => $e->validator->errors()->getMessages()], 422);
+        } elseif ($this->isHttpException($e)) {
+            return response()->json(['message' => $e->getMessage()], $e->getStatusCode());
+        }
+
+        // If the app is in debug mode
+        if (config('app.debug')) {
+            return response()->json([
+                'exception' => get_class($e),
+                'message' => $e->getMessage(),
+                'trace' => $e->getTrace(),
+            ], 500);
+        }
+
+        return response()->json($e->getMessage(), 500);
     }
 
     /**

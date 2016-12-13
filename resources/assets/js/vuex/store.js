@@ -32,11 +32,12 @@ const mutations = {
     state.loading = true;
   },
 
-  LOGIN_OK (state) {
+  LOGIN_OK (state, user) {
+    state.user = user;
     state.loading = false;
   },
 
-  LOGIN_FAIL (state, error) {
+  LOGIN_FAIL (state) {
     state.loading = false;
   },
 

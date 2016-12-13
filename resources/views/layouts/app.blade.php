@@ -20,6 +20,7 @@
 
 <div id="app">
    <navbar></navbar>
+   <spinner></spinner>
 
    <transition name="fade" mode="out-in">
       <router-view></router-view>

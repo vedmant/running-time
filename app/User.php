@@ -27,4 +27,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get existing or make new access token
+     */
+    public function getOrMakeToken()
+    {
+        $token = $this->tokens()->first();
+
+        if ($token) return $token;
+
+        return $this->createToken('API');
+    }
 }

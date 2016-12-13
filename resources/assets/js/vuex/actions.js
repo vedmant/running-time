@@ -61,20 +61,13 @@ export const login = ({commit, dispatch}, form) => {
   commit('LOGIN');
 
   return new Promise((resolve, reject) => {
-    Vue.http.post('/oauth/token', {
-      grant_type: 'password',
-      client_id: 2,
-      client_secret: '9IXuFuE6FqkDJlakgsB0AKHp4KQsJUXhYIEQFUor',
-      ...form
-    })
+    Vue.http.post(apiPath + 'auth/login', form)
       .then(response => {
-
         const access_token = response.data.access_token;
         localStorage.setItem('access_token', access_token);
 
-        commit('LOGIN_OK');
-        dispatch('checkLogin').then(() => { resolve() });
-
+        commit('LOGIN_OK', response.data.user);
+        resolve();
       })
       .catch(response => {
         commit('LOGIN_FAIL');
@@ -97,27 +90,11 @@ export const register = ({commit, dispatch}, form) => {
   return new Promise((resolve, reject) => {
     Vue.http.post(apiPath + 'auth/register', form)
       .then(response => {
+        const access_token = response.data.access_token;
+        localStorage.setItem('access_token', access_token);
 
-        Vue.http.post('/oauth/token', {
-          grant_type: 'password',
-          client_id: 2,
-          client_secret: '9IXuFuE6FqkDJlakgsB0AKHp4KQsJUXhYIEQFUor',
-          username: form.email,
-          password: form.password,
-        })
-          .then(tokenResponse => {
-
-            const access_token = tokenResponse.data.access_token;
-            localStorage.setItem('access_token', access_token);
-
-            commit('REGISTER_OK', response.data);
-            resolve();
-
-          })
-          .catch(response => {
-            commit('REGISTER_FAIL');
-            reject(response.data);
-          });
+        commit('REGISTER_OK', response.data.user);
+        resolve();
       })
       .catch(response => {
         commit('REGISTER_FAIL');
