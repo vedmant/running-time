@@ -44,15 +44,16 @@ export const checkLogin = ({commit, dispatch}) => {
 
   return new Promise((resolve, reject) => {
     Vue.http.get(apiPath + 'user/me')
-      .then(response => {
-        commit('CHECK_LOGIN_OK', response.data);
-        resolve();
-      })
-      .catch(response => {
-        localStorage.removeItem('access_token');
-        commit('CHECK_LOGIN_FAIL');
-        reject(response.data);
-      });
+      .then(
+        response => {
+          commit('CHECK_LOGIN_OK', response.data);
+          resolve();
+        },
+        response => {
+          localStorage.removeItem('access_token');
+          commit('CHECK_LOGIN_FAIL');
+          reject(response.data);
+        });
   });
 };
 
@@ -62,17 +63,19 @@ export const login = ({commit, dispatch}, form) => {
 
   return new Promise((resolve, reject) => {
     Vue.http.post(apiPath + 'auth/login', form)
-      .then(response => {
-        const access_token = response.data.access_token;
-        localStorage.setItem('access_token', access_token);
+      .then(
+        response => {
+          const access_token = response.data.access_token;
+          localStorage.setItem('access_token', access_token);
+          setHttpAccessToken(access_token);
 
-        commit('LOGIN_OK', response.data.user);
-        resolve();
-      })
-      .catch(response => {
-        commit('LOGIN_FAIL');
-        reject(response.data);
-      });
+          commit('LOGIN_OK', response.data.user);
+          resolve();
+        },
+        response => {
+          commit('LOGIN_FAIL');
+          reject(response.data);
+        });
   })
 };
 
@@ -89,16 +92,74 @@ export const register = ({commit, dispatch}, form) => {
 
   return new Promise((resolve, reject) => {
     Vue.http.post(apiPath + 'auth/register', form)
-      .then(response => {
-        const access_token = response.data.access_token;
-        localStorage.setItem('access_token', access_token);
+      .then(
+        response => {
+          const access_token = response.data.access_token;
+          localStorage.setItem('access_token', access_token);
+          setHttpAccessToken(access_token);
 
-        commit('REGISTER_OK', response.data.user);
-        resolve();
-      })
-      .catch(response => {
-        commit('REGISTER_FAIL');
-        reject(response.data);
-      });
+          commit('REGISTER_OK', response.data.user);
+          resolve();
+        },
+        response => {
+          commit('REGISTER_FAIL');
+          reject(response.data);
+        });
+  })
+};
+
+
+/* ========================================================================= *\
+ * Entries
+\* ========================================================================= */
+
+export const loadEntries = ({commit, dispatch}, page) => {
+  commit('LOAD_ENTRIES');
+
+  return new Promise((resolve, reject) => {
+    Vue.http.get(apiPath + 'entry', {page})
+      .then(
+        response => {
+          commit('LOAD_ENTRIES_OK', response.data.entries);
+          resolve();
+        },
+          response => {
+          commit('LOAD_ENTRIES_FAIL');
+          reject(response.data);
+        });
+  })
+};
+
+export const storeEntry = ({commit, dispatch}, form) => {
+  commit('STORE_ENTRY');
+
+  return new Promise((resolve, reject) => {
+    Vue.http.post(apiPath + 'entry', form)
+      .then(
+        response => {
+          commit('STORE_ENTRY_OK', response.data.entry);
+          resolve();
+        },
+        response => {
+          commit('STORE_ENTRY_FAIL');
+          reject(response.data);
+        });
+  })
+};
+
+export const deleteEntry = ({commit, dispatch}, id) => {
+  commit('DELETE_ENTRY');
+
+  return new Promise((resolve, reject) => {
+    Vue.http.post(apiPath + 'entry/' + id, {_method: 'DELETE'})
+      .then(
+        response => {
+          commit('DELETE_ENTRY_OK', id);
+          resolve();
+        },
+        response => {
+          commit('DELETE_ENTRY_FAIL');
+          reject(response.data);
+        });
   })
 };

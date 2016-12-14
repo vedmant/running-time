@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    Dashboard
+    <h3>Dashboard</h3>
+    <hr>
   </div>
 </template>
 

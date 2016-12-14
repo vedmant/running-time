@@ -28,15 +28,33 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
+    /* ========================================================================= *\
+     * Relations
+    \* ========================================================================= */
+
+    /**
+     * User has many entries
+     */
+    public function entries()
+    {
+        return $this->hasMany(Entry::class);
+    }
+
+
+    /* ========================================================================= *\
+     * Helpers
+    \* ========================================================================= */
+
     /**
      * Get existing or make new access token
      */
     public function getOrMakeToken()
     {
-        $token = $this->tokens()->first();
+        //$token = $this->tokens()->first();
 
-        if ($token) return $token;
+        //if ($token) return $token->id;
 
-        return $this->createToken('API');
+        return $this->createToken('API')->accessToken;
     }
 }

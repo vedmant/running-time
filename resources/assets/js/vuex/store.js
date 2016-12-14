@@ -11,6 +11,9 @@ const state = {
   user: null, // Logged in user
   loading: false,
   error: '',
+  entries: {
+    data: [],
+  },
 };
 
 const mutations = {
@@ -55,6 +58,32 @@ const mutations = {
   },
 
   REGISTER_FAIL (state) {
+    state.loading = false;
+  },
+
+  LOAD_ENTRIES (state) {
+    state.loading = true;
+  },
+
+  LOAD_ENTRIES_OK (state, entries) {
+    state.entries = entries;
+    state.loading = false;
+  },
+
+  LOAD_ENTRIES_FAIL (state) {
+    state.loading = false;
+  },
+
+  STORE_ENTRY (state) {
+    state.loading = true;
+  },
+
+  STORE_ENTRY_OK (state, entry) {
+    state.entries = state.entries.data.unshift(entry);
+    state.loading = false;
+  },
+
+  STORE_ENTRY_FAIL (state) {
     state.loading = false;
   },
 

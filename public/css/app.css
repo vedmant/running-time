@@ -7721,6 +7721,20 @@ button.close {
   padding-bottom: 100%;
 }
 
+.no-gutter.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.no-gutter > [class*='col-'] {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.margintop5 {
+  margin-top: 5px;
+}
+
 /**
  * Spinner
  */

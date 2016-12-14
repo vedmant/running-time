@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import jQuery from 'jquery';
 import _ from 'lodash';
+import moment from 'moment';
 import store from './vuex/store' // vuex store instance
 import router from './router' // vue-router instance
 import { sync } from 'vuex-router-sync';
@@ -12,6 +13,7 @@ import { sync } from 'vuex-router-sync';
 window.$ = window.jQuery = jQuery;
 window.Vue = Vue;
 window._ = _;
+window.moment = moment;
 
 
 /**
@@ -37,9 +39,7 @@ require('vue-resource');
  */
 Vue.component('navbar', require('./components/layout/Navbar.vue'));
 Vue.component('spinner', require('./components/layout/Spinner.vue'));
-Vue.component('passport-clients', require('./components/passport/Clients.vue'));
-Vue.component('passport-authorized-clients', require('./components/passport/AuthorizedClients.vue'));
-Vue.component('passport-personal-access-tokens', require('./components/passport/PersonalAccessTokens.vue'));
+
 
 /**
  * Authenticated routes
@@ -68,4 +68,4 @@ const app = new Vue({
 });
 
 // Check user login status
-store.dispatch('checkLogin');
+store.dispatch('checkLogin').then(() => { router.replace('/dashboard') });

@@ -1,0 +1,73 @@
+<template>
+  <div class="container">
+    <h3>Time Entries</h3>
+    <hr>
+
+    <p class="text-right">
+      <router-link class="btn btn-primary" to="/entry/new">Add new Entry</router-link>
+    </p>
+
+    <div class="panel panel-default">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>Date</th>
+          <th>Distance</th>
+          <th>Time</th>
+          <th>Avg. Speed</th>
+          <th>Avg. Pace</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <row v-for="entry in entries.data" :row="entry" @onDelete="onDelete"></row>
+        </tbody>
+      </table>
+    </div>
+
+    <ul class="pagination">
+      <li></li>
+    </ul>
+
+  </div>
+</template>
+
+<script>
+import {mapState, mapActions} from 'vuex';
+
+export default {
+
+  components: {
+    row: require('./partials/Row.vue'),
+  },
+
+  data() {
+    return {
+      showAddNew: false,
+    };
+  },
+
+  mounted() {
+    this.loadEntries(1);
+  },
+
+  computed: {
+    ...mapState([
+      'entries',
+    ])
+  },
+
+  methods: {
+
+    ...mapActions([
+      'loadEntries',
+      'deleteEntry',
+    ]),
+
+    onDelete(id) {
+      this.deleteEntry(id);
+    },
+
+  }
+}
+</script>

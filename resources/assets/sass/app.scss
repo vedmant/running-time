@@ -22,6 +22,10 @@
 .middle { width: 100%; height: 100%; display: table; }
 .middle .middle-inner { width: 100%; height: 100%; display: table-cell; vertical-align: middle; text-align: center; }
 .embed-responsive-1by1 { padding-bottom: 100%; }
+.no-gutter.row { margin-left: 0; margin-right: 0; }
+.no-gutter > [class*='col-'] { padding-right:0; padding-left:0; }
+.margintop5{ margin-top: 5px; }
+
 
 /**
  * Spinner

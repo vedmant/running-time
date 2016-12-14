@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    Front page
+    <h3>Front page</h3>
+    <hr>
   </div>
 </template>
 

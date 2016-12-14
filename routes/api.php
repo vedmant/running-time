@@ -32,6 +32,7 @@ Route::group(['prefix' => 'v1'], function () {
 
         Route::get('user/me', 'UserController@me');
         Route::resource('user', 'UserController');
+        Route::resource('entry', 'EntryController');
 
     });
 
