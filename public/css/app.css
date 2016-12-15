@@ -7735,6 +7735,22 @@ button.close {
   margin-top: 5px;
 }
 
+.margintop0 {
+  margin-top: 0;
+}
+
+.marginbot10 {
+  margin-bottom: 10px;
+}
+
+.marginpulltop15 {
+  margin-top: -15px;
+}
+
+.marginpulltop20 {
+  margin-top: -20px;
+}
+
 /**
  * Spinner
  */
@@ -7751,6 +7767,14 @@ button.close {
 
 .main-spinner.active {
   display: block;
+}
+
+/**
+ * Tables
+ */
+.page-info {
+  display: inline-block;
+  margin-right: 20px;
 }
 
 /*# sourceMappingURL=app.css.map */

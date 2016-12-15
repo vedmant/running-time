@@ -118,7 +118,7 @@ export const loadEntries = ({commit, dispatch}, page) => {
   commit('LOAD_ENTRIES');
 
   return new Promise((resolve, reject) => {
-    Vue.http.get(apiPath + 'entry', {page})
+    Vue.http.get(apiPath + 'entry', {params: {page}})
       .then(
         response => {
           commit('LOAD_ENTRIES_OK', response.data.entries);

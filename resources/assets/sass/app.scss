@@ -24,7 +24,14 @@
 .embed-responsive-1by1 { padding-bottom: 100%; }
 .no-gutter.row { margin-left: 0; margin-right: 0; }
 .no-gutter > [class*='col-'] { padding-right:0; padding-left:0; }
+
 .margintop5{ margin-top: 5px; }
+.margintop0{ margin-top: 0; }
+
+.marginbot10{ margin-bottom: 10px; }
+
+.marginpulltop15{ margin-top: -15px; }
+.marginpulltop20{ margin-top: -20px; }
 
 
 /**
@@ -34,3 +41,8 @@
    background-color: rgba(255,255,255,0.5);
 }
 .main-spinner.active{ display: block; }
+
+/**
+ * Tables
+ */
+.page-info{ display: inline-block; margin-right: 20px; }

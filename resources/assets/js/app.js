@@ -4,6 +4,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import store from './vuex/store' // vuex store instance
 import router from './router' // vue-router instance
+import './mixins';
 import { sync } from 'vuex-router-sync';
 
 /**

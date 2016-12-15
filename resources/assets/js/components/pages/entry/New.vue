@@ -3,6 +3,10 @@
     <h3>New Entry</h3>
     <hr>
 
+    <p>
+      <router-link class="btn btn-primary" to="/entries">Back</router-link>
+    </p>
+
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default">

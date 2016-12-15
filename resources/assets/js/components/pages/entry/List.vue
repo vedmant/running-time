@@ -4,6 +4,7 @@
     <hr>
 
     <p class="text-right">
+      <span class="page-info">Page {{ entries.current_page }} of  {{ entries.last_page }}</span>
       <router-link class="btn btn-primary" to="/entry/new">Add new Entry</router-link>
     </p>
 
@@ -25,9 +26,13 @@
       </table>
     </div>
 
-    <ul class="pagination">
-      <li></li>
-    </ul>
+    <div class="text-right" v-if="entries.last_page > 1">
+      <ul class="pagination marginpulltop15">
+        <li v-for="page in range(1, entries.last_page)" :class="{active: page == entries.current_page}">
+          <a href="#" @click.prevent="loadEntries(page)">{{ page }}</a>
+        </li>
+      </ul>
+    </div>
 
   </div>
 </template>
