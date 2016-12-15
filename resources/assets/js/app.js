@@ -6,6 +6,8 @@ import store from './vuex/store' // vuex store instance
 import router from './router' // vue-router instance
 import './mixins';
 import { sync } from 'vuex-router-sync';
+import VueCharts from 'vue-charts';
+
 
 /**
  * Assing global variables
@@ -24,25 +26,21 @@ window.moment = moment;
 require('bootstrap-sass');
 require('vue-resource');
 
+
+/**
+ * Vue Settings
+ */
+
+// Vue plugins
+Vue.use(VueCharts);
+
 // Authorization header
 Vue.http.interceptors.push((request, next) => {
   request.headers.set('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
   next();
 });
 
-/**
- * Attach the "CSRF" header to each of the outgoing requests issued by this application.
- * The CSRF middleware included with Laravel will automatically verify the header's value.
- */
-// Vue.http.interceptors.push((request, next) => {
-//   request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
-//   next();
-// });
-
-
-/**
- * Vue Components
- */
+// Global Vue Components
 Vue.component('navbar', require('./components/layout/Navbar.vue'));
 Vue.component('spinner', require('./components/layout/Spinner.vue'));
 

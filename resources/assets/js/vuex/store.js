@@ -11,6 +11,15 @@ const state = {
   user: null, // Logged in user
   loading: false,
   error: '',
+  dashboard: {
+    weekly_count: 0,
+    weekly_avg_speed: 0,
+    weekly_avg_pace: 0,
+    week_chart: [],
+    max_speed: 0,
+    max_distance: 0,
+    max_time: 0,
+  },
   entries: {
     current_page: 1,
     data: [],
@@ -68,6 +77,19 @@ const mutations = {
   },
 
   REGISTER_FAIL (state) {
+    state.loading = false;
+  },
+
+  LOAD_DASHBOARD (state) {
+    state.loading = true;
+  },
+
+  LOAD_DASHBOARD_OK (state, dashboard) {
+    state.dashboard = dashboard;
+    state.loading = false;
+  },
+
+  LOAD_DASHBOARD_FAIL (state) {
     state.loading = false;
   },
 

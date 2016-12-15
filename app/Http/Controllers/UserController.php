@@ -44,11 +44,13 @@ class UserController extends Controller
      * Display the specified user.
      *
      * @param User $user
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function show(User $user)
     {
         $this->authorize($user);
+
+        return ['user' => $user];
     }
 
     /**

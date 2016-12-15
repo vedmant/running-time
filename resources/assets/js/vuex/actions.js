@@ -95,7 +95,29 @@ export const register = ({commit, dispatch}, form) => {
 
 
 /* ========================================================================= *\
- * Users Actions
+ * Dashboard Actions
+\* ========================================================================= */
+
+export const loadDashboard = ({commit, dispatch}) => {
+  commit('LOAD_DASHBOARD');
+
+  return new Promise((resolve, reject) => {
+    Vue.http.get(apiPath + 'dashboard/data')
+      .then(
+        response => {
+          commit('LOAD_DASHBOARD_OK', response.data);
+          resolve();
+        },
+        response => {
+          commit('LOAD_DASHBOARD_FAIL');
+          reject(response.data);
+        });
+  })
+};
+
+
+/* ========================================================================= *\
+ * Entries Actions
 \* ========================================================================= */
 
 export const loadEntries = ({commit, dispatch}, params) => {
@@ -168,7 +190,7 @@ export const deleteEntry = ({commit, dispatch}, id) => {
 
 
 /* ========================================================================= *\
- * Entries Actions
+ * Users Actions
 \* ========================================================================= */
 
 export const loadUsers = ({commit, dispatch}, params) => {

@@ -30,6 +30,8 @@ Route::group(['prefix' => 'v1'], function () {
 
     Route::group(['middleware' => 'auth:api'], function () {
 
+        Route::get('dashboard/data', 'DashboardController@data');
+
         Route::get('user/me', 'UserController@me');
         Route::resource('user', 'UserController');
 

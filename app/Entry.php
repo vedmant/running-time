@@ -21,7 +21,12 @@ class Entry extends Model
      * @var array
      */
     protected $casts = [
-        'user_id' => 'int',
+        'user_id'  => 'int',
+        'date'     => 'date',
+        'distance' => 'float',
+        'time'     => 'int',
+        'speed'    => 'float',
+        'pace'     => 'float',
     ];
 
 
