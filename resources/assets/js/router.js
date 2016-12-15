@@ -16,7 +16,11 @@ const routes = [
   {path: '/entry/new', component: require('./components/pages/entry/New.vue'), meta: { requiresAuth: true }},
   {path: '/entry/edit/:id', component: require('./components/pages/entry/Edit.vue'), meta: { requiresAuth: true }},
 
-  {path: '/admin/dashboard', component: require('./components/pages/admin/Dashboard.vue'), meta: { requiresAdmin: true }},
+  {path: '/admin', component: require('./components/pages/admin/Admin.vue'), meta: { requiresAdmin: true }, children: [
+    {path: 'dashboard', component: require('./components/pages/admin/dashboard/Dashboard.vue')},
+    {path: 'users', component: require('./components/pages/admin/user/List.vue')},
+    {path: 'entries', component: require('./components/pages/admin/entry/List.vue')},
+  ]},
 
   {path: '*', component: require('./components/pages/404.vue')},
 ];

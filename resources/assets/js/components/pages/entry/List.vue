@@ -70,7 +70,7 @@ export default {
   },
 
   mounted() {
-    this.loadEntries({page: this.entries.current_page});
+    this.loadEntries(this.params);
   },
 
   computed: {

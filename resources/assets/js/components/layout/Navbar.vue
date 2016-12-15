@@ -40,7 +40,7 @@
             </a>
 
             <ul class="dropdown-menu" role="menu">
-              <router-link v-if="user.role === 'admin'" tag="li" to="/admin/dashboard" active-class="active"><a>Admin Dashboad</a></router-link>
+              <router-link v-if="user.role === 'admin' || user.role === 'manager'" tag="li" to="/admin/dashboard" active-class="active"><a>Admin Dashboad</a></router-link>
 
               <router-link tag="li" to="/logout" active-class="active"><a>Logout</a></router-link>
             </ul>

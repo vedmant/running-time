@@ -95,7 +95,7 @@ export const register = ({commit, dispatch}, form) => {
 
 
 /* ========================================================================= *\
- * Entries Actions
+ * Users Actions
 \* ========================================================================= */
 
 export const loadEntries = ({commit, dispatch}, params) => {
@@ -161,6 +161,62 @@ export const deleteEntry = ({commit, dispatch}, id) => {
         },
         response => {
           commit('DELETE_ENTRY_FAIL');
+          reject(response.data);
+        });
+  })
+};
+
+
+/* ========================================================================= *\
+ * Entries Actions
+\* ========================================================================= */
+
+export const loadUsers = ({commit, dispatch}, params) => {
+  commit('LOAD_USERS');
+
+  return new Promise((resolve, reject) => {
+    Vue.http.get(apiPath + 'user', {params})
+      .then(
+        response => {
+          commit('LOAD_USERS_OK', response.data.users);
+          resolve();
+        },
+        response => {
+          commit('LOAD_USERS_FAIL');
+          reject(response.data);
+        });
+  })
+};
+
+export const updateUser = ({commit, dispatch}, {id, form}) => {
+  commit('UPDATE_USER');
+
+  return new Promise((resolve, reject) => {
+    Vue.http.post(apiPath + 'user/' + id, {_method: 'PUT', ...form})
+      .then(
+        response => {
+          commit('UPDATE_USER_OK', response.data.user);
+          resolve();
+        },
+        response => {
+          commit('UPDATE_USER_FAIL');
+          reject(response.data);
+        });
+  })
+};
+
+export const deleteUser = ({commit, dispatch}, id) => {
+  commit('DELETE_USER');
+
+  return new Promise((resolve, reject) => {
+    Vue.http.post(apiPath + 'user/' + id, {_method: 'DELETE'})
+      .then(
+        response => {
+          commit('DELETE_USER_OK', id);
+          resolve();
+        },
+        response => {
+          commit('DELETE_USER_FAIL');
           reject(response.data);
         });
   })

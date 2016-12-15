@@ -15,7 +15,12 @@ const state = {
     current_page: 1,
     data: [],
   },
+  users: {
+    current_page: 1,
+    data: [],
+  },
 };
+
 
 const mutations = {
 
@@ -114,6 +119,44 @@ const mutations = {
   },
 
   DELETE_ENTRY_FAIL (state) {
+    state.loading = false;
+  },
+
+  LOAD_USERS (state) {
+    state.loading = true;
+  },
+
+  LOAD_USERS_OK (state, users) {
+    state.users = users;
+    state.loading = false;
+  },
+
+  LOAD_USERS_FAIL (state) {
+    state.loading = false;
+  },
+
+  UPDATE_USER (state) {
+    state.loading = true;
+  },
+
+  UPDATE_USER_OK (state, entry) {
+    state.users = state.users.data.map(el => (el.id === entry.id ? entry : el));
+    state.loading = false;
+  },
+
+  UPDATE_USER_FAIL (state) {
+    state.loading = false;
+  },
+
+  DELETE_USER (state) {
+    state.loading = true;
+  },
+
+  DELETE_USER_OK (state, entry) {
+    state.loading = false;
+  },
+
+  DELETE_USER_FAIL (state) {
     state.loading = false;
   },
 

@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class EntryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of time entries.
      *
      * @param Request $request
      * @return array
@@ -19,10 +19,15 @@ class EntryController extends Controller
     {
         /** @var User $me */
         $me = auth()->user();
+        $entry = $me->entries();
 
-        $entries = $me->entries()
-                      ->orderBy('date', 'desc')
-                      ->orderBy('distance', 'desc');
+        if ($request->get('all')) {
+            $this->authorize('listAll', Entry::class);
+            $entry = (new Entry)->with('user');
+        }
+
+        $entries = $entry->orderBy('date', 'desc')
+                         ->orderBy('distance', 'desc');
 
         if ($request->get('dateFrom')) {
             $entries->where('date', '>=', Carbon::parse($request->get('dateFrom'))->toDateString());
@@ -36,7 +41,7 @@ class EntryController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created time entry in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array
@@ -61,23 +66,20 @@ class EntryController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified time entry.
      *
      * @param Entry $entry
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function show(Entry $entry)
     {
         $this->authorize($entry);
 
-        /** @var User $me */
-        $me = auth()->user();
-
-        return $me->entries()->where('id', $id)->firstOrFail();
+        return ['entry' => $entry];
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update time entry in storage.
      *
      * @param  \Illuminate\Http\Request $request
      * @param Entry                     $entry
@@ -104,7 +106,7 @@ class EntryController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove time entry from storage.
      *
      * @param Entry $entry
      * @return array

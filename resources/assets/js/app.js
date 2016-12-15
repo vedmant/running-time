@@ -51,11 +51,12 @@ Vue.component('spinner', require('./components/layout/Spinner.vue'));
  * Authenticated routes
  */
 router.beforeEach((to, from, next) => {
-  if (to.meta.requiresAuth && ! store.state.user) {
+  if (to.matched.some(record => record.meta.requiresAuth) && ! store.state.user) {
     // if route requires auth and user isn't authenticated
     next('/login');
-  } else if (to.meta.requiresAdmin && ( ! store.state.user || store.state.user.role !== 'admin')) {
-    // if route required admin role
+  } else if (to.matched.some(record => record.meta.requiresAdmin) && ( ! store.state.user
+    || ! _.includes(['admin', 'manager'], store.state.user.role))) {
+    // if route required admin or manager role
     next('/login');
   } else {
     next();

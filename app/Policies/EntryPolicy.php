@@ -25,6 +25,17 @@ class EntryPolicy
     }
 
     /**
+     * Determine whether the user can view all users entries
+     *
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function listAll(User $user)
+    {
+        return false;
+    }
+
+    /**
      * Determine whether the user can view the entry.
      *
      * @param  \App\User  $user

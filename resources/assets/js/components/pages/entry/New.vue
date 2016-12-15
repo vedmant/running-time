@@ -4,7 +4,7 @@
     <hr>
 
     <p>
-      <router-link class="btn btn-primary" to="/entries">Back</router-link>
+      <a href="#" class="btn btn-primary" @click.prevent="$router.go(-1)">Back</a>
     </p>
 
     <div class="row">
@@ -53,7 +53,7 @@ export default {
 
     onSubmit(form) {
       this.storeEntry(form)
-        .then(() => { this.$router.replace('/entries'); })
+        .then(() => { this.$router.go(-1); })
         .catch((data) => { this.errors = data.validation || {} });
     },
 
