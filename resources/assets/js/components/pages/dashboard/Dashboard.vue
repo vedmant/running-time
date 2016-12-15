@@ -31,9 +31,16 @@
           <vue-chart
             :chart-type="LineChart"
             :columns="columns"
-            :rows="rows"
+            :rows="this.dashboard.week_chart"
             :options="options"
           ></vue-chart>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">Add new Time Record</div>
+          <div class="panel-body">
+            <entry-form @onSubmit="onSubmit" :form="form" :errors="errors"></entry-form>
+          </div>
         </div>
 
       </div>
@@ -47,8 +54,20 @@ import {mapState, mapActions} from 'vuex';
 
 export default {
 
+  components: {
+    'entry-form': require('./../entry/partials/Form.vue'),
+  },
+
+
   data() {
     return {
+      errors: {},
+      form: {
+        date: '',
+        distance: '',
+        time_minutes: '00',
+        time_seconds: '00',
+      },
       columns: [{
         'type': 'string',
         'label': 'Date'
@@ -56,20 +75,8 @@ export default {
         'type': 'number',
         'label': 'Speed'
       }],
-      rows: [],
       options: {
         title: 'My Speed Performance',
-//        hAxis: {
-//          title: 'Year',
-//          minValue: '2004',
-//          maxValue: '2007'
-//        },
-//        vAxis: {
-//          title: '',
-//          minValue: 300,
-//          maxValue: 1200
-//        },
-//        width: 900,
         height: 300,
         curveType: 'function'
       },
@@ -77,9 +84,7 @@ export default {
   },
 
   mounted() {
-    this.loadDashboard().then(() => {
-      this.rows = this.dashboard.week_chart;
-    });
+    this.loadDashboard();
   },
 
   computed: {
@@ -100,8 +105,24 @@ export default {
 
   methods: {
     ...mapActions([
-      'loadDashboard'
-    ])
+      'loadDashboard',
+      'storeEntry',
+    ]),
+
+    onSubmit(form) {
+      this.storeEntry(form)
+        .then(() => {
+          this.loadDashboard();
+          this.form = {
+            date: '',
+            distance: '',
+            time_minutes: '00',
+            time_seconds: '00',
+          };
+          this.errors = {};
+        })
+        .catch((data) => { this.errors = data.validation || {} });
+    },
   }
 }
 </script>

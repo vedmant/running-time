@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h3>Dashboard</h3>
+    <h3>Administrative panel</h3>
     <hr>
 
     <div class="row">
