@@ -7692,8 +7692,8 @@ button.close {
  * Transitions
  */
 .fade-enter-active, .fade-leave-active {
-  -webkit-transition: opacity .1s;
-  transition: opacity .1s;
+  -webkit-transition: opacity .2s;
+  transition: opacity .2s;
 }
 
 .fade-enter, .fade-leave-active {

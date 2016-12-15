@@ -23,16 +23,17 @@ class DashboardController extends Controller
 
         $week_chart = DB::table('entries')
             ->select(DB::raw('avg(speed) as avg_speed, date'))
-            ->where('date', '>=', Carbon::now()->subWeeks(2))
+            ->where('user_id', $me->id)
+            ->where('date', '>=', Carbon::now()->subWeeks(2)->toDateString())
             ->groupBy('date')
             ->get()->map(function ($item) {
                 return [Carbon::parse($item->date)->format('m/d'), round($item->avg_speed, 2)];
             });
 
         return [
-            'weekly_count' => $me->entries()->where('date', '>=', Carbon::now()->startOfWeek())->count(),
-            'weekly_avg_speed' => $me->entries()->where('date', '>=', Carbon::now()->startOfWeek())->avg('speed'),
-            'weekly_avg_pace' => $me->entries()->where('date', '>=', Carbon::now()->startOfWeek())->avg('pace'),
+            'weekly_count' => $me->entries()->where('date', '>=', Carbon::now()->startOfWeek()->toDateString())->count(),
+            'weekly_avg_speed' => $me->entries()->where('date', '>=', Carbon::now()->startOfWeek()->toDateString())->avg('speed'),
+            'weekly_avg_pace' => $me->entries()->where('date', '>=', Carbon::now()->startOfWeek()->toDateString())->avg('pace'),
             'week_chart' => $week_chart,
             'max_speed' => $me->entries()->max('speed'),
             'max_distance' => $me->entries()->max('distance'),
