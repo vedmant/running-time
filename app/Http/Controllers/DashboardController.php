@@ -22,12 +22,12 @@ class DashboardController extends Controller
         $me = auth()->user();
 
         $week_chart = DB::table('entries')
-            ->select(DB::raw('avg(speed) as avg_speed, date'))
+            ->select(DB::raw('avg(speed) as avg_speed, avg(distance) as avg_distance, date'))
             ->where('user_id', $me->id)
             ->where('date', '>=', Carbon::now()->subWeeks(2)->toDateString())
             ->groupBy('date')
             ->get()->map(function ($item) {
-                return [Carbon::parse($item->date)->format('m/d'), round($item->avg_speed, 2)];
+                return [Carbon::parse($item->date)->format('m/d'), round($item->avg_speed, 2), round($item->avg_distance, 2)];
             });
 
         return [

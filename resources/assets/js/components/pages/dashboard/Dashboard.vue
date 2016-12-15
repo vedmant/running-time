@@ -74,9 +74,12 @@ export default {
       }, {
         'type': 'number',
         'label': 'Speed'
+      }, {
+        'type': 'number',
+        'label': 'Distance'
       }],
       options: {
-        title: 'My Speed Performance',
+        title: 'My Performance',
         height: 300,
         curveType: 'function'
       },
