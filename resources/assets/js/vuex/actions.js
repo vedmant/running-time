@@ -2,18 +2,6 @@ import Vue from 'vue';
 
 const apiPath = '/api/v1/';
 
-/**
- * Set access token for Vue resourse http requests
- *
- * @param access_token
- */
-function setHttpAccessToken(access_token) {
-  Vue.http.interceptors.push((request, next) => {
-    request.headers.set('Authorization', 'Bearer ' + access_token);
-    next();
-  });
-}
-
 
 /* ========================================================================= *\
  * Simple Actions
@@ -41,8 +29,6 @@ export const checkLogin = ({commit, dispatch}) => {
     return;
   }
 
-  setHttpAccessToken(access_token);
-
   return new Promise((resolve, reject) => {
     Vue.http.get(apiPath + 'user/me')
       .then(
@@ -68,7 +54,6 @@ export const login = ({commit, dispatch}, form) => {
         response => {
           const access_token = response.data.access_token;
           localStorage.setItem('access_token', access_token);
-          setHttpAccessToken(access_token);
 
           commit('LOGIN_OK', response.data.user);
           resolve();
@@ -97,7 +82,6 @@ export const register = ({commit, dispatch}, form) => {
         response => {
           const access_token = response.data.access_token;
           localStorage.setItem('access_token', access_token);
-          setHttpAccessToken(access_token);
 
           commit('REGISTER_OK', response.data.user);
           resolve();

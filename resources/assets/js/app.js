@@ -24,6 +24,11 @@ window.moment = moment;
 require('bootstrap-sass');
 require('vue-resource');
 
+// Authorization header
+Vue.http.interceptors.push((request, next) => {
+  request.headers.set('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
+  next();
+});
 
 /**
  * Attach the "CSRF" header to each of the outgoing requests issued by this application.
@@ -48,6 +53,9 @@ Vue.component('spinner', require('./components/layout/Spinner.vue'));
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth && ! store.state.user) {
     // if route requires auth and user isn't authenticated
+    next('/login');
+  } else if (to.meta.requiresAdmin && ( ! store.state.user || store.state.user.role !== 'admin')) {
+    // if route required admin role
     next('/login');
   } else {
     next();
