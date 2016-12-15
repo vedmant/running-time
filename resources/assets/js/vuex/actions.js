@@ -114,11 +114,11 @@ export const register = ({commit, dispatch}, form) => {
  * Entries Actions
 \* ========================================================================= */
 
-export const loadEntries = ({commit, dispatch}, page) => {
+export const loadEntries = ({commit, dispatch}, params) => {
   commit('LOAD_ENTRIES');
 
   return new Promise((resolve, reject) => {
-    Vue.http.get(apiPath + 'entry', {params: {page}})
+    Vue.http.get(apiPath + 'entry', {params})
       .then(
         response => {
           commit('LOAD_ENTRIES_OK', response.data.entries);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Entry;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class EntryController extends Controller
@@ -11,17 +12,27 @@ class EntryController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return array
      */
-    public function index()
+    public function index(Request $request)
     {
         /** @var User $me */
         $me = auth()->user();
 
-        return ['entries' => $me->entries()
-            ->orderBy('date', 'desc')
-            ->orderBy('distance', 'desc')
-            ->paginate(15)];
+        $entries = $me->entries()
+                      ->orderBy('date', 'desc')
+                      ->orderBy('distance', 'desc');
+
+        if ($request->get('dateFrom')) {
+            $entries->where('date', '>=', Carbon::parse($request->get('dateFrom'))->toDateString());
+        }
+
+        if ($request->get('dateTo')) {
+            $entries->where('date', '<=', Carbon::parse($request->get('dateTo'))->toDateString());
+        }
+
+        return ['entries' => $entries->paginate(15)];
     }
 
     /**

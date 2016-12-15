@@ -7751,6 +7751,10 @@ button.close {
   margin-top: -20px;
 }
 
+.marginright10 {
+  margin-right: 10px;
+}
+
 /**
  * Spinner
  */
@@ -7775,6 +7779,13 @@ button.close {
 .page-info {
   display: inline-block;
   margin-right: 20px;
+}
+
+/**
+ * Fixes
+ */
+.input-group-btn:not(:first-child):not(:last-child) .btn {
+  border-radius: 0;
 }
 
 /*# sourceMappingURL=app.css.map */

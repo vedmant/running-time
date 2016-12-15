@@ -33,6 +33,8 @@
 .marginpulltop15{ margin-top: -15px; }
 .marginpulltop20{ margin-top: -20px; }
 
+.marginright10{ margin-right: 10px; }
+
 
 /**
  * Spinner
@@ -46,3 +48,11 @@
  * Tables
  */
 .page-info{ display: inline-block; margin-right: 20px; }
+
+/**
+ * Fixes
+ */
+
+.input-group-btn:not(:first-child):not(:last-child) .btn {
+   border-radius: 0;
+}

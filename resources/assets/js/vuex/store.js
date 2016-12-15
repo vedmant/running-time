@@ -12,6 +12,7 @@ const state = {
   loading: false,
   error: '',
   entries: {
+    current_page: 1,
     data: [],
   },
 };
