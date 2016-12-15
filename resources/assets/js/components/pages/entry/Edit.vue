@@ -40,7 +40,7 @@ export default {
   methods: {
 
     ...mapActions([
-      'storeEntry',
+      'updateEntry',
     ]),
 
     getForm() {
@@ -57,7 +57,9 @@ export default {
     },
 
     onSubmit(form) {
-      this.storeEntry(form)
+      const id = this.$route.params.id;
+
+      this.updateEntry({id, form})
         .then(() => { this.$router.replace('/entries'); })
         .catch((data) => { this.errors = data.validation || {} });
     },

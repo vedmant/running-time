@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entry;
+use App\User;
 use Illuminate\Http\Request;
 
 class EntryController extends Controller
@@ -14,18 +15,13 @@ class EntryController extends Controller
      */
     public function index()
     {
-        return ['entries' => auth()->user()->entries()
-            ->orderBy('date', 'desc')->orderBy('distance', 'desc')->paginate(15)];
-    }
+        /** @var User $me */
+        $me = auth()->user();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return ['entries' => $me->entries()
+            ->orderBy('date', 'desc')
+            ->orderBy('distance', 'desc')
+            ->paginate(15)];
     }
 
     /**
@@ -56,45 +52,59 @@ class EntryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Entry $entry
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Entry $entry)
     {
-        //
-    }
+        $this->authorize($entry);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        /** @var User $me */
+        $me = auth()->user();
+
+        return $me->entries()->where('id', $id)->firstOrFail();
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     * @param Entry                     $entry
+     * @return array
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Entry $entry)
     {
-        //
+        $this->authorize($entry);
+
+        $this->validate($request, [
+            'date'         => 'required|date',
+            'distance'     => 'required|numeric',
+            'time_minutes' => 'required|digits_between:1,2|min:0',
+            'time_seconds' => 'required|digits_between:1,2|between:0,60',
+        ]);
+
+        $entry->fill($request->only('date', 'distance'));
+        $entry->time = $request->get('time_minutes') * 60 + $request->get('time_seconds');
+        $entry->speed = $entry->distance / ($entry->time / 3600);
+        $entry->pace = ($entry->time / 60) / $entry->distance;
+        $entry->save();
+
+        return ['entry' => $entry];
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Entry $entry
+     * @return array
+     * @internal param int $id
      */
-    public function destroy($id)
+    public function destroy(Entry $entry)
     {
-        //
+        $this->authorize($entry);
+
+        $entry->delete();
+
+        return ['message' => 'Success'];
     }
 }

@@ -39,7 +39,6 @@ class AppServiceProvider extends ServiceProvider
         // Local and development enviroment service providers
         if ($this->app->environment('local') || $this->app->environment('development')) {
             $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
-            //$this->app->register(\App\Services\ApiDebug\ApiDebugServiceProvider::class);
         }
     }
 }

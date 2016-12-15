@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Exception\HttpResponseException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -66,7 +67,9 @@ class Handler extends ExceptionHandler
         if ($e instanceof HttpResponseException) {
             return $e->getResponse();
         } elseif ($e instanceof AuthenticationException) {
-            return $this->unauthenticated($request, $e);
+            return response()->json(['error' => 'Unauthenticated.', 'message' => $e->getMessage()], 401);
+        } elseif ($e instanceof AuthorizationException) {
+            return response()->json(['error' => 'Unauthorized.', 'message' => $e->getMessage()], 401);
         } elseif ($e instanceof ValidationException) {
             return response()->json(['validation' => $e->validator->errors()->getMessages()], 422);
         } elseif ($this->isHttpException($e)) {

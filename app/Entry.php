@@ -15,6 +15,16 @@ class Entry extends Model
         'date', 'distance', 'time',
     ];
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'user_id' => 'int',
+    ];
+
+
     /* ========================================================================= *\
      * Relations
     \* ========================================================================= */

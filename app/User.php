@@ -51,10 +51,26 @@ class User extends Authenticatable
      */
     public function getOrMakeToken()
     {
-        //$token = $this->tokens()->first();
-
-        //if ($token) return $token->id;
-
         return $this->createToken('API')->accessToken;
+    }
+
+    /**
+     * Is user admin
+     *
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    /**
+     * Is user manager
+     *
+     * @return bool
+     */
+    public function isManager()
+    {
+        return $this->role === 'manager';
     }
 }

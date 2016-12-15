@@ -55,7 +55,7 @@
 </style>
 
 <template>
-  <div class='main-spinner' :class="{active: loading}">
+  <div class='main-spinner' :class="{active: loading}" @click="stopLoading">
     <div class="middle">
       <div class="middle-inner">
         <div class="spinner">
@@ -82,6 +82,10 @@ export default {
     ])
   },
 
-  methods: {}
+  methods: {
+    ...mapActions([
+      'stopLoading',
+    ])
+  }
 }
 </script>

@@ -8,7 +8,8 @@
         "php": ">=5.6.4",
         "laravel/framework": "5.3.*",
         "mpociot/laravel-apidoc-generator": "^1.7",
-        "laravel/passport": "^1.0"
+        "laravel/passport": "^1.0",
+        "infyomlabs/laravel-generator": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

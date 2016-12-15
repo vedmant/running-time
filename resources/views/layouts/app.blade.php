@@ -18,14 +18,7 @@
 </head>
 <body>
 
-<div id="app">
-   <navbar></navbar>
-   <spinner></spinner>
-
-   <transition name="fade" mode="out-in">
-      <router-view></router-view>
-   </transition>
-</div>
+@yield('content')
 
 <!-- Scripts -->
 <script src="{{ elixir('js/app.js') }}"></script>

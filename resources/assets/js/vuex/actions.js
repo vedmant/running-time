@@ -24,6 +24,7 @@ function makeAction(type) {
 }
 
 export const clearError = makeAction('CLEAR_ERROR');
+export const stopLoading = makeAction('STOP_LOADING');
 
 
 /* ========================================================================= *\
@@ -110,7 +111,7 @@ export const register = ({commit, dispatch}, form) => {
 
 
 /* ========================================================================= *\
- * Entries
+ * Entries Actions
 \* ========================================================================= */
 
 export const loadEntries = ({commit, dispatch}, page) => {
@@ -142,6 +143,23 @@ export const storeEntry = ({commit, dispatch}, form) => {
         },
         response => {
           commit('STORE_ENTRY_FAIL');
+          reject(response.data);
+        });
+  })
+};
+
+export const updateEntry = ({commit, dispatch}, {id, form}) => {
+  commit('UPDATE_ENTRY');
+
+  return new Promise((resolve, reject) => {
+    Vue.http.post(apiPath + 'entry/' + id, {_method: 'PUT', ...form})
+      .then(
+        response => {
+          commit('UPDATE_ENTRY_OK', response.data.entry);
+          resolve();
+        },
+        response => {
+          commit('UPDATE_ENTRY_FAIL');
           reject(response.data);
         });
   })

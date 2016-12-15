@@ -48,7 +48,7 @@ export default {
   },
 
   mounted() {
-    this.loadEntries(1);
+    this.loadEntries(this.entries.current_page || 1);
   },
 
   computed: {
@@ -65,7 +65,7 @@ export default {
     ]),
 
     onDelete(id) {
-      this.deleteEntry(id);
+      this.deleteEntry(id).then(() => { this.loadEntries(this.entries.current_page || 1); });
     },
 
   }

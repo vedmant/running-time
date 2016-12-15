@@ -18,6 +18,10 @@ const state = {
 
 const mutations = {
 
+  STOP_LOADING (state) {
+    state.loading = false;
+  },
+
   CHECK_LOGIN (state) {
     state.loading = true;
   },
@@ -84,6 +88,31 @@ const mutations = {
   },
 
   STORE_ENTRY_FAIL (state) {
+    state.loading = false;
+  },
+
+  UPDATE_ENTRY (state) {
+    state.loading = true;
+  },
+
+  UPDATE_ENTRY_OK (state, entry) {
+    state.entries = state.entries.data.map(el => (el.id === entry.id ? entry : el));
+    state.loading = false;
+  },
+
+  UPDATE_ENTRY_FAIL (state) {
+    state.loading = false;
+  },
+
+  DELETE_ENTRY (state) {
+    state.loading = true;
+  },
+
+  DELETE_ENTRY_OK (state, entry) {
+    state.loading = false;
+  },
+
+  DELETE_ENTRY_FAIL (state) {
     state.loading = false;
   },
 
