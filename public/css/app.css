@@ -7759,7 +7759,10 @@ button.close {
  * Spinner
  */
 .main-spinner {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: opacity 0.3s 0.3s ease;
+  transition: opacity 0.3s 0.3s ease;
   position: fixed;
   z-index: 99999;
   top: 0;
@@ -7770,7 +7773,8 @@ button.close {
 }
 
 .main-spinner.active {
-  display: block;
+  visibility: visible;
+  opacity: 1;
 }
 
 /**
