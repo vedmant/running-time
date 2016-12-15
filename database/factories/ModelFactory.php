@@ -41,6 +41,7 @@ $factory->define(App\Entry::class, function (Faker\Generator $faker) {
     $time     = round($distance * rand(4 * 60, 7 * 60));
 
     return [
+        'user_id'  => 0,
         'date'     => $faker->dateTimeBetween('-60 days', 'now')->format('Y-m-d'),
         'distance' => $distance,
         'time'     => $time,
