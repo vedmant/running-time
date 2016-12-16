@@ -8,7 +8,7 @@
         <ul class="nav nav-pills nav-stacked">
           <router-link tag="li" to="/admin/dashboard" active-class="active"><a>Dashboard</a></router-link>
           <router-link tag="li" to="/admin/users" active-class="active"><a>Users</a></router-link>
-          <router-link v-if="user.role == 'admin'" tag="li" to="/admin/entries" active-class="active"><a>Entries</a></router-link>
+          <router-link v-if="me.role == 'admin'" tag="li" to="/admin/entries" active-class="active"><a>Entries</a></router-link>
         </ul>
       </div>
       <div class="col-sm-10">
@@ -29,7 +29,7 @@ export default {
 
   computed: {
     ...mapState([
-      'user',
+      'me',
     ])
   },
 

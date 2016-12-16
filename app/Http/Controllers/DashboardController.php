@@ -40,4 +40,31 @@ class DashboardController extends Controller
             'max_time' => $me->entries()->max('time'),
         ];
     }
+
+    /**
+     * Get admin dashboard data
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function adminData(Request $request)
+    {
+        /** @var User $me */
+        $me = auth()->user();
+
+        if ( ! $me->isAdmin() && ! $me->isManager()) abort(401);
+
+        $usersCount = User::count();
+        $entriesCount = Entry::count();
+
+        return [
+            'total_users' => $usersCount,
+            'new_users_this_week' => User::where('create_at', '>=', Carbon::now()->startOfWeek()->toDateTimeString())->count(),
+            'new_users_this_month' => User::where('create_at', '>=', Carbon::now()->startOfMonth()->toDateTimeString())->count(),
+            'total_entries' => $entriesCount,
+            'avg_entries_per_user' => round($entriesCount / $usersCount),
+            'fastest_run' => Entry::with('user')->whereRaw('speed = (select max(`speed`) from entries)')->first(),
+            'longest_run' => Entry::with('user')->whereRaw('distance = (select max(`distance`) from entries)')->first(),
+        ];
+    }
 }

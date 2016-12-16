@@ -62,6 +62,14 @@ class UserController extends Controller
         if ($request->get('password')) {
             $user->password = bcrypt($request->get('password'));
         }
+
+        // Update user role only for admin
+        if ($request->get('role') && $request->get('role') !== $user->role) {
+            if ( ! auth()->user()->isAdmin()) abort(401, 'Unathorized to edit user role.');
+
+            $user->role = $request->get('role');
+        }
+
         $user->save();
 
         return ['user' => $user];

@@ -37,7 +37,13 @@ Vue.use(VueCharts);
 // Authorization header
 Vue.http.interceptors.push((request, next) => {
   request.headers.set('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
-  next();
+  // continue to next interceptor
+  next((response) => {
+    // Show toast with message for non OK responses
+    if (response.status !== 200) {
+      store.dispatch('addToastMessage', {text: response.body.message || 'Request error status: ' + response.status, type: 'danger'})
+    }
+  });
 });
 
 // Global Vue Components
@@ -50,11 +56,11 @@ Vue.component('toast', require('./components/layout/Toast.vue'));
  * Authenticated routes
  */
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth) && ! store.state.user) {
+  if (to.matched.some(record => record.meta.requiresAuth) && ! store.state.me) {
     // if route requires auth and user isn't authenticated
     next('/login');
-  } else if (to.matched.some(record => record.meta.requiresAdmin) && ( ! store.state.user
-    || ! _.includes(['admin', 'manager'], store.state.user.role))) {
+  } else if (to.matched.some(record => record.meta.requiresAdmin) && ( ! store.state.me
+    || ! _.includes(['admin', 'manager'], store.state.me.role))) {
     // if route required admin or manager role
     next('/login');
   } else {

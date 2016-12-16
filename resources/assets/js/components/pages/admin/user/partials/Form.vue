@@ -17,6 +17,18 @@
       </div>
     </div>
 
+    <div class="form-group" :class="{ 'has-error': errors.role }" v-if="me.role == 'admin'">
+      <label for="role" class="col-md-4 control-label">Role</label>
+      <div class="col-md-6">
+        <select id="role" class="form-control" v-model="form.role">
+          <option value="user">User</option>
+          <option value="manager">Manager</option>
+          <option value="admin">Admin</option>
+        </select>
+        <div class="help-block" v-if="errors.role"><div v-for="error in errors.role"><strong>{{ error }}</strong></div></div>
+      </div>
+    </div>
+
     <div class="form-group" :class="{ 'has-error': errors.password }">
       <label for="password" class="col-md-4 control-label">Password</label>
 
@@ -57,6 +69,14 @@ export default {
       type: Object,
     }
   },
+
+  computed: {
+
+    ...mapState([
+      'me'
+    ]),
+
+  }
 
 }
 </script>

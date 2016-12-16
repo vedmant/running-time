@@ -3,9 +3,14 @@
     <h3>User: {{ user.name }}</h3>
     <hr>
 
-    <p>
-      <a href="#" class="btn btn-primary" @click.prevent="$router.go(-1)">Back</a>
-    </p>
+    <div class="row marginbot10">
+      <div class="col-sm-6">
+        <a href="#" class="btn btn-primary" @click.prevent="$router.go(-1)">Back</a>
+      </div>
+      <div class="col-sm-6 text-right">
+        <router-link :to="'/admin/user/edit/' + user.id" class="btn btn-primary">Edit</router-link>
+      </div>
+    </div>
 
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
@@ -33,7 +38,7 @@ export default {
   },
 
   mounted() {
-    this.showUser(this.$route.params.id);
+    this.loadUser(this.id);
   },
 
   computed: {
@@ -42,12 +47,16 @@ export default {
       user: 'show_user',
     }),
 
+    id() {
+      return this.$route.params.id;
+    }
+
   },
 
   methods: {
 
     ...mapActions([
-      'showUser',
+      'loadUser',
     ]),
 
   }

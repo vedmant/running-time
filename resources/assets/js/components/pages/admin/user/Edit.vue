@@ -36,23 +36,27 @@ export default {
     };
   },
 
+  mounted() {
+    this.loadUser(this.id);
+  },
+
   computed: {
 
     id() {
       return this.$route.params.id;
     },
 
-    form() {
-      const user = this.$store.state.users.data.find(el => el.id == this.id);
+    ...mapState([
+      'show_user',
+    ]),
 
-      if ( ! user) return {
-        name: '',
-        email: '',
-      };
+    form() {
+      if ( ! this.show_user) return {};
 
       return {
-        name: user.name,
-        email: user.email,
+        name: this.show_user.name,
+        email: this.show_user.email,
+        role: this.show_user.role,
       };
     }
 
@@ -61,6 +65,7 @@ export default {
   methods: {
 
     ...mapActions([
+      'loadUser',
       'updateUser',
       'addToastMessage',
     ]),

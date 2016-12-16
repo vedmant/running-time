@@ -36,21 +36,25 @@ export default {
     };
   },
 
+  mounted() {
+    this.loadEntry(this.id);
+  },
+
   computed: {
+
+    ...mapState([
+      'entry',
+    ]),
 
     id() {
       return this.$route.params.id;
-    },
-
-    entry() {
-      return this.$store.state.entries.data.find(entry => entry.id == this.id);
     },
 
     form() {
       const duration = moment.duration(this.entry.time);
 
       return {
-        date: this.entry.date,
+        date: moment(this.entry.date).format('YYYY-MM-DD'),
         distance: this.entry.distance,
         time_hours: Math.floor(duration.asHours()),
         time_minutes: _.padStart(duration.minutes(), 2, '-'),
@@ -63,8 +67,9 @@ export default {
   methods: {
 
     ...mapActions([
+      'loadEntry',
       'updateEntry',
-      'addToastMessage'
+      'addToastMessage',
     ]),
 
     onSubmit(form) {

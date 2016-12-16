@@ -9,22 +9,19 @@ Vue.use(Vuex);
 const debug = process.env.NODE_ENV !== 'production';
 
 const state = {
-  user: null, // Logged in user
+  me: null, // Logged in user
   loading: false,
   error: '',
-  dashboard: {
-    weekly_count: 0,
-    weekly_avg_speed: 0,
-    weekly_avg_pace: 0,
-    week_chart: [],
-    max_speed: 0,
-    max_distance: 0,
-    max_time: 0,
+  dashboard: {},
+  admin_dashboard: {
+    fastest_run: {user: {}},
+    longest_run: {user: {}},
   },
   entries: {
     current_page: 1,
     data: [],
   },
+  entry: {},
   users: {
     current_page: 1,
     data: [],
@@ -44,7 +41,7 @@ const mutations = {
   },
 
   CHECK_LOGIN_OK (state, user) {
-    state.user = user;
+    state.me = user;
     state.loading = false;
   },
 
@@ -57,7 +54,7 @@ const mutations = {
   },
 
   LOGIN_OK (state, user) {
-    state.user = user;
+    state.me = user;
     state.loading = false;
   },
 
@@ -66,7 +63,7 @@ const mutations = {
   },
 
   LOGOUT_OK (state) {
-    state.user = null;
+    state.me = null;
   },
 
   REGISTER (state) {
@@ -74,7 +71,7 @@ const mutations = {
   },
 
   REGISTER_OK (state, user) {
-    state.user = user;
+    state.me = user;
     state.loading = false;
   },
 
@@ -87,7 +84,7 @@ const mutations = {
   },
 
   UPDATE_PROFILE_OK (state, user) {
-    state.user = user;
+    state.me = user;
     state.loading = false;
   },
 
@@ -108,6 +105,19 @@ const mutations = {
     state.loading = false;
   },
 
+  LOAD_ADMIN_DASHBOARD (state) {
+    state.loading = true;
+  },
+
+  LOAD_ADMIN_DASHBOARD_OK (state, dashboard) {
+    state.admin_dashboard = dashboard;
+    state.loading = false;
+  },
+
+  LOAD_ADMIN_DASHBOARD_FAIL (state) {
+    state.loading = false;
+  },
+
   LOAD_ENTRIES (state) {
     state.loading = true;
   },
@@ -118,6 +128,19 @@ const mutations = {
   },
 
   LOAD_ENTRIES_FAIL (state) {
+    state.loading = false;
+  },
+
+  LOAD_ENTRY (state) {
+    state.loading = true;
+  },
+
+  LOAD_ENTRY_OK (state, entry) {
+    state.entry = entry;
+    state.loading = false;
+  },
+
+  LOAD_ENTRY_FAIL (state) {
     state.loading = false;
   },
 
@@ -171,16 +194,16 @@ const mutations = {
     state.loading = false;
   },
 
-  SHOW_USER (state) {
+  LOAD_USER (state) {
     state.loading = true;
   },
 
-  SHOW_USER_OK (state, user) {
+  LOAD_USER_OK (state, user) {
     state.show_user = user;
     state.loading = false;
   },
 
-  SHOW_USER_FAIL (state) {
+  LOAD_USER_FAIL (state) {
     state.loading = false;
   },
 
@@ -189,7 +212,7 @@ const mutations = {
   },
 
   UPDATE_USER_OK (state, user) {
-    state.users.data = state.users.data.map(el => (el.id === user.id ? user : el));
+    state.show_user = user;
     state.loading = false;
   },
 

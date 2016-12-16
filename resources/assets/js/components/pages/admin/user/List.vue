@@ -4,7 +4,7 @@
     <hr>
 
     <div class="row marginbot10">
-      <div class="col-sm-6 filters">
+      <div class="col-sm-6">
       </div>
       <div class="col-sm-6 text-right">
         <span class="page-info">Page {{ users.current_page }} of  {{ users.last_page }}</span>
@@ -17,6 +17,7 @@
         <tr>
           <th>Name</th>
           <th>Email</th>
+          <th>Role</th>
           <th>Created at</th>
           <th>Actions</th>
         </tr>

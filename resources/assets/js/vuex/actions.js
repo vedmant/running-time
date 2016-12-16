@@ -132,6 +132,23 @@ export const loadDashboard = ({commit, dispatch}) => {
   })
 };
 
+export const loadAdminDashboard = ({commit, dispatch}) => {
+  commit('LOAD_ADMIN_DASHBOARD');
+
+  return new Promise((resolve, reject) => {
+    Vue.http.get(apiPath + 'dashboard/adminData')
+      .then(
+        response => {
+          commit('LOAD_ADMIN_DASHBOARD_OK', response.data);
+          resolve();
+        },
+        response => {
+          commit('LOAD_ADMIN_DASHBOARD_FAIL');
+          reject(response.data);
+        });
+  })
+};
+
 
 /* ========================================================================= *\
  * Entries Actions
@@ -149,6 +166,23 @@ export const loadEntries = ({commit, dispatch}, params) => {
         },
           response => {
           commit('LOAD_ENTRIES_FAIL');
+          reject(response.data);
+        });
+  })
+};
+
+export const loadEntry = ({commit, dispatch}, id) => {
+  commit('LOAD_ENTRY');
+
+  return new Promise((resolve, reject) => {
+    Vue.http.get(apiPath + 'entry/' + id)
+      .then(
+        response => {
+          commit('LOAD_ENTRY_OK', response.data.entry);
+          resolve();
+        },
+        response => {
+          commit('LOAD_ENTRY_FAIL');
           reject(response.data);
         });
   })
@@ -228,18 +262,18 @@ export const loadUsers = ({commit, dispatch}, params) => {
 };
 
 
-export const showUser = ({commit, dispatch}, id) => {
-  commit('SHOW_USER');
+export const loadUser = ({commit, dispatch}, id) => {
+  commit('LOAD_USER');
 
   return new Promise((resolve, reject) => {
     Vue.http.get(apiPath + 'user/' + id)
       .then(
         response => {
-          commit('SHOW_USER_OK', response.data.user);
+          commit('LOAD_USER_OK', response.data.user);
           resolve();
         },
         response => {
-          commit('SHOW_USER_FAIL');
+          commit('LOAD_USER_FAIL');
           reject(response.data);
         });
   });

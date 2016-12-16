@@ -24,11 +24,11 @@
       <label class="col-md-4 control-label">Time</label>
       <div class="col-md-6">
         <div class="input-group">
-          <input type="number" maxlength="2" class="form-control date-filter" v-model="form.time_hours" placeholder="Hours">
+          <input type="text" maxlength="2" class="form-control date-filter" v-model="form.time_hours" placeholder="Hours">
           <span class="input-group-addon">:</span>
-          <input type="number" maxlength="2" class="form-control date-filter" v-model="form.time_minutes" placeholder="Minutes">
+          <input type="text" maxlength="2" class="form-control date-filter" v-model="form.time_minutes" placeholder="Minutes">
           <span class="input-group-addon">:</span>
-          <input type="number" maxlength="2" class="form-control date-filter" v-model="form.time_seconds" placeholder="Seconds">
+          <input type="text" maxlength="2" class="form-control date-filter" v-model="form.time_seconds" placeholder="Seconds">
         </div>
         <div class="help-block" v-if="errors.time"><div v-for="error in errors.time"><strong>{{ error }}</strong></div></div>
       </div>

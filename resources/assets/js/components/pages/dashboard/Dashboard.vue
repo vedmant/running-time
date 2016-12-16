@@ -93,7 +93,7 @@ export default {
 
   computed: {
     ...mapState([
-      'user',
+      'me',
       'dashboard',
     ]),
   },
@@ -102,12 +102,17 @@ export default {
     ...mapActions([
       'loadDashboard',
       'storeEntry',
+      'addToastMessage',
     ]),
 
     onSubmit(form) {
       this.storeEntry(form)
         .then(() => {
           this.loadDashboard();
+          this.addToastMessage({
+            text: 'New time record was added!',
+            type: 'success'
+          });
           this.form = {
             date: '',
             distance: '',

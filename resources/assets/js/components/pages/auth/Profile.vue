@@ -76,13 +76,13 @@ export default {
 
   computed: {
     ...mapState([
-      'user',
+      'me',
     ]),
   },
 
   mounted() {
-    this.form.name = this.user.name;
-    this.form.email = this.user.email;
+    this.form.name = this.me.name;
+    this.form.email = this.me.email;
   },
 
   methods: {
@@ -94,7 +94,7 @@ export default {
 
     onSubmit() {
       this.errors = {};
-      this.updateProfile({id: this.user.id, form: this.form})
+      this.updateProfile({id: this.me.id, form: this.form})
         .then(() => {
           this.addToastMessage({
             text: 'Your profile was updated!',

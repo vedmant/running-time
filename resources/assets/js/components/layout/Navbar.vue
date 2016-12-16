@@ -22,22 +22,22 @@
         </ul>
 
         <!-- Right Side Of Navbar -->
-        <ul class="nav navbar-nav navbar-right" v-if="!user">
+        <ul class="nav navbar-nav navbar-right" v-if="!me">
           <!-- Authentication Links -->
           <router-link tag="li" to="/login" active-class="active"><a>Login</a></router-link>
           <router-link tag="li" to="/register" active-class="active"><a>Register</a></router-link>
         </ul>
 
         <!-- Right Side Of Navbar -->
-        <ul class="nav navbar-nav navbar-right" v-if="user">
+        <ul class="nav navbar-nav navbar-right" v-if="me">
           <!-- Authentication Links -->
           <router-link tag="li" to="/dashboard" active-class="active"><a>Dashboad</a></router-link>
           <router-link tag="li" to="/entries" active-class="active"><a>Entries</a></router-link>
-          <router-link v-if="user.role === 'admin' || user.role === 'manager'" tag="li" to="/admin" active-class="active"><a>Admin Panel</a></router-link>
+          <router-link v-if="me.role === 'admin' || me.role === 'manager'" tag="li" to="/admin" active-class="active"><a>Admin Panel</a></router-link>
 
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-              {{ user.name }} <span class="caret"></span>
+              {{ me.name }} <span class="caret"></span>
             </a>
 
             <ul class="dropdown-menu" role="menu">
@@ -62,7 +62,7 @@ export default {
 
   computed: {
     ...mapState([
-      'user',
+      'me',
     ])
   },
 

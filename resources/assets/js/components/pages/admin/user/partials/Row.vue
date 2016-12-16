@@ -4,6 +4,7 @@
       <router-link :to="'/admin/user/show/' + row.id">{{ row.name }}</router-link>
     </td>
     <td>{{ row.email }}</td>
+    <td>{{ row.role }}</td>
     <td>{{ createdAt }}</td>
     <td>
       <router-link class="btn btn-primary btn-xs" :to="'/admin/user/edit/' + row.id"><i class="glyphicon glyphicon-pencil"></i></router-link>
