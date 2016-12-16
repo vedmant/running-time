@@ -43,6 +43,7 @@ Vue.http.interceptors.push((request, next) => {
 // Global Vue Components
 Vue.component('navbar', require('./components/layout/Navbar.vue'));
 Vue.component('spinner', require('./components/layout/Spinner.vue'));
+Vue.component('toast', require('./components/layout/Toast.vue'));
 
 
 /**

@@ -9,6 +9,7 @@ const routes = [
   {path: '/login', component: require('./components/pages/auth/Login.vue')},
   {path: '/logout', component: require('./components/pages/auth/Logout.vue')},
   {path: '/register', component: require('./components/pages/auth/Register.vue')},
+  {path: '/profile', component: require('./components/pages/auth/Profile.vue'), meta: { requiresAuth: true }},
 
   {path: '/dashboard', component: require('./components/pages/dashboard/Dashboard.vue'), meta: { requiresAuth: true }},
 
@@ -19,7 +20,11 @@ const routes = [
   {path: '/admin', component: require('./components/pages/admin/Admin.vue'), meta: { requiresAdmin: true }, children: [
     {path: '', redirect: 'dashboard'},
     {path: 'dashboard', component: require('./components/pages/admin/dashboard/Dashboard.vue')},
+
     {path: 'users', component: require('./components/pages/admin/user/List.vue')},
+    {path: 'user/show/:id', component: require('./components/pages/admin/user/Show.vue')},
+    {path: 'user/edit/:id', component: require('./components/pages/admin/user/Edit.vue')},
+
     {path: 'entries', component: require('./components/pages/admin/entry/List.vue')},
   ]},
 

@@ -33,11 +33,30 @@ export default {
   data() {
     return {
       errors: {},
-      form: this.getForm(),
     };
   },
 
   computed: {
+
+    id() {
+      return this.$route.params.id;
+    },
+
+    entry() {
+      return this.$store.state.entries.data.find(entry => entry.id == this.id);
+    },
+
+    form() {
+      const duration = moment.duration(this.entry.time);
+
+      return {
+        date: this.entry.date,
+        distance: this.entry.distance,
+        time_hours: Math.floor(duration.asHours()),
+        time_minutes: _.padStart(duration.minutes(), 2, '-'),
+        time_seconds: _.padStart(duration.seconds(), 2, '0'),
+      }
+    }
 
   },
 
@@ -45,27 +64,20 @@ export default {
 
     ...mapActions([
       'updateEntry',
+      'addToastMessage'
     ]),
-
-    getForm() {
-      const id = this.$route.params.id;
-      const entry = this.$store.state.entries.data.find(entry => entry.id == id);
-      const duration = moment.duration(parseInt(entry.time), 'seconds');
-
-      return {
-        date: entry.date,
-        distance: entry.distance,
-        time_hours: Math.floor(duration.asHours()),
-        time_minutes: _.padStart(duration.minutes(), 2, '-'),
-        time_seconds: _.padStart(duration.seconds(), 2, '0'),
-      }
-    },
 
     onSubmit(form) {
       const id = this.$route.params.id;
 
       this.updateEntry({id, form})
-        .then(() => { this.$router.go(-1); })
+        .then(() => {
+          this.addToastMessage({
+            text: 'Time record was updated!',
+            type: 'success'
+          });
+          this.$router.go(-1);
+        })
         .catch((data) => { this.errors = data.validation || {} });
     },
 

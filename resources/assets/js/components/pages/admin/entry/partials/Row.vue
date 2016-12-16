@@ -1,7 +1,7 @@
 <template>
   <tr>
     <td>
-      <router-link v-if="row.user" :to="'/user/show/' + row.user.id">{{ row.user.name }}</router-link>
+      <router-link v-if="row.user" :to="'/admin/user/show/' + row.user.id">{{ row.user.name }}</router-link>
     </td>
     <td>{{ formatDate(row.date) }}</td>
     <td>{{ row.distance }} km</td>

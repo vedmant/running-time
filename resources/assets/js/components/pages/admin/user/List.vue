@@ -74,6 +74,7 @@ export default {
     ...mapActions([
       'loadUsers',
       'deleteUser',
+      'addToastMessage',
     ]),
 
     onLoadEntries(page) {
@@ -91,7 +92,13 @@ export default {
     },
 
     onDelete(id) {
-      this.deleteUser(id).then(() => { this.loadUsers(this.params); });
+      this.deleteUser(id).then(() => {
+        this.addToastMessage({
+          text: 'User was deleted!',
+          type: 'success'
+        });
+        this.loadUsers(this.params);
+      });
     },
 
   }

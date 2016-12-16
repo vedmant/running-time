@@ -93,6 +93,23 @@ export const register = ({commit, dispatch}, form) => {
   })
 };
 
+export const updateProfile = ({commit, dispatch}, {id, form}) => {
+  commit('UPDATE_PROFILE');
+
+  return new Promise((resolve, reject) => {
+    Vue.http.post(apiPath + 'user/' + id, {_method: 'PUT', ...form})
+      .then(
+        response => {
+          commit('UPDATE_PROFILE_OK', response.data.user);
+          resolve();
+        },
+        response => {
+          commit('UPDATE_PROFILE_FAIL');
+          reject(response.data);
+        });
+  })
+};
+
 
 /* ========================================================================= *\
  * Dashboard Actions
@@ -208,6 +225,24 @@ export const loadUsers = ({commit, dispatch}, params) => {
           reject(response.data);
         });
   })
+};
+
+
+export const showUser = ({commit, dispatch}, id) => {
+  commit('SHOW_USER');
+
+  return new Promise((resolve, reject) => {
+    Vue.http.get(apiPath + 'user/' + id)
+      .then(
+        response => {
+          commit('SHOW_USER_OK', response.data.user);
+          resolve();
+        },
+        response => {
+          commit('SHOW_USER_FAIL');
+          reject(response.data);
+        });
+  });
 };
 
 export const updateUser = ({commit, dispatch}, {id, form}) => {

@@ -92,6 +92,7 @@ export default {
     ...mapActions([
       'loadEntries',
       'deleteEntry',
+      'addToastMessage',
     ]),
 
     onLoadEntries(page) {
@@ -109,7 +110,13 @@ export default {
     },
 
     onDelete(id) {
-      this.deleteEntry(id).then(() => { this.loadEntries(this.params); });
+      this.deleteEntry(id).then(() => {
+        this.addToastMessage({
+          text: 'Entry was deleted!',
+          type: 'success'
+        });
+        this.loadEntries(this.params);
+      });
     },
 
   }

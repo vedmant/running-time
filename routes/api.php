@@ -33,9 +33,9 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('dashboard/data', 'DashboardController@data');
 
         Route::get('user/me', 'UserController@me');
-        Route::resource('user', 'UserController');
+        Route::resource('user', 'UserController', ['except' => ['create', 'store', 'edit']]);
 
-        Route::resource('entry', 'EntryController');
+        Route::resource('entry', 'EntryController', ['except' => ['create', 'edit']]);
 
     });
 

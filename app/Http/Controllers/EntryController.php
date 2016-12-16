@@ -88,16 +88,14 @@ class EntryController extends Controller
         $this->authorize($entry);
 
         $this->validate($request, [
-            'date'         => 'required|date',
-            'distance'     => 'required|numeric',
-            'time_minutes' => 'required|digits_between:1,2|min:0',
-            'time_seconds' => 'required|digits_between:1,2|between:0,60',
+            'date'     => 'required|date',
+            'distance' => 'required|numeric',
+            'time'     => 'required|date_format:H:i:s',
         ]);
 
-        $entry->fill($request->only('date', 'distance'));
-        $entry->time = $request->get('time_minutes') * 60 + $request->get('time_seconds');
-        $entry->speed = $entry->distance / ($entry->time / 3600);
-        $entry->pace = ($entry->time / 60) / $entry->distance;
+        $entry->fill($request->only('date', 'distance', 'time'));
+        $entry->speed = $entry->distance / ($entry->seconds()/ 3600);
+        $entry->pace = ($entry->seconds() / 60) / $entry->distance;
         $entry->save();
 
         return ['entry' => $entry];

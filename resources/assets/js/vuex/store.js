@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import * as actions from './actions'
 import createLogger from 'vuex/dist/logger';
+import toast from './modules/toast';
 
 Vue.use(Vuex);
 
@@ -28,6 +29,7 @@ const state = {
     current_page: 1,
     data: [],
   },
+  show_user: {},
 };
 
 
@@ -80,6 +82,19 @@ const mutations = {
     state.loading = false;
   },
 
+  UPDATE_PROFILE (state) {
+    state.loading = true;
+  },
+
+  UPDATE_PROFILE_OK (state, user) {
+    state.user = user;
+    state.loading = false;
+  },
+
+  UPDATE_PROFILE_FAIL (state) {
+    state.loading = false;
+  },
+
   LOAD_DASHBOARD (state) {
     state.loading = true;
   },
@@ -111,7 +126,6 @@ const mutations = {
   },
 
   STORE_ENTRY_OK (state, entry) {
-    state.entries = state.entries.data.unshift(entry);
     state.loading = false;
   },
 
@@ -124,7 +138,7 @@ const mutations = {
   },
 
   UPDATE_ENTRY_OK (state, entry) {
-    state.entries = state.entries.data.map(el => (el.id === entry.id ? entry : el));
+    state.entries.data = state.entries.data.map(el => (el.id === entry.id ? entry : el));
     state.loading = false;
   },
 
@@ -157,12 +171,25 @@ const mutations = {
     state.loading = false;
   },
 
+  SHOW_USER (state) {
+    state.loading = true;
+  },
+
+  SHOW_USER_OK (state, user) {
+    state.show_user = user;
+    state.loading = false;
+  },
+
+  SHOW_USER_FAIL (state) {
+    state.loading = false;
+  },
+
   UPDATE_USER (state) {
     state.loading = true;
   },
 
-  UPDATE_USER_OK (state, entry) {
-    state.users = state.users.data.map(el => (el.id === entry.id ? entry : el));
+  UPDATE_USER_OK (state, user) {
+    state.users.data = state.users.data.map(el => (el.id === user.id ? user : el));
     state.loading = false;
   },
 
@@ -189,5 +216,8 @@ export default new Vuex.Store({
   mutations,
   actions,
   strict: debug,
-  plugins: debug ? [createLogger()] : []
+  plugins: debug ? [createLogger()] : [],
+  modules: {
+    toast,
+  }
 });

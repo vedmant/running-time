@@ -20,7 +20,7 @@
           <div class="panel-body">
             <p>Best speed: <strong>{{ Number(dashboard.max_speed).toFixed(2) }} km/h</strong></p>
             <p>Longest distance: <strong>{{ dashboard.max_distance }} km</strong></p>
-            <p>Longest run: <strong>{{ max_time }}</strong></p>
+            <p>Longest run: <strong>{{ dashboard.max_time }}</strong></p>
           </div>
         </div>
 
@@ -96,15 +96,6 @@ export default {
       'user',
       'dashboard',
     ]),
-
-    max_time() {
-      const duration = moment.duration(parseInt(this.dashboard.max_time), 'seconds');
-      const hours = Math.floor(duration.asHours());
-
-      return (hours ? hours + ':' : '')
-        + _.padStart(duration.minutes(), 2, '0')
-        + ':' + _.padStart(duration.seconds(), 2, '0');
-    }
   },
 
   methods: {

@@ -1,12 +1,12 @@
 <template>
   <tr>
     <td>
-      <router-link :to="'/user/show/' + row.id">{{ row.name }}</router-link>
+      <router-link :to="'/admin/user/show/' + row.id">{{ row.name }}</router-link>
     </td>
     <td>{{ row.email }}</td>
     <td>{{ createdAt }}</td>
     <td>
-      <router-link class="btn btn-primary btn-xs" :to="'/user/edit/' + row.id"><i class="glyphicon glyphicon-pencil"></i></router-link>
+      <router-link class="btn btn-primary btn-xs" :to="'/admin/user/edit/' + row.id"><i class="glyphicon glyphicon-pencil"></i></router-link>
       <button class="btn btn-danger btn-xs" @click="$emit('onDelete', row.id)"><i class="glyphicon glyphicon-remove"></i></button>
     </td>
   </tr>

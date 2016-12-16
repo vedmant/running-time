@@ -41,6 +41,7 @@
             </a>
 
             <ul class="dropdown-menu" role="menu">
+              <router-link tag="li" to="/profile" active-class="active"><a>Profile</a></router-link>
               <router-link tag="li" to="/logout" active-class="active"><a>Logout</a></router-link>
             </ul>
           </li>

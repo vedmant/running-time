@@ -1,45 +1,43 @@
 <template>
   <form class="form-horizontal" role="form" @submit.prevent="$emit('onSubmit', form)">
 
-    <div class="form-group" :class="{ 'has-error': errors.date }">
-      <label class="col-md-4 control-label">Date</label>
+    <div class="form-group" :class="{ 'has-error': errors.name }">
+      <label for="name" class="col-md-4 control-label">Name</label>
       <div class="col-md-6">
-        <input type="date" class="form-control" v-model="form.date">
-        <div class="help-block" v-if="errors.date"><div v-for="error in errors.date"><strong>{{ error }}</strong></div></div>
+        <input id="name" type="text" class="form-control" v-model="form.name" required autofocus>
+        <div class="help-block" v-if="errors.name"><div v-for="error in errors.name"><strong>{{ error }}</strong></div></div>
       </div>
     </div>
 
-    <div class="form-group" :class="{ 'has-error': errors.distance }">
-      <label class="col-md-4 control-label">Distance</label>
+    <div class="form-group" :class="{ 'has-error': errors.email }">
+      <label for="email" class="col-md-4 control-label">E-Mail Address</label>
       <div class="col-md-6">
-        <div class="input-group">
-          <input type="number" class="form-control" v-model="form.distance">
-          <span class="input-group-addon">km</span>
-        </div>
-        <div class="help-block" v-if="errors.distance"><div v-for="error in errors.distance"><strong>{{ error }}</strong></div></div>
+        <input id="email" type="email" class="form-control" v-model="form.email" required>
+        <div class="help-block" v-if="errors.email"><div v-for="error in errors.email"><strong>{{ error }}</strong></div></div>
       </div>
     </div>
 
-    <div class="form-group" :class="{ 'has-error': errors.time_minutes || errors.time_seconds }">
-      <label class="col-md-4 control-label">Time</label>
+    <div class="form-group" :class="{ 'has-error': errors.password }">
+      <label for="password" class="col-md-4 control-label">Password</label>
+
       <div class="col-md-6">
-        <div class="row no-gutter">
-          <div class="col-sm-5">
-            <input type="number" maxlength="2" class="form-control" v-model="form.time_minutes" placeholder="Minutes">
-          </div>
-          <div class="col-sm-2 text-center margintop5">:</div>
-          <div class="col-sm-5">
-            <input type="number" maxlength="2" class="form-control" v-model="form.time_seconds" placeholder="Seconds">
-          </div>
-        </div>
-        <div class="help-block" v-if="errors.time_minutes"><div v-for="error in errors.time_minutes"><strong>{{ error }}</strong></div></div>
-        <div class="help-block" v-if="errors.time_seconds"><div v-for="error in errors.time_seconds"><strong>{{ error }}</strong></div></div>
+        <input id="password" type="password" class="form-control" v-model="form.password">
+        <div class="help-block" v-if="errors.password"><div v-for="error in errors.password"><strong>{{ error }}</strong></div></div>
       </div>
     </div>
 
     <div class="form-group">
-      <div class="col-md-8 col-md-offset-4">
-        <button type="submit" class="btn btn-primary">Submit</button>
+      <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+      <div class="col-md-6">
+        <input id="password-confirm" type="password" class="form-control" v-model="form.password_confirmation">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-6 col-md-offset-4">
+        <button type="submit" class="btn btn-primary">
+          Submit
+        </button>
       </div>
     </div>
   </form>

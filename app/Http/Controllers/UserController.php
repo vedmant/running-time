@@ -28,18 +28,6 @@ class UserController extends Controller
         return ['users' =>(new User)->latest()->paginate(15)];
     }
 
-
-    /**
-     * Store a newly created user in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $this->authorize(User::class);
-    }
-
     /**
      * Display the specified user.
      *
@@ -58,11 +46,25 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param User                      $user
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function update(Request $request, User $user)
     {
         $this->authorize($user);
+
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+            'password' => 'min:6|confirmed',
+        ]);
+
+        $user->fill($request->only('name', 'email'));
+        if ($request->get('password')) {
+            $user->password = bcrypt($request->get('password'));
+        }
+        $user->save();
+
+        return ['user' => $user];
     }
 
     /**

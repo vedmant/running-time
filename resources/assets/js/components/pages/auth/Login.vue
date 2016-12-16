@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <h3>Login</h3>
+    <hr>
+
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default">
@@ -67,12 +70,19 @@ export default {
 
     ...mapActions([
       'login',
+      'addToastMessage',
     ]),
 
     onSubmit() {
       this.errors = {};
       this.login(this.form)
-        .then(() => { this.$router.replace('/dashboard'); })
+        .then(() => {
+          this.addToastMessage({
+            text: 'You logged in!',
+            type: 'success'
+          });
+          this.$router.replace('/dashboard');
+        })
         .catch((data) => {
           this.error = data.message;
           this.errors = data.validation || {};

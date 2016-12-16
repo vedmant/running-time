@@ -50,11 +50,18 @@ export default {
 
     ...mapActions([
       'storeEntry',
+      'addToastMessage',
     ]),
 
     onSubmit(form) {
       this.storeEntry(form)
-        .then(() => { this.$router.go(-1); })
+        .then(() => {
+          this.addToastMessage({
+            text: 'New time record was added!',
+            type: 'success'
+          });
+          this.$router.go(-1);
+        })
         .catch((data) => { this.errors = data.validation || {} });
     },
 
