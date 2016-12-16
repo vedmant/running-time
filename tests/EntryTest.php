@@ -90,4 +90,23 @@ class EntryTest extends TestCase
              ]);
 
     }
+
+    public function testUpdateEntry()
+    {
+        $user = factory(App\User::class)->create();
+        $user->entries()->saveMany(factory(Entry::class, 30)->make());
+
+        /** @var Entry $entry */
+        $entry = $user->entries()->first();
+
+        $this->actingAs($user, 'api')
+             ->json('PUT', '/api/v1/entry/' . $entry->id, [
+                 'date'     => $entry->date->toDateString(),
+                 'distance' => 5,
+                 'time'     => '00:20:00',
+             ])
+             ->assertResponseOk()
+             ->seeJson($entry->fresh()->toArray());
+
+    }
 }
