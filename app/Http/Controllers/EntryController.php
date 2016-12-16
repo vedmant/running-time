@@ -49,17 +49,15 @@ class EntryController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'date'         => 'required|date',
-            'distance'     => 'required|numeric',
-            'time_minutes' => 'required|digits_between:1,2|min:0',
-            'time_seconds' => 'required|digits_between:1,2|between:0,60',
+            'date'     => 'required|date',
+            'distance' => 'required|numeric',
+            'time'     => 'required|date_format:H:i:s',
         ]);
 
-        $entry = new Entry($request->only('date', 'distance'));
+        $entry = new Entry($request->only('date', 'distance', 'time'));
         $entry->user_id = auth()->id();
-        $entry->time = $request->get('time_minutes') * 60 + $request->get('time_seconds');
-        $entry->speed = $entry->distance / ($entry->time / 3600);
-        $entry->pace = ($entry->time / 60) / $entry->distance;
+        $entry->speed = $entry->distance / ($entry->seconds()/ 3600);
+        $entry->pace = ($entry->seconds() / 60) / $entry->distance;
         $entry->save();
 
         return ['entry' => $entry];

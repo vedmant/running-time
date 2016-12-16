@@ -1,8 +1,8 @@
 <template>
   <tr>
-    <td>{{ date }}</td>
+    <td>{{ formatDate(row.date) }}</td>
     <td>{{ row.distance }} km</td>
-    <td>{{ time }}</td>
+    <td>{{ row.time }}</td>
     <td>{{ Number(row.speed).toFixed(2) }} km/h</td>
     <td>{{ Number(row.pace).toFixed(2) }} min/km</td>
     <td>
@@ -26,17 +26,7 @@ export default {
   },
 
   computed: {
-    date() {
-      return moment(this.row.date).format('MM/DD/YYYY');
-    },
-    time() {
-      const duration = moment.duration(parseInt(this.row.time), 'seconds');
-      const hours = Math.floor(duration.asHours());
 
-      return (hours ? hours + ':' : '')
-        + _.padStart(duration.minutes(), 2, '0')
-        + ':' + _.padStart(duration.seconds(), 2, '0');
-    }
   },
 
 }

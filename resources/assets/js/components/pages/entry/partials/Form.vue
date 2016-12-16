@@ -1,5 +1,5 @@
 <template>
-  <form class="form-horizontal" role="form" @submit.prevent="$emit('onSubmit', form)">
+  <form class="form-horizontal" role="form" @submit.prevent="onSubmit">
 
     <div class="form-group" :class="{ 'has-error': errors.date }">
       <label class="col-md-4 control-label">Date</label>
@@ -20,20 +20,17 @@
       </div>
     </div>
 
-    <div class="form-group" :class="{ 'has-error': errors.time_minutes || errors.time_seconds }">
+    <div class="form-group" :class="{ 'has-error': errors.time }">
       <label class="col-md-4 control-label">Time</label>
       <div class="col-md-6">
-        <div class="row no-gutter">
-          <div class="col-sm-5">
-            <input type="number" maxlength="2" class="form-control" v-model="form.time_minutes" placeholder="Minutes">
-          </div>
-          <div class="col-sm-2 text-center margintop5">:</div>
-          <div class="col-sm-5">
-            <input type="number" maxlength="2" class="form-control" v-model="form.time_seconds" placeholder="Seconds">
-          </div>
+        <div class="input-group">
+          <input type="number" maxlength="2" class="form-control date-filter" v-model="form.time_hours" placeholder="Hours">
+          <span class="input-group-addon">:</span>
+          <input type="number" maxlength="2" class="form-control date-filter" v-model="form.time_minutes" placeholder="Minutes">
+          <span class="input-group-addon">:</span>
+          <input type="number" maxlength="2" class="form-control date-filter" v-model="form.time_seconds" placeholder="Seconds">
         </div>
-        <div class="help-block" v-if="errors.time_minutes"><div v-for="error in errors.time_minutes"><strong>{{ error }}</strong></div></div>
-        <div class="help-block" v-if="errors.time_seconds"><div v-for="error in errors.time_seconds"><strong>{{ error }}</strong></div></div>
+        <div class="help-block" v-if="errors.time"><div v-for="error in errors.time"><strong>{{ error }}</strong></div></div>
       </div>
     </div>
 
@@ -59,6 +56,18 @@ export default {
       type: Object,
     }
   },
+
+  methods: {
+
+    onSubmit() {
+      this.$emit('onSubmit', {
+        date: this.form.date,
+        distance: this.form.distance,
+        time: this.form.time_hours + ':' + this.form.time_minutes + ':' + this.form.time_seconds,
+      })
+    }
+
+  }
 
 }
 </script>

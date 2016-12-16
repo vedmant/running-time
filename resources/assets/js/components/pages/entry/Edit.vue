@@ -55,7 +55,8 @@ export default {
       return {
         date: entry.date,
         distance: entry.distance,
-        time_minutes: Math.floor(duration.asMinutes()),
+        time_hours: Math.floor(duration.asHours()),
+        time_minutes: _.padStart(duration.minutes(), 2, '-'),
         time_seconds: _.padStart(duration.seconds(), 2, '0'),
       }
     },

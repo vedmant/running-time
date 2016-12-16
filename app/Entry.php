@@ -24,7 +24,7 @@ class Entry extends Model
         'user_id'  => 'int',
         'date'     => 'date',
         'distance' => 'float',
-        'time'     => 'int',
+        'time'     => 'string',
         'speed'    => 'float',
         'pace'     => 'float',
     ];
@@ -40,5 +40,20 @@ class Entry extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+
+    /* ========================================================================= *\
+     * Helpers
+    \* ========================================================================= */
+
+    /**
+     * Get time in seconds
+     *
+     * @return int
+     */
+    public function seconds()
+    {
+        return time2secconds($this->time);
     }
 }

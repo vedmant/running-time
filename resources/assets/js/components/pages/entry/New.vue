@@ -35,6 +35,7 @@ export default {
       form: {
         date: '',
         distance: '',
+        time_hours: '00',
         time_minutes: '00',
         time_seconds: '00',
       }

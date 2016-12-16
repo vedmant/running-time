@@ -13,7 +13,7 @@ class EntryTest extends TestCase
     public function testMustBeAuthenticated()
     {
         $this->json('GET', 'api/v1/entry')
-            ->assertResponseStatus(401);
+             ->assertResponseStatus(401);
     }
 
     public function testGetEntriesList()
@@ -22,23 +22,28 @@ class EntryTest extends TestCase
         $user->entries()->saveMany(factory(Entry::class, 30)->make());
 
         $this->actingAs($user, 'api')
-            ->json('GET', '/api/v1/entry')
-            ->assertResponseOk()
-            ->seeJsonStructure([
-                'entries' => [
-                    'current_page',
-                    'data' => [
-                        '*' => [
-                            'id', 'date', 'distance', 'time', 'speed', 'pace'
-                        ]
-                    ],
-                    'from',
-                    'last_page',
-                    'per_page',
-                    'to',
-                    'total',
-                ],
-            ]);
+             ->json('GET', '/api/v1/entry')
+             ->assertResponseOk()
+             ->seeJsonStructure([
+                 'entries' => [
+                     'current_page',
+                     'data' => [
+                         '*' => [
+                             'id',
+                             'date',
+                             'distance',
+                             'time',
+                             'speed',
+                             'pace'
+                         ]
+                     ],
+                     'from',
+                     'last_page',
+                     'per_page',
+                     'to',
+                     'total',
+                 ],
+             ]);
     }
 
     public function testCteateEntry()
@@ -46,23 +51,22 @@ class EntryTest extends TestCase
         $user = factory(App\User::class)->create();
 
         $this->actingAs($user, 'api')
-            ->json('POST', '/api/v1/entry', [
-                'date'         => \Carbon\Carbon::now()->toDateString(),
-                'distance'     => '6',
-                'time_minutes' => '30',
-                'time_seconds' => '05',
-            ])
-            ->assertResponseOk()
-            ->seeJsonStructure([
-                'entry' => [
-                    'id',
-                    'date',
-                    'distance',
-                    'time',
-                    'speed',
-                    'pace',
-                ],
-            ]);
+             ->json('POST', '/api/v1/entry', [
+                 'date'     => \Carbon\Carbon::now()->toDateString(),
+                 'distance' => '6',
+                 'time'     => '00:30:05',
+             ])
+             ->assertResponseOk()
+             ->seeJsonStructure([
+                 'entry' => [
+                     'id',
+                     'date',
+                     'distance',
+                     'time',
+                     'speed',
+                     'pace',
+                 ],
+             ]);
 
     }
 
@@ -72,18 +76,16 @@ class EntryTest extends TestCase
 
         $this->actingAs($user, 'api')
              ->json('POST', '/api/v1/entry', [
-                 'date'         => '',
-                 'distance'     => '',
-                 'time_minutes' => '',
-                 'time_seconds' => '',
+                 'date'     => '',
+                 'distance' => '',
+                 'time'     => '',
              ])
              ->assertResponseStatus(422)
              ->seeJsonStructure([
                  'validation' => [
                      'date',
                      'distance',
-                     'time_minutes',
-                     'time_seconds',
+                     'time',
                  ],
              ]);
 

@@ -19,7 +19,7 @@ class CreateEntriesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->date('date');
             $table->decimal('distance');
-            $table->integer('time');
+            $table->time('time');
             $table->decimal('speed');
             $table->decimal('pace');
             $table->timestamps();
