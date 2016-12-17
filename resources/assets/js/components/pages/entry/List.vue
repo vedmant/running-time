@@ -74,9 +74,9 @@ export default {
   },
 
   computed: {
-    ...mapState([
-      'entries',
-    ]),
+    ...mapState({
+      entries: state => state.entries.entries,
+    }),
 
     params() {
       return {

@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import * as actions from './actions'
 import createLogger from 'vuex/dist/logger';
 import toast from './modules/toast';
+import entries from './modules/entries';
 
 Vue.use(Vuex);
 
@@ -17,11 +18,6 @@ const state = {
     fastest_run: {user: {}},
     longest_run: {user: {}},
   },
-  entries: {
-    current_page: 1,
-    data: [],
-  },
-  entry: {},
   users: {
     current_page: 1,
     data: [],
@@ -123,7 +119,6 @@ const mutations = {
   },
 
   LOAD_ENTRIES_OK (state, entries) {
-    state.entries = entries;
     state.loading = false;
   },
 
@@ -136,7 +131,6 @@ const mutations = {
   },
 
   LOAD_ENTRY_OK (state, entry) {
-    state.entry = entry;
     state.loading = false;
   },
 
@@ -161,7 +155,6 @@ const mutations = {
   },
 
   UPDATE_ENTRY_OK (state, entry) {
-    state.entries.data = state.entries.data.map(el => (el.id === entry.id ? entry : el));
     state.loading = false;
   },
 
@@ -242,5 +235,6 @@ export default new Vuex.Store({
   plugins: debug ? [createLogger()] : [],
   modules: {
     toast,
+    entries,
   }
 });

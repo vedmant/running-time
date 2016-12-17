@@ -42,9 +42,9 @@ export default {
 
   computed: {
 
-    ...mapState([
-      'entry',
-    ]),
+    ...mapState({
+      entry: state => state.entries.entry,
+    }),
 
     id() {
       return this.$route.params.id;
