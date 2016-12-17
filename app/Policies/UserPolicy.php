@@ -27,10 +27,9 @@ class UserPolicy
      * Determine whether the user can view the user.
      *
      * @param  \App\User  $user
-     * @param  \App\User  $onUser
      * @return mixed
      */
-    public function index(User $user, User $onUser)
+    public function index(User $user)
     {
         return false;
     }
@@ -67,7 +66,7 @@ class UserPolicy
      */
     public function update(User $user, User $onUser)
     {
-        return false;
+        return $user->id === $onUser->id;
     }
 
     /**

@@ -94,7 +94,7 @@ class EntryTest extends TestCase
     public function testUpdateEntry()
     {
         $user = factory(App\User::class)->create();
-        $user->entries()->saveMany(factory(Entry::class, 30)->make());
+        $user->entries()->saveMany(factory(Entry::class, 2)->make());
 
         /** @var Entry $entry */
         $entry = $user->entries()->first();
@@ -108,5 +108,94 @@ class EntryTest extends TestCase
              ->assertResponseOk()
              ->seeJson($entry->fresh()->toArray());
 
+    }
+
+    public function testUpdateNotOwnedEntry()
+    {
+        $user = factory(App\User::class)->create();
+
+        $user2 = factory(App\User::class)->create();
+        $user2->entries()->saveMany(factory(Entry::class, 2)->make());
+
+        /** @var Entry $entry */
+        $entry = $user2->entries()->first();
+
+        $this->actingAs($user, 'api')
+             ->json('PUT', '/api/v1/entry/' . $entry->id, [
+                 'date'     => $entry->date->toDateString(),
+                 'distance' => 5,
+                 'time'     => '00:20:00',
+             ])
+             ->assertResponseStatus(401);
+    }
+
+    public function testUpdateNotOwnedEntryByAdmin()
+    {
+        $user = factory(App\User::class)->states('admin')->create();
+
+        $user2 = factory(App\User::class)->create();
+        $user2->entries()->saveMany(factory(Entry::class, 2)->make());
+
+        /** @var Entry $entry */
+        $entry = $user2->entries()->first();
+
+        $this->actingAs($user, 'api')
+             ->json('PUT', '/api/v1/entry/' . $entry->id, [
+                 'date'     => $entry->date->toDateString(),
+                 'distance' => 5,
+                 'time'     => '00:20:00',
+             ])
+             ->assertResponseOk()
+             ->seeJson($entry->fresh()->toArray());
+
+    }
+
+    public function testDeleteEntry()
+    {
+        $user = factory(App\User::class)->create();
+        $user->entries()->saveMany(factory(Entry::class, 2)->make());
+
+        /** @var Entry $entry */
+        $entry = $user->entries()->first();
+
+        $this->actingAs($user, 'api')
+             ->json('DELETE', '/api/v1/entry/' . $entry->id)
+             ->assertResponseOk();
+
+        $this->assertNull(Entry::find($entry->id));
+    }
+
+    public function testDeleteNotOwnedEntry()
+    {
+        $user = factory(App\User::class)->create();
+
+        $user2 = factory(App\User::class)->create();
+        $user2->entries()->saveMany(factory(Entry::class, 2)->make());
+
+        /** @var Entry $entry */
+        $entry = $user2->entries()->first();
+
+        $this->actingAs($user, 'api')
+             ->json('DELETE', '/api/v1/entry/' . $entry->id)
+             ->assertResponseStatus(401);
+
+        $this->assertNotNull(Entry::find($entry->id));
+    }
+
+    public function testDeleteNotOwnedEntryByAdmin()
+    {
+        $user = factory(App\User::class)->states('admin')->create();
+
+        $user2 = factory(App\User::class)->create();
+        $user2->entries()->saveMany(factory(Entry::class, 2)->make());
+
+        /** @var Entry $entry */
+        $entry = $user2->entries()->first();
+
+        $this->actingAs($user, 'api')
+             ->json('DELETE', '/api/v1/entry/' . $entry->id)
+             ->assertResponseOk();
+
+        $this->assertNull(Entry::find($entry->id));
     }
 }
