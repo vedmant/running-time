@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Entry extends Model
@@ -55,5 +56,24 @@ class Entry extends Model
     public function seconds()
     {
         return time2secconds($this->time);
+    }
+
+    /**
+     * Apply filters
+     *
+     * @param $filters
+     */
+    public function scopeFilter($filters)
+    {
+        foreach ($filters as $filter => $value) {
+            switch ($filter) {
+                case 'dateFrom':
+                    $this->where('date', '>=', Carbon::parse($value)->toDateString());
+                    break;
+                case 'dateTo':
+                    $this->where('date', '<=', Carbon::parse($value)->toDateString());
+                    break;
+            }
+        }
     }
 }

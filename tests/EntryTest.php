@@ -46,6 +46,50 @@ class EntryTest extends TestCase
              ]);
     }
 
+    public function testGetAllEntriesListByAdmin()
+    {
+        $user = factory(App\User::class)->states('admin')->create();
+
+        $user2 = factory(App\User::class)->create();
+        $user2->entries()->saveMany(factory(Entry::class, 30)->make());
+
+        $this->actingAs($user, 'api')
+             ->json('GET', '/api/v1/entry/all')
+             ->assertResponseOk()
+             ->seeJsonStructure([
+                 'entries' => [
+                     'current_page',
+                     'data' => [
+                         '*' => [
+                             'id',
+                             'date',
+                             'distance',
+                             'time',
+                             'speed',
+                             'pace'
+                         ]
+                     ],
+                     'from',
+                     'last_page',
+                     'per_page',
+                     'to',
+                     'total',
+                 ],
+             ]);
+    }
+
+    public function testGetAllEntriesList()
+    {
+        $user = factory(App\User::class)->create();
+
+        $user2 = factory(App\User::class)->create();
+        $user2->entries()->saveMany(factory(Entry::class, 30)->make());
+
+        $this->actingAs($user, 'api')
+             ->json('GET', '/api/v1/entry/all')
+             ->assertResponseStatus(401);
+    }
+
     public function testCteateEntry()
     {
         $user = factory(App\User::class)->create();

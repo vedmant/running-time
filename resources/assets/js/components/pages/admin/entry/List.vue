@@ -70,12 +70,12 @@ export default {
   },
 
   mounted() {
-    this.loadEntries(this.params);
+    this.loadAllEntries(this.params);
   },
 
   computed: {
     ...mapState({
-      entries: state => state.entries.entries,
+      entries: state => state.all_entries.entries,
     }),
 
     params() {
@@ -83,7 +83,6 @@ export default {
         page: this.entries.current_page,
         dateFrom: this.dateFrom,
         dateTo: this.dateTo,
-        all: 1,
       }
     }
   },
@@ -91,23 +90,23 @@ export default {
   methods: {
 
     ...mapActions([
-      'loadEntries',
+      'loadAllEntries',
       'deleteEntry',
       'addToastMessage',
     ]),
 
     onLoadEntries(page) {
-      this.loadEntries({...this.params, page});
+      this.loadAllEntries({...this.params, page});
     },
 
     onFilter() {
-      this.loadEntries({...this.params, page: 1});
+      this.loadAllEntries({...this.params, page: 1});
     },
 
     onFilterClear() {
       this.dateFrom = '';
       this.dateTo = '';
-      this.loadEntries(this.params);
+      this.loadAllEntries(this.params);
     },
 
     onDelete(id) {
@@ -116,7 +115,7 @@ export default {
           text: 'Entry was deleted!',
           type: 'success'
         });
-        this.loadEntries(this.params);
+        this.loadAllEntries(this.params);
       });
     },
 

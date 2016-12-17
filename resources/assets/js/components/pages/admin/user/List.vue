@@ -59,9 +59,9 @@ export default {
   },
 
   computed: {
-    ...mapState([
-      'users',
-    ]),
+    ...mapState({
+      users: state => state.users.users,
+    }),
 
     params() {
       return {

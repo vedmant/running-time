@@ -30,7 +30,7 @@ class EntryPolicy
      * @param  \App\User  $user
      * @return mixed
      */
-    public function listAll(User $user)
+    public function all(User $user)
     {
         return false;
     }

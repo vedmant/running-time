@@ -19,23 +19,29 @@ class EntryController extends Controller
     {
         /** @var User $me */
         $me = auth()->user();
-        $entry = $me->entries();
 
-        if ($request->get('all')) {
-            $this->authorize('listAll', Entry::class);
-            $entry = (new Entry)->with('user');
-        }
+        $entries = $me->entries()
+            ->orderBy('date', 'desc')
+            ->orderBy('distance', 'desc')
+            ->filter($request->only('dateFrom', 'dateTo'));
 
-        $entries = $entry->orderBy('date', 'desc')
-                         ->orderBy('distance', 'desc');
+        return ['entries' => $entries->paginate(15)];
+    }
 
-        if ($request->get('dateFrom')) {
-            $entries->where('date', '>=', Carbon::parse($request->get('dateFrom'))->toDateString());
-        }
+    /**
+     * Display a listing of all users time entries.
+     *
+     * @param Request $request
+     * @return array
+     */
+    public function all(Request $request)
+    {
+        $this->authorize('all', Entry::class);
 
-        if ($request->get('dateTo')) {
-            $entries->where('date', '<=', Carbon::parse($request->get('dateTo'))->toDateString());
-        }
+        $entries = (new Entry)->with('user')
+            ->orderBy('date', 'desc')
+            ->orderBy('distance', 'desc')
+            ->filter($request->only('dateFrom', 'dateTo'));
 
         return ['entries' => $entries->paginate(15)];
     }

@@ -4,6 +4,8 @@ import * as actions from './actions'
 import createLogger from 'vuex/dist/logger';
 import toast from './modules/toast';
 import entries from './modules/entries';
+import all_entries from './modules/all-entries';
+import users from './modules/users';
 
 Vue.use(Vuex);
 
@@ -12,17 +14,11 @@ const debug = process.env.NODE_ENV !== 'production';
 const state = {
   me: null, // Logged in user
   loading: false,
-  error: '',
   dashboard: {},
   admin_dashboard: {
     fastest_run: {user: {}},
     longest_run: {user: {}},
   },
-  users: {
-    current_page: 1,
-    data: [],
-  },
-  show_user: {},
 };
 
 
@@ -126,6 +122,18 @@ const mutations = {
     state.loading = false;
   },
 
+  LOAD_ALL_ENTRIES (state) {
+    state.loading = true;
+  },
+
+  LOAD_ALL_ENTRIES_OK (state, entries) {
+    state.loading = false;
+  },
+
+  LOAD_ALL_ENTRIES_FAIL (state) {
+    state.loading = false;
+  },
+
   LOAD_ENTRY (state) {
     state.loading = true;
   },
@@ -179,7 +187,6 @@ const mutations = {
   },
 
   LOAD_USERS_OK (state, users) {
-    state.users = users;
     state.loading = false;
   },
 
@@ -192,7 +199,6 @@ const mutations = {
   },
 
   LOAD_USER_OK (state, user) {
-    state.show_user = user;
     state.loading = false;
   },
 
@@ -205,7 +211,6 @@ const mutations = {
   },
 
   UPDATE_USER_OK (state, user) {
-    state.show_user = user;
     state.loading = false;
   },
 
@@ -236,5 +241,7 @@ export default new Vuex.Store({
   modules: {
     toast,
     entries,
+    all_entries,
+    users,
   }
 });

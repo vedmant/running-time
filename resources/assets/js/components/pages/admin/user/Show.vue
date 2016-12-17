@@ -44,7 +44,7 @@ export default {
   computed: {
 
     ...mapState({
-      user: 'show_user',
+      user: state => state.users.user,
     }),
 
     id() {

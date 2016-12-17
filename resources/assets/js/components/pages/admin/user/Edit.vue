@@ -46,17 +46,17 @@ export default {
       return this.$route.params.id;
     },
 
-    ...mapState([
-      'show_user',
-    ]),
+    ...mapState({
+      user: state => state.users.user,
+    }),
 
     form() {
-      if ( ! this.show_user) return {};
+      if ( ! this.user) return {};
 
       return {
-        name: this.show_user.name,
-        email: this.show_user.email,
-        role: this.show_user.role,
+        name: this.user.name,
+        email: this.user.email,
+        role: this.user.role,
       };
     }
 

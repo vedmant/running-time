@@ -36,6 +36,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('user/me', 'UserController@me');
         Route::resource('user', 'UserController', ['except' => ['create', 'store', 'edit']]);
 
+        Route::get('entry/all', 'EntryController@all');
         Route::resource('entry', 'EntryController', ['except' => ['create', 'edit']]);
 
     });
