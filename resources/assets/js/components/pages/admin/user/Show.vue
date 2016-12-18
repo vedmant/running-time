@@ -19,6 +19,7 @@
           <div class="panel-body">
             <p>Name: <strong>{{ user.name }}</strong></p>
             <p>Email: <strong>{{ user.email }}</strong></p>
+            <p>Role: <strong>{{ user.role }}</strong></p>
           </div>
         </div>
       </div>

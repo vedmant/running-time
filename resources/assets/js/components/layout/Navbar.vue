@@ -33,6 +33,17 @@
           <!-- Authentication Links -->
           <router-link tag="li" to="/dashboard" active-class="active"><a>Dashboad</a></router-link>
           <router-link tag="li" to="/entries" active-class="active"><a>Entries</a></router-link>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              Reports <span class="caret"></span>
+            </a>
+
+            <ul class="dropdown-menu" role="menu">
+              <router-link tag="li" to="/report/weekly" active-class="active"><a>Weekly</a></router-link>
+            </ul>
+          </li>
+
           <router-link v-if="me.role === 'admin' || me.role === 'manager'" tag="li" to="/admin" active-class="active"><a>Admin Panel</a></router-link>
 
           <li class="dropdown">

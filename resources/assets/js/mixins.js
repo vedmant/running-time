@@ -5,11 +5,19 @@ import moment from 'moment';
 Vue.mixin({
   methods: {
     range(begin, end) {
-      var offset = begin > end ? end : begin;
-      var delta = Math.abs(end - begin);
-      var result = [];
-      for (var i = 0; i <= delta; i++) {
-        result.push(i + offset);
+      begin = parseInt(begin);
+      end = parseInt(end);
+
+      let result = [];
+
+      if (begin < end) {
+        for (let i = begin; i <= end; i++) {
+          result.push(i);
+        }
+      } else {
+        for (let i = begin; i >= end; i--) {
+          result.push(i);
+        }
       }
 
       return result;

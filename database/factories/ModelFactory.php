@@ -42,7 +42,7 @@ $factory->define(App\Entry::class, function (Faker\Generator $faker) {
 
     return [
         'user_id'  => 0,
-        'date'     => $faker->dateTimeBetween('-60 days', 'now')->format('Y-m-d'),
+        'date'     => $faker->dateTimeBetween('-90 days', 'now')->format('Y-m-d'),
         'distance' => $distance,
         'time'     => seconds2time($time),
         'speed'    => $distance / ($time / 3600),

@@ -31,6 +31,7 @@ const mutations = {
     'LOAD_USER',
     'UPDATE_USER',
     'DELETE_USER',
+    'LOAD_WEEKLY_REPORT',
   ], (state) => {
     state.loading = true;
   }),
@@ -69,6 +70,8 @@ const mutations = {
     'UPDATE_USER_FAIL',
     'DELETE_USER_OK',
     'DELETE_USER_FAIL',
+    'LOAD_WEEKLY_REPORT_OK',
+    'LOAD_WEEKLY_REPORT_FAIL',
   ], (state) => {
     state.loading = false;
   }),

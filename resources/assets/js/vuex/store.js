@@ -7,6 +7,7 @@ import entries from './modules/entries';
 import all_entries from './modules/all-entries';
 import users from './modules/users';
 import global from './modules/global';
+import reports from './modules/reports';
 
 Vue.use(Vuex);
 
@@ -66,5 +67,6 @@ export default new Vuex.Store({
     all_entries,
     users,
     global,
+    reports,
   }
 });

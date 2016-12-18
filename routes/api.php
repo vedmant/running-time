@@ -39,6 +39,8 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('entry/all', 'EntryController@all');
         Route::resource('entry', 'EntryController', ['except' => ['create', 'edit']]);
 
+        Route::get('report/weekly', 'ReportController@weekly');
+
     });
 
 });

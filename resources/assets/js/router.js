@@ -17,6 +17,8 @@ const routes = [
   {path: '/entry/new', component: require('./components/pages/entry/New.vue'), meta: { requiresAuth: true }},
   {path: '/entry/edit/:id', component: require('./components/pages/entry/Edit.vue'), meta: { requiresAuth: true }},
 
+  {path: '/report/weekly', component: require('./components/pages/report/Weekly.vue'), meta: { requiresAuth: true }},
+
   {path: '/admin', component: require('./components/pages/admin/Admin.vue'), meta: { requiresAdmin: true }, children: [
     {path: '', redirect: 'dashboard'},
     {path: 'dashboard', component: require('./components/pages/admin/dashboard/Dashboard.vue')},
