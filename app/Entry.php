@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -61,17 +62,19 @@ class Entry extends Model
     /**
      * Apply filters
      *
+     * @param Builder $query
      * @param $filters
      */
-    public function scopeFilter($filters)
+    public function scopeFilter($query, $filters)
     {
         foreach ($filters as $filter => $value) {
+            if ( ! $value) continue;
             switch ($filter) {
                 case 'dateFrom':
-                    $this->where('date', '>=', Carbon::parse($value)->toDateString());
+                    $query->where('date', '>=', Carbon::parse($value)->toDateString());
                     break;
                 case 'dateTo':
-                    $this->where('date', '<=', Carbon::parse($value)->toDateString());
+                    $query->where('date', '<=', Carbon::parse($value)->toDateString());
                     break;
             }
         }
