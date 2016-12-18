@@ -22,16 +22,30 @@ class ReportController extends Controller
         /** @var User $me */
         $me = auth()->user();
 
+        $sqlite = DB::connection()->getDriverName() === 'sqlite';
+
         /** @var LengthAwarePaginator $weekly */
-        $weekly = DB::table('entries')
-            ->select(DB::raw('STRFTIME("%W", `date`) as `week`, STRFTIME("%Y", `date`) as `year`, avg(`speed`) as `avg_speed`, avg(`distance`) as `avg_distance`'))
+        $query = DB::table('entries')
+            ->select($sqlite ?
+                DB::raw('STRFTIME("%W", `date`) as `week`, STRFTIME("%Y", `date`) as `year`, avg(`speed`) as `avg_speed`, avg(`distance`) as `avg_distance`')
+                : DB::raw('WEEK(`date`) as `week`, YEAR(`date`) as `year`, avg(`speed`) as `avg_speed`, avg(`distance`) as `avg_distance`')
+            )
             ->where('user_id', $me->id)
-            ->where('year', $request->get('year', date('Y')))
+            ->where($sqlite ? 'year' : DB::raw('YEAR(`date`)'), $request->get('year', date('Y')))
             ->groupBy('year', 'week')
             ->orderBy('year', 'desc')
             ->orderBy('week', 'desc');
 
-        $weekly = $weekly->get()->map(function ($item) {
+        $min_year = DB::table('entries')->select($sqlite ?
+            DB::raw('MIN(STRFTIME("%Y", `date`)) as year')
+            : DB::raw('MIN(YEAR(`date`)) as year'))->value('year');
+
+        $max_year = DB::table('entries')->select($sqlite ?
+            DB::raw('MAX(STRFTIME("%Y", `date`)) as year')
+            : DB::raw('MAX(YEAR(`date`)) as year'))->value('year');
+
+
+        $weekly = $query->get()->map(function ($item) {
             $date = (new Carbon())->setISODate($item->year, $item->week);
             return [
                 'week'         => $item->week,
@@ -41,9 +55,6 @@ class ReportController extends Controller
                 'avg_distance' => round($item->avg_distance, 2),
             ];
         });
-
-        $min_year = DB::table('entries')->select(DB::raw('MIN(STRFTIME("%Y", `date`)) as year'))->value('year');
-        $max_year = DB::table('entries')->select(DB::raw('MAX(STRFTIME("%Y", `date`)) as year'))->value('year');
 
         return [
             'weekly' => [

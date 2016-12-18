@@ -59,8 +59,8 @@ class DashboardController extends Controller
 
         return [
             'total_users' => $usersCount,
-            'new_users_this_week' => User::where('create_at', '>=', Carbon::now()->startOfWeek()->toDateTimeString())->count(),
-            'new_users_this_month' => User::where('create_at', '>=', Carbon::now()->startOfMonth()->toDateTimeString())->count(),
+            'new_users_this_week' => User::where('created_at', '>=', Carbon::now()->startOfWeek()->toDateTimeString())->count(),
+            'new_users_this_month' => User::where('created_at', '>=', Carbon::now()->startOfMonth()->toDateTimeString())->count(),
             'total_entries' => $entriesCount,
             'avg_entries_per_user' => round($entriesCount / $usersCount),
             'fastest_run' => Entry::with('user')->whereRaw('speed = (select max(`speed`) from entries)')->first(),

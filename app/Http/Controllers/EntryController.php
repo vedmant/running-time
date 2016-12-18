@@ -22,7 +22,7 @@ class EntryController extends Controller
 
         $entries = $me->entries()
             ->orderBy('date', 'desc')
-            ->orderBy('distance', 'desc')
+            ->orderBy('id', 'desc')
             ->filter($request->only('dateFrom', 'dateTo'));
 
         return ['entries' => $entries->paginate(15)];
