@@ -1,3 +1,39 @@
+<template>
+  <div class='main-spinner' :class="{active: loading}" @click="stopLoading">
+    <div class="middle">
+      <div class="middle-inner">
+        <div class="spinner">
+          <div class="cube1"></div>
+          <div class="cube2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import {mapState, mapActions} from 'vuex';
+
+export default {
+
+  data() {
+    return {};
+  },
+
+  computed: {
+    ...mapState({
+      loading: state => state.global.loading,
+    })
+  },
+
+  methods: {
+    ...mapActions([
+      'stopLoading',
+    ])
+  }
+}
+</script>
+
 <style>
   .spinner {
     margin: 100px auto;
@@ -53,39 +89,3 @@
     }
   }
 </style>
-
-<template>
-  <div class='main-spinner' :class="{active: loading}" @click="stopLoading">
-    <div class="middle">
-      <div class="middle-inner">
-        <div class="spinner">
-          <div class="cube1"></div>
-          <div class="cube2"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
-<script>
-import {mapState, mapActions} from 'vuex';
-
-export default {
-
-  data() {
-    return {};
-  },
-
-  computed: {
-    ...mapState([
-      'loading',
-    ])
-  },
-
-  methods: {
-    ...mapActions([
-      'stopLoading',
-    ])
-  }
-}
-</script>
