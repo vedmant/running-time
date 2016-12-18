@@ -26,6 +26,7 @@ const routes = [
     {path: 'user/edit/:id', component: require('./components/pages/admin/user/Edit.vue')},
 
     {path: 'entries', component: require('./components/pages/admin/entry/List.vue')},
+    {path: 'entry/edit/:id', component: require('./components/pages/admin/entry/Edit.vue')},
   ]},
 
   {path: '*', component: require('./components/pages/404.vue')},
