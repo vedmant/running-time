@@ -35,6 +35,9 @@
 
 .marginright10{ margin-right: 10px; }
 
+@media (max-width: $screen-sm-max){
+   .input-group-stack-sm{ display: block; }
+}
 
 /**
  * Spinner
@@ -45,10 +48,12 @@
 }
 .main-spinner.active{ visibility: visible; opacity: 1; }
 
+
 /**
  * Tables
  */
 .page-info{ display: inline-block; margin-right: 20px; }
+
 
 /**
  * Fixes

@@ -56,11 +56,11 @@ Vue.component('toast', require('./components/layout/Toast.vue'));
  * Authenticated routes
  */
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth) && ! store.state.me) {
+  if (to.matched.some(record => record.meta.requiresAuth) && ! store.state.auth.me) {
     // if route requires auth and user isn't authenticated
     next('/login');
-  } else if (to.matched.some(record => record.meta.requiresAdmin) && ( ! store.state.me
-    || ! _.includes(['admin', 'manager'], store.state.me.role))) {
+  } else if (to.matched.some(record => record.meta.requiresAdmin) && ( ! store.state.auth.me
+    || ! _.includes(['admin', 'manager'], store.state.auth.me.role))) {
     // if route required admin or manager role
     next('/login');
   } else {

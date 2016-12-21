@@ -15,9 +15,7 @@ export default {
   },
 
   computed: {
-    ...mapState([
-      'user',
-    ])
+
   },
 
   methods: {}

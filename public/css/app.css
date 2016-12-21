@@ -7755,6 +7755,12 @@ button.close {
   margin-right: 10px;
 }
 
+@media (max-width: 991px) {
+  .input-group-stack-sm {
+    display: block;
+  }
+}
+
 /**
  * Spinner
  */

@@ -55,9 +55,9 @@ export default {
   },
 
   computed: {
-    ...mapState([
-      'admin_dashboard',
-    ])
+    ...mapState({
+      admin_dashboard: state => state.general.admin_dashboard,
+    })
   },
 
   methods: {

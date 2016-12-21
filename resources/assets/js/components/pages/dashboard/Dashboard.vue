@@ -92,10 +92,10 @@ export default {
   },
 
   computed: {
-    ...mapState([
-      'me',
-      'dashboard',
-    ]),
+    ...mapState({
+      me: state => state.auth.me,
+      dashboard: state => state.general.dashboard,
+    }),
   },
 
   methods: {

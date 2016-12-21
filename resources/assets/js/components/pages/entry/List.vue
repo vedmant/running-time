@@ -5,7 +5,7 @@
 
     <div class="row marginbot10">
       <div class="col-sm-6 filters">
-        <div class="input-group">
+        <div class="input-group input-group-stack-sm">
           <span class="input-group-addon">From:</span>
           <input type="date" class="form-control date-filter" v-model="dateFrom" placeholder="Date from">
           <span class="input-group-addon">To:</span>
@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <div class="panel panel-default">
+    <div class="panel panel-default table-responsive">
       <table class="table table-bordered">
         <thead>
         <tr>
