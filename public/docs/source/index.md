@@ -6,11 +6,10 @@ language_tabs:
 - javascript
 
 includes:
+- errors
 
 search: true
 
-toc_footers:
-- <a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a>
 ---
 <!-- START_INFO -->
 # Info
@@ -53,6 +52,14 @@ $.ajax(settings).done(function (response) {
 `POST api/v1/auth/login`
 
 
+### Query Parameters
+
+Parameter | Required
+--- | ---
+email | required
+password | required
+
+
 <!-- END_2be1f0e022faf424f18f30275e61416e -->
 <!-- START_3157fb6d77831463001829403e201c3e -->
 ## Registration
@@ -85,6 +92,15 @@ $.ajax(settings).done(function (response) {
 
 ### HTTP Request
 `POST api/v1/auth/register`
+
+### Query Parameters
+
+Parameter | Required
+--- | ---
+name | required
+email | required
+password | required
+password_confirmation | required
 
 
 <!-- END_3157fb6d77831463001829403e201c3e -->
@@ -135,26 +151,7 @@ $.ajax(settings).done(function (response) {
             11.86,
             13
         ],
-        [
-            "12\/13",
-            9.14,
-            5
-        ],
-        [
-            "12\/15",
-            10.59,
-            13
-        ],
-        [
-            "12\/16",
-            10.23,
-            16
-        ],
-        [
-            "12\/18",
-            11.18,
-            12
-        ]
+        ...
     ],
     "max_speed": "14.754098360656",
     "max_distance": "20",
@@ -334,7 +331,8 @@ $.ajax(settings).done(function (response) {
                     "created_at": "2016-12-21 17:58:26",
                     "updated_at": "2016-12-21 17:58:26"
                 }
-            }
+            },
+            ...
         ]
     }
 }
@@ -410,7 +408,8 @@ $.ajax(settings).done(function (response) {
                 "pace": 5.8666666666667,
                 "created_at": "2016-12-21 17:58:26",
                 "updated_at": "2016-12-21 17:58:26"
-            }
+            },
+            ...
         ]
     }
 }
@@ -454,6 +453,14 @@ $.ajax(settings).done(function (response) {
 
 ### HTTP Request
 `POST api/v1/entry`
+
+### Query Parameters
+
+Parameter | Required
+--- | ---
+date | required
+distance | required
+time | required
 
 
 <!-- END_3289f9989af83178b71306f86511c809 -->
@@ -545,6 +552,15 @@ $.ajax(settings).done(function (response) {
 `PATCH api/v1/entry/{entry}`
 
 
+### Query Parameters
+
+Parameter | Required
+--- | ---
+date | required
+distance | required
+time | required
+
+
 <!-- END_178d5d19d4f73ab9ba96945c8e083263 -->
 <!-- START_802c74715286cd8b3276562d36c98790 -->
 ## Delete entry
@@ -630,76 +646,7 @@ $.ajax(settings).done(function (response) {
                 "avg_speed": 11.38,
                 "avg_distance": 10.75
             },
-            {
-                "week": "47",
-                "week_start": "2016-11-21",
-                "week_end": "2016-11-27",
-                "avg_speed": 12.27,
-                "avg_distance": 10.67
-            },
-            {
-                "week": "46",
-                "week_start": "2016-11-14",
-                "week_end": "2016-11-20",
-                "avg_speed": 11.7,
-                "avg_distance": 7.67
-            },
-            {
-                "week": "45",
-                "week_start": "2016-11-07",
-                "week_end": "2016-11-13",
-                "avg_speed": 11.85,
-                "avg_distance": 10.5
-            },
-            {
-                "week": "44",
-                "week_start": "2016-10-31",
-                "week_end": "2016-11-06",
-                "avg_speed": 11.68,
-                "avg_distance": 9.86
-            },
-            {
-                "week": "43",
-                "week_start": "2016-10-24",
-                "week_end": "2016-10-30",
-                "avg_speed": 11.72,
-                "avg_distance": 13.13
-            },
-            {
-                "week": "42",
-                "week_start": "2016-10-17",
-                "week_end": "2016-10-23",
-                "avg_speed": 11.72,
-                "avg_distance": 4.75
-            },
-            {
-                "week": "41",
-                "week_start": "2016-10-10",
-                "week_end": "2016-10-16",
-                "avg_speed": 9.51,
-                "avg_distance": 14
-            },
-            {
-                "week": "40",
-                "week_start": "2016-10-03",
-                "week_end": "2016-10-09",
-                "avg_speed": 11.78,
-                "avg_distance": 13.67
-            },
-            {
-                "week": "39",
-                "week_start": "2016-09-26",
-                "week_end": "2016-10-02",
-                "avg_speed": 11.39,
-                "avg_distance": 11.75
-            },
-            {
-                "week": "38",
-                "week_start": "2016-09-19",
-                "week_end": "2016-09-25",
-                "avg_speed": 11.05,
-                "avg_distance": 11
-            }
+            ...
         ]
     }
 }
@@ -818,7 +765,8 @@ $.ajax(settings).done(function (response) {
                 "role": "manager",
                 "created_at": "2016-12-21 17:58:26",
                 "updated_at": "2016-12-21 17:58:26"
-            }
+            },
+            ...
         ]
     }
 }
@@ -914,6 +862,16 @@ $.ajax(settings).done(function (response) {
 `PUT api/v1/user/{user}`
 
 `PATCH api/v1/user/{user}`
+
+
+### Query Parameters
+
+Parameter | Required
+--- | ---
+name | required
+email | required
+password | optional
+password_confirmation | optional, required with password
 
 
 <!-- END_1006d782d67bb58039bde349972eb2f0 -->

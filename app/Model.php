@@ -11,5 +11,5 @@ abstract class Model extends Eloquent
      *
      * @var int
      */
-    protected $perPage = 2;
+    protected $perPage = 15;
 }
