@@ -9,6 +9,12 @@ use DB;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
+/**
+ * Class ReportController
+ *
+ * @package App\Http\Controllers
+ * @resource Reports
+ */
 class ReportController extends Controller
 {
     /**

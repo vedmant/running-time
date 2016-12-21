@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 
+/**
+ * Class UserController
+ *
+ * @package App\Http\Controllers
+ * @resource User
+ */
 class UserController extends Controller
 {
     /**
+     * Сurrent authenticated user
+     *
      * Return current authenticated user data
      *
      * @param Request $request
@@ -19,6 +27,8 @@ class UserController extends Controller
     }
 
     /**
+     * Users list
+     *
      * Display a listing of users
      *
      * @return array
@@ -27,10 +37,12 @@ class UserController extends Controller
     {
         $this->authorize('index', User::class);
 
-        return ['users' =>(new User)->latest()->paginate(15)];
+        return ['users' =>(new User)->latest()->paginate()];
     }
 
     /**
+     * Show user
+     *
      * Display the specified user.
      *
      * @param User $user
@@ -44,6 +56,8 @@ class UserController extends Controller
     }
 
     /**
+     * Update user
+     *
      * Update the specified user in storage.
      *
      * @param  \Illuminate\Http\Request $request
@@ -78,6 +92,8 @@ class UserController extends Controller
     }
 
     /**
+     * Delete user
+     *
      * Remove the specified user from storage.
      *
      * @param User $user

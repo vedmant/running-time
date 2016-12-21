@@ -8,9 +8,17 @@ use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 
+/**
+ * Class DashboardController
+ *
+ * @package App\Http\Controllers
+ * @resource Dashboards
+ */
 class DashboardController extends Controller
 {
     /**
+     * Dashboard
+     *
      * Get user dashboard data
      *
      * @param Request $request
@@ -42,6 +50,8 @@ class DashboardController extends Controller
     }
 
     /**
+     * Admin dashboard
+     *
      * Get admin dashboard data
      *
      * @param Request $request

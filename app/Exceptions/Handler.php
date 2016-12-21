@@ -65,7 +65,7 @@ class Handler extends ExceptionHandler
     public function renderJson($request, Exception $e)
     {
         if ($e instanceof HttpResponseException) {
-            return $e->getResponse();
+            return response()->json(['message' => $e->getMessage()], $e->getResponse()->getStatusCode());
         } elseif ($e instanceof AuthenticationException) {
             return response()->json(['error' => 'Unauthenticated.', 'message' => $e->getMessage()], 401);
         } elseif ($e instanceof AuthorizationException) {

@@ -3,13 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Entry;
+use App\Http\Requests\StoreEntryRequest;
+use App\Http\Requests\UpdateEntryRequest;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
+/**
+ * Class EntryController
+ *
+ * @package App\Http\Controllers
+ * @resource Entry
+ */
 class EntryController extends Controller
 {
     /**
+     * Entries list
+     *
      * Display a listing of time entries.
      *
      * @param Request $request
@@ -25,11 +35,13 @@ class EntryController extends Controller
             ->orderBy('id', 'desc')
             ->filter($request->only('dateFrom', 'dateTo'));
 
-        return ['entries' => $entries->paginate(15)];
+        return ['entries' => $entries->paginate()];
     }
 
     /**
-     * Display a listing of all users time entries.
+     * All ennties list
+     *
+     * Display a listing of all users time entries (admin access only).
      *
      * @param Request $request
      * @return array
@@ -43,13 +55,15 @@ class EntryController extends Controller
             ->orderBy('distance', 'desc')
             ->filter($request->only('dateFrom', 'dateTo'));
 
-        return ['entries' => $entries->paginate(15)];
+        return ['entries' => $entries->paginate()];
     }
 
     /**
+     * Store Entry
+     *
      * Store a newly created time entry in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return array
      */
     public function store(Request $request)
@@ -57,7 +71,7 @@ class EntryController extends Controller
         $this->validate($request, [
             'date'     => 'required|date',
             'distance' => 'required|numeric',
-            'time'     => 'required|date_format:H:i:s',
+            'time'     => 'required|date_format:H:i:s|time_required',
         ]);
 
         $entry = new Entry($request->only('date', 'distance', 'time'));
@@ -70,6 +84,8 @@ class EntryController extends Controller
     }
 
     /**
+     * Show entry
+     *
      * Display the specified time entry.
      *
      * @param Entry $entry
@@ -83,10 +99,12 @@ class EntryController extends Controller
     }
 
     /**
+     * Update entry
+     *
      * Update time entry in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param Entry                     $entry
+     * @param Request $request
+     * @param Entry                      $entry
      * @return array
      */
     public function update(Request $request, Entry $entry)
@@ -96,7 +114,7 @@ class EntryController extends Controller
         $this->validate($request, [
             'date'     => 'required|date',
             'distance' => 'required|numeric',
-            'time'     => 'required|date_format:H:i:s',
+            'time'     => 'required|date_format:H:i:s|time_required',
         ]);
 
         $entry->fill($request->only('date', 'distance', 'time'));
@@ -108,6 +126,8 @@ class EntryController extends Controller
     }
 
     /**
+     * Delete entry
+     *
      * Remove time entry from storage.
      *
      * @param Entry $entry

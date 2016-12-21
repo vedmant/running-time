@@ -1,0 +1,813 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/all.js"></script>
+
+
+          <script>
+        $(function() {
+            setupLanguages(["bash","javascript"]);
+        });
+      </script>
+      </head>
+
+  <body class="">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+        <img src="images/logo.png" />
+                    <div class="lang-selector">
+                                  <a href="#" data-language-name="bash">bash</a>
+                                  <a href="#" data-language-name="javascript">javascript</a>
+                            </div>
+                            <div class="search">
+              <input type="text" class="search" id="input-search" placeholder="Search">
+            </div>
+            <ul class="search-results"></ul>
+              <div id="toc">
+      </div>
+                    <ul class="toc-footer">
+                                  <li><a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a></li>
+                            </ul>
+            </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+          <!-- START_INFO -->
+<h1>Info</h1>
+<p>Welcome to the generated API reference.
+<a href="http://localhost/docs/collection.json">Get Postman Collection</a></p>
+<!-- END_INFO -->
+<h1>Authentication</h1>
+<!-- START_2be1f0e022faf424f18f30275e61416e -->
+<h2>Login</h2>
+<p>Handle a login request to the application.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost/api/v1/auth/login" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/v1/auth/login",
+    "method": "POST",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/v1/auth/login</code></p>
+<!-- END_2be1f0e022faf424f18f30275e61416e -->
+<!-- START_3157fb6d77831463001829403e201c3e -->
+<h2>Registration</h2>
+<p>Handle a registration request for the application.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost/api/v1/auth/register" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/v1/auth/register",
+    "method": "POST",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/v1/auth/register</code></p>
+<!-- END_3157fb6d77831463001829403e201c3e -->
+<h1>Dashboards</h1>
+<!-- START_9bb5562a2592cee5f0b67c57fb76f99a -->
+<h2>Dashboard</h2>
+<p>Get user dashboard data</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost/api/v1/dashboard/data" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/v1/dashboard/data",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
+    "weekly_count": 0,
+    "weekly_avg_speed": null,
+    "weekly_avg_pace": null,
+    "week_chart": [
+        [
+            "12\/11",
+            9.77,
+            7.67
+        ],
+        [
+            "12\/12",
+            11.86,
+            13
+        ],
+        [
+            "12\/13",
+            9.14,
+            5
+        ],
+        [
+            "12\/15",
+            10.59,
+            13
+        ],
+        [
+            "12\/16",
+            10.23,
+            16
+        ],
+        [
+            "12\/18",
+            11.18,
+            12
+        ]
+    ],
+    "max_speed": "14.754098360656",
+    "max_distance": "20",
+    "max_time": "2:06:40"
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/v1/dashboard/data</code></p>
+<p><code>HEAD api/v1/dashboard/data</code></p>
+<!-- END_9bb5562a2592cee5f0b67c57fb76f99a -->
+<!-- START_0acb3ece78a7d22a13c67da9901c9eee -->
+<h2>Admin dashboard</h2>
+<p>Get admin dashboard data</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost/api/v1/dashboard/adminData" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/v1/dashboard/adminData",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
+    "total_users": 5,
+    "new_users_this_week": 5,
+    "new_users_this_month": 5,
+    "total_entries": 180,
+    "avg_entries_per_user": 36,
+    "fastest_run": {
+        "id": 152,
+        "user_id": 5,
+        "date": "2016-11-03 00:00:00",
+        "distance": 20,
+        "time": "1:20:00",
+        "speed": 15,
+        "pace": 4,
+        "created_at": "2016-12-21 17:58:26",
+        "updated_at": "2016-12-21 17:58:26",
+        "user": {
+            "id": 5,
+            "name": "Sincere Ruecker",
+            "email": "ottis.wunsch@example.com",
+            "role": "user",
+            "created_at": "2016-12-21 17:58:26",
+            "updated_at": "2016-12-21 17:58:26"
+        }
+    },
+    "longest_run": {
+        "id": 39,
+        "user_id": 1,
+        "date": "2016-10-08 00:00:00",
+        "distance": 20,
+        "time": "1:29:20",
+        "speed": 13.432835820896,
+        "pace": 4.4666666666667,
+        "created_at": "2016-12-21 17:58:26",
+        "updated_at": "2016-12-21 17:58:26",
+        "user": {
+            "id": 1,
+            "name": "vedmant",
+            "email": "vedmant@gmail.com",
+            "role": "admin",
+            "created_at": "2016-12-21 17:58:26",
+            "updated_at": "2016-12-21 17:58:26"
+        }
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/v1/dashboard/adminData</code></p>
+<p><code>HEAD api/v1/dashboard/adminData</code></p>
+<!-- END_0acb3ece78a7d22a13c67da9901c9eee -->
+<h1>Entry</h1>
+<!-- START_9885765a0eba68c236ad6a094aeda978 -->
+<h2>All ennties list</h2>
+<p>Display a listing of all users time entries (admin access only).</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost/api/v1/entry/all" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/v1/entry/all",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
+    "entries": {
+        "total": 180,
+        "per_page": 2,
+        "current_page": 1,
+        "last_page": 90,
+        "next_page_url": "http:\/\/localhostapi\/v1\/entry\/all?page=2",
+        "prev_page_url": null,
+        "from": 1,
+        "to": 2,
+        "data": [
+            {
+                "id": 74,
+                "user_id": 2,
+                "date": "2016-12-21 00:00:00",
+                "distance": 20,
+                "time": "1:25:40",
+                "speed": 14.007782101167,
+                "pace": 4.2833333333333,
+                "created_at": "2016-12-21 17:58:26",
+                "updated_at": "2016-12-21 17:58:26",
+                "user": {
+                    "id": 2,
+                    "name": "manager",
+                    "email": "manager@gmail.com",
+                    "role": "manager",
+                    "created_at": "2016-12-21 17:58:26",
+                    "updated_at": "2016-12-21 17:58:26"
+                }
+            },
+            {
+                "id": 142,
+                "user_id": 4,
+                "date": "2016-12-21 00:00:00",
+                "distance": 5,
+                "time": "0:30:30",
+                "speed": 9.8360655737705,
+                "pace": 6.1,
+                "created_at": "2016-12-21 17:58:26",
+                "updated_at": "2016-12-21 17:58:26",
+                "user": {
+                    "id": 4,
+                    "name": "Dr. Zula Weimann Sr.",
+                    "email": "rwisoky@example.net",
+                    "role": "user",
+                    "created_at": "2016-12-21 17:58:26",
+                    "updated_at": "2016-12-21 17:58:26"
+                }
+            }
+        ]
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/v1/entry/all</code></p>
+<p><code>HEAD api/v1/entry/all</code></p>
+<!-- END_9885765a0eba68c236ad6a094aeda978 -->
+<!-- START_65c8d1046202778f8d5e8f590b7695ed -->
+<h2>Entries list</h2>
+<p>Display a listing of time entries.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost/api/v1/entry" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/v1/entry",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
+    "entries": {
+        "total": 60,
+        "per_page": 2,
+        "current_page": 1,
+        "last_page": 30,
+        "next_page_url": "http:\/\/localhostapi\/v1\/entry?page=2",
+        "prev_page_url": null,
+        "from": 1,
+        "to": 2,
+        "data": [
+            {
+                "id": 21,
+                "user_id": 1,
+                "date": "2016-12-18 00:00:00",
+                "distance": 12,
+                "time": "1:04:24",
+                "speed": 11.180124223602,
+                "pace": 5.3666666666667,
+                "created_at": "2016-12-21 17:58:26",
+                "updated_at": "2016-12-21 17:58:26"
+            },
+            {
+                "id": 16,
+                "user_id": 1,
+                "date": "2016-12-16 00:00:00",
+                "distance": 16,
+                "time": "1:33:52",
+                "speed": 10.227272727273,
+                "pace": 5.8666666666667,
+                "created_at": "2016-12-21 17:58:26",
+                "updated_at": "2016-12-21 17:58:26"
+            }
+        ]
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/v1/entry</code></p>
+<p><code>HEAD api/v1/entry</code></p>
+<!-- END_65c8d1046202778f8d5e8f590b7695ed -->
+<!-- START_3289f9989af83178b71306f86511c809 -->
+<h2>Store Entry</h2>
+<p>Store a newly created time entry in storage.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost/api/v1/entry" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/v1/entry",
+    "method": "POST",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/v1/entry</code></p>
+<!-- END_3289f9989af83178b71306f86511c809 -->
+<!-- START_b8a6863911bb39a1e86237d9575d27ee -->
+<h2>Show entry</h2>
+<p>Display the specified time entry.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost/api/v1/entry/{entry}" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/v1/entry/{entry}",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
+    "entry": {
+        "id": 1,
+        "user_id": 1,
+        "date": "2016-12-11 00:00:00",
+        "distance": 3,
+        "time": "0:19:12",
+        "speed": 9.375,
+        "pace": 6.4,
+        "created_at": "2016-12-21 17:58:26",
+        "updated_at": "2016-12-21 17:58:26"
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/v1/entry/{entry}</code></p>
+<p><code>HEAD api/v1/entry/{entry}</code></p>
+<!-- END_b8a6863911bb39a1e86237d9575d27ee -->
+<!-- START_178d5d19d4f73ab9ba96945c8e083263 -->
+<h2>Update entry</h2>
+<p>Update time entry in storage.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost/api/v1/entry/{entry}" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/v1/entry/{entry}",
+    "method": "PUT",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>PUT api/v1/entry/{entry}</code></p>
+<p><code>PATCH api/v1/entry/{entry}</code></p>
+<!-- END_178d5d19d4f73ab9ba96945c8e083263 -->
+<!-- START_802c74715286cd8b3276562d36c98790 -->
+<h2>Delete entry</h2>
+<p>Remove time entry from storage.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost/api/v1/entry/{entry}" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/v1/entry/{entry}",
+    "method": "DELETE",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>DELETE api/v1/entry/{entry}</code></p>
+<!-- END_802c74715286cd8b3276562d36c98790 -->
+<h1>Reports</h1>
+<!-- START_f3e53b672e74b1d2798ed908c1abb6a6 -->
+<h2>Get weekly report</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost/api/v1/report/weekly" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/v1/report/weekly",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
+    "weekly": {
+        "year": "2016",
+        "min_year": "2016",
+        "max_year": "2016",
+        "data": [
+            {
+                "week": "50",
+                "week_start": "2016-12-12",
+                "week_end": "2016-12-18",
+                "avg_speed": 10.96,
+                "avg_distance": 12.14
+            },
+            {
+                "week": "49",
+                "week_start": "2016-12-05",
+                "week_end": "2016-12-11",
+                "avg_speed": 11.38,
+                "avg_distance": 10.75
+            },
+            {
+                "week": "47",
+                "week_start": "2016-11-21",
+                "week_end": "2016-11-27",
+                "avg_speed": 12.27,
+                "avg_distance": 10.67
+            },
+            {
+                "week": "46",
+                "week_start": "2016-11-14",
+                "week_end": "2016-11-20",
+                "avg_speed": 11.7,
+                "avg_distance": 7.67
+            },
+            {
+                "week": "45",
+                "week_start": "2016-11-07",
+                "week_end": "2016-11-13",
+                "avg_speed": 11.85,
+                "avg_distance": 10.5
+            },
+            {
+                "week": "44",
+                "week_start": "2016-10-31",
+                "week_end": "2016-11-06",
+                "avg_speed": 11.68,
+                "avg_distance": 9.86
+            },
+            {
+                "week": "43",
+                "week_start": "2016-10-24",
+                "week_end": "2016-10-30",
+                "avg_speed": 11.72,
+                "avg_distance": 13.13
+            },
+            {
+                "week": "42",
+                "week_start": "2016-10-17",
+                "week_end": "2016-10-23",
+                "avg_speed": 11.72,
+                "avg_distance": 4.75
+            },
+            {
+                "week": "41",
+                "week_start": "2016-10-10",
+                "week_end": "2016-10-16",
+                "avg_speed": 9.51,
+                "avg_distance": 14
+            },
+            {
+                "week": "40",
+                "week_start": "2016-10-03",
+                "week_end": "2016-10-09",
+                "avg_speed": 11.78,
+                "avg_distance": 13.67
+            },
+            {
+                "week": "39",
+                "week_start": "2016-09-26",
+                "week_end": "2016-10-02",
+                "avg_speed": 11.39,
+                "avg_distance": 11.75
+            },
+            {
+                "week": "38",
+                "week_start": "2016-09-19",
+                "week_end": "2016-09-25",
+                "avg_speed": 11.05,
+                "avg_distance": 11
+            }
+        ]
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/v1/report/weekly</code></p>
+<p><code>HEAD api/v1/report/weekly</code></p>
+<!-- END_f3e53b672e74b1d2798ed908c1abb6a6 -->
+<h1>User</h1>
+<!-- START_957f36a05e68536731995f18794d7502 -->
+<h2>Сurrent authenticated user</h2>
+<p>Return current authenticated user data</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost/api/v1/user/me" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/v1/user/me",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
+    "id": 1,
+    "name": "vedmant",
+    "email": "vedmant@gmail.com",
+    "role": "admin",
+    "created_at": "2016-12-21 17:58:26",
+    "updated_at": "2016-12-21 17:58:26"
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/v1/user/me</code></p>
+<p><code>HEAD api/v1/user/me</code></p>
+<!-- END_957f36a05e68536731995f18794d7502 -->
+<!-- START_b2892eb191cd19c0a6f1aae56ba43db4 -->
+<h2>Users list</h2>
+<p>Display a listing of users</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost/api/v1/user" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/v1/user",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
+    "users": {
+        "total": 5,
+        "per_page": 2,
+        "current_page": 1,
+        "last_page": 3,
+        "next_page_url": "http:\/\/localhostapi\/v1\/user?page=2",
+        "prev_page_url": null,
+        "from": 1,
+        "to": 2,
+        "data": [
+            {
+                "id": 1,
+                "name": "vedmant",
+                "email": "vedmant@gmail.com",
+                "role": "admin",
+                "created_at": "2016-12-21 17:58:26",
+                "updated_at": "2016-12-21 17:58:26"
+            },
+            {
+                "id": 2,
+                "name": "manager",
+                "email": "manager@gmail.com",
+                "role": "manager",
+                "created_at": "2016-12-21 17:58:26",
+                "updated_at": "2016-12-21 17:58:26"
+            }
+        ]
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/v1/user</code></p>
+<p><code>HEAD api/v1/user</code></p>
+<!-- END_b2892eb191cd19c0a6f1aae56ba43db4 -->
+<!-- START_eda2b3d78b052ccb36bffab3b344d72a -->
+<h2>Show user</h2>
+<p>Display the specified user.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost/api/v1/user/{user}" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/v1/user/{user}",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
+    "user": {
+        "id": 1,
+        "name": "vedmant",
+        "email": "vedmant@gmail.com",
+        "role": "admin",
+        "created_at": "2016-12-21 17:58:26",
+        "updated_at": "2016-12-21 17:58:26"
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/v1/user/{user}</code></p>
+<p><code>HEAD api/v1/user/{user}</code></p>
+<!-- END_eda2b3d78b052ccb36bffab3b344d72a -->
+<!-- START_1006d782d67bb58039bde349972eb2f0 -->
+<h2>Update user</h2>
+<p>Update the specified user in storage.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost/api/v1/user/{user}" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/v1/user/{user}",
+    "method": "PUT",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>PUT api/v1/user/{user}</code></p>
+<p><code>PATCH api/v1/user/{user}</code></p>
+<!-- END_1006d782d67bb58039bde349972eb2f0 -->
+<!-- START_a5d7655acadc1b6c97d48e68f1e87be9 -->
+<h2>Delete user</h2>
+<p>Remove the specified user from storage.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl "http://localhost/api/v1/user/{user}" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/v1/user/{user}",
+    "method": "DELETE",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>DELETE api/v1/user/{user}</code></p>
+<!-- END_a5d7655acadc1b6c97d48e68f1e87be9 -->
+      </div>
+      <div class="dark-box">
+                        <div class="lang-selector">
+                                    <a href="#" data-language-name="bash">bash</a>
+                                    <a href="#" data-language-name="javascript">javascript</a>
+                              </div>
+                </div>
+    </div>
+  </body>
+</html>

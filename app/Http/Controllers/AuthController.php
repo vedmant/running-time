@@ -9,11 +9,19 @@ use Illuminate\Http\Request;
 use Lang;
 use Validator;
 
+/**
+ * Class AuthController
+ *
+ * @package App\Http\Controllers
+ * @resource Authentication
+ */
 class AuthController extends Controller
 {
     use AuthenticatesUsers;
 
     /**
+     * Login
+     *
      * Handle a login request to the application.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -51,6 +59,8 @@ class AuthController extends Controller
     }
 
     /**
+     * Registration
+     *
      * Handle a registration request for the application.
      *
      * @param  \Illuminate\Http\Request $request

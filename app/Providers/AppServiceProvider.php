@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Extensions\ExtendedValidator;
 use Illuminate\Support\ServiceProvider;
+use Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Validator with custom rules
+        Validator::resolver(function($translator, $data, $rules, $messages) {
+            return new ExtendedValidator($translator, $data, $rules, $messages);
+        });
     }
 
     /**
