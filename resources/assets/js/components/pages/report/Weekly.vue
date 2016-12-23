@@ -4,6 +4,15 @@
     <hr>
 
     <div class="panel panel-default">
+      <vue-chart
+        :chart-type="LineChart"
+        :columns="columns"
+        :rows="this.report.chart"
+        :options="options"
+      ></vue-chart>
+    </div>
+
+    <div class="panel panel-default">
       <table class="table table-bordered">
         <thead>
         <tr>
@@ -40,7 +49,23 @@ export default {
 
   data() {
     return {
-
+      columns: [{
+        'type': 'string',
+        'label': 'Week'
+      }, {
+        'type': 'number',
+        'label': 'Avg. Speed'
+      }, {
+        'type': 'number',
+        'label': 'Avg. Distance'
+      }],
+      options: {
+        title: 'My Performance',
+        height: 500,
+        curveType: 'function',
+        vAxis: {title: 'Speed, Pace'},
+        hAxis: {title: 'Week'}
+      },
     };
   },
 

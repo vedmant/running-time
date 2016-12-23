@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 /**
  * Class ReportController
@@ -51,7 +52,9 @@ class ReportController extends Controller
             : DB::raw('MAX(YEAR(`date`)) as year'))->value('year');
 
 
-        $weekly = $query->get()->map(function ($item) {
+        $result = $query->get();
+
+        $data = $result->map(function ($item) {
             $date = (new Carbon())->setISODate($item->year, $item->week);
             return [
                 'week'         => $item->week,
@@ -62,13 +65,18 @@ class ReportController extends Controller
             ];
         });
 
+        $data_chart = (new Collection(array_reverse($result->toArray())))->map(function ($item) {
+            return [$item->week, round($item->avg_speed, 2), round($item->avg_distance, 2)];
+        });
+
         return [
             'weekly' => [
                 'year'     => $request->get('year', date('Y')),
                 'min_year' => $min_year,
                 'max_year' => $max_year,
-                'data'     => $weekly,
-            ]
+                'data'     => $data,
+                'chart'    => $data_chart,
+            ],
         ];
     }
 }

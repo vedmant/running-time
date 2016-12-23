@@ -72,9 +72,9 @@ export default {
 
   computed: {
 
-    ...mapState([
-      'me'
-    ]),
+    ...mapState({
+      me: state => state.auth.me,
+    }),
 
   }
 
