@@ -37,7 +37,7 @@ const actions = {
     commit('LOAD_ADMIN_DASHBOARD');
 
     return new Promise((resolve, reject) => {
-      Vue.http.get(Config.apiPath + 'dashboard/adminData')
+      Vue.http.get(Config.apiPath + 'dashboard/admin-data')
         .then(
           response => {
             commit('LOAD_ADMIN_DASHBOARD_OK', response.data);

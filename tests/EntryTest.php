@@ -12,8 +12,11 @@ class EntryTest extends TestCase
 
     public function testMustBeAuthenticated()
     {
-        $this->json('GET', 'api/v1/entry')
-             ->assertResponseStatus(401);
+        $this->json('GET', 'api/v1/entry')->assertResponseStatus(401);
+        $this->json('GET', 'api/v1/entry/all')->assertResponseStatus(401);
+        $this->json('POST', 'api/v1/entry')->assertResponseStatus(401);
+        $this->json('PUT', 'api/v1/entry/1')->assertResponseStatus(401);
+        $this->json('DELETE', 'api/v1/entry/1')->assertResponseStatus(401);
     }
 
     public function testGetEntriesList()

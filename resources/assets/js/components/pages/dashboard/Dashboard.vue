@@ -82,7 +82,9 @@ export default {
       options: {
         title: 'My Performance',
         height: 300,
-        curveType: 'function'
+        curveType: 'function',
+        vAxis: {title: 'Speed, Pace'},
+        hAxis: {title: 'Day'}
       },
     };
   },

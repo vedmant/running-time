@@ -12,8 +12,11 @@ class UserTest extends TestCase
 
     public function testMustBeAuthenticated()
     {
-        $this->json('GET', 'api/v1/user')
-             ->assertResponseStatus(401);
+        $this->json('GET', 'api/v1/user')->assertResponseStatus(401);
+        $this->json('GET', 'api/v1/user/me')->assertResponseStatus(401);
+        $this->json('GET', 'api/v1/user/1')->assertResponseStatus(401);
+        $this->json('PUT', 'api/v1/user/1')->assertResponseStatus(401);
+        $this->json('DELETE', 'api/v1/user/1')->assertResponseStatus(401);
     }
 
     public function testMustBeAdmin()

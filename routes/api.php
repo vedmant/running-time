@@ -31,7 +31,7 @@ Route::group(['prefix' => 'v1'], function () {
     Route::group(['middleware' => 'auth:api'], function () {
 
         Route::get('dashboard/data', 'DashboardController@data');
-        Route::get('dashboard/adminData', 'DashboardController@adminData');
+        Route::get('dashboard/admin-data', 'DashboardController@adminData');
 
         Route::get('user/me', 'UserController@me');
         Route::resource('user', 'UserController', ['except' => ['create', 'store', 'edit']]);
