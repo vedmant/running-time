@@ -13,7 +13,7 @@
               {{ error }}
             </div>
 
-            <form class="form-horizontal" role="form" @submit.prevent="onSubmit">
+            <form id="login_form" class="form-horizontal" role="form" @submit.prevent="onSubmit">
 
               <div class="form-group" :class="{ 'has-error': errors.email }">
                 <label for="email" class="col-md-4 control-label">E-Mail Address</label>

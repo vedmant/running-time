@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="col-sm-6 text-right">
-        <span class="page-info">Page {{ users.current_page }} of  {{ users.last_page }}</span>
+        <span class="page-info">Page {{ users.current_page }} of {{ users.last_page }}</span>
       </div>
     </div>
 
