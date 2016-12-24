@@ -25,7 +25,7 @@
     </div>
 
     <div class="panel panel-default table-responsive">
-      <table class="table table-bordered">
+      <table class="table table-bordered" id="entries_list">
         <thead>
         <tr>
           <th>Date</th>

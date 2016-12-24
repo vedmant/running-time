@@ -9,5 +9,6 @@ Homestead.yaml
 .env
 /database/database.sqlite
 /npm-debug.log
-/resources/assets/tests/report
-/resources/assets/tests/screenshots
+/selenium-debug.log
+/resources/assets/test/report
+/resources/assets/test/screenshots

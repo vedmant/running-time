@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="admin-dashboard">
     <h3>Dashboard</h3>
     <hr>
 

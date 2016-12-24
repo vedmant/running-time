@@ -1,0 +1,20 @@
+var chalk = require('chalk');
+
+/**
+ * Send logout request as an api call.
+ *
+ * @returns {exports}
+ */
+exports.command = function(callback) {
+	console.log(chalk.cyan('Logging out...'));
+	this.url(this.launchUrl + '/logout')
+    .waitForElementPresent('#front_page', 500);
+
+  console.log(chalk.cyan('Logged out'));
+
+  if (typeof callback === 'function') {
+    callback();
+  }
+
+	return this;
+};

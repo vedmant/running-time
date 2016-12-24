@@ -1,9 +1,11 @@
 // http://nightwatchjs.org/guide#settings-file
 module.exports = {
-  src_folders: ['resources/assets/tests/test'],
-  output_folder: 'resources/assets/tests/report',
-  custom_commands_path: ['node_modules/nightwatch-helpers/commands'],
+  src_folders: ['resources/assets/test/tests'],
+  output_folder: 'resources/assets/test/report',
+  custom_commands_path: ['node_modules/nightwatch-helpers/commands', 'resources/assets/test/commands'],
   custom_assertions_path: ['node_modules/nightwatch-helpers/assertions'],
+  page_objects_path: ['resources/assets/test/page_objects'],
+  globals_path: 'resources/assets/test/globals-module.js',
 
   selenium: {
     start_process: true,
@@ -17,6 +19,7 @@ module.exports = {
 
   test_settings: {
     default: {
+      launch_url: 'http://localhost:8000/#',
       selenium_port: 4444,
       selenium_host: 'localhost',
       silent: true,
@@ -24,7 +27,7 @@ module.exports = {
         enabled: true,
         on_failure: true,
         on_error: false,
-        path: 'resources/assets/tests/screenshots'
+        path: 'resources/assets/test/screenshots'
       }
     },
 
