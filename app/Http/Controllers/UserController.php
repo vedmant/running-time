@@ -31,13 +31,21 @@ class UserController extends Controller
      *
      * Display a listing of users
      *
+     * @param Request $request
      * @return array
      */
-    public function index()
+    public function index(Request $request)
     {
         $this->authorize('index', User::class);
 
-        return ['users' =>(new User)->latest()->paginate()];
+        $users = (new User)->latest();
+
+        if ($request->get('query')) {
+            $users->where('name', 'like', '%' . $request->get('query') . '%')
+                ->orWhere('email', 'like', '%' . $request->get('query') . '%');
+        }
+
+        return ['users' => $users->paginate()];
     }
 
     /**

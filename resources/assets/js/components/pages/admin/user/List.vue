@@ -4,7 +4,13 @@
     <hr>
 
     <div class="row marginbot10">
-      <div class="col-sm-6">
+      <div class="col-sm-6 form-inline">
+        <div class="input-group">
+          <input type="text" class="form-control" v-model="search">
+          <span class="input-group-btn">
+            <button class="btn btn-primary" @click="onSearch">Search</button>
+          </span>
+        </div>
       </div>
       <div class="col-sm-6 text-right">
         <span class="page-info">Page {{ users.current_page }} of  {{ users.last_page }}</span>
@@ -50,7 +56,7 @@ export default {
 
   data() {
     return {
-
+      search: '',
     };
   },
 
@@ -66,6 +72,7 @@ export default {
     params() {
       return {
         page: this.users.current_page,
+        query: this.search,
       }
     }
   },
@@ -82,14 +89,8 @@ export default {
       this.loadUsers({...this.params, page});
     },
 
-    onFilter() {
+    onSearch() {
       this.loadUsers({...this.params, page: 1});
-    },
-
-    onFilterClear() {
-      this.dateFrom = '';
-      this.dateTo = '';
-      this.loadUsers(this.params);
     },
 
     onDelete(id) {
