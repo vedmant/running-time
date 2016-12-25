@@ -51,7 +51,6 @@ module.exports = {
   after: (next) => next(),
 
 	beforeEach: function(client, done) {
-	  // Disabled for now
     // TODO: create refresh DB api call for development enviroment/test only
 	  done();
 	  return;

@@ -8,7 +8,7 @@ var chalk = require('chalk');
 exports.command = function(callback) {
 	console.log(chalk.cyan('Logging out...'));
 	this.url(this.launchUrl + '/logout')
-    .waitForElementPresent('#front_page', 500);
+    .pause(500);
 
   console.log(chalk.cyan('Logged out'));
 
