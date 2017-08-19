@@ -1,4 +1,4 @@
-import { makeMutations } from '../helpers';
+import {makeMutations} from '../helpers';
 import * as Config from '../../config';
 
 const state = {
@@ -12,11 +12,11 @@ const state = {
 
 const actions = {
 
-  stopLoading ({commit}) {
+  stopLoading({commit}) {
     commit('STOP_LOADING');
   },
 
-  loadDashboard ({commit, dispatch}) {
+  loadDashboard({commit, dispatch}) {
     commit('LOAD_DASHBOARD');
 
     return new Promise((resolve, reject) => {
@@ -33,7 +33,7 @@ const actions = {
     })
   },
 
-  loadAdminDashboard ({commit, dispatch}) {
+  loadAdminDashboard({commit, dispatch}) {
     commit('LOAD_ADMIN_DASHBOARD');
 
     return new Promise((resolve, reject) => {
@@ -114,12 +114,12 @@ const mutations = {
     state.loading = false;
   }),
 
-  LOAD_DASHBOARD_OK (state, dashboard) {
+  LOAD_DASHBOARD_OK(state, dashboard) {
     state.dashboard = dashboard;
     state.loading = false;
   },
 
-  LOAD_ADMIN_DASHBOARD_OK (state, dashboard) {
+  LOAD_ADMIN_DASHBOARD_OK(state, dashboard) {
     state.admin_dashboard = dashboard;
     state.loading = false;
   },

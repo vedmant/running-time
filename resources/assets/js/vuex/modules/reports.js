@@ -13,7 +13,7 @@ const state = {
 
 const actions = {
 
-  loadWeeklyReport ({commit, dispatch}, params) {
+  loadWeeklyReport({commit, dispatch}, params) {
     commit('LOAD_WEEKLY_REPORT');
 
     return new Promise((resolve, reject) => {
@@ -34,7 +34,7 @@ const actions = {
 
 const mutations = {
 
-  LOAD_WEEKLY_REPORT_OK (state, report) {
+  LOAD_WEEKLY_REPORT_OK(state, report) {
     state.weekly = report;
   },
 

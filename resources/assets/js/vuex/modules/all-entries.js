@@ -10,7 +10,7 @@ const state = {
 
 const actions = {
 
-  loadAllEntries ({commit, dispatch}, params) {
+  loadAllEntries({commit, dispatch}, params) {
     commit('LOAD_ALL_ENTRIES');
 
     return new Promise((resolve, reject) => {
@@ -31,7 +31,7 @@ const actions = {
 
 const mutations = {
 
-  LOAD_ALL_ENTRIES_OK (state, entries) {
+  LOAD_ALL_ENTRIES_OK(state, entries) {
     state.entries = entries;
   },
 

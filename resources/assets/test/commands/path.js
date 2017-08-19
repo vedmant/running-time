@@ -6,15 +6,15 @@
  * @param callback
  * @returns {exports}
  */
-exports.command = function(path, callback) {
-	// `this` is the client instance
-	var self = this;
-	this.url(this.launchUrl + path);
+exports.command = function (path, callback) {
+  // `this` is the client instance
+  var self = this;
+  this.url(this.launchUrl + path);
 
-	if (typeof callback === 'function') {
-		callback.call(self);
-	}
+  if (typeof callback === 'function') {
+    callback.call(self);
+  }
 
-	// returning `this` allows the command to be chained
-	return this;
+  // returning `this` allows the command to be chained
+  return this;
 };

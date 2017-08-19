@@ -19,7 +19,9 @@
                 <label for="email" class="col-md-4 control-label">E-Mail Address</label>
                 <div class="col-md-6">
                   <input id="email" type="email" class="form-control" v-model.trim="form.email" required autofocus>
-                  <div class="help-block" v-if="errors.email"><div v-for="error in errors.email"><strong>{{ error }}</strong></div></div>
+                  <div class="help-block" v-if="errors.email">
+                    <div v-for="error in errors.email"><strong>{{ error }}</strong></div>
+                  </div>
                 </div>
               </div>
 
@@ -27,7 +29,9 @@
                 <label for="password" class="col-md-4 control-label">Password</label>
                 <div class="col-md-6">
                   <input id="password" type="password" class="form-control" v-model.trim="form.password" required>
-                  <div class="help-block" v-if="errors.password"><div v-for="error in errors.password"><strong>{{ error }}</strong></div></div>
+                  <div class="help-block" v-if="errors.password">
+                    <div v-for="error in errors.password"><strong>{{ error }}</strong></div>
+                  </div>
                 </div>
               </div>
 
@@ -45,50 +49,50 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+  import {mapState, mapActions} from 'vuex';
 
-export default {
+  export default {
 
-  data() {
-    return {
-      form: {
-        email: '',
-        password: '',
-      },
-      error: '',
-      errors: {},
-    };
-  },
-
-  computed: {
-    ...mapState({
-      me: state => state.auth.me,
-    })
-  },
-
-  methods: {
-
-    ...mapActions([
-      'login',
-      'addToastMessage',
-    ]),
-
-    onSubmit() {
-      this.errors = {};
-      this.login(this.form)
-        .then(() => {
-          this.addToastMessage({
-            text: 'You logged in!',
-            type: 'success'
-          });
-          this.$router.replace('/dashboard');
-        })
-        .catch((data) => {
-          this.error = data.message;
-          this.errors = data.validation || {};
-        });
+    data() {
+      return {
+        form: {
+          email: '',
+          password: '',
+        },
+        error: '',
+        errors: {},
+      };
     },
 
+    computed: {
+      ...mapState({
+        me: state => state.auth.me,
+      })
+    },
+
+    methods: {
+
+      ...mapActions([
+        'login',
+        'addToastMessage',
+      ]),
+
+      onSubmit() {
+        this.errors = {};
+        this.login(this.form)
+          .then(() => {
+            this.addToastMessage({
+              text: 'You logged in!',
+              type: 'success'
+            });
+            this.$router.replace('/dashboard');
+          })
+          .catch((data) => {
+            this.error = data.message;
+            this.errors = data.validation || {};
+          });
+      },
+
+    }
   }
-}
 </script>

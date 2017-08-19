@@ -4,6 +4,6 @@
  * @param {string} selector
  * @returns {exports}
  */
-exports.command = function(selector) {
-	return this.click(selector + ':first-of-type');
+exports.command = function (selector) {
+  return this.click(selector + ':first-of-type');
 };

@@ -5,7 +5,9 @@
       <label for="name" class="col-md-4 control-label">Name</label>
       <div class="col-md-6">
         <input id="name" type="text" class="form-control" v-model="form.name" required autofocus>
-        <div class="help-block" v-if="errors.name"><div v-for="error in errors.name"><strong>{{ error }}</strong></div></div>
+        <div class="help-block" v-if="errors.name">
+          <div v-for="error in errors.name"><strong>{{ error }}</strong></div>
+        </div>
       </div>
     </div>
 
@@ -13,7 +15,9 @@
       <label for="email" class="col-md-4 control-label">E-Mail Address</label>
       <div class="col-md-6">
         <input id="email" type="email" class="form-control" v-model="form.email" required>
-        <div class="help-block" v-if="errors.email"><div v-for="error in errors.email"><strong>{{ error }}</strong></div></div>
+        <div class="help-block" v-if="errors.email">
+          <div v-for="error in errors.email"><strong>{{ error }}</strong></div>
+        </div>
       </div>
     </div>
 
@@ -25,7 +29,9 @@
           <option value="manager">Manager</option>
           <option value="admin">Admin</option>
         </select>
-        <div class="help-block" v-if="errors.role"><div v-for="error in errors.role"><strong>{{ error }}</strong></div></div>
+        <div class="help-block" v-if="errors.role">
+          <div v-for="error in errors.role"><strong>{{ error }}</strong></div>
+        </div>
       </div>
     </div>
 
@@ -34,7 +40,9 @@
 
       <div class="col-md-6">
         <input id="password" type="password" class="form-control" v-model="form.password">
-        <div class="help-block" v-if="errors.password"><div v-for="error in errors.password"><strong>{{ error }}</strong></div></div>
+        <div class="help-block" v-if="errors.password">
+          <div v-for="error in errors.password"><strong>{{ error }}</strong></div>
+        </div>
       </div>
     </div>
 
@@ -56,27 +64,27 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+  import {mapState, mapActions} from 'vuex';
 
-export default {
+  export default {
 
-  props: {
-    form: {
-      type: Object,
-      required: true,
+    props: {
+      form: {
+        type: Object,
+        required: true,
+      },
+      errors: {
+        type: Object,
+      }
     },
-    errors: {
-      type: Object,
+
+    computed: {
+
+      ...mapState({
+        me: state => state.auth.me,
+      }),
+
     }
-  },
-
-  computed: {
-
-    ...mapState({
-      me: state => state.auth.me,
-    }),
 
   }
-
-}
 </script>

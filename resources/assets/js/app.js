@@ -6,7 +6,7 @@ import moment from 'moment';
 import store from './vuex/store' // vuex store instance
 import router from './router' // vue-router instance
 import './mixins';
-import { sync } from 'vuex-router-sync';
+import {sync} from 'vuex-router-sync';
 import VueCharts from 'vue-charts';
 
 
@@ -42,7 +42,10 @@ Vue.http.interceptors.push((request, next) => {
   next((response) => {
     // Show toast with message for non OK responses
     if (response.status !== 200) {
-      store.dispatch('addToastMessage', {text: response.body.message || 'Request error status: ' + response.status, type: 'danger'})
+      store.dispatch('addToastMessage', {
+        text: response.body.message || 'Request error status: ' + response.status,
+        type: 'danger'
+      })
     }
   });
 });
@@ -61,7 +64,7 @@ router.beforeEach((to, from, next) => {
     // if route requires auth and user isn't authenticated
     next('/login');
   } else if (to.matched.some(record => record.meta.requiresAdmin) && ( ! store.state.auth.me
-    || ! _.includes(['admin', 'manager'], store.state.auth.me.role))) {
+      || ! _.includes(['admin', 'manager'], store.state.auth.me.role))) {
     // if route required admin or manager role
     next('/login');
   } else {
@@ -84,4 +87,6 @@ const app = new Vue({
 });
 
 // Check user login status
-store.dispatch('checkLogin').then(() => { router.replace('/dashboard') });
+store.dispatch('checkLogin').then(() => {
+  router.replace('/dashboard')
+});

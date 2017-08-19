@@ -43,59 +43,59 @@
 </template>
 
 <script>
-import {mapState, mapActions} from 'vuex';
+  import {mapState, mapActions} from 'vuex';
 
-export default {
+  export default {
 
-  data() {
-    return {
-      columns: [{
-        'type': 'string',
-        'label': 'Week'
-      }, {
-        'type': 'number',
-        'label': 'Avg. Speed'
-      }, {
-        'type': 'number',
-        'label': 'Avg. Distance'
-      }],
-      options: {
-        title: 'My Performance',
-        height: 500,
-        curveType: 'function',
-        vAxis: {title: 'Speed, Pace'},
-        hAxis: {title: 'Week'}
-      },
-    };
-  },
-
-  mounted() {
-    this.report.data.length || this.loadWeeklyReport(this.params);
-  },
-
-  computed: {
-
-    ...mapState({
-      report: state => state.reports.weekly,
-    }),
-
-    params() {
+    data() {
       return {
-        year: this.report.year,
-      }
-    }
-
-  },
-
-  methods: {
-
-    ...mapActions([
-      'loadWeeklyReport',
-    ]),
-
-    onLoadWeeklyReport(year) {
-      this.loadWeeklyReport({...this.params, year});
+        columns: [{
+          'type': 'string',
+          'label': 'Week'
+        }, {
+          'type': 'number',
+          'label': 'Avg. Speed'
+        }, {
+          'type': 'number',
+          'label': 'Avg. Distance'
+        }],
+        options: {
+          title: 'My Performance',
+          height: 500,
+          curveType: 'function',
+          vAxis: {title: 'Speed, Pace'},
+          hAxis: {title: 'Week'}
+        },
+      };
     },
+
+    mounted() {
+      this.report.data.length || this.loadWeeklyReport(this.params);
+    },
+
+    computed: {
+
+      ...mapState({
+        report: state => state.reports.weekly,
+      }),
+
+      params() {
+        return {
+          year: this.report.year,
+        }
+      }
+
+    },
+
+    methods: {
+
+      ...mapActions([
+        'loadWeeklyReport',
+      ]),
+
+      onLoadWeeklyReport(year) {
+        this.loadWeeklyReport({...this.params, year});
+      },
+    }
   }
-}
 </script>

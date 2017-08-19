@@ -21,67 +21,69 @@
 </template>
 
 <script>
-import {mapState, mapActions} from 'vuex';
-import moment from 'moment';
+  import {mapState, mapActions} from 'vuex';
+  import moment from 'moment';
 
-export default {
+  export default {
 
-  components: {
-    'user-form': require('./partials/Form.vue'),
-  },
-
-  data() {
-    return {
-      errors: {},
-    };
-  },
-
-  mounted() {
-    this.loadUser(this.id);
-  },
-
-  computed: {
-
-    id() {
-      return this.$route.params.id;
+    components: {
+      'user-form': require('./partials/Form.vue'),
     },
 
-    ...mapState({
-      user: state => state.users.user,
-    }),
-
-    form() {
-      if ( ! this.user) return {};
-
+    data() {
       return {
-        name: this.user.name,
-        email: this.user.email,
-        role: this.user.role,
+        errors: {},
       };
-    }
-
-  },
-
-  methods: {
-
-    ...mapActions([
-      'loadUser',
-      'updateUser',
-      'addToastMessage',
-    ]),
-
-    onSubmit(form) {
-      this.updateUser({id: this.id, form})
-        .then(() => {
-          this.addToastMessage({
-            text: 'User was updated!',
-            type: 'success'
-          });
-          this.$router.go(-1);
-        })
-        .catch((data) => { this.errors = data.validation || {} });
     },
 
+    mounted() {
+      this.loadUser(this.id);
+    },
+
+    computed: {
+
+      id() {
+        return this.$route.params.id;
+      },
+
+      ...mapState({
+        user: state => state.users.user,
+      }),
+
+      form() {
+        if (! this.user) return {};
+
+        return {
+          name: this.user.name,
+          email: this.user.email,
+          role: this.user.role,
+        };
+      }
+
+    },
+
+    methods: {
+
+      ...mapActions([
+        'loadUser',
+        'updateUser',
+        'addToastMessage',
+      ]),
+
+      onSubmit(form) {
+        this.updateUser({id: this.id, form})
+          .then(() => {
+            this.addToastMessage({
+              text: 'User was updated!',
+              type: 'success'
+            });
+            this.$router.go(- 1);
+          })
+          .catch((data) => {
+            this.errors = data.validation || {}
+          });
+      },
+
+    }
   }
-}
 </script>

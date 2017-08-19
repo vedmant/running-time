@@ -11,11 +11,11 @@ Vue.mixin({
       let result = [];
 
       if (begin < end) {
-        for (let i = begin; i <= end; i++) {
+        for (let i = begin; i <= end; i ++) {
           result.push(i);
         }
       } else {
-        for (let i = begin; i >= end; i--) {
+        for (let i = begin; i >= end; i --) {
           result.push(i);
         }
       }

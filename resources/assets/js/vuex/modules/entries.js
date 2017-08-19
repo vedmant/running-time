@@ -11,7 +11,7 @@ const state = {
 
 const actions = {
 
-  loadEntries ({commit, dispatch}, params) {
+  loadEntries({commit, dispatch}, params) {
     commit('LOAD_ENTRIES');
 
     return new Promise((resolve, reject) => {
@@ -28,7 +28,7 @@ const actions = {
     })
   },
 
-  loadEntry ({commit, dispatch}, id) {
+  loadEntry({commit, dispatch}, id) {
     commit('LOAD_ENTRY');
 
     return new Promise((resolve, reject) => {
@@ -45,7 +45,7 @@ const actions = {
     })
   },
 
-  storeEntry ({commit, dispatch}, form) {
+  storeEntry({commit, dispatch}, form) {
     commit('STORE_ENTRY');
 
     return new Promise((resolve, reject) => {
@@ -62,7 +62,7 @@ const actions = {
     })
   },
 
-  updateEntry ({commit, dispatch}, {id, form}) {
+  updateEntry({commit, dispatch}, {id, form}) {
     commit('UPDATE_ENTRY');
 
     return new Promise((resolve, reject) => {
@@ -79,7 +79,7 @@ const actions = {
     })
   },
 
-  deleteEntry ({commit, dispatch}, id) {
+  deleteEntry({commit, dispatch}, id) {
     commit('DELETE_ENTRY');
 
     return new Promise((resolve, reject) => {
@@ -100,11 +100,11 @@ const actions = {
 
 const mutations = {
 
-  LOAD_ENTRIES_OK (state, entries) {
+  LOAD_ENTRIES_OK(state, entries) {
     state.entries = entries;
   },
 
-  LOAD_ENTRY_OK (state, entry) {
+  LOAD_ENTRY_OK(state, entry) {
     state.entry = entry;
   },
 

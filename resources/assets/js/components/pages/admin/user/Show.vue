@@ -28,38 +28,36 @@
 </template>
 
 <script>
-import {mapState, mapActions} from 'vuex';
+  import {mapState, mapActions} from 'vuex';
 
-export default {
+  export default {
 
-  data() {
-    return {
+    data() {
+      return {};
+    },
 
-    };
-  },
+    mounted() {
+      this.loadUser(this.id);
+    },
 
-  mounted() {
-    this.loadUser(this.id);
-  },
+    computed: {
 
-  computed: {
+      ...mapState({
+        user: state => state.users.user,
+      }),
 
-    ...mapState({
-      user: state => state.users.user,
-    }),
+      id() {
+        return this.$route.params.id;
+      }
 
-    id() {
-      return this.$route.params.id;
+    },
+
+    methods: {
+
+      ...mapActions([
+        'loadUser',
+      ]),
+
     }
-
-  },
-
-  methods: {
-
-    ...mapActions([
-      'loadUser',
-    ]),
-
   }
-}
 </script>

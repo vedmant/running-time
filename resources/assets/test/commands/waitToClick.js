@@ -5,7 +5,7 @@
  * @param {string} selector
  * @returns {exports}
  */
-exports.command = function(selector) {
-	return this.waitForElementVisible(selector)
-		.click(selector);
+exports.command = function (selector) {
+  return this.waitForElementVisible(selector)
+    .click(selector);
 };

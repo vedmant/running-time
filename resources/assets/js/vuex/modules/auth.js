@@ -6,12 +6,12 @@ const state = {
 
 const actions = {
 
-  checkLogin ({commit, dispatch}) {
+  checkLogin({commit, dispatch}) {
     commit('CHECK_LOGIN');
 
     const access_token = localStorage.getItem('access_token');
 
-    if ( ! access_token) {
+    if (! access_token) {
       commit('CHECK_LOGIN_FAIL');
       return;
     }
@@ -32,7 +32,7 @@ const actions = {
   },
 
 
-  login ({commit, dispatch}, form) {
+  login({commit, dispatch}, form) {
     commit('LOGIN');
 
     return new Promise((resolve, reject) => {
@@ -52,13 +52,13 @@ const actions = {
     })
   },
 
-  logout ({commit, dispatch}) {
+  logout({commit, dispatch}) {
     commit('LOGOUT_OK');
 
     localStorage.removeItem('access_token');
   },
 
-  register ({commit, dispatch}, form) {
+  register({commit, dispatch}, form) {
     commit('REGISTER');
 
     return new Promise((resolve, reject) => {
@@ -78,7 +78,7 @@ const actions = {
     })
   },
 
-  updateProfile ({commit, dispatch}, {id, form}) {
+  updateProfile({commit, dispatch}, {id, form}) {
     commit('UPDATE_PROFILE');
 
     return new Promise((resolve, reject) => {
@@ -99,23 +99,23 @@ const actions = {
 
 const mutations = {
 
-  CHECK_LOGIN_OK (state, user) {
+  CHECK_LOGIN_OK(state, user) {
     state.me = user;
   },
 
-  LOGIN_OK (state, user) {
+  LOGIN_OK(state, user) {
     state.me = user;
   },
 
-  LOGOUT_OK (state) {
+  LOGOUT_OK(state) {
     state.me = null;
   },
 
-  REGISTER_OK (state, user) {
+  REGISTER_OK(state, user) {
     state.me = user;
   },
 
-  UPDATE_PROFILE_OK (state, user) {
+  UPDATE_PROFILE_OK(state, user) {
     state.me = user;
   },
 

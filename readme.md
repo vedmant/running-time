@@ -22,7 +22,18 @@ npm run dev # Compile assets
 php artisan serve # Start server
 ```
 
-### Include ###
+### Main features ###
+* Fully separate Backend and Frontend
+* Authentication based on Laravel Passport
+* List pages with filters and CRUD editing
+* Admin panel
+* Simple widgets
+* Simple reports
+* Full Phpunit test coverage
+* Sample E2E tests using Nightwatch.js
+
+
+### Includes ###
 
 * [Laravel Passport](https://laravel.com/docs/5.4/passport) API Authentication
 * [API Docs Gerator](https://github.com/mpociot/laravel-apidoc-generator) Laravel API Documentation Generator
@@ -32,7 +43,7 @@ php artisan serve # Start server
 * [Vue-Router](https://router.vuejs.org/en/) Router library for Vue.js
 
 
-### Features ###
+### Other Features ###
 
 * Front page
 * Authentication (registration, login, logout, throttle)
@@ -58,6 +69,14 @@ npm run hot # Will server frontend on loaclhost:8080 and fallback on localhost:8
 
 And open http://localhost:8080
 
+Alternatively you can use watch method:
+
+```
+npm run watch
+```
+
+And open http://localhost:8000
+
 
 ### Tests ###
 
@@ -70,6 +89,7 @@ To run all Phpunit tests:
 To run all E2E tests:
 
 ```
+php artisan serve
 npm run test
 ```
 

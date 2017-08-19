@@ -1,3 +1,5 @@
+var glob = require('glob');
+
 // http://nightwatchjs.org/guide#settings-file
 module.exports = {
   src_folders: ['resources/assets/test/tests'],
@@ -9,7 +11,7 @@ module.exports = {
 
   selenium: {
     start_process: true,
-    server_path: 'node_modules/selenium-server/lib/runner/selenium-server-standalone-3.0.1.jar',
+    server_path: glob.sync('node_modules/selenium-server/lib/runner/selenium-server-standalone-*.jar')[0],
     host: '127.0.0.1',
     port: 4444,
     cli_args: {

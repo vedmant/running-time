@@ -46,63 +46,63 @@
 </template>
 
 <script>
-import {mapState, mapActions} from 'vuex';
+  import {mapState, mapActions} from 'vuex';
 
-export default {
+  export default {
 
-  components: {
-    row: require('./partials/Row.vue'),
-  },
+    components: {
+      row: require('./partials/Row.vue'),
+    },
 
-  data() {
-    return {
-      search: '',
-    };
-  },
-
-  mounted() {
-    this.loadUsers(this.params);
-  },
-
-  computed: {
-    ...mapState({
-      users: state => state.users.users,
-    }),
-
-    params() {
+    data() {
       return {
-        page: this.users.current_page,
-        query: this.search,
+        search: '',
+      };
+    },
+
+    mounted() {
+      this.loadUsers(this.params);
+    },
+
+    computed: {
+      ...mapState({
+        users: state => state.users.users,
+      }),
+
+      params() {
+        return {
+          page: this.users.current_page,
+          query: this.search,
+        }
       }
-    }
-  },
-
-  methods: {
-
-    ...mapActions([
-      'loadUsers',
-      'deleteUser',
-      'addToastMessage',
-    ]),
-
-    onLoadEntries(page) {
-      this.loadUsers({...this.params, page});
     },
 
-    onSearch() {
-      this.loadUsers({...this.params, page: 1});
-    },
+    methods: {
 
-    onDelete(id) {
-      this.deleteUser(id).then(() => {
-        this.addToastMessage({
-          text: 'User was deleted!',
-          type: 'success'
+      ...mapActions([
+        'loadUsers',
+        'deleteUser',
+        'addToastMessage',
+      ]),
+
+      onLoadEntries(page) {
+        this.loadUsers({...this.params, page});
+      },
+
+      onSearch() {
+        this.loadUsers({...this.params, page: 1});
+      },
+
+      onDelete(id) {
+        this.deleteUser(id).then(() => {
+          this.addToastMessage({
+            text: 'User was deleted!',
+            type: 'success'
+          });
+          this.loadUsers(this.params);
         });
-        this.loadUsers(this.params);
-      });
-    },
+      },
 
+    }
   }
-}
 </script>

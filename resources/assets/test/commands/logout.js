@@ -5,16 +5,16 @@ var chalk = require('chalk');
  *
  * @returns {exports}
  */
-exports.command = function(callback) {
-	console.log(chalk.cyan('Logging out...'));
-	this.url(this.launchUrl + '/logout')
-    .pause(500);
+exports.command = function (done) {
+  console.log(chalk.cyan('Logging out...'));
+  this.url(this.launchUrl + '/logout')
+    .waitForElementVisible('#app')
+    .perform(function () {
+      console.log(chalk.cyan('Logged out'));
+      if (typeof done === 'function') {
+        done();
+      }
+    });
 
-  console.log(chalk.cyan('Logged out'));
-
-  if (typeof callback === 'function') {
-    callback();
-  }
-
-	return this;
+  return this;
 };

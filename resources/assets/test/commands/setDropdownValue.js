@@ -6,13 +6,13 @@
  * @param {string|number} value - The value to set.
  * @returns {exports}
  */
-exports.command = function(id, value) {
-	// lop off "#" from the id parameter
-	id = id.substr(1);
-	if (typeof value === 'number') {
-		// handle angular's way of setting the value attribute in ng-options
-		value = 'number:' + value;
-	}
+exports.command = function (id, value) {
+  // lop off "#" from the id parameter
+  id = id.substr(1);
+  if (typeof value === 'number') {
+    // handle angular's way of setting the value attribute in ng-options
+    value = 'number:' + value;
+  }
 
-	return this.click('select[id="' + id + '"] option[value="' + value + '"]');
+  return this.click('select[id="' + id + '"] option[value="' + value + '"]');
 };

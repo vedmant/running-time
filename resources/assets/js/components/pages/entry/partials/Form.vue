@@ -5,7 +5,9 @@
       <label class="col-md-4 control-label">Date</label>
       <div class="col-md-6">
         <input type="date" class="form-control" id="date" v-model="form.date">
-        <div class="help-block" v-if="errors.date"><div v-for="error in errors.date"><strong>{{ error }}</strong></div></div>
+        <div class="help-block" v-if="errors.date">
+          <div v-for="error in errors.date"><strong>{{ error }}</strong></div>
+        </div>
       </div>
     </div>
 
@@ -16,7 +18,9 @@
           <input type="number" class="form-control" id="distance" v-model="form.distance">
           <span class="input-group-addon">km</span>
         </div>
-        <div class="help-block" v-if="errors.distance"><div v-for="error in errors.distance"><strong>{{ error }}</strong></div></div>
+        <div class="help-block" v-if="errors.distance">
+          <div v-for="error in errors.distance"><strong>{{ error }}</strong></div>
+        </div>
       </div>
     </div>
 
@@ -30,7 +34,9 @@
           <span class="input-group-addon">:</span>
           <input type="text" maxlength="2" class="form-control date-filter" id="time_seconds" v-model="form.time_seconds" placeholder="Seconds">
         </div>
-        <div class="help-block" v-if="errors.time"><div v-for="error in errors.time"><strong>{{ error }}</strong></div></div>
+        <div class="help-block" v-if="errors.time">
+          <div v-for="error in errors.time"><strong>{{ error }}</strong></div>
+        </div>
       </div>
     </div>
 
@@ -43,31 +49,31 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+  import {mapState, mapActions} from 'vuex';
 
-export default {
+  export default {
 
-  props: {
-    form: {
-      type: Object,
-      required: true,
+    props: {
+      form: {
+        type: Object,
+        required: true,
+      },
+      errors: {
+        type: Object,
+      }
     },
-    errors: {
-      type: Object,
-    }
-  },
 
-  methods: {
+    methods: {
 
-    onSubmit() {
-      this.$emit('onSubmit', {
-        date: this.form.date,
-        distance: this.form.distance,
-        time: this.form.time_hours + ':' + this.form.time_minutes + ':' + this.form.time_seconds,
-      })
+      onSubmit() {
+        this.$emit('onSubmit', {
+          date: this.form.date,
+          distance: this.form.distance,
+          time: this.form.time_hours + ':' + this.form.time_minutes + ':' + this.form.time_seconds,
+        })
+      }
+
     }
 
   }
-
-}
 </script>

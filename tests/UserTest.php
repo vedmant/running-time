@@ -90,7 +90,7 @@ class UserTest extends TestCase
                  'email' => 'newemail@gmail.com',
              ])
              ->assertResponseOk()
-             ->seeJson($user2->fresh()->toArray());
+             ->seeJson(['user' => $user2->fresh()->toArray()]);
     }
 
     public function testUpdateUser()
@@ -104,7 +104,7 @@ class UserTest extends TestCase
                  'email' => 'newemail@gmail.com',
              ])
              ->assertResponseOk()
-             ->seeJson($user2->fresh()->toArray());
+             ->seeJson(['user' => $user2->fresh()->toArray()]);
     }
 
     public function testUpdateCurrentUserByNonAdmin()
@@ -117,7 +117,7 @@ class UserTest extends TestCase
                  'email' => 'newemail@gmail.com',
              ])
              ->assertResponseOk()
-             ->seeJson($user->fresh()->toArray());
+             ->seeJson(['user' => $user->fresh()->toArray()]);
     }
 
     public function testDeleteUser()

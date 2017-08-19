@@ -44,7 +44,8 @@
             </ul>
           </li>
 
-          <router-link v-if="me.role === 'admin' || me.role === 'manager'" tag="li" to="/admin" active-class="active"><a>Admin Panel</a></router-link>
+          <router-link v-if="me.role === 'admin' || me.role === 'manager'" tag="li" to="/admin" active-class="active">
+            <a>Admin Panel</a></router-link>
 
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -63,20 +64,20 @@
 </template>
 
 <script>
-import {mapState, mapActions} from 'vuex';
+  import {mapState, mapActions} from 'vuex';
 
-export default {
+  export default {
 
-  data() {
-    return {};
-  },
+    data() {
+      return {};
+    },
 
-  computed: {
-    ...mapState({
-      me: state => state.auth.me,
-    })
-  },
+    computed: {
+      ...mapState({
+        me: state => state.auth.me,
+      })
+    },
 
-  methods: {}
-}
+    methods: {}
+  }
 </script>

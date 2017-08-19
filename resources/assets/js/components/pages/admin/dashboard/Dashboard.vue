@@ -25,12 +25,26 @@
             <p>Total entries: <strong>{{ admin_dashboard.total_entries }}</strong></p>
             <p>Average entries per user: <strong>{{ admin_dashboard.avg_entries_per_user }}</strong></p>
             <p>Fastest run: <strong>
-              <router-link :to="'/entry/edit/' + admin_dashboard.fastest_run.id">{{ Number(admin_dashboard.fastest_run.speed).toFixed(2) }}</router-link> km/h
-              (<router-link :to="'/admin/user/show/' + admin_dashboard.fastest_run.user.id">{{ admin_dashboard.fastest_run.user.name }}</router-link>)
+              <router-link :to="'/entry/edit/' + admin_dashboard.fastest_run.id">
+                {{ Number(admin_dashboard.fastest_run.speed).toFixed(2) }}
+              </router-link>
+              km/h
+              (
+              <router-link :to="'/admin/user/show/' + admin_dashboard.fastest_run.user.id">
+                {{ admin_dashboard.fastest_run.user.name }}
+              </router-link>
+              )
             </strong></p>
             <p>Longest run: <strong>
-              <router-link :to="'/entry/edit/' + admin_dashboard.longest_run.id">{{ admin_dashboard.longest_run.distance }}</router-link> km
-              (<router-link :to="'/admin/user/show/' + admin_dashboard.longest_run.user.id">{{ admin_dashboard.longest_run.user.name }}</router-link>)
+              <router-link :to="'/entry/edit/' + admin_dashboard.longest_run.id">{{ admin_dashboard.longest_run.distance
+                }}
+              </router-link>
+              km
+              (
+              <router-link :to="'/admin/user/show/' + admin_dashboard.longest_run.user.id">
+                {{ admin_dashboard.longest_run.user.name }}
+              </router-link>
+              )
             </strong></p>
           </div>
         </div>
@@ -42,28 +56,28 @@
 </template>
 
 <script>
-import {mapState, mapActions} from 'vuex';
+  import {mapState, mapActions} from 'vuex';
 
-export default {
+  export default {
 
-  data() {
-    return {};
-  },
+    data() {
+      return {};
+    },
 
-  mounted() {
-    this.loadAdminDashboard();
-  },
+    mounted() {
+      this.loadAdminDashboard();
+    },
 
-  computed: {
-    ...mapState({
-      admin_dashboard: state => state.general.admin_dashboard,
-    })
-  },
+    computed: {
+      ...mapState({
+        admin_dashboard: state => state.general.admin_dashboard,
+      })
+    },
 
-  methods: {
-    ...mapActions([
-      'loadAdminDashboard',
-    ])
+    methods: {
+      ...mapActions([
+        'loadAdminDashboard',
+      ])
+    }
   }
-}
 </script>

@@ -1,12 +1,11 @@
-
 <style lang="scss">
   $width: 350px;
-  .toast {
+  .toast{
     position: fixed;
     width: $width;
     z-index: 10000;
   }
-  .toast-message {
+  .toast-message{
     position: relative;
     box-sizing: border-box;
     margin-bottom: 10px;
@@ -16,7 +15,7 @@
     transition: 400ms cubic-bezier(0.17, 0.67, 0.17, 0.98);
     transition-property: opacity, transform;
   }
-  .toast-button {
+  .toast-button{
     position: absolute;
     top: 0;
     right: 5px;
@@ -27,49 +26,49 @@
     color: inherit;
     cursor: pointer;
   }
-  .toast-button::before {
+  .toast-button::before{
     content: '\d7';
   }
   /**
    * Transition
    */
   .toast-enter-active,
-  .toast-leave {
+  .toast-leave{
     opacity: 1;
   }
   .toast-enter,
-  .toast-leave-active {
+  .toast-leave-active{
     opacity: 0;
   }
-  .toast-leave-active {
+  .toast-leave-active{
     position: absolute;
   }
   /**
    * Position
    */
-  .toast-position-n {
+  .toast-position-n{
     top: 10px;
     left: 50%;
     margin-left: -$width / 2;
   }
-  .toast-position-s {
+  .toast-position-s{
     bottom: 10px;
     left: 50%;
     margin-left: -$width / 2;
   }
-  .toast-position-ne {
+  .toast-position-ne{
     top: 10px;
     right: 10px;
   }
-  .toast-position-nw {
+  .toast-position-nw{
     top: 10px;
     left: 10px;
   }
-  .toast-position-se {
+  .toast-position-se{
     bottom: 10px;
     right: 10px;
   }
-  .toast-position-sw {
+  .toast-position-sw{
     bottom: 10px;
     left: 10px;
   }
@@ -78,35 +77,35 @@
    */
   .toast-position-n,
   .toast-position-ne,
-  .toast-position-nw {
+  .toast-position-nw{
     .toast-enter,
-    .toast-leave-active {
+    .toast-leave-active{
       transform: translateY(-20px);
     }
   }
   .toast-position-s,
   .toast-position-se,
-  .toast-position-sw {
-    .toast-enter {
+  .toast-position-sw{
+    .toast-enter{
       transform: translateY(20px);
     }
-    .toast-leave-active {
+    .toast-leave-active{
       transform: translateY(-100%) translateY(20px);
     }
   }
   /**
    * Types
    */
-  .toast-type-info {
+  .toast-type-info{
     background-color: #43b4ec;
   }
-  .toast-type-success {
+  .toast-type-success{
     background-color: #3add93;
   }
-  .toast-type-warning {
+  .toast-type-warning{
     background-color: #efd700;
   }
-  .toast-type-danger {
+  .toast-type-danger{
     background-color: #f3755e;
   }
 </style>
@@ -123,46 +122,47 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
-export default {
+  import {mapGetters, mapActions} from 'vuex'
 
-  props: {
-    position: {
-      validator(value) {
-        return /^(:?n|s|nw|ne|sw|se)$/.test(value)
-      },
-      default: 'ne',
-    }
-  },
+  export default {
 
-  computed: {
-    ...mapGetters({
-      messages: 'toastMessages'
-    }),
-    positionClass() {
-      return `toast-position-${this.position}`
-    }
-  },
+    props: {
+      position: {
+        validator(value) {
+          return /^(:?n|s|nw|ne|sw|se)$/.test(value)
+        },
+        default: 'ne',
+      }
+    },
 
-  methods: {
-    ...mapActions({
-      close: 'removeToastMessage'
-    }),
-    messageTypeClass(message) {
-      return `toast-type-${message.type}`
-    }
-  },
+    computed: {
+      ...mapGetters({
+        messages: 'toastMessages'
+      }),
+      positionClass() {
+        return `toast-position-${this.position}`
+      }
+    },
 
-  components: {
-    ToastTransition: {
-      functional: true,
-      render(h, { children }) {
-        const data = {
-          attrs: { tag: 'div', name: 'toast', type: 'transition' }
-        };
-        return h('transition-group', data, children)
+    methods: {
+      ...mapActions({
+        close: 'removeToastMessage'
+      }),
+      messageTypeClass(message) {
+        return `toast-type-${message.type}`
+      }
+    },
+
+    components: {
+      ToastTransition: {
+        functional: true,
+        render(h, {children}) {
+          const data = {
+            attrs: {tag: 'div', name: 'toast', type: 'transition'}
+          };
+          return h('transition-group', data, children)
+        }
       }
     }
   }
-}
 </script>

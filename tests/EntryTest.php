@@ -153,7 +153,7 @@ class EntryTest extends TestCase
                  'time'     => '00:20:00',
              ])
              ->assertResponseOk()
-             ->seeJson($entry->fresh()->toArray());
+             ->seeJson(['entry' => $entry->fresh()->toArray()]);
 
     }
 
@@ -193,7 +193,7 @@ class EntryTest extends TestCase
                  'time'     => '00:20:00',
              ])
              ->assertResponseOk()
-             ->seeJson($entry->fresh()->toArray());
+             ->seeJson(['entry' => $entry->fresh()->toArray()]);
 
     }
 

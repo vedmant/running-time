@@ -6,12 +6,12 @@
  * @param {string} [text] - The text of the validation message (can be partial text).
  * @returns {exports}
  */
-exports.command = function(field, text) {
-	var selector = '.' + field + '-error';
-	text = text || '';
-	this.waitForElementVisible(selector);
-	if (text) {
-		this.assert.containsText(selector, text);
-	}
-	return this;
+exports.command = function (field, text) {
+  var selector = '.' + field + '-error';
+  text = text || '';
+  this.waitForElementVisible(selector);
+  if (text) {
+    this.assert.containsText(selector, text);
+  }
+  return this;
 };

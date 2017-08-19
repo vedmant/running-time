@@ -50,81 +50,83 @@
 </template>
 
 <script>
-import {mapState, mapActions} from 'vuex';
+  import {mapState, mapActions} from 'vuex';
 
-export default {
+  export default {
 
-  components: {
-    'entry-form': require('./../entry/partials/Form.vue'),
-  },
-
-
-  data() {
-    return {
-      errors: {},
-      form: {
-        date: '',
-        distance: '',
-        time_hours: '00',
-        time_minutes: '00',
-        time_seconds: '00',
-      },
-      columns: [{
-        'type': 'string',
-        'label': 'Date'
-      }, {
-        'type': 'number',
-        'label': 'Speed'
-      }, {
-        'type': 'number',
-        'label': 'Distance'
-      }],
-      options: {
-        title: 'My Performance',
-        height: 300,
-        curveType: 'function',
-        vAxis: {title: 'Speed, Pace'},
-        hAxis: {title: 'Day'}
-      },
-    };
-  },
-
-  mounted() {
-    this.loadDashboard();
-  },
-
-  computed: {
-    ...mapState({
-      me: state => state.auth.me,
-      dashboard: state => state.general.dashboard,
-    }),
-  },
-
-  methods: {
-    ...mapActions([
-      'loadDashboard',
-      'storeEntry',
-      'addToastMessage',
-    ]),
-
-    onSubmit(form) {
-      this.storeEntry(form)
-        .then(() => {
-          this.loadDashboard();
-          this.addToastMessage({
-            text: 'New time record was added!',
-            type: 'success'
-          });
-          this.form = {
-            date: '',
-            distance: '',
-            time_minutes: '00',
-            time_seconds: '00',
-          };
-          this.errors = {};
-        })
-        .catch((data) => { this.errors = data.validation || {} });
+    components: {
+      'entry-form': require('./../entry/partials/Form.vue'),
     },
+
+
+    data() {
+      return {
+        errors: {},
+        form: {
+          date: '',
+          distance: '',
+          time_hours: '00',
+          time_minutes: '00',
+          time_seconds: '00',
+        },
+        columns: [{
+          'type': 'string',
+          'label': 'Date'
+        }, {
+          'type': 'number',
+          'label': 'Speed'
+        }, {
+          'type': 'number',
+          'label': 'Distance'
+        }],
+        options: {
+          title: 'My Performance',
+          height: 300,
+          curveType: 'function',
+          vAxis: {title: 'Speed, Pace'},
+          hAxis: {title: 'Day'}
+        },
+      };
+    },
+
+    mounted() {
+      this.loadDashboard();
+    },
+
+    computed: {
+      ...mapState({
+        me: state => state.auth.me,
+        dashboard: state => state.general.dashboard,
+      }),
+    },
+
+    methods: {
+      ...mapActions([
+        'loadDashboard',
+        'storeEntry',
+        'addToastMessage',
+      ]),
+
+      onSubmit(form) {
+        this.storeEntry(form)
+          .then(() => {
+            this.loadDashboard();
+            this.addToastMessage({
+              text: 'New time record was added!',
+              type: 'success'
+            });
+            this.form = {
+              date: '',
+              distance: '',
+              time_minutes: '00',
+              time_seconds: '00',
+            };
+            this.errors = {};
+          })
+          .catch((data) => {
+            this.errors = data.validation || {}
+          });
+      },
+    }
   }
-}
 </script>

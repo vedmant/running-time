@@ -2,22 +2,21 @@
   <div class="container" id="front_page">
     <h3>Front page</h3>
     <hr>
+    <p>This is sample front page.</p>
   </div>
 </template>
 
 <script>
-import {mapState, mapActions} from 'vuex';
+  import {mapState, mapActions} from 'vuex';
 
-export default {
+  export default {
 
-  data() {
-    return {};
-  },
+    data() {
+      return {};
+    },
 
-  computed: {
+    computed: {},
 
-  },
-
-  methods: {}
-}
+    methods: {}
+  }
 </script>
