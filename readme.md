@@ -5,7 +5,7 @@
 ### Installation ###
 
 ```
-git clone git@github.com:vedmant/jogging-time.git # To clone repo
+git clone https://github.com/vedmant/jogging-time.git # To clone repo
 cd jogging-time 
 composer install # Install php dependencies
 
