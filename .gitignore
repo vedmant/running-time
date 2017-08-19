@@ -12,3 +12,5 @@ Homestead.yaml
 /selenium-debug.log
 /resources/assets/test/report
 /resources/assets/test/screenshots
+/public/mix-manifest.json
+/public/hot

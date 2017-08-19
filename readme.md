@@ -30,6 +30,7 @@ php artisan serve # Start server
 * Fully separate Backend and Frontend
 * Authentication based on Laravel Passport
 * List pages with filters and CRUD editing
+* Backend validation
 * Admin panel
 * Simple widgets
 * Simple reports

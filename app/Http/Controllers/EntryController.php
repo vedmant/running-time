@@ -69,7 +69,7 @@ class EntryController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'date'     => 'required|date',
+            'date'     => 'required|date|before:tomorrow',
             'distance' => 'required|numeric|min:0.01',
             'time'     => 'required|date_format:H:i:s|time_required',
         ]);
@@ -113,7 +113,7 @@ class EntryController extends Controller
         $this->authorize($entry);
 
         $this->validate($request, [
-            'date'     => 'required|date',
+            'date'     => 'required|date|before:tomorrow',
             'distance' => 'required|numeric|min:0.01',
             'time'     => 'required|date_format:H:i:s|time_required',
         ]);
