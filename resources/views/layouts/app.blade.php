@@ -11,16 +11,16 @@
    <title>{{ config('app.name', 'Jogging Times') }}</title>
 
    <!-- Styles -->
-   <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
+   <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
    <!-- Scripts -->
-   <script>window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token()]); ?></script>
+   <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token()]) !!};</script>
 </head>
 <body>
 
 @yield('content')
 
 <!-- Scripts -->
-<script src="{{ elixir('js/app.js') }}"></script>
+<script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>

@@ -29,14 +29,14 @@
         </tr>
         </thead>
         <tbody>
-        <row v-for="user in users.data" :row="user" @onDelete="onDelete"></row>
+        <row v-for="user in users.data" :key="user.id" :row="user" @onDelete="onDelete"></row>
         </tbody>
       </table>
     </div>
 
     <div class="text-right" v-if="users.last_page > 1">
       <ul class="pagination marginpulltop15">
-        <li v-for="page in range(1, users.last_page)" :class="{active: page == users.current_page}">
+        <li v-for="page in range(1, users.last_page)" :key="page" :class="{active: page == users.current_page}">
           <a href="#" @click.prevent="onLoadEntries(page)">{{ page }}</a>
         </li>
       </ul>

@@ -6,10 +6,10 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
-        "laravel/framework": "5.3.*",
-        "mpociot/laravel-apidoc-generator": "^1.7",
-        "laravel/passport": "^1.0",
-        "infyomlabs/laravel-generator": "dev-master"
+        "laravel/framework": "5.4.*",
+        "laravel/passport": "^1.0.18",
+        "laravel/tinker": "^1.0",
+        "mpociot/laravel-apidoc-generator": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -22,7 +22,8 @@
     },
     "autoload": {
         "classmap": [
-            "database"
+            "database/seeds",
+            "database/factories"
         ],
         "psr-4": {
             "App\\": "app/"
@@ -53,6 +54,8 @@
         ]
     },
     "config": {
-        "preferred-install": "dist"
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
     }
 }

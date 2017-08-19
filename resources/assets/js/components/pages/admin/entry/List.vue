@@ -37,14 +37,14 @@
         </tr>
         </thead>
         <tbody>
-        <row v-for="entry in entries.data" :row="entry" @onDelete="onDelete"></row>
+        <row v-for="entry in entries.data" :key="entry.id" :row="entry" @onDelete="onDelete"></row>
         </tbody>
       </table>
     </div>
 
     <div class="text-right" v-if="entries.last_page > 1">
       <ul class="pagination marginpulltop15">
-        <li v-for="page in range(1, entries.last_page)" :class="{active: page == entries.current_page}">
+        <li v-for="page in range(1, entries.last_page)" :key="page" :class="{active: page == entries.current_page}">
           <a href="#" @click.prevent="onLoadEntries(page)">{{ page }}</a>
         </li>
       </ul>

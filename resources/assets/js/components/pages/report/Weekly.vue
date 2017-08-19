@@ -5,7 +5,7 @@
 
     <div class="panel panel-default">
       <vue-chart
-        :chart-type="LineChart"
+        chart-type="LineChart"
         :columns="columns"
         :rows="this.report.chart"
         :options="options"

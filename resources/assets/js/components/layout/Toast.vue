@@ -1,5 +1,5 @@
 
-<style lang="sass">
+<style lang="scss">
   $width: 350px;
   .toast {
     position: fixed;
