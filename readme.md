@@ -2,6 +2,10 @@
 
 **Laravel 5 example** is a tutorial Single Page Application (SPA) for Laravel 5.4 and Vue.js Frontend
 
+[Demo](http://jogging-time.vedmant.com/)
+
+Use login: `user@gmail.com` and password: `123456`
+
 ### Installation ###
 
 ```
