@@ -50,7 +50,7 @@
 
 <script>
   import {mapState, mapActions} from 'vuex';
-  import  _ from 'lodash';
+  import padStart from 'lodash-es/padStart';
 
   export default {
 
@@ -70,9 +70,9 @@
         this.$emit('onSubmit', {
           date: this.form.date,
           distance: this.form.distance,
-          time: _.padStart(this.form.time_hours, 2, '0')
-            + ':' + _.padStart(this.form.time_minutes, 2, '0')
-            + ':' + _.padStart(this.form.time_seconds, 2, '0'),
+          time: padStart(this.form.time_hours, 2, '0')
+            + ':' + padStart(this.form.time_minutes, 2, '0')
+            + ':' + padStart(this.form.time_seconds, 2, '0'),
         })
       }
 

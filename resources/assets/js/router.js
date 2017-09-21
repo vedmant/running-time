@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import store from './vuex/store'
+import {sync} from 'vuex-router-sync';
+import includes from 'lodash-es/includes';
 
 Vue.use(VueRouter);
 
@@ -43,6 +45,9 @@ const router = new VueRouter({
   history: false,
 });
 
+// Sync Vuex and vue-router;
+sync(store, router);
+
 /**
  * Authenticated routes
  */
@@ -51,7 +56,7 @@ router.beforeEach((to, from, next) => {
     // if route requires auth and user isn't authenticated
     next('/login');
   } else if (to.matched.some(record => record.meta.requiresAdmin) && ( ! store.state.auth.me
-      || ! _.includes(['admin', 'manager'], store.state.auth.me.role))) {
+      || ! includes(['admin', 'manager'], store.state.auth.me.role))) {
     // if route required admin or manager role
     next('/login');
   } else {

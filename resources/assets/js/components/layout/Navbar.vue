@@ -22,13 +22,6 @@
         </ul>
 
         <!-- Right Side Of Navbar -->
-        <ul class="nav navbar-nav navbar-right" v-if="!me">
-          <!-- Authentication Links -->
-          <router-link tag="li" to="/login" active-class="active"><a>Login</a></router-link>
-          <router-link tag="li" to="/register" active-class="active"><a>Register</a></router-link>
-        </ul>
-
-        <!-- Right Side Of Navbar -->
         <ul class="nav navbar-nav navbar-right" v-if="me">
           <!-- Authentication Links -->
           <router-link tag="li" to="/dashboard" active-class="active"><a>Dashboad</a></router-link>
@@ -58,6 +51,13 @@
             </ul>
           </li>
         </ul>
+
+        <!-- Right Side Of Navbar -->
+        <ul class="nav navbar-nav navbar-right" v-else>
+          <!-- Authentication Links -->
+          <router-link tag="li" to="/login" active-class="active"><a>Login</a></router-link>
+          <router-link tag="li" to="/register" active-class="active"><a>Register</a></router-link>
+        </ul>
       </div>
     </div>
   </nav>
@@ -75,7 +75,14 @@
     computed: {
       ...mapState({
         me: state => state.auth.me,
+        route: state => state.route,
       })
+    },
+
+    watch: {
+      route() {
+        this.$forceUpdate(); // Tempopary fix for wrong router navigation after login
+      }
     },
 
     methods: {}

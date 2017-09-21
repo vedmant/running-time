@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import * as Config from '../../config';
-import moment from 'moment';
+import moment from 'moment-mini';
 
 const state = {
   weekly: {

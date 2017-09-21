@@ -1,12 +1,10 @@
 import "babel-polyfill";
-import Vue from 'vue'
+import Vue from 'vue';
 import jQuery from 'jquery';
-import _ from 'lodash';
-import moment from 'moment';
+import moment from 'moment-mini';
 import store from './vuex/store' // vuex store instance
 import router from './router' // vue-router instance
 import './mixins';
-import {sync} from 'vuex-router-sync';
 import VueCharts from 'vue-charts';
 
 
@@ -55,9 +53,6 @@ Vue.component('navbar', require('./components/layout/Navbar.vue'));
 Vue.component('spinner', require('./components/layout/Spinner.vue'));
 Vue.component('toast', require('./components/layout/Toast.vue'));
 
-
-// Sync Vuex and vue-router;
-sync(store, router);
 
 /**
  * Application

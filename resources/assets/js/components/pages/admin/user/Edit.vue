@@ -22,7 +22,7 @@
 
 <script>
   import {mapState, mapActions} from 'vuex';
-  import moment from 'moment';
+  import moment from 'moment-mini';
 
   export default {
 

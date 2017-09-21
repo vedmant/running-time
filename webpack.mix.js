@@ -1,4 +1,8 @@
 let mix = require('laravel-mix');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
+const nodeEnv = process.env.NODE_ENV || 'development';
+const isProduction = nodeEnv === 'production';
 
 /*
  |--------------------------------------------------------------------------
@@ -11,17 +15,25 @@ let mix = require('laravel-mix');
  |
  */
 
+const plugins = [];
+
+if (isProduction) {
+  plugins.push(new BundleAnalyzerPlugin());
+}
+
+
 mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css')
-   .webpackConfig({
-      devServer: {
-         historyApiFallback: true,
-         quiet: false,
-         proxy: {
-            '!/**/*.{css,js,hot-update.js,hot-update.json}': {
-               target: 'http://localhost:8000',
-               secure: false,
-            },
-         },
-      }
-   });
+  .sass('resources/assets/sass/app.scss', 'public/css')
+  .webpackConfig({
+    devServer: {
+      historyApiFallback: true,
+      quiet: false,
+      proxy: {
+        '!/**/*.{css,js,hot-update.js,hot-update.json}': {
+          target: 'http://localhost:8000',
+          secure: false,
+        },
+      },
+    },
+    plugins,
+  });
