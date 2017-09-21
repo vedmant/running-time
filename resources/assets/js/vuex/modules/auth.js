@@ -11,12 +11,12 @@ const actions = {
 
     const access_token = localStorage.getItem('access_token');
 
-    if (! access_token) {
-      commit('CHECK_LOGIN_FAIL');
-      return;
-    }
-
     return new Promise((resolve, reject) => {
+      if (! access_token) {
+        commit('CHECK_LOGIN_FAIL');
+        return reject();
+      }
+
       Vue.http.get(Config.apiPath + 'user/me')
         .then(
           response => {

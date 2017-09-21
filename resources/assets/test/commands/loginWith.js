@@ -14,7 +14,9 @@ exports.command = function (userKey, done) {
 
   this.url(this.launchUrl + '/login')
     .waitForElementVisible('#email')
+    .clearValue('#email')
     .setValue('#email', loginUser.email)
+    .clearValue('#password')
     .setValue('#password', loginUser.password)
     .click('button[type="submit"]')
     .waitForElementVisible('#dashboard')

@@ -7,7 +7,7 @@ module.exports = {
 
   // this will overwrite the default polling interval (currently 500ms) for waitFor commands
   // and expect assertions that use retry
-  waitForConditionPollInterval: 100,
+  waitForConditionPollInterval: 200,
 
   // default timeout value in milliseconds for waitFor commands and implicit waitFor value for
   // expect assertions
@@ -19,7 +19,7 @@ module.exports = {
 
   // controls the timeout time for async hooks. Expects the done() callback to be invoked within this time
   // or an error is thrown
-  asyncHookTimeout: 10000,
+  asyncHookTimeout: 5000,
 
   // automatically retry failed assertions until a given timeout is reached,
   // before the test runner gives up and fails the test

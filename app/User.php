@@ -70,7 +70,7 @@ class User extends Model implements
     /**
      * Get existing or make new access token
      */
-    public function getOrMakeToken()
+    public function makeApiToken()
     {
         return $this->createToken('API')->accessToken;
     }

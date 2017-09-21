@@ -108,6 +108,12 @@ For testing application the database is seeded with sample users:
 * User: email = user@gmail.com, password = 123456
 
 
+### TODO ###
+
+- Replace Vue Resource with Axios
+- Add more E2E tests
+
+
 ### License ###
 
 And of course:

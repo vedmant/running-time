@@ -1,4 +1,3 @@
-const path = require('path');
 const spawn = require('cross-spawn');
 
 let args = process.argv.slice(2);
@@ -6,7 +5,7 @@ if (args.indexOf('--config') === - 1) {
   args = args.concat(['--config', 'nightwatch.conf.js'])
 }
 if (args.indexOf('--env') === - 1) {
-  args = args.concat(['--env', 'chrome,phantomjs'])
+  args = args.concat(['--env', 'chrome'/*,phantomjs*/])
 }
 const i = args.indexOf('--test');
 if (i > - 1) {

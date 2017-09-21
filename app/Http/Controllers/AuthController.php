@@ -47,7 +47,7 @@ class AuthController extends Controller
             /** @var User $user */
             $user = $this->guard()->user();
 
-            return ['user' => $user, 'access_token' => $user->getOrMakeToken()];
+            return ['user' => $user, 'access_token' => $user->makeApiToken()];
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
@@ -72,7 +72,7 @@ class AuthController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
 
-        return ['user' => $user, 'access_token' => $user->getOrMakeToken()];
+        return ['user' => $user, 'access_token' => $user->makeApiToken()];
     }
 
     /**

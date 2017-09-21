@@ -2,20 +2,25 @@ var entries = require('../data/entries-data');
 
 module.exports = {
 
+  before(client, done) {
+    client.loginWith('admin', done);
+  },
+
+  after(client, done) {
+    client.logout(done);
+  },
+
   'it has list of entries'(client) {
     client
-      .loginWith('admin')
       .path('/entries')
       .waitForElementVisible('#entries_list')
       .assert.visible('#entries_list tr')
-      .logout()
       .end();
   },
 
   'it lets add new entry'(client) {
     const entry = entries.valid;
     client
-      .loginWith('admin')
       .path('/entry/new')
       .waitForElementVisible('#entry_form')
       .setValue('#date', entry.date)
@@ -29,7 +34,6 @@ module.exports = {
       .click('#entry_form [type=submit]')
       .assert.elementNotPresent('.has-error')
       .assert.elementPresent('#entries_list')
-      .logout()
       .end();
   },
 

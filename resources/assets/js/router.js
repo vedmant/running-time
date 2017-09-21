@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import store from './vuex/store'
 
 Vue.use(VueRouter);
 
@@ -21,16 +22,16 @@ const routes = [
 
   {
     path: '/admin', component: require('./components/pages/admin/Admin.vue'), meta: {requiresAdmin: true}, children: [
-    {path: '', redirect: 'dashboard'},
-    {path: 'dashboard', component: require('./components/pages/admin/dashboard/Dashboard.vue')},
+      {path: '', redirect: 'dashboard'},
+      {path: 'dashboard', component: require('./components/pages/admin/dashboard/Dashboard.vue')},
 
-    {path: 'users', component: require('./components/pages/admin/user/List.vue')},
-    {path: 'user/show/:id', component: require('./components/pages/admin/user/Show.vue')},
-    {path: 'user/edit/:id', component: require('./components/pages/admin/user/Edit.vue')},
+      {path: 'users', component: require('./components/pages/admin/user/List.vue')},
+      {path: 'user/show/:id', component: require('./components/pages/admin/user/Show.vue')},
+      {path: 'user/edit/:id', component: require('./components/pages/admin/user/Edit.vue')},
 
-    {path: 'entries', component: require('./components/pages/admin/entry/List.vue')},
-    {path: 'entry/edit/:id', component: require('./components/pages/admin/entry/Edit.vue')},
-  ]
+      {path: 'entries', component: require('./components/pages/admin/entry/List.vue')},
+      {path: 'entry/edit/:id', component: require('./components/pages/admin/entry/Edit.vue')},
+    ]
   },
 
   {path: '*', component: require('./components/pages/404.vue')},
@@ -41,5 +42,22 @@ const router = new VueRouter({
   routes,
   history: false,
 });
+
+/**
+ * Authenticated routes
+ */
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth) && ! store.state.auth.me) {
+    // if route requires auth and user isn't authenticated
+    next('/login');
+  } else if (to.matched.some(record => record.meta.requiresAdmin) && ( ! store.state.auth.me
+      || ! _.includes(['admin', 'manager'], store.state.auth.me.role))) {
+    // if route required admin or manager role
+    next('/login');
+  } else {
+    next();
+  }
+});
+
 
 export default router;
