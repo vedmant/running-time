@@ -56,8 +56,8 @@
     data() {
       return {
         form: {
-          email: 'admin@gmail.com',
-          password: '123456',
+          email: Laravel.demoMode ? 'admin@gmail.com' : '',
+          password: Laravel.demoMode ? '123456' : '',
         },
         error: '',
         errors: {},

@@ -7,7 +7,7 @@
  * @returns {exports}
  */
 exports.command = function (field, text) {
-  var selector = '.' + field + '-error';
+  const selector = '.' + field + '-error';
   text = text || '';
   this.waitForElementVisible(selector);
   if (text) {

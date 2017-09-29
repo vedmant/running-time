@@ -1,5 +1,3 @@
-var chalk = require('chalk');
-
 module.exports = {
   // this controls whether to abort the test execution when an assertion failed and skip the rest
   // it's being used in waitFor commands and expect assertions
@@ -7,11 +5,11 @@ module.exports = {
 
   // this will overwrite the default polling interval (currently 500ms) for waitFor commands
   // and expect assertions that use retry
-  waitForConditionPollInterval: 200,
+  waitForConditionPollInterval: 500,
 
   // default timeout value in milliseconds for waitFor commands and implicit waitFor value for
   // expect assertions
-  waitForConditionTimeout: 2000, // 2000 default
+  waitForConditionTimeout: 5000, // 5000 default
 
   // this will cause waitFor commands on elements to throw an error if multiple
   // elements are found using the given locate strategy and selector

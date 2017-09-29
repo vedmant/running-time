@@ -6,7 +6,7 @@ module.exports = {
   output_folder: 'resources/assets/test/report',
   custom_commands_path: ['node_modules/nightwatch-helpers/commands', 'resources/assets/test/commands'],
   custom_assertions_path: ['node_modules/nightwatch-helpers/assertions'],
-  page_objects_path: ['resources/assets/test/page_objects'],
+  // page_objects_path: ['resources/assets/test/page_objects'],
   globals_path: 'resources/assets/test/globals-module.js',
 
   selenium: {

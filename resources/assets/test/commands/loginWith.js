@@ -1,5 +1,5 @@
-var chalk = require('chalk');
-var users = require('../data/users-data');
+const chalk = require('chalk');
+const users = require('../data/users-data');
 
 /**
  *  Login with the credentials for the specified user.
@@ -9,7 +9,7 @@ var users = require('../data/users-data');
  * @returns {exports}
  */
 exports.command = function (userKey, done) {
-  var loginUser = users[userKey];
+  const loginUser = users[userKey];
   console.log(chalk.cyan('Logging in with ' + loginUser.name + '...'));
 
   this.url(this.launchUrl + '/login')

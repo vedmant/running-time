@@ -1,4 +1,4 @@
-var chalk = require('chalk');
+const chalk = require('chalk');
 
 /**
  * Send logout request as an api call.

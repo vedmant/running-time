@@ -1,21 +1,13 @@
-var entries = require('../data/entries-data');
+const entries = require('../data/entries-data');
 
 module.exports = {
 
-  before(client, done) {
+  beforeEach(client, done) {
     client.loginWith('admin', done);
   },
 
-  after(client, done) {
+  afterEach(client, done) {
     client.logout(done);
-  },
-
-  'it has list of entries'(client) {
-    client
-      .path('/entries')
-      .waitForElementVisible('#entries_list')
-      .assert.visible('#entries_list tr')
-      .end();
   },
 
   'it lets add new entry'(client) {
@@ -33,7 +25,14 @@ module.exports = {
       .setValue('#time_seconds', entry.seconds)
       .click('#entry_form [type=submit]')
       .assert.elementNotPresent('.has-error')
-      .assert.elementPresent('#entries_list')
+      .assert.elementPresent('#dashboard');
+  },
+
+  'it has list of entries'(client) {
+    client
+      .path('/entries')
+      .waitForElementVisible('#entries_list')
+      .assert.visible('#entries_list tr')
       .end();
   },
 

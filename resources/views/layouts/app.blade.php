@@ -14,7 +14,7 @@
    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
    <!-- Scripts -->
-   <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token()]) !!};</script>
+   <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(), 'demoMode' => env('APP_DEMO')]) !!};</script>
 </head>
 <body>
 

@@ -8,7 +8,7 @@
  */
 exports.command = function (path, callback) {
   // `this` is the client instance
-  var self = this;
+  const self = this;
   this.url(this.launchUrl + path);
 
   if (typeof callback === 'function') {
