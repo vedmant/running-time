@@ -8,9 +8,9 @@
     "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
     "prod": "npm run production",
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "test": "node resources/assets/test/runner.js",
-    "cypress": "node_modules/.bin/cypress open",
-    "cypress-test": "node_modules/.bin/cypress run"
+    "test": "node_modules/.bin/cypress run",
+    "test-gui": "node_modules/.bin/cypress open",
+    "test-nw": "node resources/assets/test/runner.js"
   },
   "devDependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -30,6 +30,7 @@
     "axios": "^0.16.2",
     "babel-polyfill": "^6.20.0",
     "bootstrap-sass": "^3.3.7",
+    "faker": "^4.1.0",
     "jquery": "^3.2.1",
     "lodash-es": "^4.17.4",
     "moment-mini": "^2.18.1",

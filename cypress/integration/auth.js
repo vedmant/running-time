@@ -1,3 +1,5 @@
+const faker = require('faker')
+
 describe('Auth pages', function () {
   it('can login', function () {
     cy.visit('/login')
@@ -19,8 +21,8 @@ describe('Auth pages', function () {
     cy.fixture('user_new').as('user')
 
     cy.get('#register_form').within(() => {
-      cy.get('#name').type(this.user.name)
-      cy.get('#email').type(this.user.email)
+      cy.get('#name').type(faker.name.findName())
+      cy.get('#email').type(faker.internet.email())
       cy.get('#password').type(this.user.password)
       cy.get('#password-confirm').type(this.user.password)
       cy.root().submit()

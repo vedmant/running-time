@@ -35,7 +35,7 @@ php artisan serve # Start server
 * Simple widgets
 * Simple reports
 * Full Phpunit test coverage
-* Sample E2E tests using Nightwatch.js
+* Sample E2E tests using Nightwatch and Cypress
 
 
 ### Includes ###
@@ -91,11 +91,20 @@ To run all Phpunit tests:
 ./vendor/bin/phpunit 
 ```
 
-To run all E2E tests:
+To run Nightwatch E2E tests:
+
+```
+php artisan serve
+npm run test-nw
+```
+
+To run Cypress E2E tests:
 
 ```
 php artisan serve
 npm run test
+# Or you can open GUI with
+npm run test-gui
 ```
 
 
