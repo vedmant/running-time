@@ -3,12 +3,14 @@
 // Variables
 @import "variables";
 // Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
 /**
  * Transitions
  */
 .fade-enter-active, .fade-leave-active{ transition: opacity .2s; }
 .fade-enter, .fade-leave-active{ opacity: 0; }
+
 /**
  * Helpers
  */
@@ -26,6 +28,7 @@
 @media (max-width: $screen-sm-max){
    .input-group-stack-sm{ display: block; }
 }
+
 /**
  * Spinner
  */
@@ -34,14 +37,16 @@
    background-color: rgba(255, 255, 255, 0.5);
 }
 .main-spinner.active{ visibility: visible; opacity: 1; }
+
 /**
  * Tables
  */
 .page-info{ display: inline-block; margin-right: 20px; }
+
 /**
  * Fixes
  */
-
 .input-group-btn:not(:first-child):not(:last-child) .btn{
    border-radius: 0;
 }
+.github-menu-item > iframe { margin-top: 10px; margin-left: 15px; }

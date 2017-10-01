@@ -21,6 +21,12 @@
           &nbsp;
         </ul>
 
+        <ul class="nav navbar-nav navbar-left">
+          <li class="github-menu-item">
+            <a class="github-button" href="https://github.com/vedmant/jogging-time" data-size="large" data-show-count="true" aria-label="Star vedmant/jogging-time on GitHub">Star</a>
+          </li>
+        </ul>
+
         <!-- Right Side Of Navbar -->
         <ul class="nav navbar-nav navbar-right" v-if="me">
           <!-- Authentication Links -->
@@ -58,6 +64,7 @@
           <router-link tag="li" to="/login" active-class="active"><a>Login</a></router-link>
           <router-link tag="li" to="/register" active-class="active"><a>Register</a></router-link>
         </ul>
+
       </div>
     </div>
   </nav>
@@ -70,6 +77,10 @@
 
     data() {
       return {};
+    },
+
+    mounted() {
+      this.loadGithubScript();
     },
 
     computed: {
@@ -85,6 +96,12 @@
       }
     },
 
-    methods: {}
+    methods: {
+      loadGithubScript() {
+        const script = document.createElement('script')
+        script.src = 'https://buttons.github.io/buttons.js';
+        document.head.appendChild(script);
+      },
+    },
   }
 </script>
