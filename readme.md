@@ -1,4 +1,6 @@
-## Laravel 5 & Vue.js + Vuex Sample Project ##
+<p align="center">
+<a href="https://travis-ci.org/vedmant/jogging-time"><img src="https://travis-ci.org/vedmant/jogging-time.svg?branch=master" alt="Build Status"></a>
+</p>
 
 **Laravel 5 example** is a tutorial Single Page Application (SPA) for Laravel 5.4 and Vue.js Frontend
 
