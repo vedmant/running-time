@@ -17,16 +17,24 @@ git clone https://github.com/vedmant/jogging-time.git # To clone repo
 cd jogging-time 
 composer install # Install php dependencies
 
+# Prepare enviroment variables
 cp .env.example .env # Copy configuration file
 php artisan key:generate # Generate unique key
 
+# Prepare database
 touch database/database.sqlite # Create sqlite database
 php artisan migrate --seed # Create DB Schema and seed sample data
 php artisan passport:install # Install Passport
 
+# Compile assets
 npm install # Install Javascript dependencies
 npm run dev # Compile assets
 
+# Or if you have installed Yarn:
+yarn
+yarn prod
+
+# Start server
 php artisan serve # Start server
 ```
 
@@ -86,6 +94,15 @@ npm run watch
 
 And open http://localhost:8000
 
+To compile assets for production run:
+```
+npm run prod
+```
+
+Or to display bundle analyzer
+```
+npm run production -- --env.analyzer true
+```
 
 ### Tests ###
 

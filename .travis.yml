@@ -10,10 +10,10 @@ before_script:
   - composer install --no-interaction
   - php artisan key:generate
   - php artisan migrate
-  - nvm install node
-  - npm i -g yarn
-  - yarn
-  - yarn prod
+  # - nvm install node
+  # - npm i -g yarn
+  # - yarn
+  # - yarn prod
 
 script:
   - vendor/bin/phpunit
