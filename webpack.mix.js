@@ -22,7 +22,7 @@ if (argv.env && argv.env.analyzer) {
 mix
 
   .js('resources/assets/js/app.js', 'public/js')
-  .extract(['vue', 'vuex', 'vue-router', 'jquery', 'axios', 'moment-mini', 'babel-polyfill'])
+  .extract(['vue', 'vuex', 'vue-router', 'jquery', 'axios', 'moment-mini'])
 
   .webpackConfig({
     devServer: {
