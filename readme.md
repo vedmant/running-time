@@ -2,9 +2,9 @@
 <a href="https://travis-ci.org/vedmant/jogging-time"><img src="https://travis-ci.org/vedmant/jogging-time.svg?branch=master" alt="Build Status"></a>
 </p>
 
-## Laravel 5 & Vue.js + Vuex Sample Project ##
+## Laravel 5.5 & Vue.js 2.4 + Vuex Sample Project ##
 
-**Laravel example** is a tutorial Single Page Application (SPA) for Laravel 5.5 and Vue.js Frontend
+**Laravel example** is a tutorial Single Page Application (SPA) for Laravel 5.5 and Vue.js 2.4 Frontend
 
 [Demo](https://jogging-time.vedmant.com/)
 
