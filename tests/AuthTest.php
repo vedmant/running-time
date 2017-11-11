@@ -76,7 +76,7 @@ class AuthTest extends TestCase
         ])
              ->assertResponseStatus(422)
              ->seeJsonStructure([
-                 'validation' => [
+                 'errors' => [
                      'name',
                      'email',
                      'password'

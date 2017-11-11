@@ -90,7 +90,7 @@ class EntryTest extends TestCase
 
         $this->actingAs($user, 'api')
              ->json('GET', '/api/v1/entry/all')
-             ->assertResponseStatus(401);
+             ->assertResponseStatus(403);
     }
 
     public function testCteateEntry()
@@ -129,7 +129,7 @@ class EntryTest extends TestCase
              ])
              ->assertResponseStatus(422)
              ->seeJsonStructure([
-                 'validation' => [
+                 'errors' => [
                      'date',
                      'distance',
                      'time',
@@ -173,7 +173,7 @@ class EntryTest extends TestCase
                  'distance' => 5,
                  'time'     => '00:20:00',
              ])
-             ->assertResponseStatus(401);
+             ->assertResponseStatus(403);
     }
 
     public function testUpdateNotOwnedEntryByAdmin()
@@ -224,7 +224,7 @@ class EntryTest extends TestCase
 
         $this->actingAs($user, 'api')
              ->json('DELETE', '/api/v1/entry/' . $entry->id)
-             ->assertResponseStatus(401);
+             ->assertResponseStatus(403);
 
         $this->assertNotNull(Entry::find($entry->id));
     }

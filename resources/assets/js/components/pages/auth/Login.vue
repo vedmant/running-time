@@ -89,7 +89,7 @@
           })
           .catch((data) => {
             this.error = data.message;
-            this.errors = data.validation || {};
+            this.errors = data.errors || {};
           });
       },
 

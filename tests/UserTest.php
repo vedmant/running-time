@@ -26,19 +26,19 @@ class UserTest extends TestCase
 
         $this->actingAs($user, 'api')
              ->json('GET', 'api/v1/user')
-             ->assertResponseStatus(401);
+             ->assertResponseStatus(403);
 
         $this->actingAs($user, 'api')
              ->json('GET', 'api/v1/user/' . $user2->id)
-             ->assertResponseStatus(401);
+             ->assertResponseStatus(403);
 
         $this->actingAs($user, 'api')
              ->json('PUT', 'api/v1/user/' . $user2->id)
-             ->assertResponseStatus(401);
+             ->assertResponseStatus(403);
 
         $this->actingAs($user, 'api')
              ->json('DELETE', 'api/v1/user/' . $user2->id)
-             ->assertResponseStatus(401);
+             ->assertResponseStatus(403);
     }
 
     public function testGetCurrentUser()

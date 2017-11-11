@@ -2,9 +2,6 @@ const mix = require('laravel-mix');
 const argv = require('yargs').argv;
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const nodeEnv = process.env.NODE_ENV || 'development';
-const isProduction = nodeEnv === 'production';
-
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -22,8 +19,11 @@ if (argv.env && argv.env.analyzer) {
   plugins.push(new BundleAnalyzerPlugin());
 }
 
-mix.js('resources/assets/js/app.js', 'public/js')
-  .sass('resources/assets/sass/app.scss', 'public/css')
+mix
+
+  .js('resources/assets/js/app.js', 'public/js')
+  .extract(['vue', 'vuex', 'vue-router', 'jquery', 'axios', 'moment-mini', 'babel-polyfill'])
+
   .webpackConfig({
     devServer: {
       historyApiFallback: true,
@@ -36,4 +36,6 @@ mix.js('resources/assets/js/app.js', 'public/js')
       },
     },
     plugins,
-  });
+  })
+
+  .sass('resources/assets/sass/app.scss', 'public/css')

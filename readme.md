@@ -4,7 +4,7 @@
 
 ## Laravel 5 & Vue.js + Vuex Sample Project ##
 
-**Laravel 5 example** is a tutorial Single Page Application (SPA) for Laravel 5.4 and Vue.js Frontend
+**Laravel example** is a tutorial Single Page Application (SPA) for Laravel 5.5 and Vue.js Frontend
 
 [Demo](https://jogging-time.vedmant.com/)
 
@@ -27,8 +27,8 @@ php artisan migrate --seed # Create DB Schema and seed sample data
 php artisan passport:install # Install Passport
 
 # Compile assets
-npm install # Install Javascript dependencies
-npm run dev # Compile assets
+yarn # Install Javascript dependencies
+yarn dev # Compile assets
 
 # Or if you have installed Yarn:
 yarn
@@ -81,7 +81,7 @@ To run convenient development server with hot reloading:
 
 ```
 php artisan serve # Will serve backend on localhost:8000
-npm run hot # Will server frontend on loaclhost:8080 and fallback on localhost:8000
+yarn hot # Will server frontend on loaclhost:8080 and fallback on localhost:8000
 ```
 
 And open http://localhost:8080
@@ -89,19 +89,19 @@ And open http://localhost:8080
 Alternatively you can use watch method:
 
 ```
-npm run watch
+yarn watch
 ```
 
 And open http://localhost:8000
 
 To compile assets for production run:
 ```
-npm run prod
+yarn prod
 ```
 
 Or to display bundle analyzer
 ```
-npm run production -- --env.analyzer true
+yarn production -- --env.analyzer true
 ```
 
 ### Tests ###
@@ -116,16 +116,16 @@ To run Nightwatch E2E tests:
 
 ```
 php artisan serve
-npm run test-nw
+yarn test-nw
 ```
 
 To run Cypress E2E tests:
 
 ```
 php artisan serve
-npm run test
+yarn test
 # Or you can open GUI with
-npm run test-gui
+yarn test-gui
 ```
 
 

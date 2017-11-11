@@ -108,7 +108,7 @@
             })
           })
           .catch((data) => {
-            this.errors = data.validation || {};
+            this.errors = data.errors || {};
           });
       },
 
