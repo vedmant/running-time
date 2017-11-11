@@ -28,15 +28,13 @@ php artisan passport:install # Install Passport
 
 # Compile assets
 yarn # Install Javascript dependencies
-yarn dev # Compile assets
-
-# Or if you have installed Yarn:
-yarn
-yarn prod
+yarn prod # Compile assets
 
 # Start server
 php artisan serve # Start server
 ```
+
+If you don't have installed yarn, run `npm install -g yarn`
 
 ### Main features ###
 * Fully separate Backend and Frontend
