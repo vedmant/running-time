@@ -4,7 +4,7 @@
 
 ## Laravel 5.5 & Vue.js 2.4 + Vuex Sample Project ##
 
-**Laravel example** is a tutorial Single Page Application (SPA) for Laravel 5.5 and Vue.js 2.4 Frontend
+**Laravel & Vue Sample Project** is a tutorial Single Page Application (SPA) for Laravel 5.5 and Vue.js 2.4 Frontend
 
 [Demo](https://jogging-time.vedmant.com/)
 
@@ -14,7 +14,7 @@ Use login: `user@gmail.com` and password: `123456`
 
 ```
 git clone https://github.com/vedmant/jogging-time.git # To clone repo
-cd jogging-time 
+cd jogging-time
 composer install # Install php dependencies
 
 # Prepare enviroment variables
@@ -34,9 +34,13 @@ yarn prod # Compile assets
 php artisan serve # Start server
 ```
 
+Open http://localhost:8000 to view site
+
 If you don't have installed yarn, run `npm install -g yarn`
 
+
 ### Main features ###
+
 * Fully separate Backend and Frontend
 * Authentication based on Laravel Passport
 * List pages with filters and CRUD editing
@@ -70,7 +74,7 @@ If you don't have installed yarn, run `npm install -g yarn`
 * Admin dashboard with widgets
 * Users admin (list, show, edit, delete, create)
 * Entries admin (list, show, edit, delete, create)
-* Global loader for all requests with small delay
+* Global loader overlay for all requests
 
 
 ### Development ###
@@ -79,7 +83,7 @@ To run convenient development server with hot reloading:
 
 ```
 php artisan serve # Will serve backend on localhost:8000
-yarn hot # Will server frontend on loaclhost:8080 and fallback on localhost:8000
+yarn hot # Will serve frontend on loaclhost:8080 and proxy api requests to localhost:8000
 ```
 
 And open http://localhost:8080
@@ -95,12 +99,11 @@ And open http://localhost:8000
 To compile assets for production run:
 ```
 yarn prod
-```
 
-Or to display bundle analyzer
-```
+# Or to display bundle analyzer run:
 yarn production -- --env.analyzer true
 ```
+
 
 ### Tests ###
 
@@ -108,13 +111,6 @@ To run all Phpunit tests:
 
 ```
 ./vendor/bin/phpunit 
-```
-
-To run Nightwatch E2E tests:
-
-```
-php artisan serve
-yarn test-nw
 ```
 
 To run Cypress E2E tests:
@@ -126,8 +122,15 @@ yarn test
 yarn test-gui
 ```
 
+To run Nightwatch E2E tests:
 
-### Credentials ###
+```
+php artisan serve
+yarn test-nw
+```
+
+
+### Demo Credentials ###
 
 For testing application the database is seeded with sample users:
 
@@ -138,6 +141,7 @@ For testing application the database is seeded with sample users:
 
 ### TODO ###
 
+- Dissalow to revoke admin role for last admin user
 - Replace Vue Resource with Axios
 - Add more E2E tests
 
