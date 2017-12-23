@@ -3,4 +3,4 @@
  *
  * @type {string}
  */
-export const apiPath = '/api/v1/';
+export const apiPath = '/api/v1/'

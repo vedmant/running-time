@@ -1,6 +1,6 @@
-const mix = require('laravel-mix');
-const argv = require('yargs').argv;
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const mix = require('laravel-mix')
+const argv = require('yargs').argv
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 /*
  |--------------------------------------------------------------------------
@@ -13,10 +13,10 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
  |
  */
 
-const plugins = [];
+const plugins = []
 
 if (argv.env && argv.env.analyzer) {
-  plugins.push(new BundleAnalyzerPlugin());
+  plugins.push(new BundleAnalyzerPlugin())
 }
 
 mix
@@ -41,3 +41,22 @@ mix
   .sass('resources/assets/sass/app.scss', 'public/css')
 
   .version()
+
+// Add eslint check
+if (process.env.NODE_ENV === 'development') {
+  mix.webpackConfig({
+    module: {
+      rules: [
+        {
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          enforce: 'pre',
+          exclude: /node_modules/,
+          options: {
+            formatter: require('eslint-friendly-formatter'),
+          }
+        },
+      ],
+    },
+  })
+}

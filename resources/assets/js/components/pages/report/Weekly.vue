@@ -43,11 +43,11 @@
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex';
+  import { mapState, mapActions } from 'vuex'
 
   export default {
 
-    data() {
+    data () {
       return {
         columns: [{
           'type': 'string',
@@ -66,11 +66,11 @@
           vAxis: {title: 'Speed, Pace'},
           hAxis: {title: 'Week'}
         },
-      };
+      }
     },
 
-    mounted() {
-      this.report.data.length || this.loadWeeklyReport(this.params);
+    mounted () {
+      this.report.data.length || this.loadWeeklyReport(this.params)
     },
 
     computed: {
@@ -79,7 +79,7 @@
         report: state => state.reports.weekly,
       }),
 
-      params() {
+      params () {
         return {
           year: this.report.year,
         }
@@ -93,8 +93,8 @@
         'loadWeeklyReport',
       ]),
 
-      onLoadWeeklyReport(year) {
-        this.loadWeeklyReport({...this.params, year});
+      onLoadWeeklyReport (year) {
+        this.loadWeeklyReport({...this.params, year})
       },
     }
   }

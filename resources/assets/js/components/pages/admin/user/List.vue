@@ -46,7 +46,7 @@
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex';
+  import { mapState, mapActions } from 'vuex'
 
   export default {
 
@@ -54,14 +54,14 @@
       row: require('./partials/Row.vue'),
     },
 
-    data() {
+    data () {
       return {
         search: '',
-      };
+      }
     },
 
-    mounted() {
-      this.loadUsers(this.params);
+    mounted () {
+      this.loadUsers(this.params)
     },
 
     computed: {
@@ -69,7 +69,7 @@
         users: state => state.users.users,
       }),
 
-      params() {
+      params () {
         return {
           page: this.users.current_page,
           query: this.search,
@@ -85,22 +85,22 @@
         'addToastMessage',
       ]),
 
-      onLoadEntries(page) {
-        this.loadUsers({...this.params, page});
+      onLoadEntries (page) {
+        this.loadUsers({...this.params, page})
       },
 
-      onSearch() {
-        this.loadUsers({...this.params, page: 1});
+      onSearch () {
+        this.loadUsers({...this.params, page: 1})
       },
 
-      onDelete(id) {
+      onDelete (id) {
         this.deleteUser(id).then(() => {
           this.addToastMessage({
             text: 'User was deleted!',
             type: 'success'
-          });
-          this.loadUsers(this.params);
-        });
+          })
+          this.loadUsers(this.params)
+        })
       },
 
     }

@@ -1,5 +1,6 @@
-import {makeMutations} from '../helpers';
-import * as Config from '../../config';
+import Vue from 'vue'
+import { makeMutations } from '../helpers'
+import * as Config from '../../config'
 
 const state = {
   loading: false,
@@ -8,49 +9,49 @@ const state = {
     fastest_run: {user: {}},
     longest_run: {user: {}},
   },
-};
+}
 
 const actions = {
 
-  stopLoading({commit}) {
-    commit('STOP_LOADING');
+  stopLoading ({commit}) {
+    commit('STOP_LOADING')
   },
 
-  loadDashboard({commit, dispatch}) {
-    commit('LOAD_DASHBOARD');
+  loadDashboard ({commit, dispatch}) {
+    commit('LOAD_DASHBOARD')
 
     return new Promise((resolve, reject) => {
       Vue.http.get(Config.apiPath + 'dashboard/data')
         .then(
           response => {
-            commit('LOAD_DASHBOARD_OK', response.data);
-            resolve();
+            commit('LOAD_DASHBOARD_OK', response.data)
+            resolve()
           },
           response => {
-            commit('LOAD_DASHBOARD_FAIL');
-            reject(response.data);
-          });
+            commit('LOAD_DASHBOARD_FAIL')
+            reject(response.data)
+          })
     })
   },
 
-  loadAdminDashboard({commit, dispatch}) {
-    commit('LOAD_ADMIN_DASHBOARD');
+  loadAdminDashboard ({commit, dispatch}) {
+    commit('LOAD_ADMIN_DASHBOARD')
 
     return new Promise((resolve, reject) => {
       Vue.http.get(Config.apiPath + 'dashboard/admin-data')
         .then(
           response => {
-            commit('LOAD_ADMIN_DASHBOARD_OK', response.data);
-            resolve();
+            commit('LOAD_ADMIN_DASHBOARD_OK', response.data)
+            resolve()
           },
           response => {
-            commit('LOAD_ADMIN_DASHBOARD_FAIL');
-            reject(response.data);
-          });
+            commit('LOAD_ADMIN_DASHBOARD_FAIL')
+            reject(response.data)
+          })
     })
   },
 
-};
+}
 
 const mutations = {
 
@@ -73,7 +74,7 @@ const mutations = {
     'DELETE_USER',
     'LOAD_WEEKLY_REPORT',
   ], (state) => {
-    state.loading = true;
+    state.loading = true
   }),
 
   ...makeMutations([
@@ -111,23 +112,23 @@ const mutations = {
     'LOAD_WEEKLY_REPORT_OK',
     'LOAD_WEEKLY_REPORT_FAIL',
   ], (state) => {
-    state.loading = false;
+    state.loading = false
   }),
 
-  LOAD_DASHBOARD_OK(state, dashboard) {
-    state.dashboard = dashboard;
-    state.loading = false;
+  LOAD_DASHBOARD_OK (state, dashboard) {
+    state.dashboard = dashboard
+    state.loading = false
   },
 
-  LOAD_ADMIN_DASHBOARD_OK(state, dashboard) {
-    state.admin_dashboard = dashboard;
-    state.loading = false;
+  LOAD_ADMIN_DASHBOARD_OK (state, dashboard) {
+    state.admin_dashboard = dashboard
+    state.loading = false
   },
 
-};
+}
 
 export default {
   state,
   actions,
   mutations
-};
+}

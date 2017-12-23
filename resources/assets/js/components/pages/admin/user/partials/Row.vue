@@ -16,8 +16,7 @@
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex';
-  import moment from 'moment-mini';
+  import moment from 'moment-mini'
 
   export default {
 
@@ -29,8 +28,8 @@
     },
 
     computed: {
-      createdAt() {
-        return moment(this.row.date).format('MM/DD/YYYY HH:mm:ss');
+      createdAt () {
+        return moment(this.row.date).format('MM/DD/YYYY HH:mm:ss')
       },
     },
 

@@ -75,6 +75,8 @@ If you don't have installed yarn, run `npm install -g yarn`
 * Users admin (list, show, edit, delete, create)
 * Entries admin (list, show, edit, delete, create)
 * Global loader overlay for all requests
+# Eslint code standard check
+# Lodash-es to allow tree shaking for bundle size optimization
 
 
 ### Development ###

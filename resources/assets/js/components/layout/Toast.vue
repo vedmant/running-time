@@ -128,7 +128,7 @@
 
     props: {
       position: {
-        validator(value) {
+        validator (value) {
           return /^(:?n|s|nw|ne|sw|se)$/.test(value)
         },
         default: 'ne',
@@ -139,7 +139,7 @@
       ...mapGetters({
         messages: 'toastMessages'
       }),
-      positionClass() {
+      positionClass () {
         return `toast-position-${this.position}`
       }
     },
@@ -148,7 +148,7 @@
       ...mapActions({
         close: 'removeToastMessage'
       }),
-      messageTypeClass(message) {
+      messageTypeClass (message) {
         return `toast-type-${message.type}`
       }
     },
@@ -156,10 +156,10 @@
     components: {
       ToastTransition: {
         functional: true,
-        render(h, {children}) {
+        render (h, {children}) {
           const data = {
             attrs: {tag: 'div', name: 'toast', type: 'transition'}
-          };
+          }
           return h('transition-group', data, children)
         }
       }

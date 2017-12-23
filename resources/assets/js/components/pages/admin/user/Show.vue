@@ -28,16 +28,16 @@
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex';
+  import { mapState, mapActions } from 'vuex'
 
   export default {
 
-    data() {
-      return {};
+    data () {
+      return {}
     },
 
-    mounted() {
-      this.loadUser(this.id);
+    mounted () {
+      this.loadUser(this.id)
     },
 
     computed: {
@@ -46,8 +46,8 @@
         user: state => state.users.user,
       }),
 
-      id() {
-        return this.$route.params.id;
+      id () {
+        return this.$route.params.id
       }
 
     },

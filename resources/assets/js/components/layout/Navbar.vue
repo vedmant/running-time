@@ -71,16 +71,16 @@
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex';
+  import { mapState } from 'vuex'
 
   export default {
 
-    data() {
-      return {};
+    data () {
+      return {}
     },
 
-    mounted() {
-      this.loadGithubScript();
+    mounted () {
+      this.loadGithubScript()
     },
 
     computed: {
@@ -91,16 +91,16 @@
     },
 
     watch: {
-      route() {
-        this.$forceUpdate(); // Tempopary fix for wrong router navigation after login
+      route () {
+        this.$forceUpdate() // Tempopary fix for wrong router navigation after login
       }
     },
 
     methods: {
-      loadGithubScript() {
+      loadGithubScript () {
         const script = document.createElement('script')
-        script.src = 'https://buttons.github.io/buttons.js';
-        document.head.appendChild(script);
+        script.src = 'https://buttons.github.io/buttons.js'
+        document.head.appendChild(script)
       },
     },
   }

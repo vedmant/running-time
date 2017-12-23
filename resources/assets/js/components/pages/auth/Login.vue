@@ -49,11 +49,11 @@
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex';
+  import { mapState, mapActions } from 'vuex'
 
   export default {
 
-    data() {
+    data () {
       return {
         form: {
           email: Laravel.demoMode ? 'admin@gmail.com' : '',
@@ -61,7 +61,7 @@
         },
         error: '',
         errors: {},
-      };
+      }
     },
 
     computed: {
@@ -77,20 +77,20 @@
         'addToastMessage',
       ]),
 
-      onSubmit() {
-        this.errors = {};
+      onSubmit () {
+        this.errors = {}
         this.login(this.form)
           .then(() => {
             this.addToastMessage({
               text: 'You logged in!',
               type: 'success'
-            });
-            this.$router.replace('/dashboard');
+            })
+            this.$router.replace('/dashboard')
           })
           .catch((data) => {
-            this.error = data.message;
-            this.errors = data.errors || {};
-          });
+            this.error = data.message
+            this.errors = data.errors || {}
+          })
       },
 
     }

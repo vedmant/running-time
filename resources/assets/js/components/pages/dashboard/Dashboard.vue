@@ -50,7 +50,7 @@
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex';
+  import { mapState, mapActions } from 'vuex'
 
   export default {
 
@@ -58,8 +58,7 @@
       'entry-form': require('./../entry/partials/Form.vue'),
     },
 
-
-    data() {
+    data () {
       return {
         errors: {},
         form: {
@@ -86,11 +85,11 @@
           vAxis: {title: 'Speed, Pace'},
           hAxis: {title: 'Day'}
         },
-      };
+      }
     },
 
-    mounted() {
-      this.loadDashboard();
+    mounted () {
+      this.loadDashboard()
     },
 
     computed: {
@@ -107,25 +106,25 @@
         'addToastMessage',
       ]),
 
-      onSubmit(form) {
+      onSubmit (form) {
         this.storeEntry(form)
           .then(() => {
-            this.loadDashboard();
+            this.loadDashboard()
             this.addToastMessage({
               text: 'New time record was added!',
               type: 'success'
-            });
+            })
             this.form = {
               date: '',
               distance: '',
               time_minutes: '00',
               time_seconds: '00',
-            };
-            this.errors = {};
+            }
+            this.errors = {}
           })
           .catch((data) => {
             this.errors = data.errors || {}
-          });
+          })
       },
     }
   }

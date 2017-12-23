@@ -64,11 +64,11 @@
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex';
+  import { mapActions } from 'vuex'
 
   export default {
 
-    data() {
+    data () {
       return {
         form: {
           name: '',
@@ -86,15 +86,15 @@
         'register',
       ]),
 
-      onSubmit() {
-        this.errors = {};
+      onSubmit () {
+        this.errors = {}
         this.register(this.form)
           .then(() => {
-            this.$router.replace('/dashboard');
+            this.$router.replace('/dashboard')
           })
           .catch((data) => {
-            this.errors = data.errors || {};
-          });
+            this.errors = data.errors || {}
+          })
       },
 
     }

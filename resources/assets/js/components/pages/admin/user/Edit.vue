@@ -21,8 +21,7 @@
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex';
-  import moment from 'moment-mini';
+  import { mapState, mapActions } from 'vuex'
 
   export default {
 
@@ -30,34 +29,34 @@
       'user-form': require('./partials/Form.vue'),
     },
 
-    data() {
+    data () {
       return {
         errors: {},
-      };
+      }
     },
 
-    mounted() {
-      this.loadUser(this.id);
+    mounted () {
+      this.loadUser(this.id)
     },
 
     computed: {
 
-      id() {
-        return this.$route.params.id;
+      id () {
+        return this.$route.params.id
       },
 
       ...mapState({
         user: state => state.users.user,
       }),
 
-      form() {
-        if (! this.user) return {};
+      form () {
+        if (! this.user) return {}
 
         return {
           name: this.user.name,
           email: this.user.email,
           role: this.user.role,
-        };
+        }
       }
 
     },
@@ -70,18 +69,18 @@
         'addToastMessage',
       ]),
 
-      onSubmit(form) {
+      onSubmit (form) {
         this.updateUser({id: this.id, form})
           .then(() => {
             this.addToastMessage({
               text: 'User was updated!',
               type: 'success'
-            });
-            this.$router.go(- 1);
+            })
+            this.$router.go(- 1)
           })
           .catch((data) => {
             this.errors = data.errors || {}
-          });
+          })
       },
 
     }

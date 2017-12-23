@@ -21,7 +21,7 @@
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex';
+  import { mapActions } from 'vuex'
 
   export default {
 
@@ -29,7 +29,7 @@
       'entry-form': require('./partials/Form.vue'),
     },
 
-    data() {
+    data () {
       return {
         errors: {},
         form: {
@@ -39,7 +39,7 @@
           time_minutes: '00',
           time_seconds: '00',
         }
-      };
+      }
     },
 
     computed: {},
@@ -51,18 +51,18 @@
         'addToastMessage',
       ]),
 
-      onSubmit(form) {
+      onSubmit (form) {
         this.storeEntry(form)
           .then(() => {
             this.addToastMessage({
               text: 'New time record was added!',
               type: 'success'
-            });
-            this.$router.go(- 1);
+            })
+            this.$router.go(- 1)
           })
           .catch((data) => {
             this.errors = data.errors || {}
-          });
+          })
       },
 
     }

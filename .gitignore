@@ -14,3 +14,4 @@ Homestead.yaml
 /resources/assets/test/screenshots
 /public/mix-manifest.json
 /public/hot
+/cypress/videos

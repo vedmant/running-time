@@ -64,11 +64,11 @@
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex';
+  import { mapState, mapActions } from 'vuex'
 
   export default {
 
-    data() {
+    data () {
       return {
         form: {
           name: '',
@@ -86,9 +86,9 @@
       }),
     },
 
-    mounted() {
-      this.form.name = this.me.name;
-      this.form.email = this.me.email;
+    mounted () {
+      this.form.name = this.me.name
+      this.form.email = this.me.email
     },
 
     methods: {
@@ -98,8 +98,8 @@
         'addToastMessage',
       ]),
 
-      onSubmit() {
-        this.errors = {};
+      onSubmit () {
+        this.errors = {}
         this.updateProfile({id: this.me.id, form: this.form})
           .then(() => {
             this.addToastMessage({
@@ -108,8 +108,8 @@
             })
           })
           .catch((data) => {
-            this.errors = data.errors || {};
-          });
+            this.errors = data.errors || {}
+          })
       },
 
     }

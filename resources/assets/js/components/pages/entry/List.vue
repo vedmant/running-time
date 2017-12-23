@@ -54,7 +54,7 @@
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex';
+  import { mapState, mapActions } from 'vuex'
 
   export default {
 
@@ -62,15 +62,15 @@
       row: require('./partials/Row.vue'),
     },
 
-    data() {
+    data () {
       return {
         dateFrom: '',
         dateTo: '',
-      };
+      }
     },
 
-    mounted() {
-      this.loadEntries(this.params);
+    mounted () {
+      this.loadEntries(this.params)
     },
 
     computed: {
@@ -78,7 +78,7 @@
         entries: state => state.entries.entries,
       }),
 
-      params() {
+      params () {
         return {
           page: this.entries.current_page,
           dateFrom: this.dateFrom,
@@ -95,28 +95,28 @@
         'addToastMessage',
       ]),
 
-      onLoadEntries(page) {
-        this.loadEntries({...this.params, page});
+      onLoadEntries (page) {
+        this.loadEntries({...this.params, page})
       },
 
-      onFilter() {
-        this.loadEntries({...this.params, page: 1});
+      onFilter () {
+        this.loadEntries({...this.params, page: 1})
       },
 
-      onFilterClear() {
-        this.dateFrom = '';
-        this.dateTo = '';
-        this.loadEntries(this.params);
+      onFilterClear () {
+        this.dateFrom = ''
+        this.dateTo = ''
+        this.loadEntries(this.params)
       },
 
-      onDelete(id) {
+      onDelete (id) {
         this.deleteEntry(id).then(() => {
           this.addToastMessage({
             text: 'Entry was deleted!',
             type: 'success'
-          });
-          this.loadEntries(this.params);
-        });
+          })
+          this.loadEntries(this.params)
+        })
       },
 
     }
