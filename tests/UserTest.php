@@ -102,9 +102,22 @@ class UserTest extends TestCase
              ->json('PUT', '/api/v1/user/' . $user2->id, [
                  'name'  => 'New Name',
                  'email' => 'newemail@gmail.com',
+                 'role'  => 'manager',
              ])
              ->assertResponseOk()
              ->seeJson(['user' => $user2->fresh()->toArray()]);
+    }
+
+    public function testRevokeSelfAdminRestriction()
+    {
+        $user = factory(App\User::class)->states('admin')->create();
+
+        $this->actingAs($user, 'api')
+             ->json('PUT', '/api/v1/user/' . $user->id, [
+                 'name'  => $user->name,
+                 'email' => $user->email,
+                 'role' => 'user'
+             ])->assertResponseStatus(401);
     }
 
     public function testUpdateCurrentUserByNonAdmin()

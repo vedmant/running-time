@@ -141,7 +141,6 @@ For testing application the database is seeded with sample users:
 
 ### TODO ###
 
-- Dissalow to revoke admin role for last admin user
 - Replace Vue Resource with Axios
 - Add more E2E tests
 
