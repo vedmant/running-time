@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import axios from 'axios'
 import { makeMutations } from '../helpers'
 import * as Config from '../../config'
 
@@ -21,16 +21,16 @@ const actions = {
     commit('LOAD_DASHBOARD')
 
     return new Promise((resolve, reject) => {
-      Vue.http.get(Config.apiPath + 'dashboard/data')
+      axios.get(Config.apiPath + 'dashboard/data')
         .then(
           response => {
             commit('LOAD_DASHBOARD_OK', response.data)
             resolve()
-          },
-          response => {
-            commit('LOAD_DASHBOARD_FAIL')
-            reject(response.data)
           })
+        .catch(error => {
+          commit('LOAD_DASHBOARD_FAIL')
+          reject(error.response.data)
+        })
     })
   },
 
@@ -38,16 +38,16 @@ const actions = {
     commit('LOAD_ADMIN_DASHBOARD')
 
     return new Promise((resolve, reject) => {
-      Vue.http.get(Config.apiPath + 'dashboard/admin-data')
+      axios.get(Config.apiPath + 'dashboard/admin-data')
         .then(
           response => {
             commit('LOAD_ADMIN_DASHBOARD_OK', response.data)
             resolve()
-          },
-          response => {
-            commit('LOAD_ADMIN_DASHBOARD_FAIL')
-            reject(response.data)
           })
+        .catch(error => {
+          commit('LOAD_ADMIN_DASHBOARD_FAIL')
+          reject(error.response.data)
+        })
     })
   },
 

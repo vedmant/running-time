@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import axios from 'axios'
 import * as Config from '../../config'
 
 const state = {
@@ -15,16 +15,16 @@ const actions = {
     commit('LOAD_ENTRIES')
 
     return new Promise((resolve, reject) => {
-      Vue.http.get(Config.apiPath + 'entry', {params})
+      axios.get(Config.apiPath + 'entry', {params})
         .then(
           response => {
             commit('LOAD_ENTRIES_OK', response.data.entries)
             resolve()
-          },
-          response => {
-            commit('LOAD_ENTRIES_FAIL')
-            reject(response.data)
           })
+        .catch(error => {
+          commit('LOAD_ENTRIES_FAIL')
+          reject(error.response.data)
+        })
     })
   },
 
@@ -32,16 +32,16 @@ const actions = {
     commit('LOAD_ENTRY')
 
     return new Promise((resolve, reject) => {
-      Vue.http.get(Config.apiPath + 'entry/' + id)
+      axios.get(Config.apiPath + 'entry/' + id)
         .then(
           response => {
             commit('LOAD_ENTRY_OK', response.data.entry)
             resolve()
-          },
-          response => {
-            commit('LOAD_ENTRY_FAIL')
-            reject(response.data)
           })
+        .catch(error => {
+          commit('LOAD_ENTRY_FAIL')
+          reject(error.response.data)
+        })
     })
   },
 
@@ -49,16 +49,16 @@ const actions = {
     commit('STORE_ENTRY')
 
     return new Promise((resolve, reject) => {
-      Vue.http.post(Config.apiPath + 'entry', form)
+      axios.post(Config.apiPath + 'entry', form)
         .then(
           response => {
             commit('STORE_ENTRY_OK', response.data.entry)
             resolve()
-          },
-          response => {
-            commit('STORE_ENTRY_FAIL')
-            reject(response.data)
           })
+        .catch(error => {
+          commit('STORE_ENTRY_FAIL')
+          reject(error.response.data)
+        })
     })
   },
 
@@ -66,16 +66,16 @@ const actions = {
     commit('UPDATE_ENTRY')
 
     return new Promise((resolve, reject) => {
-      Vue.http.post(Config.apiPath + 'entry/' + id, {_method: 'PUT', ...form})
+      axios.post(Config.apiPath + 'entry/' + id, {_method: 'PUT', ...form})
         .then(
           response => {
             commit('UPDATE_ENTRY_OK', response.data.entry)
             resolve()
-          },
-          response => {
-            commit('UPDATE_ENTRY_FAIL')
-            reject(response.data)
           })
+        .catch(error => {
+          commit('UPDATE_ENTRY_FAIL')
+          reject(error.response.data)
+        })
     })
   },
 
@@ -83,16 +83,16 @@ const actions = {
     commit('DELETE_ENTRY')
 
     return new Promise((resolve, reject) => {
-      Vue.http.post(Config.apiPath + 'entry/' + id, {_method: 'DELETE'})
+      axios.post(Config.apiPath + 'entry/' + id, {_method: 'DELETE'})
         .then(
           response => {
             commit('DELETE_ENTRY_OK', id)
             resolve()
-          },
-          response => {
-            commit('DELETE_ENTRY_FAIL')
-            reject(response.data)
           })
+        .catch(error => {
+          commit('DELETE_ENTRY_FAIL')
+          reject(error.response.data)
+        })
     })
   }
 

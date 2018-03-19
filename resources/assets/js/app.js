@@ -1,5 +1,6 @@
 import 'babel-polyfill'
 import Vue from 'vue'
+import axios from 'axios'
 import jQuery from 'jquery'
 import moment from 'moment-mini'
 import store from './vuex/store' // vuex store instance
@@ -20,7 +21,6 @@ window.moment = moment
  */
 
 require('bootstrap-sass')
-require('vue-resource')
 
 /**
  * Vue Settings
@@ -30,18 +30,21 @@ require('vue-resource')
 Vue.use(VueCharts)
 
 // Authorization header
-Vue.http.interceptors.push((request, next) => {
-  request.headers.set('Authorization', 'Bearer ' + localStorage.getItem('access_token'))
-  // continue to next interceptor
-  next((response) => {
-    // Show toast with message for non OK responses
-    if (response.status !== 200) {
-      store.dispatch('addToastMessage', {
-        text: response.body.message || 'Request error status: ' + response.status,
-        type: 'danger'
-      })
-    }
+axios.interceptors.request.use(function (config) {
+  config['headers'] = {
+    Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+    Accept: 'application/json',
+  }
+  return config
+}, error => Promise.reject(error))
+
+// Show toast with message for non OK responses
+axios.interceptors.response.use(response => response, error => {
+  store.dispatch('addToastMessage', {
+    text: error.response.data.message || 'Request error status: ' + error.response.status,
+    type: 'danger'
   })
+  return Promise.reject(error)
 })
 
 // Global Vue Components

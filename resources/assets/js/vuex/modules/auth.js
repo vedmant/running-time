@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import axios from 'axios'
 import * as Config from '../../config'
 
 const state = {
@@ -18,17 +18,17 @@ const actions = {
         return reject(new Error('No access token stored'))
       }
 
-      Vue.http.get(Config.apiPath + 'user/me')
+      axios.get(Config.apiPath + 'user/me')
         .then(
           response => {
             commit('CHECK_LOGIN_OK', response.data)
             resolve()
-          },
-          response => {
-            localStorage.removeItem('access_token')
-            commit('CHECK_LOGIN_FAIL')
-            reject(response.data)
           })
+        .catch(error => {
+          localStorage.removeItem('access_token')
+          commit('CHECK_LOGIN_FAIL')
+          reject(error.response.data)
+        })
     })
   },
 
@@ -37,7 +37,7 @@ const actions = {
     commit('LOGIN')
 
     return new Promise((resolve, reject) => {
-      Vue.http.post(Config.apiPath + 'auth/login', form)
+      axios.post(Config.apiPath + 'auth/login', form)
         .then(
           response => {
             const accessToken = response.data.access_token
@@ -45,11 +45,11 @@ const actions = {
 
             commit('LOGIN_OK', response.data.user)
             resolve()
-          },
-          response => {
-            commit('LOGIN_FAIL')
-            reject(response.data)
           })
+        .catch(error => {
+          commit('LOGIN_FAIL')
+          reject(error.response.data)
+        })
     })
   },
 
@@ -63,7 +63,7 @@ const actions = {
     commit('REGISTER')
 
     return new Promise((resolve, reject) => {
-      Vue.http.post(Config.apiPath + 'auth/register', form)
+      axios.post(Config.apiPath + 'auth/register', form)
         .then(
           response => {
             const accessToken = response.data.access_token
@@ -71,11 +71,11 @@ const actions = {
 
             commit('REGISTER_OK', response.data.user)
             resolve()
-          },
-          response => {
-            commit('REGISTER_FAIL')
-            reject(response.data)
           })
+        .catch(error => {
+          commit('REGISTER_FAIL')
+          reject(error.response.data)
+        })
     })
   },
 
@@ -83,16 +83,16 @@ const actions = {
     commit('UPDATE_PROFILE')
 
     return new Promise((resolve, reject) => {
-      Vue.http.post(Config.apiPath + 'user/' + id, {_method: 'PUT', ...form})
+      axios.post(Config.apiPath + 'user/' + id, {_method: 'PUT', ...form})
         .then(
           response => {
             commit('UPDATE_PROFILE_OK', response.data.user)
             resolve()
-          },
-          response => {
-            commit('UPDATE_PROFILE_FAIL')
-            reject(response.data)
           })
+        .catch(error => {
+          commit('UPDATE_PROFILE_FAIL')
+          reject(error.response.data)
+        })
     })
   },
 

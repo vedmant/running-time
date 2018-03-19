@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import axios from 'axios'
 import * as Config from '../../config'
 
 const state = {
@@ -14,16 +14,16 @@ const actions = {
     commit('LOAD_ALL_ENTRIES')
 
     return new Promise((resolve, reject) => {
-      Vue.http.get(Config.apiPath + 'entry/all', {params})
+      axios.get(Config.apiPath + 'entry/all', {params})
         .then(
           response => {
             commit('LOAD_ALL_ENTRIES_OK', response.data.entries)
             resolve()
-          },
-          response => {
-            commit('LOAD_ALL_ENTRIES_FAIL')
-            reject(response.data)
           })
+        .catch(error => {
+          commit('LOAD_ALL_ENTRIES_FAIL')
+          reject(error.response.data)
+        })
     })
   },
 

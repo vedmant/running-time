@@ -40,7 +40,9 @@ mix
 
   .sass('resources/assets/sass/app.scss', 'public/css')
 
-  .version()
+if (process.env.npm_lifecycle_event !== 'hot') {
+  mix.version()
+}
 
 // Add eslint check
 if (process.env.NODE_ENV === 'development') {

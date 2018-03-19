@@ -2,9 +2,9 @@
 <a href="https://travis-ci.org/vedmant/jogging-time"><img src="https://travis-ci.org/vedmant/jogging-time.svg?branch=master" alt="Build Status"></a>
 </p>
 
-## Laravel 5.5 & Vue.js 2.4 + Vuex Sample Project ##
+## Laravel 5.5 & Vue.js 2.5 + Vuex Sample Project ##
 
-**Laravel & Vue Sample Project** is a tutorial Single Page Application (SPA) for Laravel 5.5 and Vue.js 2.4 Frontend
+**Laravel & Vue Sample Project** is a tutorial Single Page Application (SPA) for Laravel 5.5 and Vue.js 2.5 Frontend
 
 [Demo](https://jogging-time.vedmant.com/)
 
@@ -60,6 +60,7 @@ If you don't have installed yarn, run `npm install -g yarn`
 * [Vue.js](https://vuejs.org/) The Progressive JavaScript Framework
 * [Vuex](https://vuex.vuejs.org/en/intro.html) State management pattern + library for Vue.js
 * [Vue-Router](https://router.vuejs.org/en/) Router library for Vue.js
+* [Axios](https://github.com/axios/axios) HTTP client
 
 
 ### Other Features ###
@@ -143,7 +144,6 @@ For testing application the database is seeded with sample users:
 
 ### TODO ###
 
-- Replace Vue Resource with Axios
 - Add more E2E tests
 
 
