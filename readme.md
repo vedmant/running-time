@@ -144,7 +144,8 @@ For testing application the database is seeded with sample users:
 
 ### TODO ###
 
-- Add more E2E tests
+- Upgrade Bootstrap to v4
+- Add more E2E cypress tests
 
 
 ### License ###
