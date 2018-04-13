@@ -145,6 +145,7 @@ For testing application the database is seeded with sample users:
 ### TODO ###
 
 - Upgrade Bootstrap to v4
+- Setup Travis to run Cypress tests
 - Add more E2E cypress tests
 
 
