@@ -1,5 +1,5 @@
 <template>
-  <tr>
+  <tr :id="`entry-row-${row.id}`">
     <td>{{ formatDate(row.date) }}</td>
     <td>{{ row.distance }} km</td>
     <td>{{ row.time }}</td>

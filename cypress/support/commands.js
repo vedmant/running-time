@@ -25,14 +25,12 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 Cypress.Commands.add('login', function (userType, options = {}) {
-  cy.visit('/login')
-
+  cy.visit('/')
   cy.fixture(`user_${userType}`).as('user')
+  const getStore = () => cy.window().its('app.__vue__.$store')
 
-  cy.get('#login_form').within(() => {
-    cy.get('#email').type(this.user.email)
-    cy.get('#password').type(this.user.password)
-    cy.root().submit()
+  getStore().then(store => {
+    store.dispatch('login', {email: this.user.email, password: this.user.password})
+    getStore().its('state.auth.me').should('not.equal', null)
   })
-  cy.url().should('include', '/dashboard')
 })
