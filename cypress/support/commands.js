@@ -24,13 +24,20 @@
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
+Cypress.Commands.add('store', function () {
+  return cy.window().its('app.__vue__.$store')
+})
+
 Cypress.Commands.add('login', function (userType, options = {}) {
   cy.visit('/')
   cy.fixture(`user_${userType}`).as('user')
-  const getStore = () => cy.window().its('app.__vue__.$store')
 
-  getStore().then(store => {
+  cy.store().then(store => {
     store.dispatch('login', {email: this.user.email, password: this.user.password})
-    getStore().its('state.auth.me').should('not.equal', null)
+    cy.store().its('state.auth.me').should('not.equal', null)
   })
+})
+
+Cypress.Commands.add('resetDb', function () {
+  cy.exec('php artisan migrate:refresh --seed && php artisan passport:install').its('code').should('eq', 0)
 })

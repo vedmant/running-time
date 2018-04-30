@@ -8,7 +8,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">My Profile</div>
           <div class="panel-body">
-            <form class="form-horizontal" role="form" @submit.prevent="onSubmit">
+            <form class="form-horizontal" id="profile_form" role="form" @submit.prevent="onSubmit">
 
               <div class="form-group" :class="{ 'has-error': errors.name }">
                 <label for="name" class="col-md-4 control-label">Name</label>

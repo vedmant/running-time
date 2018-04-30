@@ -1,6 +1,10 @@
-var moment = require('moment-mini');
+const moment = require('moment-mini');
 
 describe('Entries', function () {
+  before(() => {
+    cy.resetDb()
+  })
+
   beforeEach(() => {
     cy.login('user')
   })

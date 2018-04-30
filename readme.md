@@ -50,6 +50,7 @@ If you don't have installed yarn, run `npm install -g yarn`
 * Simple reports
 * Full Phpunit test coverage
 * E2E tests with Cypress
+* Continuous integration with Travis CI
 
 
 ### Includes ###

@@ -1,6 +1,11 @@
 const faker = require('faker')
 
 describe('Auth pages', function () {
+
+  before(() => {
+    cy.resetDb()
+  })
+
   it('can login', function () {
     cy.visit('/login')
 
@@ -28,5 +33,15 @@ describe('Auth pages', function () {
       cy.root().submit()
       cy.url().should('include', '/dashboard')
     })
+  })
+
+  it('can logout', function () {
+    cy.login('user')
+    cy.get('.navbar a').contains('User').click()
+    cy.get('.navbar a').contains('Logout').click()
+    cy.get('.navbar a').contains('Login').should('be.visible')
+    cy.get('.navbar a').contains('Register').should('be.visible')
+
+    cy.store().its('state.auth.me').should('be.equal', null)
   })
 })
