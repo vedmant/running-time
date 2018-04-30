@@ -49,7 +49,7 @@ If you don't have installed yarn, run `npm install -g yarn`
 * Simple widgets
 * Simple reports
 * Full Phpunit test coverage
-* Sample E2E tests using Nightwatch and Cypress
+* E2E tests with Cypress
 
 
 ### Includes ###
@@ -120,16 +120,9 @@ To run Cypress E2E tests:
 
 ```
 php artisan serve
-yarn test
+yarn e2e-run
 # Or you can open GUI with
-yarn test-gui
-```
-
-To run Nightwatch E2E tests:
-
-```
-php artisan serve
-yarn test-nw
+yarn e2e
 ```
 
 
