@@ -16,3 +16,4 @@ yarn-error.log
 /public/mix-manifest.json
 /public/hot
 /cypress/videos
+/cypress/screenshots

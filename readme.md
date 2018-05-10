@@ -115,6 +115,8 @@ To run all Phpunit tests:
 
 ```
 ./vendor/bin/phpunit 
+# Or
+yarn test
 ```
 
 To run Cypress E2E tests:
