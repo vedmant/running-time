@@ -1,5 +1,5 @@
 <template>
-  <tr :id="`user-row-${row.id}`">>
+  <tr :id="`user-row-${row.id}`">
     <td>
       <router-link :to="'/admin/user/show/' + row.id">{{ row.name }}</router-link>
     </td>

@@ -1,5 +1,5 @@
 <template>
-  <tr :id="`entry-row-${row.id}`">>
+  <tr :id="`entry-row-${row.id}`">
     <td>
       <router-link v-if="row.user" :to="'/admin/user/show/' + row.user.id">{{ row.user.name }}</router-link>
     </td>

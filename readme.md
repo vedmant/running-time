@@ -51,6 +51,7 @@ If you don't have installed yarn, run `npm install -g yarn`
 * Full Phpunit test coverage
 * E2E tests with Cypress
 * Continuous integration with Travis CI
+* Development configuration with Docker
 
 
 ### Includes ###
@@ -62,6 +63,7 @@ If you don't have installed yarn, run `npm install -g yarn`
 * [Vuex](https://vuex.vuejs.org/en/intro.html) State management pattern + library for Vue.js
 * [Vue-Router](https://router.vuejs.org/en/) Router library for Vue.js
 * [Axios](https://github.com/axios/axios) HTTP client
+* [Docker](https://www.docker.com/) Development setup with Docker
 
 
 ### Other Features ###
@@ -109,9 +111,42 @@ yarn production -- --env.analyzer true
 ```
 
 
+### Development with Docker ###
+
+If you want to use more features like Redis queues, MariaDB database, 
+sending and viewing sent emails you can use Docker setup on this project.
+
+For you you will need Docker installed on your host [https://docs.docker.com/install/](https://docs.docker.com/install/)
+
+To build the image for Docker, run:
+  
+    docker-compose build
+
+It will build all images and run all needed containers.
+
+Then use ENV variables, prepared specificly for Docker:
+
+    cp .env.docker.example .env
+    docker-compose run php php artisan key:generate
+
+Migrate and seed database, and install Passport:
+
+     docker-compose run php php artisan migrate --seed
+     docker-compose run php php artisan passport:install
+
+To run the project in Docker just run:
+  
+    docker-compose up
+
+And open http://localhost:8080
+
+To run all the Artisan or Test commands you can use `docker-compose run php` before the command to run it in the container.
+If you want to run command in currently running container, use `docker-compose exec php`.
+
+
 ### Tests ###
 
-To run all Phpunit tests:
+To run all PHPUnit tests:
 
 ```
 ./vendor/bin/phpunit 
