@@ -12,7 +12,7 @@
         </button>
 
         <!-- Branding Image -->
-        <router-link class="navbar-brand" to="/">Jogging Times</router-link>
+        <router-link class="navbar-brand" to="/">Running Times</router-link>
       </div>
 
       <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -23,7 +23,7 @@
 
         <ul class="nav navbar-nav navbar-left">
           <li class="github-menu-item">
-            <a class="github-button" href="https://github.com/vedmant/jogging-time" data-size="large" data-show-count="true" aria-label="Star vedmant/jogging-time on GitHub">Star</a>
+            <a class="github-button" href="https://github.com/vedmant/running-time" data-size="large" data-show-count="true" aria-label="Star vedmant/running-time on GitHub">Star</a>
           </li>
         </ul>
 

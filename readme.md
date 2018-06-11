@@ -1,20 +1,20 @@
 <p align="center">
-<a href="https://travis-ci.org/vedmant/jogging-time"><img src="https://travis-ci.org/vedmant/jogging-time.svg?branch=master" alt="Build Status"></a>
+<a href="https://travis-ci.org/vedmant/running-time"><img src="https://travis-ci.org/vedmant/running-time.svg?branch=master" alt="Build Status"></a>
 </p>
 
 ## Laravel 5.5 & Vue.js 2.5 + Vuex Sample Project ##
 
 **Laravel & Vue Sample Project** is a tutorial Single Page Application (SPA) for Laravel 5.5 and Vue.js 2.5 Frontend
 
-[Demo](https://jogging-time.vedmant.com/)
+[Demo](https://running-time.vedmant.com/)
 
 Use login: `user@gmail.com` and password: `123456`
 
 ### Installation ###
 
 ```
-git clone https://github.com/vedmant/jogging-time.git # To clone repo
-cd jogging-time
+git clone https://github.com/vedmant/running-time.git # To clone repo
+cd running-time
 composer install # Install php dependencies
 
 # Prepare enviroment variables

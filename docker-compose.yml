@@ -3,8 +3,8 @@ services:
 
   php:
     build: ./
-    container_name: jogging_time_php
-    image: jogging_time_php
+    container_name: running_time_php
+    image: running_time_php
     volumes:
       - .:/app:cached
       - ./docker/php.ini:/usr/local/etc/php/conf.d/custom.ini
@@ -16,7 +16,7 @@ services:
 
   nginx:
     image: nginx:alpine
-    container_name: jogging_time_nginx
+    container_name: running_time_nginx
     ports:
       - 8080:80
     volumes:
@@ -27,26 +27,26 @@ services:
 
   mariadb:
     image: mariadb:latest
-    container_name: jogging_time_mysql
+    container_name: running_time_mysql
     ports:
      - 33060:3306
     volumes:
       - mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: jogging_time
-      MYSQL_USER: jogging_time
+      MYSQL_DATABASE: running_time
+      MYSQL_USER: running_time
       MYSQL_PASS: secret
 
   mailcatcher:
     image: schickling/mailcatcher
-    container_name: jogging_time_mailcatcher
+    container_name: running_time_mailcatcher
     ports:
       - 1080:1080
 
   redis:
     image: redis:3-alpine
-    container_name: jogging_time_redis
+    container_name: running_time_redis
     ports:
       - 63790:6379
 
