@@ -1,7 +1,7 @@
 # Errors
 
 
-The Jogging Time API uses the following error codes:
+The Running Time API uses the following error codes:
 
 
 Error Code | Meaning
