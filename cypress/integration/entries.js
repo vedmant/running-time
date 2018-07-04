@@ -21,10 +21,10 @@ describe('Entries', function () {
 
     cy.get('#entry_form').within(() => {
       cy.get('#date').type(moment().format('YYYY-MM-DD'))
-      cy.get('#distance').type(6)
-      cy.get('#time_hours').clear().type(0)
-      cy.get('#time_minutes').clear().type(30)
-      cy.get('#time_seconds').clear().type(17)
+      cy.get('#distance').type('6')
+      cy.get('#time_hours').invoke('attr', 'maxlength', '10').clear().type('0')
+      cy.get('#time_minutes').invoke('attr', 'maxlength', '10').clear().type('30')
+      cy.get('#time_seconds').invoke('attr', 'maxlength', '10').clear().type('17')
       cy.root().submit()
     })
     cy.url().should('include', '/entries')
@@ -42,10 +42,10 @@ describe('Entries', function () {
 
     cy.get('#entry_form').within(() => {
       cy.get('#date').type(moment().subtract(2, 'days').format('YYYY-MM-DD'))
-      cy.get('#distance').clear().type(6)
-      cy.get('#time_hours').clear().type(0)
-      cy.get('#time_minutes').clear().type(30)
-      cy.get('#time_seconds').clear().type(17)
+      cy.get('#distance').invoke('attr', 'maxlength', '10').clear().type('6')
+      cy.get('#time_hours').invoke('attr', 'maxlength', '10').clear().type('0')
+      cy.get('#time_minutes').invoke('attr', 'maxlength', '10').clear().type('20')
+      cy.get('#time_seconds').invoke('attr', 'maxlength', '10').clear().type('10')
       cy.root().submit()
     })
     cy.url().should('include', '/entries')
