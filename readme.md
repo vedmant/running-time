@@ -2,9 +2,9 @@
 <a href="https://travis-ci.org/vedmant/running-time"><img src="https://travis-ci.org/vedmant/running-time.svg?branch=master" alt="Build Status"></a>
 </p>
 
-## Laravel 5.5 & Vue.js 2.5 + Vuex Sample Project ##
+## Laravel 5.6 & Vue.js 2.5 + Vuex Sample Project ##
 
-**Laravel & Vue Sample Project** is a tutorial Single Page Application (SPA) for Laravel 5.5 and Vue.js 2.5 Frontend
+**Laravel & Vue Sample Project** is a tutorial Single Page Application (SPA) for Laravel 5.6 and Vue.js 2.5 Frontend
 
 [Demo](https://running-time.vedmant.com/)
 

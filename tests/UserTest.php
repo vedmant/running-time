@@ -48,7 +48,7 @@ class UserTest extends TestCase
 
         $this->actingAs($user, 'api')
              ->json('GET', 'api/v1/user/me')
-             ->assertResponseOK()
+             ->assertResponseStatus(201)
              ->seeJson($user->toArray());
     }
 
