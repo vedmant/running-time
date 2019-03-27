@@ -40,10 +40,13 @@ axios.interceptors.request.use(function (config) {
 
 // Show toast with message for non OK responses
 axios.interceptors.response.use(response => response, error => {
-  store.dispatch('addToastMessage', {
-    text: error.response.data.message || 'Request error status: ' + error.response.status,
-    type: 'danger'
-  })
+  // Ignore /me url
+  if (! error.response.config.url.includes('/me')) {
+    store.dispatch('addToastMessage', {
+      text: error.response.data.message || 'Request error status: ' + error.response.status,
+      type: 'danger'
+    })
+  }
   return Promise.reject(error)
 })
 
@@ -63,8 +66,3 @@ new Vue({
   router,
   store,
 })
-
-// Check user login status
-store.dispatch('checkLogin').then(() => {
-  router.replace('/dashboard')
-}).catch(() => {})

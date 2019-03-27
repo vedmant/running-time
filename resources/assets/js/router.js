@@ -2,16 +2,15 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from './vuex/store'
 import {sync} from 'vuex-router-sync'
-import includes from 'lodash-es/includes'
 
 Vue.use(VueRouter)
 
 const routes = [
   {path: '/', component: require('./components/pages/front/Front.vue')},
 
-  {path: '/login', component: require('./components/pages/auth/Login.vue')},
-  {path: '/logout', component: require('./components/pages/auth/Logout.vue')},
-  {path: '/register', component: require('./components/pages/auth/Register.vue')},
+  {path: '/login', component: require('./components/pages/auth/Login.vue'), meta: {guestOnly: true}},
+  {path: '/logout', component: require('./components/pages/auth/Logout.vue'), meta: {requiresAuth: true}},
+  {path: '/register', component: require('./components/pages/auth/Register.vue'), meta: {guestOnly: true}},
   {path: '/profile', component: require('./components/pages/auth/Profile.vue'), meta: {requiresAuth: true}},
 
   {path: '/dashboard', component: require('./components/pages/dashboard/Dashboard.vue'), meta: {requiresAuth: true}},
@@ -54,12 +53,21 @@ sync(store, router)
 /**
  * Authenticated routes
  */
-router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth) && ! store.state.auth.me) {
+router.beforeEach(async (to, from, next) => {
+  if (! store.state.auth.me && ! store.state.auth.authChecked) {
+    await store.dispatch('checkLogin')
+      .catch(() => {})
+  }
+  const me = store.state.auth.me
+
+  if (to.matched.some(record => record.meta.guestOnly) && me) {
+    // Guest only page, dont follow there when user is authenticated
+    next(false)
+  } else if (to.matched.some(record => record.meta.requiresAuth) && ! me) {
     // if route requires auth and user isn't authenticated
     next('/login')
-  } else if (to.matched.some(record => record.meta.requiresAdmin) && (! store.state.auth.me ||
-      ! includes(['admin', 'manager'], store.state.auth.me.role))) {
+  } else if (to.matched.some(record => record.meta.requiresAdmin) &&
+    (! me || ! ['admin', 'manager'].includes(store.state.auth.me.role))) {
     // if route required admin or manager role
     next('/login')
   } else {

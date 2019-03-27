@@ -3,21 +3,16 @@ import * as Config from '../../config'
 
 const state = {
   me: null, // Logged in user
+  accessToken: localStorage.getItem('access_token'),
+  authChecked: false,
 }
 
 const actions = {
 
-  checkLogin ({commit, dispatch}) {
+  checkLogin ({commit}) {
     commit('CHECK_LOGIN')
 
-    const accessToken = localStorage.getItem('access_token')
-
     return new Promise((resolve, reject) => {
-      if (! accessToken) {
-        commit('CHECK_LOGIN_FAIL')
-        return reject(new Error('No access token stored'))
-      }
-
       axios.get(Config.apiPath + 'user/me')
         .then(
           response => {
@@ -25,13 +20,11 @@ const actions = {
             resolve()
           })
         .catch(error => {
-          localStorage.removeItem('access_token')
           commit('CHECK_LOGIN_FAIL')
           reject(error.response.data)
         })
     })
   },
-
 
   login ({commit, dispatch}, form) {
     commit('LOGIN')
@@ -43,7 +36,7 @@ const actions = {
             const accessToken = response.data.access_token
             localStorage.setItem('access_token', accessToken)
 
-            commit('LOGIN_OK', response.data.user)
+            commit('LOGIN_OK', {user: response.data.user, accessToken})
             resolve()
           })
         .catch(error => {
@@ -53,7 +46,7 @@ const actions = {
     })
   },
 
-  logout ({commit, dispatch}) {
+  logout ({commit}) {
     commit('LOGOUT_OK')
 
     localStorage.removeItem('access_token')
@@ -69,7 +62,7 @@ const actions = {
             const accessToken = response.data.access_token
             localStorage.setItem('access_token', accessToken)
 
-            commit('REGISTER_OK', response.data.user)
+            commit('REGISTER_OK', {user: response.data.user, accessToken})
             resolve()
           })
         .catch(error => {
@@ -102,18 +95,27 @@ const mutations = {
 
   CHECK_LOGIN_OK (state, user) {
     state.me = user
+    state.authChecked = true
   },
 
-  LOGIN_OK (state, user) {
+  CHECK_LOGIN_FAIL (state) {
+    state.accessToken = null
+    state.authChecked = true
+  },
+
+  LOGIN_OK (state, {user, accessToken}) {
     state.me = user
+    state.accessToken = accessToken
   },
 
   LOGOUT_OK (state) {
     state.me = null
+    state.accessToken = null
   },
 
-  REGISTER_OK (state, user) {
+  REGISTER_OK (state, {user, accessToken}) {
     state.me = user
+    state.accessToken = accessToken
   },
 
   UPDATE_PROFILE_OK (state, user) {
