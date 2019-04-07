@@ -1,10 +1,13 @@
 <?php
 
+namespace Tests\Feature;
+
 use App\Entry;
 use App\User;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
 
 class EntryTest extends TestCase
 {
@@ -21,7 +24,7 @@ class EntryTest extends TestCase
 
     public function testGetEntriesList()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(\App\User::class)->create();
         $user->entries()->saveMany(factory(Entry::class, 30)->make());
 
         $this->actingAs($user, 'api')
@@ -51,9 +54,9 @@ class EntryTest extends TestCase
 
     public function testGetAllEntriesListByAdmin()
     {
-        $user = factory(App\User::class)->states('admin')->create();
+        $user = factory(\App\User::class)->states('admin')->create();
 
-        $user2 = factory(App\User::class)->create();
+        $user2 = factory(\App\User::class)->create();
         $user2->entries()->saveMany(factory(Entry::class, 30)->make());
 
         $this->actingAs($user, 'api')
@@ -83,9 +86,9 @@ class EntryTest extends TestCase
 
     public function testGetAllEntriesList()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(\App\User::class)->create();
 
-        $user2 = factory(App\User::class)->create();
+        $user2 = factory(\App\User::class)->create();
         $user2->entries()->saveMany(factory(Entry::class, 30)->make());
 
         $this->actingAs($user, 'api')
@@ -95,7 +98,7 @@ class EntryTest extends TestCase
 
     public function testCteateEntry()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(\App\User::class)->create();
 
         $this->actingAs($user, 'api')
              ->json('POST', '/api/v1/entry', [
@@ -119,7 +122,7 @@ class EntryTest extends TestCase
 
     public function testCteateEntryValidationError()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(\App\User::class)->create();
 
         $this->actingAs($user, 'api')
              ->json('POST', '/api/v1/entry', [
@@ -140,7 +143,7 @@ class EntryTest extends TestCase
 
     public function testUpdateEntry()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(\App\User::class)->create();
         $user->entries()->saveMany(factory(Entry::class, 2)->make());
 
         /** @var Entry $entry */
@@ -159,9 +162,9 @@ class EntryTest extends TestCase
 
     public function testUpdateNotOwnedEntry()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(\App\User::class)->create();
 
-        $user2 = factory(App\User::class)->create();
+        $user2 = factory(\App\User::class)->create();
         $user2->entries()->saveMany(factory(Entry::class, 2)->make());
 
         /** @var Entry $entry */
@@ -178,9 +181,9 @@ class EntryTest extends TestCase
 
     public function testUpdateNotOwnedEntryByAdmin()
     {
-        $user = factory(App\User::class)->states('admin')->create();
+        $user = factory(\App\User::class)->states('admin')->create();
 
-        $user2 = factory(App\User::class)->create();
+        $user2 = factory(\App\User::class)->create();
         $user2->entries()->saveMany(factory(Entry::class, 2)->make());
 
         /** @var Entry $entry */
@@ -199,7 +202,7 @@ class EntryTest extends TestCase
 
     public function testDeleteEntry()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(\App\User::class)->create();
         $user->entries()->saveMany(factory(Entry::class, 2)->make());
 
         /** @var Entry $entry */
@@ -214,9 +217,9 @@ class EntryTest extends TestCase
 
     public function testDeleteNotOwnedEntry()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(\App\User::class)->create();
 
-        $user2 = factory(App\User::class)->create();
+        $user2 = factory(\App\User::class)->create();
         $user2->entries()->saveMany(factory(Entry::class, 2)->make());
 
         /** @var Entry $entry */
@@ -231,9 +234,9 @@ class EntryTest extends TestCase
 
     public function testDeleteNotOwnedEntryByAdmin()
     {
-        $user = factory(App\User::class)->states('admin')->create();
+        $user = factory(\App\User::class)->states('admin')->create();
 
-        $user2 = factory(App\User::class)->create();
+        $user2 = factory(\App\User::class)->create();
         $user2->entries()->saveMany(factory(Entry::class, 2)->make());
 
         /** @var Entry $entry */

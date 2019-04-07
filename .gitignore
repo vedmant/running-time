@@ -17,3 +17,4 @@ yarn-error.log
 /public/hot
 /cypress/videos
 /cypress/screenshots
+.phpunit.result.cache

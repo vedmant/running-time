@@ -1,10 +1,13 @@
 <?php
 
+namespace Tests\Feature;
+
 use App\Entry;
 use App\User;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
 
 class DashboardTest extends TestCase
 {
@@ -18,7 +21,7 @@ class DashboardTest extends TestCase
 
     public function testGetData()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(\App\User::class)->create();
         $user->entries()->saveMany(factory(Entry::class, 30)->make());
 
         $this->actingAs($user, 'api')
@@ -37,7 +40,7 @@ class DashboardTest extends TestCase
 
     public function testGetAdminData()
     {
-        $user = factory(App\User::class)->states('admin')->create();
+        $user = factory(\App\User::class)->states('admin')->create();
         $user->entries()->saveMany(factory(Entry::class, 30)->make());
 
         $this->actingAs($user, 'api')
@@ -56,7 +59,7 @@ class DashboardTest extends TestCase
 
     public function testGetAdminDataByNonAdmin()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(\App\User::class)->create();
 
         $this->actingAs($user, 'api')
              ->json('GET', '/api/v1/dashboard/admin-data')

@@ -25,7 +25,7 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 Cypress.Commands.add('store', function () {
-  return cy.window().its('app.__vue__.$store')
+  return cy.window().its('store')
 })
 
 Cypress.Commands.add('login', function (userType, options = {}) {

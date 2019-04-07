@@ -1,10 +1,13 @@
 <?php
 
+namespace Tests\Feature;
+
 use App\Entry;
 use App\User;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
 
 class UserTest extends TestCase
 {
@@ -21,8 +24,8 @@ class UserTest extends TestCase
 
     public function testMustBeAdmin()
     {
-        $user = factory(App\User::class)->create();
-        $user2 = factory(App\User::class)->create();
+        $user = factory(\App\User::class)->create();
+        $user2 = factory(\App\User::class)->create();
 
         $this->actingAs($user, 'api')
              ->json('GET', 'api/v1/user')
@@ -44,7 +47,7 @@ class UserTest extends TestCase
     public function testGetCurrentUser()
     {
         /** @var User $user */
-        $user = factory(App\User::class)->create();
+        $user = factory(\App\User::class)->create();
 
         $this->actingAs($user, 'api')
              ->json('GET', 'api/v1/user/me')
@@ -54,7 +57,7 @@ class UserTest extends TestCase
 
     public function testGetUsersList()
     {
-        $user = factory(App\User::class)->states('admin')->create();
+        $user = factory(\App\User::class)->states('admin')->create();
         factory(User::class, 10)->make();
 
         $this->actingAs($user, 'api')
@@ -81,8 +84,8 @@ class UserTest extends TestCase
 
     public function testShowUser()
     {
-        $user = factory(App\User::class)->states('admin')->create();
-        $user2 = factory(App\User::class)->create();
+        $user = factory(\App\User::class)->states('admin')->create();
+        $user2 = factory(\App\User::class)->create();
 
         $this->actingAs($user, 'api')
              ->json('GET', '/api/v1/user/' . $user2->id, [
@@ -95,8 +98,8 @@ class UserTest extends TestCase
 
     public function testUpdateUser()
     {
-        $user = factory(App\User::class)->states('admin')->create();
-        $user2 = factory(App\User::class)->create();
+        $user = factory(\App\User::class)->states('admin')->create();
+        $user2 = factory(\App\User::class)->create();
 
         $this->actingAs($user, 'api')
              ->json('PUT', '/api/v1/user/' . $user2->id, [
@@ -110,7 +113,7 @@ class UserTest extends TestCase
 
     public function testRevokeSelfAdminRestriction()
     {
-        $user = factory(App\User::class)->states('admin')->create();
+        $user = factory(\App\User::class)->states('admin')->create();
 
         $this->actingAs($user, 'api')
              ->json('PUT', '/api/v1/user/' . $user->id, [
@@ -122,7 +125,7 @@ class UserTest extends TestCase
 
     public function testUpdateCurrentUserByNonAdmin()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(\App\User::class)->create();
 
         $this->actingAs($user, 'api')
              ->json('PUT', '/api/v1/user/' . $user->id, [
@@ -135,8 +138,8 @@ class UserTest extends TestCase
 
     public function testDeleteUser()
     {
-        $user = factory(App\User::class)->states('admin')->create();
-        $user2 = factory(App\User::class)->create();
+        $user = factory(\App\User::class)->states('admin')->create();
+        $user2 = factory(\App\User::class)->create();
 
         $this->actingAs($user, 'api')
              ->json('DELETE', '/api/v1/user/' . $user2->id)

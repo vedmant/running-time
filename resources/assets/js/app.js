@@ -66,7 +66,7 @@ Vue.component('toast', Toast)
  * @type {Vue$2}
  */
 /* eslint-disable no-new */
-new Vue({
+const app = new Vue({
   el: '#app',
   router,
   store,
@@ -74,3 +74,7 @@ new Vue({
     return createElement(App)
   },
 })
+
+if (window.Cypress) {
+  window.store = store
+}

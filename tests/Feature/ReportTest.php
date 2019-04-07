@@ -1,10 +1,13 @@
 <?php
 
+namespace Tests\Feature;
+
 use App\Entry;
 use App\User;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
 
 class ReportTest extends TestCase
 {
@@ -18,7 +21,7 @@ class ReportTest extends TestCase
 
     public function testGetWeekly()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(\App\User::class)->create();
         $user->entries()->saveMany(factory(Entry::class, 30)->make());
 
         $this->actingAs($user, 'api')

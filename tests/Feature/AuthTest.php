@@ -1,10 +1,13 @@
 <?php
 
+namespace Tests\Feature;
+
 use App\Entry;
 use App\User;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
 
 class AuthTest extends TestCase
 {
@@ -12,7 +15,7 @@ class AuthTest extends TestCase
 
     public function testLogin()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(\App\User::class)->create();
         $user->entries()->saveMany(factory(Entry::class, 30)->make());
 
         $this->json('POST', '/api/v1/auth/login', [
@@ -32,7 +35,7 @@ class AuthTest extends TestCase
 
     public function testWrongLogin()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(\App\User::class)->create();
         $user->entries()->saveMany(factory(Entry::class, 30)->make());
 
         $this->json('POST', '/api/v1/auth/login', [
@@ -47,7 +50,7 @@ class AuthTest extends TestCase
 
     public function testRegister()
     {
-        $faker = Faker\Factory::create();
+        $faker = \Faker\Factory::create();
 
         $this->json('POST', '/api/v1/auth/register', [
             'name'                  => $faker->name,
