@@ -12,7 +12,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">Edit Time Record</div>
           <div class="panel-body">
-            <entry-form @onSubmit="onSubmit" :form="form" :errors="errors"></entry-form>
+            <entry-form :form="form" :errors="errors" @onSubmit="onSubmit" />
           </div>
         </div>
       </div>
@@ -24,21 +24,18 @@
   import { mapState, mapActions } from 'vuex'
   import moment from 'moment-mini'
   import padStart from 'lodash-es/padStart'
+  import EntryForm from './partials/Form'
 
   export default {
 
     components: {
-      'entry-form': require('./partials/Form.vue'),
+      EntryForm,
     },
 
     data () {
       return {
         errors: {},
       }
-    },
-
-    mounted () {
-      this.loadEntry(this.id)
     },
 
     computed: {
@@ -63,6 +60,10 @@
         }
       }
 
+    },
+
+    mounted () {
+      this.loadEntry(this.id)
     },
 
     methods: {

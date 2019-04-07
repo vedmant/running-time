@@ -1,4 +1,5 @@
 <template>
+  <div />
 </template>
 
 <script>

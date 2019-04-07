@@ -1,5 +1,5 @@
 <template>
-  <div class="container" id="front_page">
+  <div id="front_page" class="container">
     <h3>Front page</h3>
     <hr>
     <p>This is sample front page.</p>

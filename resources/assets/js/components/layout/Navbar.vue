@@ -6,16 +6,16 @@
         <!-- Collapsed Hamburger -->
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
           <span class="sr-only">Toggle Navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
+          <span class="icon-bar" />
+          <span class="icon-bar" />
+          <span class="icon-bar" />
         </button>
 
         <!-- Branding Image -->
         <router-link class="navbar-brand" to="/">Running Times</router-link>
       </div>
 
-      <div class="collapse navbar-collapse" id="app-navbar-collapse">
+      <div id="app-navbar-collapse" class="collapse navbar-collapse">
         <!-- Left Side Of Navbar -->
         <ul class="nav navbar-nav">
           &nbsp;
@@ -28,14 +28,14 @@
         </ul>
 
         <!-- Right Side Of Navbar -->
-        <ul class="nav navbar-nav navbar-right" v-if="me">
+        <ul v-if="me" class="nav navbar-nav navbar-right">
           <!-- Authentication Links -->
           <router-link tag="li" to="/dashboard" active-class="active"><a>Dashboad</a></router-link>
           <router-link tag="li" to="/entries" active-class="active"><a>Entries</a></router-link>
 
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-              Reports <span class="caret"></span>
+              Reports <span class="caret" />
             </a>
 
             <ul class="dropdown-menu" role="menu">
@@ -48,7 +48,7 @@
 
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-              {{ me.name }} <span class="caret"></span>
+              {{ me.name }} <span class="caret" />
             </a>
 
             <ul class="dropdown-menu" role="menu">
@@ -59,7 +59,7 @@
         </ul>
 
         <!-- Right Side Of Navbar -->
-        <ul class="nav navbar-nav navbar-right" v-else>
+        <ul v-else class="nav navbar-nav navbar-right">
           <!-- Authentication Links -->
           <router-link tag="li" to="/login" active-class="active"><a>Login</a></router-link>
           <router-link tag="li" to="/register" active-class="active"><a>Register</a></router-link>
@@ -79,10 +79,6 @@
       return {}
     },
 
-    mounted () {
-      this.loadGithubScript()
-    },
-
     computed: {
       ...mapState({
         me: state => state.auth.me,
@@ -94,6 +90,10 @@
       route () {
         this.$forceUpdate() // Tempopary fix for wrong router navigation after login
       }
+    },
+
+    mounted () {
+      this.loadGithubScript()
     },
 
     methods: {

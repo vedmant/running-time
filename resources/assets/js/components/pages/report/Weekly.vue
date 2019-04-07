@@ -7,33 +7,33 @@
       <vue-chart
         chart-type="LineChart"
         :columns="columns"
-        :rows="this.report.chart"
+        :rows="report.chart"
         :options="options"
-      ></vue-chart>
+      />
     </div>
 
     <div class="panel panel-default">
       <table class="table table-bordered">
         <thead>
-        <tr>
-          <th>Week</th>
-          <th>Avg. Speed</th>
-          <th>Avg. Distance</th>
-        </tr>
+          <tr>
+            <th>Week</th>
+            <th>Avg. Speed</th>
+            <th>Avg. Distance</th>
+          </tr>
         </thead>
         <tbody>
-        <tr v-for="row in report.data">
-          <td>{{ formatDate(row.week_start) + ' - ' + formatDate(row.week_end) }} ({{ row.week }})</td>
-          <td>{{ Number(row.avg_speed).toFixed(2) }} km/h</td>
-          <td>{{ Number(row.avg_distance).toFixed(2) }} min/km</td>
-        </tr>
+          <tr v-for="(row, index) in report.data" :key="index">
+            <td>{{ formatDate(row.week_start) + ' - ' + formatDate(row.week_end) }} ({{ row.week }})</td>
+            <td>{{ Number(row.avg_speed).toFixed(2) }} km/h</td>
+            <td>{{ Number(row.avg_distance).toFixed(2) }} min/km</td>
+          </tr>
         </tbody>
       </table>
     </div>
 
     <div class="text-right">
       <ul class="pagination marginpulltop15">
-        <li v-for="year in range(report.max_year, report.min_year)" :class="{active: year == report.year}">
+        <li v-for="year in range(report.max_year, report.min_year)" :key="year" :class="{active: year == report.year}">
           <a href="#" @click.prevent="onLoadWeeklyReport(year)">{{ year }}</a>
         </li>
       </ul>
@@ -69,10 +69,6 @@
       }
     },
 
-    mounted () {
-      this.report.data.length || this.loadWeeklyReport(this.params)
-    },
-
     computed: {
 
       ...mapState({
@@ -85,6 +81,10 @@
         }
       }
 
+    },
+
+    mounted () {
+      this.report.data.length || this.loadWeeklyReport(this.params)
     },
 
     methods: {

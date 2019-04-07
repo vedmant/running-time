@@ -7,6 +7,11 @@ import store from './vuex/store' // vuex store instance
 import router from './router' // vue-router instance
 import './mixins'
 import VueCharts from 'vue-charts'
+import App from './components/App'
+import Navbar from './components/layout/Navbar'
+import Spinner from './components/layout/Spinner'
+import Toast from './components/layout/Toast'
+
 
 /**
  * Assing global variables
@@ -51,9 +56,9 @@ axios.interceptors.response.use(response => response, error => {
 })
 
 // Global Vue Components
-Vue.component('navbar', require('./components/layout/Navbar.vue'))
-Vue.component('spinner', require('./components/layout/Spinner.vue'))
-Vue.component('toast', require('./components/layout/Toast.vue'))
+Vue.component('navbar', Navbar)
+Vue.component('spinner', Spinner)
+Vue.component('toast', Toast)
 
 /**
  * Application
@@ -65,4 +70,7 @@ new Vue({
   el: '#app',
   router,
   store,
+  render (createElement) {
+    return createElement(App)
+  },
 })

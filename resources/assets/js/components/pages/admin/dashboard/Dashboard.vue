@@ -37,7 +37,7 @@
             </strong></p>
             <p>Longest run: <strong>
               <router-link :to="'/entry/edit/' + admin_dashboard.longest_run.id">{{ admin_dashboard.longest_run.distance
-                }}
+              }}
               </router-link>
               km
               (
@@ -64,14 +64,14 @@
       return {}
     },
 
-    mounted () {
-      this.loadAdminDashboard()
-    },
-
     computed: {
       ...mapState({
         admin_dashboard: state => state.general.admin_dashboard,
       })
+    },
+
+    mounted () {
+      this.loadAdminDashboard()
     },
 
     methods: {

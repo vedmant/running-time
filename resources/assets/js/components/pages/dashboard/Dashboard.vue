@@ -1,5 +1,5 @@
 <template>
-  <div class="container" id="dashboard">
+  <div id="dashboard" class="container">
     <h3>Dashboard</h3>
     <hr>
 
@@ -31,15 +31,15 @@
           <vue-chart
             chart-type="LineChart"
             :columns="columns"
-            :rows="this.dashboard.week_chart"
+            :rows="dashboard.week_chart"
             :options="options"
-          ></vue-chart>
+          />
         </div>
 
         <div class="panel panel-default">
           <div class="panel-heading">Add new Time Record</div>
           <div class="panel-body">
-            <entry-form @onSubmit="onSubmit" :form="form" :errors="errors"></entry-form>
+            <entry-form :form="form" :errors="errors" @onSubmit="onSubmit" />
           </div>
         </div>
 
@@ -51,11 +51,12 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
+  import EntryForm from '../entry/partials/Form'
 
   export default {
 
     components: {
-      'entry-form': require('./../entry/partials/Form.vue'),
+      EntryForm,
     },
 
     data () {
@@ -88,15 +89,15 @@
       }
     },
 
-    mounted () {
-      this.loadDashboard()
-    },
-
     computed: {
       ...mapState({
         me: state => state.auth.me,
         dashboard: state => state.general.dashboard,
       }),
+    },
+
+    mounted () {
+      this.loadDashboard()
     },
 
     methods: {

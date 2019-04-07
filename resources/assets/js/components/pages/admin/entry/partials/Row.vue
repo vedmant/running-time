@@ -10,9 +10,9 @@
     <td>{{ Number(row.pace).toFixed(2) }} min/km</td>
     <td>
       <router-link class="btn btn-primary btn-xs" :to="'/admin/entry/edit/' + row.id">
-        <i class="glyphicon glyphicon-pencil"></i></router-link>
+        <i class="glyphicon glyphicon-pencil" /></router-link>
       <button class="btn btn-danger btn-xs" @click="$emit('onDelete', row.id)">
-        <i class="glyphicon glyphicon-remove"></i></button>
+        <i class="glyphicon glyphicon-remove" /></button>
     </td>
   </tr>
 </template>

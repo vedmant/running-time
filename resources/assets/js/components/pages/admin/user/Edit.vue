@@ -12,7 +12,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">Edit User</div>
           <div class="panel-body">
-            <user-form @onSubmit="onSubmit" :form="form" :errors="errors"></user-form>
+            <user-form :form="form" :errors="errors" @onSubmit="onSubmit" />
           </div>
         </div>
       </div>
@@ -22,21 +22,18 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
+  import UserForm from './partials/Form.vue'
 
   export default {
 
     components: {
-      'user-form': require('./partials/Form.vue'),
+      UserForm,
     },
 
     data () {
       return {
         errors: {},
       }
-    },
-
-    mounted () {
-      this.loadUser(this.id)
     },
 
     computed: {
@@ -59,6 +56,10 @@
         }
       }
 
+    },
+
+    mounted () {
+      this.loadUser(this.id)
     },
 
     methods: {

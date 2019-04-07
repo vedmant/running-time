@@ -6,7 +6,7 @@
     <div class="row marginbot10">
       <div class="col-sm-6 form-inline">
         <div class="input-group">
-          <input type="text" class="form-control" v-model="search">
+          <input v-model="search" type="text" class="form-control">
           <span class="input-group-btn">
             <button class="btn btn-primary" @click="onSearch">Search</button>
           </span>
@@ -20,21 +20,21 @@
     <div class="panel panel-default">
       <table class="table table-bordered">
         <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Role</th>
-          <th>Created at</th>
-          <th>Actions</th>
-        </tr>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Created at</th>
+            <th>Actions</th>
+          </tr>
         </thead>
         <tbody>
-        <row v-for="user in users.data" :key="user.id" :row="user" @onDelete="onDelete"></row>
+          <row v-for="user in users.data" :key="user.id" :row="user" @onDelete="onDelete" />
         </tbody>
       </table>
     </div>
 
-    <div class="text-right" v-if="users.last_page > 1">
+    <div v-if="users.last_page > 1" class="text-right">
       <ul class="pagination marginpulltop15">
         <li v-for="page in range(1, users.last_page)" :key="page" :class="{active: page == users.current_page}">
           <a href="#" @click.prevent="onLoadEntries(page)">{{ page }}</a>
@@ -47,21 +47,18 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
+  import Row from './partials/Row'
 
   export default {
 
     components: {
-      row: require('./partials/Row.vue'),
+      Row,
     },
 
     data () {
       return {
         search: '',
       }
-    },
-
-    mounted () {
-      this.loadUsers(this.params)
     },
 
     computed: {
@@ -75,6 +72,10 @@
           query: this.search,
         }
       }
+    },
+
+    mounted () {
+      this.loadUsers(this.params)
     },
 
     methods: {

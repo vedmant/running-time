@@ -2,18 +2,16 @@
 
 module.exports = {
   root: true,
-  parser: 'babel-eslint',
   parserOptions: {
-    sourceType: 'module'
+    parser: 'babel-eslint',
+    sourceType: 'module',
+    ecmaVersion: 2017,
   },
   env: {
     browser: true,
   },
-  // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
-  extends: 'standard',
-  // required to lint *.vue files
-  plugins: [
-    'html'
+  extends: [
+    'plugin:vue/recommended',
   ],
   // add your custom rules here
   rules: {
@@ -34,6 +32,16 @@ module.exports = {
       'overrides': {
         '++': false,
         '--': false,
+      },
+    }],
+
+    'vue/singleline-html-element-content-newline': 0,
+    'vue/multiline-html-element-content-newline': 0,
+    'vue/max-attributes-per-line': ['error', {
+      'singleline': 6,
+      'multiline': {
+        'max': 1,
+        'allowFirstLine': false,
       },
     }],
   },

@@ -9,7 +9,7 @@
           <div class="panel-heading">Login</div>
           <div class="panel-body">
 
-            <div class="alert alert-danger" v-if="error">
+            <div v-if="error" class="alert alert-danger">
               {{ error }}
             </div>
 
@@ -18,9 +18,9 @@
               <div class="form-group" :class="{ 'has-error': errors.email }">
                 <label for="email" class="col-md-4 control-label">E-Mail Address</label>
                 <div class="col-md-6">
-                  <input id="email" type="email" class="form-control" v-model.trim="form.email" required autofocus>
-                  <div class="help-block" v-if="errors.email">
-                    <div v-for="error in errors.email"><strong>{{ error }}</strong></div>
+                  <input id="email" v-model.trim="form.email" type="email" class="form-control" required autofocus>
+                  <div v-if="errors.email" class="help-block">
+                    <div v-for="(err, index) in errors.email" :key="index"><strong>{{ err }}</strong></div>
                   </div>
                 </div>
               </div>
@@ -28,9 +28,9 @@
               <div class="form-group" :class="{ 'has-error': errors.password }">
                 <label for="password" class="col-md-4 control-label">Password</label>
                 <div class="col-md-6">
-                  <input id="password" type="password" class="form-control" v-model.trim="form.password" required>
-                  <div class="help-block" v-if="errors.password">
-                    <div v-for="error in errors.password"><strong>{{ error }}</strong></div>
+                  <input id="password" v-model.trim="form.password" type="password" class="form-control" required>
+                  <div v-if="errors.password" class="help-block">
+                    <div v-for="(err, index) in errors.password" :key="index"><strong>{{ err }}</strong></div>
                   </div>
                 </div>
               </div>

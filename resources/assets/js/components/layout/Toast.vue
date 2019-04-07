@@ -113,9 +113,9 @@
 <template>
   <div class="toast" :class="positionClass">
     <toast-transition>
-      <div class="toast-message" :class="messageTypeClass(m)" v-for="m in messages" :key="m.id" role="note">
+      <div v-for="m in messages" :key="m.id" class="toast-message" :class="messageTypeClass(m)" role="note">
         <div class="toast-message-text">{{ m.text }}</div>
-        <button class="toast-button" aria-label="Close" type="button" @click="close(m.id)"></button>
+        <button class="toast-button" aria-label="Close" type="button" @click="close(m.id)" />
       </div>
     </toast-transition>
   </div>
@@ -125,6 +125,18 @@
   import {mapGetters, mapActions} from 'vuex'
 
   export default {
+
+    components: {
+      ToastTransition: {
+        functional: true,
+        render (h, {children}) {
+          const data = {
+            attrs: {tag: 'div', name: 'toast', type: 'transition'}
+          }
+          return h('transition-group', data, children)
+        }
+      }
+    },
 
     props: {
       position: {
@@ -152,17 +164,5 @@
         return `toast-type-${message.type}`
       }
     },
-
-    components: {
-      ToastTransition: {
-        functional: true,
-        render (h, {children}) {
-          const data = {
-            attrs: {tag: 'div', name: 'toast', type: 'transition'}
-          }
-          return h('transition-group', data, children)
-        }
-      }
-    }
   }
 </script>

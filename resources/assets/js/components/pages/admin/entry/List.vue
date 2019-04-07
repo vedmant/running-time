@@ -7,9 +7,9 @@
       <div class="col-sm-6 filters">
         <div class="input-group">
           <span class="input-group-addon">From:</span>
-          <input type="date" class="form-control date-filter" v-model="dateFrom" placeholder="Date from">
+          <input v-model="dateFrom" type="date" class="form-control date-filter" placeholder="Date from">
           <span class="input-group-addon">To:</span>
-          <input type="date" class="form-control date-filter" v-model="dateTo" placeholder="Date to">
+          <input v-model="dateTo" type="date" class="form-control date-filter" placeholder="Date to">
           <span class="input-group-btn">
             <button class="btn btn-primary" @click="onFilter">Filter</button>
           </span>
@@ -26,23 +26,23 @@
     <div class="panel panel-default">
       <table class="table table-bordered">
         <thead>
-        <tr>
-          <th>User</th>
-          <th>Date</th>
-          <th>Distance</th>
-          <th>Time</th>
-          <th>Avg. Speed</th>
-          <th>Avg. Pace</th>
-          <th>Actions</th>
-        </tr>
+          <tr>
+            <th>User</th>
+            <th>Date</th>
+            <th>Distance</th>
+            <th>Time</th>
+            <th>Avg. Speed</th>
+            <th>Avg. Pace</th>
+            <th>Actions</th>
+          </tr>
         </thead>
         <tbody>
-        <row v-for="entry in entries.data" :key="entry.id" :row="entry" @onDelete="onDelete"></row>
+          <row v-for="entry in entries.data" :key="entry.id" :row="entry" @onDelete="onDelete" />
         </tbody>
       </table>
     </div>
 
-    <div class="text-right" v-if="entries.last_page > 1">
+    <div v-if="entries.last_page > 1" class="text-right">
       <ul class="pagination marginpulltop15">
         <li v-for="page in range(1, entries.last_page)" :key="page" :class="{active: page == entries.current_page}">
           <a href="#" @click.prevent="onLoadEntries(page)">{{ page }}</a>
@@ -55,11 +55,12 @@
 
 <script>
   import { mapState, mapActions } from 'vuex'
+  import Row from './partials/Row.vue'
 
   export default {
 
     components: {
-      row: require('./partials/Row.vue'),
+      Row,
     },
 
     data () {
@@ -67,10 +68,6 @@
         dateFrom: '',
         dateTo: '',
       }
-    },
-
-    mounted () {
-      this.loadAllEntries(this.params)
     },
 
     computed: {
@@ -85,6 +82,10 @@
           dateTo: this.dateTo,
         }
       }
+    },
+
+    mounted () {
+      this.loadAllEntries(this.params)
     },
 
     methods: {

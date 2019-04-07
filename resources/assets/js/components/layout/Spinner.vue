@@ -1,10 +1,10 @@
 <template>
-  <div class='main-spinner' :class="{active: loading}" @click="stopLoading">
+  <div class="main-spinner" :class="{active: loading}" @click="stopLoading">
     <div class="middle">
       <div class="middle-inner">
         <div class="spinner">
-          <div class="cube1"></div>
-          <div class="cube2"></div>
+          <div class="cube1" />
+          <div class="cube2" />
         </div>
       </div>
     </div>

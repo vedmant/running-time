@@ -36,10 +36,6 @@
       return {}
     },
 
-    mounted () {
-      this.loadUser(this.id)
-    },
-
     computed: {
 
       ...mapState({
@@ -50,6 +46,10 @@
         return this.$route.params.id
       }
 
+    },
+
+    mounted () {
+      this.loadUser(this.id)
     },
 
     methods: {

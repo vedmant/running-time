@@ -3,42 +3,68 @@ import VueRouter from 'vue-router'
 import store from './vuex/store'
 import {sync} from 'vuex-router-sync'
 
+import Front from './components/pages/front/Front'
+
+import Login from './components/pages/auth/Login'
+import Logout from './components/pages/auth/Logout'
+import Register from './components/pages/auth/Register'
+
+import Dashboard from './components/pages/dashboard/Dashboard'
+
+import EntryList from './components/pages/entry/List'
+import EntryNew from './components/pages/entry/New'
+import EntryEdit from './components/pages/entry/Edit'
+
+import ReportWeekly from './components/pages/report/Weekly'
+
+import Admin from './components/pages/admin/Admin'
+import AdminDashboard from './components/pages/admin/dashboard/Dashboard'
+import UserList from './components/pages/admin/user/List'
+import UserShow from './components/pages/admin/user/Show'
+import UserEdit from './components/pages/admin/user/Edit'
+
+import AdminEntryList from './components/pages/admin/entry/List'
+import AdminEntryEdit from './components/pages/admin/entry/Edit'
+
+import Error404 from './components/pages/404'
+import Profile from './components/pages/auth/Profile'
+
 Vue.use(VueRouter)
 
 const routes = [
-  {path: '/', component: require('./components/pages/front/Front.vue')},
+  {path: '/', component: Front},
 
-  {path: '/login', component: require('./components/pages/auth/Login.vue'), meta: {guestOnly: true}},
-  {path: '/logout', component: require('./components/pages/auth/Logout.vue'), meta: {requiresAuth: true}},
-  {path: '/register', component: require('./components/pages/auth/Register.vue'), meta: {guestOnly: true}},
-  {path: '/profile', component: require('./components/pages/auth/Profile.vue'), meta: {requiresAuth: true}},
+  {path: '/login', component: Login, meta: {guestOnly: true}},
+  {path: '/logout', component: Logout, meta: {requiresAuth: true}},
+  {path: '/register', component: Register, meta: {guestOnly: true}},
+  {path: '/profile', component: Profile, meta: {requiresAuth: true}},
 
-  {path: '/dashboard', component: require('./components/pages/dashboard/Dashboard.vue'), meta: {requiresAuth: true}},
+  {path: '/dashboard', component: Dashboard, meta: {requiresAuth: true}},
 
-  {path: '/entries', component: require('./components/pages/entry/List.vue'), meta: {requiresAuth: true}},
-  {path: '/entry/new', component: require('./components/pages/entry/New.vue'), meta: {requiresAuth: true}},
-  {path: '/entry/edit/:id', component: require('./components/pages/entry/Edit.vue'), meta: {requiresAuth: true}},
+  {path: '/entries', component: EntryList, meta: {requiresAuth: true}},
+  {path: '/entry/new', component: EntryNew, meta: {requiresAuth: true}},
+  {path: '/entry/edit/:id', component: EntryEdit, meta: {requiresAuth: true}},
 
-  {path: '/report/weekly', component: require('./components/pages/report/Weekly.vue'), meta: {requiresAuth: true}},
+  {path: '/report/weekly', component: ReportWeekly, meta: {requiresAuth: true}},
 
   {
     path: '/admin',
-    component: require('./components/pages/admin/Admin.vue'),
+    component: Admin,
     meta: {requiresAdmin: true},
     children: [
       {path: '', redirect: 'dashboard'},
-      {path: 'dashboard', component: require('./components/pages/admin/dashboard/Dashboard.vue')},
+      {path: 'dashboard', component: AdminDashboard},
 
-      {path: 'users', component: require('./components/pages/admin/user/List.vue')},
-      {path: 'user/show/:id', component: require('./components/pages/admin/user/Show.vue')},
-      {path: 'user/edit/:id', component: require('./components/pages/admin/user/Edit.vue')},
+      {path: 'users', component: UserList},
+      {path: 'user/show/:id', component: UserShow},
+      {path: 'user/edit/:id', component: UserEdit},
 
-      {path: 'entries', component: require('./components/pages/admin/entry/List.vue')},
-      {path: 'entry/edit/:id', component: require('./components/pages/admin/entry/Edit.vue')},
+      {path: 'entries', component: AdminEntryList},
+      {path: 'entry/edit/:id', component: AdminEntryEdit},
     ]
   },
 
-  {path: '*', component: require('./components/pages/404.vue')},
+  {path: '*', component: Error404},
 ]
 
 

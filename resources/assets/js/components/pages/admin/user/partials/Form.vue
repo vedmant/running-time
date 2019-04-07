@@ -4,9 +4,9 @@
     <div class="form-group" :class="{ 'has-error': errors.name }">
       <label for="name" class="col-md-4 control-label">Name</label>
       <div class="col-md-6">
-        <input id="name" type="text" class="form-control" v-model="form.name" required autofocus>
-        <div class="help-block" v-if="errors.name">
-          <div v-for="error in errors.name"><strong>{{ error }}</strong></div>
+        <input id="name" v-model="form.name" type="text" class="form-control" required autofocus>
+        <div v-if="errors.name" class="help-block">
+          <div v-for="(error, index) in errors.name" :key="index"><strong>{{ error }}</strong></div>
         </div>
       </div>
     </div>
@@ -14,23 +14,23 @@
     <div class="form-group" :class="{ 'has-error': errors.email }">
       <label for="email" class="col-md-4 control-label">E-Mail Address</label>
       <div class="col-md-6">
-        <input id="email" type="email" class="form-control" v-model="form.email" required>
-        <div class="help-block" v-if="errors.email">
-          <div v-for="error in errors.email"><strong>{{ error }}</strong></div>
+        <input id="email" v-model="form.email" type="email" class="form-control" required>
+        <div v-if="errors.email" class="help-block">
+          <div v-for="(error, index) in errors.email" :key="index"><strong>{{ error }}</strong></div>
         </div>
       </div>
     </div>
 
-    <div class="form-group" :class="{ 'has-error': errors.role }" v-if="me.role == 'admin'">
+    <div v-if="me.role == 'admin'" class="form-group" :class="{ 'has-error': errors.role }">
       <label for="role" class="col-md-4 control-label">Role</label>
       <div class="col-md-6">
-        <select id="role" class="form-control" v-model="form.role">
+        <select id="role" v-model="form.role" class="form-control">
           <option value="user">User</option>
           <option value="manager">Manager</option>
           <option value="admin">Admin</option>
         </select>
-        <div class="help-block" v-if="errors.role">
-          <div v-for="error in errors.role"><strong>{{ error }}</strong></div>
+        <div v-if="errors.role" class="help-block">
+          <div v-for="(error, index) in errors.role" :key="index"><strong>{{ error }}</strong></div>
         </div>
       </div>
     </div>
@@ -39,9 +39,9 @@
       <label for="password" class="col-md-4 control-label">Password</label>
 
       <div class="col-md-6">
-        <input id="password" type="password" class="form-control" v-model="form.password">
-        <div class="help-block" v-if="errors.password">
-          <div v-for="error in errors.password"><strong>{{ error }}</strong></div>
+        <input id="password" v-model="form.password" type="password" class="form-control">
+        <div v-if="errors.password" class="help-block">
+          <div v-for="(error, index) in errors.password" :key="index"><strong>{{ error }}</strong></div>
         </div>
       </div>
     </div>
@@ -49,7 +49,7 @@
     <div class="form-group">
       <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
       <div class="col-md-6">
-        <input id="password-confirm" type="password" class="form-control" v-model="form.password_confirmation">
+        <input id="password-confirm" v-model="form.password_confirmation" type="password" class="form-control">
       </div>
     </div>
 
@@ -75,6 +75,7 @@
       },
       errors: {
         type: Object,
+        default: () => ({}),
       }
     },
 

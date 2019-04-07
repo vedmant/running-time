@@ -12,7 +12,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">Add new Time Record</div>
           <div class="panel-body">
-            <entry-form @onSubmit="onSubmit" :form="form" :errors="errors"></entry-form>
+            <entry-form :form="form" :errors="errors" @onSubmit="onSubmit" />
           </div>
         </div>
       </div>
@@ -22,11 +22,12 @@
 
 <script>
   import { mapActions } from 'vuex'
+  import EntryForm from './partials/Form.vue'
 
   export default {
 
     components: {
-      'entry-form': require('./partials/Form.vue'),
+      EntryForm,
     },
 
     data () {
