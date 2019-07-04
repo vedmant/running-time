@@ -81,6 +81,7 @@ If you don't have installed yarn, run `npm install -g yarn`
 * Global loader overlay for all requests
 * Eslint code standard check
 * Lodash-es to allow tree shaking for bundle size optimization
+* Support IE11 with Polyfills
 
 
 ### Development ###
