@@ -2,9 +2,9 @@
 <a href="https://travis-ci.org/vedmant/running-time"><img src="https://travis-ci.org/vedmant/running-time.svg?branch=master" alt="Build Status"></a>
 </p>
 
-## Laravel 5.8 & Vue.js 2.6 + Vuex Sample Project ##
+## Laravel 6 & Vue.js 2.6 + Vuex Sample Project ##
 
-**Laravel & Vue Sample Project** is a tutorial Single Page Application (SPA) for Laravel 5.8 and Vue.js 2.6 Frontend
+**Laravel & Vue Sample Project** is a tutorial Single Page Application (SPA) for Laravel 6 and Vue.js 2.6 Frontend
 
 [Demo](https://running-time.vedmant.com/)
 
@@ -58,7 +58,7 @@ If you don't have installed yarn, run `npm install -g yarn`
 
 * [Laravel Passport](https://laravel.com/docs/5.4/passport) API Authentication
 * [API Docs Gerator](https://github.com/mpociot/laravel-apidoc-generator) Laravel API Documentation Generator
-* [Laravel DebugBar](https://github.com/barryvdh/laravel-debugbar) Debug bar for Laravel
+* [Laravel Telescope](https://laravel.com/docs/6.x/telescope) Laravel Telescope for debugging
 * [Vue.js](https://vuejs.org/) The Progressive JavaScript Framework
 * [Vuex](https://vuex.vuejs.org/en/intro.html) State management pattern + library for Vue.js
 * [Vue-Router](https://router.vuejs.org/en/) Router library for Vue.js

@@ -19,6 +19,7 @@ describe('Entries', function () {
     cy.visit('/entries') // Needs for corrent redirect back
     cy.visit('/entry/new')
 
+    cy.wait(500)
     cy.get('#entry_form').within(() => {
       cy.get('#date').type(moment().format('YYYY-MM-DD'))
       cy.get('#distance').type('6')
