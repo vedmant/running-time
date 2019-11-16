@@ -16,7 +16,7 @@ describe('Entries', function () {
   })
 
   it('can add new entry', function () {
-    cy.visit('/entries') // Needs for corrent redirect back
+    cy.visit('/entries') // Needs for correct redirect back
     cy.visit('/entry/new')
 
     cy.wait(500)

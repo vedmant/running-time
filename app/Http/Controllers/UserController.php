@@ -79,7 +79,7 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
-            'password' => 'min:6|confirmed',
+            'password' => 'nullable|min:6|confirmed',
         ]);
 
         $user->fill($request->only('name', 'email'));
