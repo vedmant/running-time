@@ -39,7 +39,7 @@
     "vue-template-compiler": "^2.6.10"
   },
   "dependencies": {
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "bootstrap-sass": "^3.3.7",
     "core-js": "^3.1.4",
     "faker": "^4.1.0",
