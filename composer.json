@@ -11,7 +11,7 @@
     "php": "^7.2",
     "fideloper/proxy": "^4.1",
     "laravel/framework": "^6.2",
-    "laravel/passport": "^7.5",
+    "laravel/passport": "^9.4",
     "laravel/telescope": "^2.1",
     "laravel/tinker": "^1.0",
     "mpociot/laravel-apidoc-generator": "^3.17",
