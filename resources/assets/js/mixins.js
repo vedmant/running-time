@@ -1,8 +1,7 @@
-import Vue from 'vue'
 import moment from 'moment-mini'
 import padStart from 'lodash-es/padStart'
 
-Vue.mixin({
+export default {
   methods: {
     range (begin, end) {
       begin = parseInt(begin)
@@ -36,4 +35,4 @@ Vue.mixin({
       return moment(date).format('MM/DD/YYYY')
     }
   }
-})
+}

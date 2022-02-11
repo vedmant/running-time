@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Models\User;
 use Carbon\Carbon;
-use DB;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class ReportController

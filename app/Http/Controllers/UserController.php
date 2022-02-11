@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 /**
@@ -36,7 +36,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('index', User::class);
+        $this->authorize('viewAll', User::class);
 
         $users = (new User)->latest();
 
@@ -87,7 +87,7 @@ class UserController extends Controller
             $user->password = bcrypt($request->get('password'));
         }
 
-        // Update user role only for admin
+        // Update user role only by admin
         if ($request->get('role') && $request->get('role') !== $user->role) {
             if (! auth()->user()->isAdmin()) abort(401, 'Unathorized to edit user role.');
 

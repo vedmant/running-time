@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Entry;
-use App\User;
+use App\Models\Entry;
+use App\Models\User;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -15,15 +15,14 @@ class AuthTest extends TestCase
 
     public function testLogin()
     {
-        $user = factory(\App\User::class)->create();
-        $user->entries()->saveMany(factory(Entry::class, 30)->make());
+        $user = User::factory()->has(Entry::factory()->count(30))->create();
 
         $this->json('POST', '/api/v1/auth/login', [
             'email'    => $user->email,
-            'password' => '123456',
+            'password' => 'password',
         ])
-             ->assertResponseOk()
-             ->seeJsonStructure([
+             ->assertOk()
+             ->assertJsonStructure([
                  'access_token',
                  'user' => [
                      'id',
@@ -35,15 +34,14 @@ class AuthTest extends TestCase
 
     public function testWrongLogin()
     {
-        $user = factory(\App\User::class)->create();
-        $user->entries()->saveMany(factory(Entry::class, 30)->make());
+        $user = User::factory()->has(Entry::factory()->count(30))->create();
 
         $this->json('POST', '/api/v1/auth/login', [
             'email'    => $user->email,
             'password' => 'wrong-pass',
         ])
-             ->assertResponseStatus(401)
-             ->seeJsonStructure([
+             ->assertStatus(401)
+             ->assertJsonStructure([
                  'message',
              ]);
     }
@@ -58,8 +56,8 @@ class AuthTest extends TestCase
             'password'              => '123456',
             'password_confirmation' => '123456',
         ])
-             ->assertResponseOk()
-             ->seeJsonStructure([
+             ->assertOk()
+             ->assertJsonStructure([
                  'access_token',
                  'user' => [
                      'id',
@@ -77,8 +75,8 @@ class AuthTest extends TestCase
             'password'              => '',
             'password_confirmation' => '',
         ])
-             ->assertResponseStatus(422)
-             ->seeJsonStructure([
+             ->assertStatus(422)
+             ->assertJsonStructure([
                  'errors' => [
                      'name',
                      'email',

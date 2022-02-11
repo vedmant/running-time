@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Entry;
-use App\User;
+use App\Models\Entry;
+use App\Models\User;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -15,19 +15,18 @@ class DashboardTest extends TestCase
 
     public function testMustBeAuthenticated()
     {
-        $this->json('GET', 'api/v1/dashboard/data')->assertResponseStatus(401);
-        $this->json('GET', 'api/v1/dashboard/admin-data')->assertResponseStatus(401);
+        $this->json('GET', 'api/v1/dashboard/data')->assertStatus(401);
+        $this->json('GET', 'api/v1/dashboard/admin-data')->assertStatus(401);
     }
 
     public function testGetData()
     {
-        $user = factory(\App\User::class)->create();
-        $user->entries()->saveMany(factory(Entry::class, 30)->make());
+        $user = User::factory()->has(Entry::factory()->count(30))->create();
 
-        $this->actingAs($user, 'api')
+        $this->actingAs($user, 'sanctum')
              ->json('GET', '/api/v1/dashboard/data')
-             ->assertResponseOk()
-             ->seeJsonStructure([
+             ->assertOk()
+             ->assertJsonStructure([
                  'weekly_count',
                  'weekly_avg_speed',
                  'weekly_avg_pace',
@@ -40,13 +39,12 @@ class DashboardTest extends TestCase
 
     public function testGetAdminData()
     {
-        $user = factory(\App\User::class)->states('admin')->create();
-        $user->entries()->saveMany(factory(Entry::class, 30)->make());
+        $user = User::factory()->admin()->has(Entry::factory()->count(30))->create();
 
-        $this->actingAs($user, 'api')
+        $this->actingAs($user, 'sanctum')
              ->json('GET', '/api/v1/dashboard/admin-data')
-             ->assertResponseOk()
-             ->seeJsonStructure([
+             ->assertOk()
+             ->assertJsonStructure([
                  'total_users',
                  'new_users_this_week',
                  'new_users_this_month',
@@ -59,10 +57,10 @@ class DashboardTest extends TestCase
 
     public function testGetAdminDataByNonAdmin()
     {
-        $user = factory(\App\User::class)->create();
+        $user = User::factory()->create();
 
-        $this->actingAs($user, 'api')
+        $this->actingAs($user, 'sanctum')
              ->json('GET', '/api/v1/dashboard/admin-data')
-             ->assertResponseStatus(401);
+             ->assertStatus(401);
     }
 }

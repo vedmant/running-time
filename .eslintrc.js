@@ -39,11 +39,10 @@ module.exports = {
     'vue/multiline-html-element-content-newline': 0,
     'vue/max-attributes-per-line': ['error', {
       'singleline': 6,
-      'multiline': {
-        'max': 1,
-        'allowFirstLine': false,
-      },
+      'multiline': 1,
     }],
+    'vue/multi-word-component-names': 0,
+    'vue/no-mutating-props': ['warn'],
   },
 
   globals: {

@@ -2,7 +2,7 @@
 <a href="https://travis-ci.org/vedmant/running-time"><img src="https://travis-ci.org/vedmant/running-time.svg?branch=master" alt="Build Status"></a>
 </p>
 
-## Laravel 6 & Vue.js 2.6 + Vuex Sample Project ##
+## Laravel 9 & Vue.js 3 (Options API) + Vuex Sample Project ##
 
 **Laravel & Vue Sample Project** is a tutorial Single Page Application (SPA) for Laravel 6 and Vue.js 2.6 Frontend
 
@@ -114,13 +114,13 @@ yarn production -- --env.analyzer true
 
 ### Development with Docker ###
 
-If you want to use more features like Redis queues, MariaDB database, 
+If you want to use more features like Redis queues, MariaDB database,
 sending and viewing sent emails you can use Docker setup on this project.
 
 For you you will need Docker installed on your host [https://docs.docker.com/install/](https://docs.docker.com/install/)
 
 To build the image for Docker, run:
-  
+
     docker-compose build
 
 It will build all images and run all needed containers.
@@ -136,7 +136,7 @@ Migrate and seed database, and install Passport:
      docker-compose run php php artisan passport:install
 
 To run the project in Docker just run:
-  
+
     docker-compose up
 
 And open http://localhost:8080

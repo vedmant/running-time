@@ -1,7 +1,6 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import { createWebHashHistory, createRouter } from 'vue-router'
 import store from './vuex/store'
-import {sync} from 'vuex-router-sync'
+import { sync } from 'vuex-router-sync'
 
 import Front from './components/pages/front/Front'
 
@@ -29,48 +28,49 @@ import AdminEntryEdit from './components/pages/admin/entry/Edit'
 import Error404 from './components/pages/404'
 import Profile from './components/pages/auth/Profile'
 
-Vue.use(VueRouter)
-
 const routes = [
-  {path: '/', component: Front},
+  { path: '/', component: Front },
 
-  {path: '/login', component: Login, meta: {guestOnly: true}},
-  {path: '/logout', component: Logout, meta: {requiresAuth: true}},
-  {path: '/register', component: Register, meta: {guestOnly: true}},
-  {path: '/profile', component: Profile, meta: {requiresAuth: true}},
+  { path: '/login', component: Login, meta: { guestOnly: true } },
+  { path: '/logout', component: Logout, meta: { requiresAuth: true } },
+  { path: '/register', component: Register, meta: { guestOnly: true } },
+  { path: '/profile', component: Profile, meta: { requiresAuth: true } },
 
-  {path: '/dashboard', component: Dashboard, meta: {requiresAuth: true}},
+  { path: '/dashboard', component: Dashboard, meta: { requiresAuth: true } },
 
-  {path: '/entries', component: EntryList, meta: {requiresAuth: true}},
-  {path: '/entry/new', component: EntryNew, meta: {requiresAuth: true}},
-  {path: '/entry/edit/:id', component: EntryEdit, meta: {requiresAuth: true}},
+  { path: '/entries', component: EntryList, meta: { requiresAuth: true } },
+  { path: '/entry/new', component: EntryNew, meta: { requiresAuth: true } },
+  { path: '/entry/edit/:id', component: EntryEdit, meta: { requiresAuth: true } },
 
-  {path: '/report/weekly', component: ReportWeekly, meta: {requiresAuth: true}},
+  { path: '/report/weekly', component: ReportWeekly, meta: { requiresAuth: true } },
 
   {
     path: '/admin',
     component: Admin,
-    meta: {requiresAdmin: true},
+    meta: { requiresAdmin: true },
     children: [
-      {path: '', redirect: 'dashboard'},
-      {path: 'dashboard', component: AdminDashboard},
+      { path: '', redirect: '/admin/dashboard' },
+      { path: 'dashboard', component: AdminDashboard },
 
-      {path: 'users', component: UserList},
-      {path: 'user/show/:id', component: UserShow},
-      {path: 'user/edit/:id', component: UserEdit},
+      { path: 'users', component: UserList },
+      { path: 'user/show/:id', component: UserShow },
+      { path: 'user/edit/:id', component: UserEdit },
 
-      {path: 'entries', component: AdminEntryList},
-      {path: 'entry/edit/:id', component: AdminEntryEdit},
-    ]
+      { path: 'entries', component: AdminEntryList },
+      { path: 'entry/edit/:id', component: AdminEntryEdit },
+    ],
   },
 
-  {path: '*', component: Error404},
+  {
+    path: "/:catchAll(.*)", // Unrecognized path automatically matches 404
+    component: Error404
+  },
 ]
 
 
-const router = new VueRouter({
+const router = createRouter({
+  history: createWebHashHistory(),
   routes,
-  history: false,
 })
 
 // Sync Vuex and vue-router;
@@ -82,7 +82,8 @@ sync(store, router)
 router.beforeEach(async (to, from, next) => {
   if (! store.state.auth.me && ! store.state.auth.authChecked) {
     await store.dispatch('checkLogin')
-      .catch(() => {})
+      .catch(() => {
+      })
   }
   const me = store.state.auth.me
 

@@ -1,25 +1,23 @@
 import 'core-js/stable'
 import 'regenerator-runtime/runtime'
-import Vue from 'vue'
+import { createApp } from 'vue'
 import axios from 'axios'
 import jQuery from 'jquery'
 import moment from 'moment-mini'
 import store from './vuex/store' // vuex store instance
 import router from './router' // vue-router instance
 import './mixins'
-import VueCharts from 'vue-charts'
 import App from './components/App'
 import Navbar from './components/layout/Navbar'
 import Spinner from './components/layout/Spinner'
 import Toast from './components/layout/Toast'
-
+import mixins from './mixins'
 
 /**
  * Assing global variables
  */
 
 window.$ = window.jQuery = jQuery
-window.Vue = Vue
 window.moment = moment
 
 /**
@@ -31,9 +29,6 @@ require('bootstrap-sass')
 /**
  * Vue Settings
  */
-
-// Vue plugins
-Vue.use(VueCharts)
 
 // Authorization header
 axios.interceptors.request.use(function (config) {
@@ -56,25 +51,21 @@ axios.interceptors.response.use(response => response, error => {
   return Promise.reject(error)
 })
 
-// Global Vue Components
-Vue.component('navbar', Navbar)
-Vue.component('spinner', Spinner)
-Vue.component('toast', Toast)
-
 /**
  * Application
- *
- * @type {Vue$2}
  */
-/* eslint-disable no-new */
-const app = new Vue({
-  el: '#app',
-  router,
-  store,
-  render (createElement) {
-    return createElement(App)
-  },
-})
+const app = createApp(App)
+app.use(router)
+app.use(store)
+
+// Global Vue Components
+app.component('navbar', Navbar)
+app.component('spinner', Spinner)
+app.component('toast', Toast)
+
+app.mixin(mixins)
+
+app.mount('#app') // Vue Instance - Root component
 
 if (window.Cypress) {
   window.store = store

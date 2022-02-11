@@ -1,6 +1,12 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EntryController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,32 +21,25 @@ use Illuminate\Http\Request;
 
 // API Group Routes
 Route::group(['prefix' => 'v1'], function () {
-
     /*
      * Guest area
      */
-
-    Route::post('auth/login', 'AuthController@login');
-    Route::post('auth/register', 'AuthController@register');
-
+    Route::post('auth/login', [AuthController::class, 'login']);
+    Route::post('auth/register', [AuthController::class, 'register']);
 
     /*
      * Authenticated area
      */
+    Route::group(['middleware' => 'auth:sanctum'], function () {
+        Route::get('dashboard/data', [DashboardController::class, 'data']);
+        Route::get('dashboard/admin-data', [DashboardController::class, 'adminData']);
 
-    Route::group(['middleware' => 'auth:api'], function () {
+        Route::get('user/me', [UserController::class, 'me']);
+        Route::resource('user', UserController::class, ['except' => ['create', 'store', 'edit']]);
 
-        Route::get('dashboard/data', 'DashboardController@data');
-        Route::get('dashboard/admin-data', 'DashboardController@adminData');
+        Route::get('entry/all', [EntryController::class, 'all']);
+        Route::resource('entry', EntryController::class, ['except' => ['create', 'edit']]);
 
-        Route::get('user/me', 'UserController@me');
-        Route::resource('user', 'UserController', ['except' => ['create', 'store', 'edit']]);
-
-        Route::get('entry/all', 'EntryController@all');
-        Route::resource('entry', 'EntryController', ['except' => ['create', 'edit']]);
-
-        Route::get('report/weekly', 'ReportController@weekly');
-
+        Route::get('report/weekly', [ReportController::class, 'weekly']);
     });
-
 });

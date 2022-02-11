@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 use App\Extensions\ExtendedValidator;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
 
 class AppServiceProvider extends ServiceProvider
 {

@@ -30,8 +30,16 @@
         <!-- Right Side Of Navbar -->
         <ul v-if="me" class="nav navbar-nav navbar-right">
           <!-- Authentication Links -->
-          <router-link tag="li" to="/dashboard" active-class="active"><a>Dashboad</a></router-link>
-          <router-link tag="li" to="/entries" active-class="active"><a>Entries</a></router-link>
+          <router-link custom v-slot="{ navigate, href, isActive }" to="/dashboard">
+            <li :class="{active: isActive}">
+              <a :href="href" @click="navigate">Dashboad</a>
+            </li>
+          </router-link>
+          <router-link custom v-slot="{ navigate, href, isActive }" to="/entries">
+            <li :class="{active: isActive}">
+              <a :href="href" @click="navigate">Entries</a>
+            </li>
+          </router-link>
 
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -39,12 +47,19 @@
             </a>
 
             <ul class="dropdown-menu" role="menu">
-              <router-link tag="li" to="/report/weekly" active-class="active"><a>Weekly</a></router-link>
+              <router-link custom v-slot="{ navigate, href, isActive }" to="/report/weekly">
+                <li :class="{active: isActive}">
+                  <a :href="href" @click="navigate">Weekly</a>
+                </li>
+              </router-link>
             </ul>
           </li>
 
-          <router-link v-if="me.role === 'admin' || me.role === 'manager'" tag="li" to="/admin" active-class="active">
-            <a>Admin Panel</a></router-link>
+          <router-link v-if="me.role === 'admin' || me.role === 'manager'" custom v-slot="{ navigate, href, isActive }" to="/admin">
+            <li :class="{active: isActive}">
+              <a :href="href" @click="navigate">Admin Panel</a>
+            </li>
+          </router-link>
 
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -52,8 +67,16 @@
             </a>
 
             <ul class="dropdown-menu" role="menu">
-              <router-link tag="li" to="/profile" active-class="active"><a>Profile</a></router-link>
-              <router-link tag="li" to="/logout" active-class="active"><a>Logout</a></router-link>
+              <router-link custom v-slot="{ navigate, href, isActive }" to="/profile">
+                <li :class="{active: isActive}">
+                  <a :href="href" @click="navigate">Profile</a>
+                </li>
+              </router-link>
+              <router-link custom v-slot="{ navigate, href, isActive }" to="/logout">
+                <li :class="{active: isActive}">
+                  <a :href="href" @click="navigate">Logout</a>
+                </li>
+              </router-link>
             </ul>
           </li>
         </ul>
@@ -61,8 +84,16 @@
         <!-- Right Side Of Navbar -->
         <ul v-else class="nav navbar-nav navbar-right">
           <!-- Authentication Links -->
-          <router-link tag="li" to="/login" active-class="active"><a>Login</a></router-link>
-          <router-link tag="li" to="/register" active-class="active"><a>Register</a></router-link>
+          <router-link custom v-slot="{ navigate, href, isActive }" to="/login">
+            <li :class="{active: isActive}">
+              <a :href="href" @click="navigate">Login</a>
+            </li>
+          </router-link>
+          <router-link custom v-slot="{ navigate, href, isActive }" to="/register">
+            <li :class="{active: isActive}">
+              <a :href="href" @click="navigate">Register</a>
+            </li>
+          </router-link>
         </ul>
 
       </div>

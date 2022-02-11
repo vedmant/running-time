@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Entry;
-use App\Http\Requests\StoreEntryRequest;
-use App\Http\Requests\UpdateEntryRequest;
-use App\User;
+use App\Models\Entry;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 

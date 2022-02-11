@@ -1,4 +1,4 @@
-FROM php:7.2-fpm
+FROM php:8-fpm
 
 # Get repository and install wget and vim
 RUN apt-get update && apt-get install --no-install-recommends -y wget vim git unzip apt-transport-https gnupg

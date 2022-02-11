@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Entry;
-use App\User;
+use App\Models\Entry;
+use App\Models\User;
 use Carbon\Carbon;
-use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class DashboardController

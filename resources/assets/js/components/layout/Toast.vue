@@ -123,13 +123,14 @@
 
 <script>
   import {mapGetters, mapActions} from 'vuex'
+  import { h } from 'vue'
 
   export default {
 
     components: {
       ToastTransition: {
         functional: true,
-        render (h, {children}) {
+        render ({children}) {
           const data = {
             attrs: {tag: 'div', name: 'toast', type: 'transition'}
           }

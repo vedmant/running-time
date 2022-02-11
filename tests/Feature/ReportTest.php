@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Entry;
-use App\User;
+use App\Models\Entry;
+use App\Models\User;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -16,18 +16,17 @@ class ReportTest extends TestCase
     public function testMustBeAuthenticated()
     {
         $this->json('GET', 'api/v1/report/weekly')
-             ->assertResponseStatus(401);
+             ->assertStatus(401);
     }
 
     public function testGetWeekly()
     {
-        $user = factory(\App\User::class)->create();
-        $user->entries()->saveMany(factory(Entry::class, 30)->make());
+        $user = User::factory()->has(Entry::factory()->count(30))->create();
 
-        $this->actingAs($user, 'api')
+        $this->actingAs($user, 'sanctum')
              ->json('GET', '/api/v1/report/weekly')
-             ->assertResponseOk()
-             ->seeJsonStructure([
+             ->assertOk()
+             ->assertJsonStructure([
                  'weekly' => [
                      'year',
                      'min_year',

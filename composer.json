@@ -1,41 +1,38 @@
 {
   "name": "vedmant/running-time",
   "description": "Laravel & Vue.js + Vuex Sample Project",
+  "type": "project",
   "keywords": [
     "framework",
     "laravel"
   ],
   "license": "MIT",
-  "type": "project",
   "require": {
-    "php": "^7.2",
-    "fideloper/proxy": "^4.1",
-    "laravel/framework": "^6.2",
-    "laravel/passport": "^9.4",
-    "laravel/telescope": "^2.1",
-    "laravel/tinker": "^1.0",
-    "mpociot/laravel-apidoc-generator": "^3.17",
-    "predis/predis": "^1.1"
+    "php": "^8.0",
+    "fruitcake/laravel-cors": "^2.0.5",
+    "guzzlehttp/guzzle": "^7.2",
+    "laravel/framework": "^9.0",
+    "laravel/sanctum": "^2.14",
+    "laravel/telescope": "^4.7",
+    "laravel/tinker": "^2.7",
+    "laravel/ui": "^3.4"
   },
   "require-dev": {
-    "barryvdh/laravel-ide-helper": "^2.6",
-    "codedungeon/phpunit-result-printer": "^0.26.2",
-    "facade/ignition": "^1.4",
-    "fzaninotto/faker": "~1.8",
-    "laravel/browser-kit-testing": "^5.1",
-    "mockery/mockery": "^1.0",
-    "nunomaduro/collision": "^3.0",
-    "phpunit/phpunit": "^8.0",
-    "symfony/css-selector": "~4.0",
-    "symfony/dom-crawler": "~4.0"
+    "barryvdh/laravel-ide-helper": "^2.12",
+    "codedungeon/phpunit-result-printer": "^0.31.0",
+    "fakerphp/faker": "^1.9.1",
+    "laravel/browser-kit-testing": "^6.3",
+    "laravel/sail": "^1.0.1",
+    "mockery/mockery": "^1.4.4",
+    "nunomaduro/collision": "^6.1",
+    "phpunit/phpunit": "^9.5.10",
+    "spatie/laravel-ignition": "^1.0"
   },
   "autoload": {
-    "classmap": [
-      "database/seeds",
-      "database/factories"
-    ],
     "psr-4": {
-      "App\\": "app/"
+      "App\\": "app/",
+      "Database\\Factories\\": "database/factories/",
+      "Database\\Seeders\\": "database/seeders/"
     },
     "files": [
       "app/helpers.php"
@@ -51,6 +48,9 @@
       "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
       "@php artisan package:discover --ansi"
     ],
+    "post-update-cmd": [
+      "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+    ],
     "post-root-package-install": [
       "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
     ],
@@ -58,14 +58,16 @@
       "@php artisan key:generate --ansi"
     ]
   },
-  "config": {
-    "preferred-install": "dist",
-    "sort-packages": true,
-    "optimize-autoloader": true
-  },
   "extra": {
     "laravel": {
       "dont-discover": []
     }
-  }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }

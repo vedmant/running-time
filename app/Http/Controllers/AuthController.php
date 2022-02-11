@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Lang;
-use Validator;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * Class AuthController
  *
  * @package App\Http\Controllers
- * @resource Authentication
  */
 class AuthController extends Controller
 {
@@ -84,8 +83,8 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'name'     => 'required|max:255',
+            'email'    => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
     }
