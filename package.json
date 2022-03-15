@@ -44,7 +44,7 @@
     "core-js": "^3.1.4",
     "faker": "^4.1.0",
     "jquery": "^3.4.1",
-    "lodash-es": "^4.17.7",
+    "lodash-es": "^4.17.21",
     "moment-mini": "^2.22.1",
     "vue": "^2.6.10",
     "vue-charts": "^0.2.1",
