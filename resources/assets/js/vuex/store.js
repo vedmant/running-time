@@ -1,5 +1,4 @@
-import { createStore } from 'vuex'
-import createLogger from 'vuex/dist/logger'
+import { createStore, createLogger } from 'vuex'
 import auth from './modules/auth'
 import toast from './modules/toast'
 import entries from './modules/entries'
