@@ -1,6 +1,4 @@
-<p align="center">
-<a href="https://travis-ci.org/vedmant/running-time"><img src="https://travis-ci.org/vedmant/running-time.svg?branch=master" alt="Build Status"></a>
-</p>
+![actions workflow](https://github.com/vedmant/running-time/actions/workflows/test.yml/badge.svg)
 
 ## Laravel 9 & Vue.js 3 (Options API) + Vuex Sample Project ##
 
