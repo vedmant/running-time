@@ -108,7 +108,7 @@ To compile assets for production run:
 yarn prod
 
 # Or to display bundle analyzer run:
-yarn production -- --env.analyzer true
+yarn production -- --env.analyzer true 
 ```
 
 

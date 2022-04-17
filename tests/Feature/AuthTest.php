@@ -19,7 +19,7 @@ class AuthTest extends TestCase
 
         $this->json('POST', '/api/v1/auth/login', [
             'email'    => $user->email,
-            'password' => 'password',
+            'password' => '123456',
         ])
              ->assertOk()
              ->assertJsonStructure([
