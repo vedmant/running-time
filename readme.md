@@ -1,4 +1,4 @@
-![actions workflow](https://github.com/vedmant/running-time/actions/workflows/test.yml/badge.svg)
+![actions workflow](https://github.com/vedmant/running-time/workflows/Test/badge.svg)
 
 ## Laravel 9 & Vue.js 3 (Options API) + Vuex Sample Project ##
 
