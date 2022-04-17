@@ -64,28 +64,28 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 
-  export default {
+export default {
 
-    props: {
-      form: {
-        type: Object,
-        required: true,
-      },
-      errors: {
-        type: Object,
-        default: () => ({}),
-      }
+  props: {
+    form: {
+      type: Object,
+      required: true,
     },
+    errors: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
 
-    computed: {
+  computed: {
 
-      ...mapState({
-        me: state => state.auth.me,
-      }),
+    ...mapState({
+      me: state => state.auth.me,
+    }),
 
-    }
+  },
 
-  }
+}
 </script>

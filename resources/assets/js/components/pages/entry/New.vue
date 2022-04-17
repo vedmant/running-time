@@ -21,51 +21,51 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
-  import EntryForm from './partials/Form.vue'
+import { mapActions } from 'vuex'
+import EntryForm from './partials/Form.vue'
 
-  export default {
+export default {
 
-    components: {
-      EntryForm,
-    },
+  components: {
+    EntryForm,
+  },
 
-    data () {
-      return {
-        errors: {},
-        form: {
-          date: '',
-          distance: '',
-          time_hours: '00',
-          time_minutes: '00',
-          time_seconds: '00',
-        }
-      }
-    },
-
-    computed: {},
-
-    methods: {
-
-      ...mapActions([
-        'storeEntry',
-        'addToastMessage',
-      ]),
-
-      onSubmit (form) {
-        this.storeEntry(form)
-          .then(() => {
-            this.addToastMessage({
-              text: 'New time record was added!',
-              type: 'success'
-            })
-            this.$router.go(- 1)
-          })
-          .catch((data) => {
-            this.errors = data.errors || {}
-          })
+  data () {
+    return {
+      errors: {},
+      form: {
+        date: '',
+        distance: '',
+        time_hours: '00',
+        time_minutes: '00',
+        time_seconds: '00',
       },
-
     }
-  }
+  },
+
+  computed: {},
+
+  methods: {
+
+    ...mapActions([
+      'storeEntry',
+      'addToastMessage',
+    ]),
+
+    onSubmit (form) {
+      this.storeEntry(form)
+        .then(() => {
+          this.addToastMessage({
+            text: 'New time record was added!',
+            type: 'success',
+          })
+          this.$router.go(- 1)
+        })
+        .catch((data) => {
+          this.errors = data.errors || {}
+        })
+    },
+
+  },
+}
 </script>

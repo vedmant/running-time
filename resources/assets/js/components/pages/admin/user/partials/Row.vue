@@ -1,14 +1,14 @@
 <template>
   <tr :id="`user-row-${row.id}`">
     <td>
-      <router-link :to="'/admin/user/show/' + row.id">{{ row.name }}</router-link>
+      <RouterLink :to="'/admin/user/show/' + row.id">{{ row.name }}</RouterLink>
     </td>
     <td>{{ row.email }}</td>
     <td>{{ row.role }}</td>
     <td>{{ createdAt }}</td>
     <td>
-      <router-link class="btn btn-primary btn-xs" :to="'/admin/user/edit/' + row.id">
-        <i class="glyphicon glyphicon-pencil" /></router-link>
+      <RouterLink class="btn btn-primary btn-xs" :to="'/admin/user/edit/' + row.id">
+        <i class="glyphicon glyphicon-pencil" /></RouterLink>
       <button class="btn btn-danger btn-xs" @click="$emit('onDelete', row.id)">
         <i class="glyphicon glyphicon-remove" /></button>
     </td>
@@ -16,22 +16,22 @@
 </template>
 
 <script>
-  import moment from 'moment-mini'
+import moment from 'moment-mini'
 
-  export default {
+export default {
 
-    props: {
-      row: {
-        type: Object,
-        required: true,
-      }
+  props: {
+    row: {
+      type: Object,
+      required: true,
     },
+  },
 
-    computed: {
-      createdAt () {
-        return moment(this.row.date).format('MM/DD/YYYY HH:mm:ss')
-      },
+  computed: {
+    createdAt () {
+      return moment(this.row.date).format('MM/DD/YYYY HH:mm:ss')
     },
+  },
 
-  }
+}
 </script>

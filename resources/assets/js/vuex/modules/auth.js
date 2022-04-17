@@ -9,7 +9,7 @@ const state = {
 
 const actions = {
 
-  checkLogin ({commit}) {
+  checkLogin ({ commit }) {
     commit('CHECK_LOGIN')
 
     return new Promise((resolve, reject) => {
@@ -26,7 +26,7 @@ const actions = {
     })
   },
 
-  login ({commit, dispatch}, form) {
+  login ({ commit, dispatch }, form) {
     commit('LOGIN')
 
     return new Promise((resolve, reject) => {
@@ -36,7 +36,7 @@ const actions = {
             const accessToken = response.data.access_token
             localStorage.setItem('access_token', accessToken)
 
-            commit('LOGIN_OK', {user: response.data.user, accessToken})
+            commit('LOGIN_OK', { user: response.data.user, accessToken })
             resolve()
           })
         .catch(error => {
@@ -46,13 +46,13 @@ const actions = {
     })
   },
 
-  logout ({commit}) {
+  logout ({ commit }) {
     commit('LOGOUT_OK')
 
     localStorage.removeItem('access_token')
   },
 
-  register ({commit, dispatch}, form) {
+  register ({ commit, dispatch }, form) {
     commit('REGISTER')
 
     return new Promise((resolve, reject) => {
@@ -62,7 +62,7 @@ const actions = {
             const accessToken = response.data.access_token
             localStorage.setItem('access_token', accessToken)
 
-            commit('REGISTER_OK', {user: response.data.user, accessToken})
+            commit('REGISTER_OK', { user: response.data.user, accessToken })
             resolve()
           })
         .catch(error => {
@@ -72,11 +72,11 @@ const actions = {
     })
   },
 
-  updateProfile ({commit, dispatch}, {id, form}) {
+  updateProfile ({ commit, dispatch }, { id, form }) {
     commit('UPDATE_PROFILE')
 
     return new Promise((resolve, reject) => {
-      axios.post(Config.apiPath + 'user/' + id, {_method: 'PUT', ...form})
+      axios.post(Config.apiPath + 'user/' + id, { _method: 'PUT', ...form })
         .then(
           response => {
             commit('UPDATE_PROFILE_OK', response.data.user)
@@ -103,7 +103,7 @@ const mutations = {
     state.authChecked = true
   },
 
-  LOGIN_OK (state, {user, accessToken}) {
+  LOGIN_OK (state, { user, accessToken }) {
     state.me = user
     state.accessToken = accessToken
   },
@@ -113,7 +113,7 @@ const mutations = {
     state.accessToken = null
   },
 
-  REGISTER_OK (state, {user, accessToken}) {
+  REGISTER_OK (state, { user, accessToken }) {
     state.me = user
     state.accessToken = accessToken
   },
@@ -127,5 +127,5 @@ const mutations = {
 export default {
   state,
   actions,
-  mutations
+  mutations,
 }

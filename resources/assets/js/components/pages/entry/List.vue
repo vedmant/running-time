@@ -20,7 +20,7 @@
       </div>
       <div class="col-sm-6 text-right">
         <span class="page-info">Page {{ entries.current_page }} of  {{ entries.last_page }}</span>
-        <router-link class="btn btn-primary" to="/entry/new">Add new Entry</router-link>
+        <RouterLink class="btn btn-primary" to="/entry/new">Add new Entry</RouterLink>
       </div>
     </div>
 
@@ -54,72 +54,72 @@
 </template>
 
 <script>
-  import { mapState, mapActions } from 'vuex'
-  import Row from './partials/Row'
+import { mapState, mapActions } from 'vuex'
+import Row from './partials/Row'
 
-  export default {
+export default {
 
-    components: {
-      Row,
-    },
+  components: {
+    Row,
+  },
 
-    data () {
+  data () {
+    return {
+      dateFrom: '',
+      dateTo: '',
+    }
+  },
+
+  computed: {
+    ...mapState({
+      entries: state => state.entries.entries,
+    }),
+
+    params () {
       return {
-        dateFrom: '',
-        dateTo: '',
+        page: this.entries.current_page,
+        dateFrom: this.dateFrom,
+        dateTo: this.dateTo,
       }
     },
+  },
 
-    computed: {
-      ...mapState({
-        entries: state => state.entries.entries,
-      }),
+  mounted () {
+    this.loadEntries(this.params)
+  },
 
-      params () {
-        return {
-          page: this.entries.current_page,
-          dateFrom: this.dateFrom,
-          dateTo: this.dateTo
-        }
-      }
+  methods: {
+
+    ...mapActions([
+      'loadEntries',
+      'deleteEntry',
+      'addToastMessage',
+    ]),
+
+    onLoadEntries (page) {
+      this.loadEntries({ ...this.params, page })
     },
 
-    mounted () {
+    onFilter () {
+      this.loadEntries({ ...this.params, page: 1 })
+    },
+
+    onFilterClear () {
+      this.dateFrom = ''
+      this.dateTo = ''
       this.loadEntries(this.params)
     },
 
-    methods: {
-
-      ...mapActions([
-        'loadEntries',
-        'deleteEntry',
-        'addToastMessage',
-      ]),
-
-      onLoadEntries (page) {
-        this.loadEntries({...this.params, page})
-      },
-
-      onFilter () {
-        this.loadEntries({...this.params, page: 1})
-      },
-
-      onFilterClear () {
-        this.dateFrom = ''
-        this.dateTo = ''
-        this.loadEntries(this.params)
-      },
-
-      onDelete (id) {
-        this.deleteEntry(id).then(() => {
-          this.addToastMessage({
-            text: 'Entry was deleted!',
-            type: 'success'
-          })
-          this.loadEntries(this.params)
+    onDelete (id) {
+      this.deleteEntry(id).then(() => {
+        this.addToastMessage({
+          text: 'Entry was deleted!',
+          type: 'success',
         })
-      },
+        this.loadEntries(this.params)
+      })
+    },
 
-    }
-  }
+  },
+}
 </script>

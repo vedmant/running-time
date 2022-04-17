@@ -12,7 +12,7 @@
         </button>
 
         <!-- Branding Image -->
-        <router-link class="navbar-brand" to="/">Running Times</router-link>
+        <RouterLink class="navbar-brand" to="/">Running Times</RouterLink>
       </div>
 
       <div id="app-navbar-collapse" class="collapse navbar-collapse">
@@ -23,23 +23,29 @@
 
         <ul class="nav navbar-nav navbar-left">
           <li class="github-menu-item">
-            <a class="github-button" href="https://github.com/vedmant/running-time" data-size="large" data-show-count="true" aria-label="Star vedmant/running-time on GitHub">Star</a>
+            <a
+              class="github-button"
+              href="https://github.com/vedmant/running-time"
+              data-size="large"
+              data-show-count="true"
+              aria-label="Star vedmant/running-time on GitHub"
+            >Star</a>
           </li>
         </ul>
 
         <!-- Right Side Of Navbar -->
         <ul v-if="me" class="nav navbar-nav navbar-right">
           <!-- Authentication Links -->
-          <router-link custom v-slot="{ navigate, href, isActive }" to="/dashboard">
+          <RouterLink v-slot="{ navigate, href, isActive }" custom to="/dashboard">
             <li :class="{active: isActive}">
               <a :href="href" @click="navigate">Dashboad</a>
             </li>
-          </router-link>
-          <router-link custom v-slot="{ navigate, href, isActive }" to="/entries">
+          </RouterLink>
+          <RouterLink v-slot="{ navigate, href, isActive }" custom to="/entries">
             <li :class="{active: isActive}">
               <a :href="href" @click="navigate">Entries</a>
             </li>
-          </router-link>
+          </RouterLink>
 
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -47,19 +53,24 @@
             </a>
 
             <ul class="dropdown-menu" role="menu">
-              <router-link custom v-slot="{ navigate, href, isActive }" to="/report/weekly">
+              <RouterLink v-slot="{ navigate, href, isActive }" custom to="/report/weekly">
                 <li :class="{active: isActive}">
                   <a :href="href" @click="navigate">Weekly</a>
                 </li>
-              </router-link>
+              </RouterLink>
             </ul>
           </li>
 
-          <router-link v-if="me.role === 'admin' || me.role === 'manager'" custom v-slot="{ navigate, href, isActive }" to="/admin">
+          <RouterLink
+            v-if="me.role === 'admin' || me.role === 'manager'"
+            v-slot="{ navigate, href, isActive }"
+            custom
+            to="/admin"
+          >
             <li :class="{active: isActive}">
               <a :href="href" @click="navigate">Admin Panel</a>
             </li>
-          </router-link>
+          </RouterLink>
 
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -67,16 +78,16 @@
             </a>
 
             <ul class="dropdown-menu" role="menu">
-              <router-link custom v-slot="{ navigate, href, isActive }" to="/profile">
+              <RouterLink v-slot="{ navigate, href, isActive }" custom to="/profile">
                 <li :class="{active: isActive}">
                   <a :href="href" @click="navigate">Profile</a>
                 </li>
-              </router-link>
-              <router-link custom v-slot="{ navigate, href, isActive }" to="/logout">
+              </RouterLink>
+              <RouterLink v-slot="{ navigate, href, isActive }" custom to="/logout">
                 <li :class="{active: isActive}">
                   <a :href="href" @click="navigate">Logout</a>
                 </li>
-              </router-link>
+              </RouterLink>
             </ul>
           </li>
         </ul>
@@ -84,16 +95,16 @@
         <!-- Right Side Of Navbar -->
         <ul v-else class="nav navbar-nav navbar-right">
           <!-- Authentication Links -->
-          <router-link custom v-slot="{ navigate, href, isActive }" to="/login">
+          <RouterLink v-slot="{ navigate, href, isActive }" custom to="/login">
             <li :class="{active: isActive}">
               <a :href="href" @click="navigate">Login</a>
             </li>
-          </router-link>
-          <router-link custom v-slot="{ navigate, href, isActive }" to="/register">
+          </RouterLink>
+          <RouterLink v-slot="{ navigate, href, isActive }" custom to="/register">
             <li :class="{active: isActive}">
               <a :href="href" @click="navigate">Register</a>
             </li>
-          </router-link>
+          </RouterLink>
         </ul>
 
       </div>
@@ -102,37 +113,37 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 
-  export default {
+export default {
 
-    data () {
-      return {}
+  data () {
+    return {}
+  },
+
+  computed: {
+    ...mapState({
+      me: state => state.auth.me,
+      route: state => state.route,
+    }),
+  },
+
+  watch: {
+    route () {
+      this.$forceUpdate() // Tempopary fix for wrong router navigation after login
     },
+  },
 
-    computed: {
-      ...mapState({
-        me: state => state.auth.me,
-        route: state => state.route,
-      })
-    },
+  mounted () {
+    this.loadGithubScript()
+  },
 
-    watch: {
-      route () {
-        this.$forceUpdate() // Tempopary fix for wrong router navigation after login
-      }
+  methods: {
+    loadGithubScript () {
+      const script = document.createElement('script')
+      script.src = 'https://buttons.github.io/buttons.js'
+      document.head.appendChild(script)
     },
-
-    mounted () {
-      this.loadGithubScript()
-    },
-
-    methods: {
-      loadGithubScript () {
-        const script = document.createElement('script')
-        script.src = 'https://buttons.github.io/buttons.js'
-        document.head.appendChild(script)
-      },
-    },
-  }
+  },
+}
 </script>

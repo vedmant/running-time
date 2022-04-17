@@ -46,64 +46,64 @@
 </template>
 
 <script>
-  import { mapState, mapActions } from 'vuex'
-  import Row from './partials/Row'
+import { mapState, mapActions } from 'vuex'
+import Row from './partials/Row'
 
-  export default {
+export default {
 
-    components: {
-      Row,
-    },
+  components: {
+    Row,
+  },
 
-    data () {
-      return {
-        search: '',
-      }
-    },
-
-    computed: {
-      ...mapState({
-        users: state => state.users.users,
-      }),
-
-      params () {
-        return {
-          page: this.users.current_page,
-          query: this.search,
-        }
-      }
-    },
-
-    mounted () {
-      this.loadUsers(this.params)
-    },
-
-    methods: {
-
-      ...mapActions([
-        'loadUsers',
-        'deleteUser',
-        'addToastMessage',
-      ]),
-
-      onLoadEntries (page) {
-        this.loadUsers({...this.params, page})
-      },
-
-      onSearch () {
-        this.loadUsers({...this.params, page: 1})
-      },
-
-      onDelete (id) {
-        this.deleteUser(id).then(() => {
-          this.addToastMessage({
-            text: 'User was deleted!',
-            type: 'success'
-          })
-          this.loadUsers(this.params)
-        })
-      },
-
+  data () {
+    return {
+      search: '',
     }
-  }
+  },
+
+  computed: {
+    ...mapState({
+      users: state => state.users.users,
+    }),
+
+    params () {
+      return {
+        page: this.users.current_page,
+        query: this.search,
+      }
+    },
+  },
+
+  mounted () {
+    this.loadUsers(this.params)
+  },
+
+  methods: {
+
+    ...mapActions([
+      'loadUsers',
+      'deleteUser',
+      'addToastMessage',
+    ]),
+
+    onLoadEntries (page) {
+      this.loadUsers({ ...this.params, page })
+    },
+
+    onSearch () {
+      this.loadUsers({ ...this.params, page: 1 })
+    },
+
+    onDelete (id) {
+      this.deleteUser(id).then(() => {
+        this.addToastMessage({
+          text: 'User was deleted!',
+          type: 'success',
+        })
+        this.loadUsers(this.params)
+      })
+    },
+
+  },
+}
 </script>

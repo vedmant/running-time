@@ -3,19 +3,19 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
-  export default {
+export default {
 
-    mounted () {
-      this.logout()
-      this.$router.replace('/')
-    },
+  mounted () {
+    this.logout()
+    this.$router.replace('/')
+  },
 
-    methods: {
-      ...mapActions([
-        'logout',
-      ]),
-    }
-  }
+  methods: {
+    ...mapActions([
+      'logout',
+    ]),
+  },
+}
 </script>

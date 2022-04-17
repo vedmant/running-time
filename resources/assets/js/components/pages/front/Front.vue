@@ -7,14 +7,14 @@
 </template>
 
 <script>
-  export default {
+export default {
 
-    data () {
-      return {}
-    },
+  data () {
+    return {}
+  },
 
-    computed: {},
+  computed: {},
 
-    methods: {}
-  }
+  methods: {},
+}
 </script>

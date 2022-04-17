@@ -8,7 +8,7 @@
         <a href="#" class="btn btn-primary" @click.prevent="$router.go(-1)">Back</a>
       </div>
       <div class="col-sm-6 text-right">
-        <router-link :to="'/admin/user/edit/' + user.id" class="btn btn-primary">Edit</router-link>
+        <RouterLink :to="'/admin/user/edit/' + user.id" class="btn btn-primary">Edit</RouterLink>
       </div>
     </div>
 
@@ -28,36 +28,36 @@
 </template>
 
 <script>
-  import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
-  export default {
+export default {
 
-    data () {
-      return {}
+  data () {
+    return {}
+  },
+
+  computed: {
+
+    ...mapState({
+      user: state => state.users.user,
+    }),
+
+    id () {
+      return this.$route.params.id
     },
 
-    computed: {
+  },
 
-      ...mapState({
-        user: state => state.users.user,
-      }),
+  mounted () {
+    this.loadUser(this.id)
+  },
 
-      id () {
-        return this.$route.params.id
-      }
+  methods: {
 
-    },
+    ...mapActions([
+      'loadUser',
+    ]),
 
-    mounted () {
-      this.loadUser(this.id)
-    },
-
-    methods: {
-
-      ...mapActions([
-        'loadUser',
-      ]),
-
-    }
-  }
+  },
+}
 </script>

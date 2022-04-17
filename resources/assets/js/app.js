@@ -45,7 +45,7 @@ axios.interceptors.response.use(response => response, error => {
   if (! error.response.config.url.includes('/me')) {
     store.dispatch('addToastMessage', {
       text: error.response.data.message || 'Request error status: ' + error.response.status,
-      type: 'danger'
+      type: 'danger',
     })
   }
   return Promise.reject(error)
@@ -59,9 +59,9 @@ app.use(router)
 app.use(store)
 
 // Global Vue Components
-app.component('navbar', Navbar)
-app.component('spinner', Spinner)
-app.component('toast', Toast)
+app.component('Navbar', Navbar)
+app.component('Spinner', Spinner)
+app.component('Toast', Toast)
 
 app.mixin(mixins)
 

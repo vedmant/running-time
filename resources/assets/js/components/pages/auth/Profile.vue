@@ -44,7 +44,12 @@
               <div class="form-group">
                 <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
                 <div class="col-md-6">
-                  <input id="password-confirm" v-model="form.password_confirmation" type="password" class="form-control">
+                  <input
+                    id="password-confirm"
+                    v-model="form.password_confirmation"
+                    type="password"
+                    class="form-control"
+                  >
                 </div>
               </div>
 
@@ -64,55 +69,55 @@
 </template>
 
 <script>
-  import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
-  export default {
+export default {
 
-    data () {
-      return {
-        form: {
-          name: '',
-          email: '',
-          password: '',
-          password_confirmation: '',
-        },
-        errors: {}
-      }
-    },
-
-    computed: {
-      ...mapState({
-        me: state => state.auth.me,
-      }),
-    },
-
-    mounted () {
-      this.form.name = this.me.name
-      this.form.email = this.me.email
-    },
-
-    methods: {
-
-      ...mapActions([
-        'updateProfile',
-        'addToastMessage',
-      ]),
-
-      onSubmit () {
-        this.errors = {}
-        this.updateProfile({id: this.me.id, form: this.form})
-          .then(() => {
-            this.addToastMessage({
-              text: 'Your profile was updated!',
-              type: 'success'
-            })
-          })
-          .catch((data) => {
-            this.errors = data.errors || {}
-          })
+  data () {
+    return {
+      form: {
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
       },
-
+      errors: {},
     }
+  },
 
-  }
+  computed: {
+    ...mapState({
+      me: state => state.auth.me,
+    }),
+  },
+
+  mounted () {
+    this.form.name = this.me.name
+    this.form.email = this.me.email
+  },
+
+  methods: {
+
+    ...mapActions([
+      'updateProfile',
+      'addToastMessage',
+    ]),
+
+    onSubmit () {
+      this.errors = {}
+      this.updateProfile({ id: this.me.id, form: this.form })
+        .then(() => {
+          this.addToastMessage({
+            text: 'Your profile was updated!',
+            type: 'success',
+          })
+        })
+        .catch((data) => {
+          this.errors = data.errors || {}
+        })
+    },
+
+  },
+
+}
 </script>

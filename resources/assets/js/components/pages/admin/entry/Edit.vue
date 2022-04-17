@@ -21,75 +21,75 @@
 </template>
 
 <script>
-  import { mapState, mapActions } from 'vuex'
-  import moment from 'moment-mini'
-  import padStart from 'lodash-es/padStart'
-  import EntryForm from '../../entry/partials/Form'
+import { mapState, mapActions } from 'vuex'
+import moment from 'moment-mini'
+import padStart from 'lodash-es/padStart'
+import EntryForm from '../../entry/partials/Form'
 
-  export default {
+export default {
 
-    components: {
-      EntryForm,
-    },
+  components: {
+    EntryForm,
+  },
 
-    data () {
-      return {
-        errors: {},
-      }
-    },
-
-    computed: {
-
-      ...mapState({
-        entry: state => state.entries.entry,
-      }),
-
-      id () {
-        return this.$route.params.id
-      },
-
-      form () {
-        const duration = moment.duration(this.entry.time)
-
-        return {
-          date: moment(this.entry.date).format('YYYY-MM-DD'),
-          distance: this.entry.distance,
-          time_hours: Math.floor(duration.asHours()),
-          time_minutes: padStart(duration.minutes(), 2, '-'),
-          time_seconds: padStart(duration.seconds(), 2, '0'),
-        }
-      }
-
-    },
-
-    mounted () {
-      this.loadEntry(this.id)
-    },
-
-    methods: {
-
-      ...mapActions([
-        'loadEntry',
-        'updateEntry',
-        'addToastMessage',
-      ]),
-
-      onSubmit (form) {
-        const id = this.$route.params.id
-
-        this.updateEntry({id, form})
-          .then(() => {
-            this.addToastMessage({
-              text: 'Time record was updated!',
-              type: 'success'
-            })
-            this.$router.go(- 1)
-          })
-          .catch((data) => {
-            this.errors = data.errors || {}
-          })
-      },
-
+  data () {
+    return {
+      errors: {},
     }
-  }
+  },
+
+  computed: {
+
+    ...mapState({
+      entry: state => state.entries.entry,
+    }),
+
+    id () {
+      return this.$route.params.id
+    },
+
+    form () {
+      const duration = moment.duration(this.entry.time)
+
+      return {
+        date: moment(this.entry.date).format('YYYY-MM-DD'),
+        distance: this.entry.distance,
+        time_hours: Math.floor(duration.asHours()),
+        time_minutes: padStart(duration.minutes(), 2, '-'),
+        time_seconds: padStart(duration.seconds(), 2, '0'),
+      }
+    },
+
+  },
+
+  mounted () {
+    this.loadEntry(this.id)
+  },
+
+  methods: {
+
+    ...mapActions([
+      'loadEntry',
+      'updateEntry',
+      'addToastMessage',
+    ]),
+
+    onSubmit (form) {
+      const id = this.$route.params.id
+
+      this.updateEntry({ id, form })
+        .then(() => {
+          this.addToastMessage({
+            text: 'Time record was updated!',
+            type: 'success',
+          })
+          this.$router.go(- 1)
+        })
+        .catch((data) => {
+          this.errors = data.errors || {}
+        })
+    },
+
+  },
+}
 </script>

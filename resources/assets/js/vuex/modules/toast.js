@@ -5,25 +5,25 @@ const state = {
 }
 
 const getters = {
-  toastMessages: (state) => state.messages
+  toastMessages: (state) => state.messages,
 }
 
 const actions = {
-  addToastMessage ({commit}, {text, type = 'info', dismissAfter = 5000}) {
+  addToastMessage ({ commit }, { text, type = 'info', dismissAfter = 5000 }) {
     const id = ++maxToastId
 
     commit('ADD_TOAST_MESSAGE', {
       id,
       text,
       type,
-      dismissAfter
+      dismissAfter,
     })
     setTimeout(() => commit('REMOVE_TOAST_MESSAGE', id), dismissAfter)
   },
 
-  removeToastMessage ({commit}, id) {
+  removeToastMessage ({ commit }, id) {
     commit('REMOVE_TOAST_MESSAGE', id)
-  }
+  },
 }
 
 const mutations = {
@@ -33,12 +33,12 @@ const mutations = {
 
   REMOVE_TOAST_MESSAGE (state, id) {
     state.messages = state.messages.filter(m => m.id !== id)
-  }
+  },
 }
 
 export default {
   state,
   getters,
   actions,
-  mutations
+  mutations,
 }

@@ -44,7 +44,13 @@
               <div class="form-group">
                 <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
                 <div class="col-md-6">
-                  <input id="password-confirm" v-model="form.password_confirmation" type="password" class="form-control" required>
+                  <input
+                    id="password-confirm"
+                    v-model="form.password_confirmation"
+                    type="password"
+                    class="form-control"
+                    required
+                  >
                 </div>
               </div>
 
@@ -64,40 +70,40 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
-  export default {
+export default {
 
-    data () {
-      return {
-        form: {
-          name: '',
-          email: '',
-          password: '',
-          password_confirmation: '',
-        },
-        errors: {}
-      }
+  data () {
+    return {
+      form: {
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
+      },
+      errors: {},
+    }
+  },
+
+  methods: {
+
+    ...mapActions([
+      'register',
+    ]),
+
+    onSubmit () {
+      this.errors = {}
+      this.register(this.form)
+        .then(() => {
+          this.$router.replace('/dashboard')
+        })
+        .catch((data) => {
+          this.errors = data.errors || {}
+        })
     },
 
-    methods: {
+  },
 
-      ...mapActions([
-        'register',
-      ]),
-
-      onSubmit () {
-        this.errors = {}
-        this.register(this.form)
-          .then(() => {
-            this.$router.replace('/dashboard')
-          })
-          .catch((data) => {
-            this.errors = data.errors || {}
-          })
-      },
-
-    }
-
-  }
+}
 </script>

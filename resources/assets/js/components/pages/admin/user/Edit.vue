@@ -21,69 +21,69 @@
 </template>
 
 <script>
-  import { mapState, mapActions } from 'vuex'
-  import UserForm from './partials/Form.vue'
+import { mapState, mapActions } from 'vuex'
+import UserForm from './partials/Form.vue'
 
-  export default {
+export default {
 
-    components: {
-      UserForm,
-    },
+  components: {
+    UserForm,
+  },
 
-    data () {
-      return {
-        errors: {},
-      }
-    },
-
-    computed: {
-
-      id () {
-        return this.$route.params.id
-      },
-
-      ...mapState({
-        user: state => state.users.user,
-      }),
-
-      form () {
-        if (! this.user) return {}
-
-        return {
-          name: this.user.name,
-          email: this.user.email,
-          role: this.user.role,
-        }
-      }
-
-    },
-
-    mounted () {
-      this.loadUser(this.id)
-    },
-
-    methods: {
-
-      ...mapActions([
-        'loadUser',
-        'updateUser',
-        'addToastMessage',
-      ]),
-
-      onSubmit (form) {
-        this.updateUser({id: this.id, form})
-          .then(() => {
-            this.addToastMessage({
-              text: 'User was updated!',
-              type: 'success'
-            })
-            this.$router.go(- 1)
-          })
-          .catch((data) => {
-            this.errors = data.errors || {}
-          })
-      },
-
+  data () {
+    return {
+      errors: {},
     }
-  }
+  },
+
+  computed: {
+
+    id () {
+      return this.$route.params.id
+    },
+
+    ...mapState({
+      user: state => state.users.user,
+    }),
+
+    form () {
+      if (! this.user) return {}
+
+      return {
+        name: this.user.name,
+        email: this.user.email,
+        role: this.user.role,
+      }
+    },
+
+  },
+
+  mounted () {
+    this.loadUser(this.id)
+  },
+
+  methods: {
+
+    ...mapActions([
+      'loadUser',
+      'updateUser',
+      'addToastMessage',
+    ]),
+
+    onSubmit (form) {
+      this.updateUser({ id: this.id, form })
+        .then(() => {
+          this.addToastMessage({
+            text: 'User was updated!',
+            type: 'success',
+          })
+          this.$router.go(- 1)
+        })
+        .catch((data) => {
+          this.errors = data.errors || {}
+        })
+    },
+
+  },
+}
 </script>

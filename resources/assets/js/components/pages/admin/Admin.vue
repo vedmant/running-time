@@ -6,10 +6,21 @@
     <div class="row">
       <div class="col-sm-2">
         <ul class="nav nav-pills nav-stacked">
-          <router-link tag="li" to="/admin/dashboard" active-class="active"><a>Dashboard</a></router-link>
-          <router-link tag="li" to="/admin/users" active-class="active"><a>Users</a></router-link>
-          <router-link v-if="me.role == 'admin'" tag="li" to="/admin/entries" active-class="active"><a>Entries</a>
-          </router-link>
+          <RouterLink v-slot="{ navigate, href, isActive }" custom to="/admin/dashboard">
+            <li :class="{active: isActive}">
+              <a :href="href" @click="navigate">Dashboard</a>
+            </li>
+          </RouterLink>
+          <RouterLink v-slot="{ navigate, href, isActive }" custom to="/admin/users">
+            <li :class="{active: isActive}">
+              <a :href="href" @click="navigate">Users</a>
+            </li>
+          </RouterLink>
+          <RouterLink v-if="me.role == 'admin'" v-slot="{ navigate, href, isActive }" custom to="/admin/entries">
+            <li :class="{active: isActive}">
+              <a :href="href" @click="navigate">Entries</a>
+            </li>
+          </RouterLink>
         </ul>
       </div>
       <div class="col-sm-10">
@@ -20,20 +31,20 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 
-  export default {
+export default {
 
-    data () {
-      return {}
-    },
+  data () {
+    return {}
+  },
 
-    computed: {
-      ...mapState({
-        me: state => state.auth.me,
-      })
-    },
+  computed: {
+    ...mapState({
+      me: state => state.auth.me,
+    }),
+  },
 
-    methods: {}
-  }
+  methods: {},
+}
 </script>

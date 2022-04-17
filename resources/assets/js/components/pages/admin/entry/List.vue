@@ -54,72 +54,72 @@
 </template>
 
 <script>
-  import { mapState, mapActions } from 'vuex'
-  import Row from './partials/Row.vue'
+import { mapState, mapActions } from 'vuex'
+import Row from './partials/Row.vue'
 
-  export default {
+export default {
 
-    components: {
-      Row,
-    },
+  components: {
+    Row,
+  },
 
-    data () {
+  data () {
+    return {
+      dateFrom: '',
+      dateTo: '',
+    }
+  },
+
+  computed: {
+    ...mapState({
+      entries: state => state.all_entries.entries,
+    }),
+
+    params () {
       return {
-        dateFrom: '',
-        dateTo: '',
+        page: this.entries.current_page,
+        dateFrom: this.dateFrom,
+        dateTo: this.dateTo,
       }
     },
+  },
 
-    computed: {
-      ...mapState({
-        entries: state => state.all_entries.entries,
-      }),
+  mounted () {
+    this.loadAllEntries(this.params)
+  },
 
-      params () {
-        return {
-          page: this.entries.current_page,
-          dateFrom: this.dateFrom,
-          dateTo: this.dateTo,
-        }
-      }
+  methods: {
+
+    ...mapActions([
+      'loadAllEntries',
+      'deleteEntry',
+      'addToastMessage',
+    ]),
+
+    onLoadEntries (page) {
+      this.loadAllEntries({ ...this.params, page })
     },
 
-    mounted () {
+    onFilter () {
+      this.loadAllEntries({ ...this.params, page: 1 })
+    },
+
+    onFilterClear () {
+      this.dateFrom = ''
+      this.dateTo = ''
       this.loadAllEntries(this.params)
     },
 
-    methods: {
-
-      ...mapActions([
-        'loadAllEntries',
-        'deleteEntry',
-        'addToastMessage',
-      ]),
-
-      onLoadEntries (page) {
-        this.loadAllEntries({...this.params, page})
-      },
-
-      onFilter () {
-        this.loadAllEntries({...this.params, page: 1})
-      },
-
-      onFilterClear () {
-        this.dateFrom = ''
-        this.dateTo = ''
-        this.loadAllEntries(this.params)
-      },
-
-      onDelete (id) {
-        this.deleteEntry(id).then(() => {
-          this.addToastMessage({
-            text: 'Entry was deleted!',
-            type: 'success'
-          })
-          this.loadAllEntries(this.params)
+    onDelete (id) {
+      this.deleteEntry(id).then(() => {
+        this.addToastMessage({
+          text: 'Entry was deleted!',
+          type: 'success',
         })
-      },
+        this.loadAllEntries(this.params)
+      })
+    },
 
-    }
-  }
+  },
+}
 </script>

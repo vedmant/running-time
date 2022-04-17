@@ -11,11 +11,11 @@ const state = {
 
 const actions = {
 
-  loadEntries ({commit, dispatch}, params) {
+  loadEntries ({ commit, dispatch }, params) {
     commit('LOAD_ENTRIES')
 
     return new Promise((resolve, reject) => {
-      axios.get(Config.apiPath + 'entry', {params})
+      axios.get(Config.apiPath + 'entry', { params })
         .then(
           response => {
             commit('LOAD_ENTRIES_OK', response.data.entries)
@@ -28,7 +28,7 @@ const actions = {
     })
   },
 
-  loadEntry ({commit, dispatch}, id) {
+  loadEntry ({ commit, dispatch }, id) {
     commit('LOAD_ENTRY')
 
     return new Promise((resolve, reject) => {
@@ -45,7 +45,7 @@ const actions = {
     })
   },
 
-  storeEntry ({commit, dispatch}, form) {
+  storeEntry ({ commit, dispatch }, form) {
     commit('STORE_ENTRY')
 
     return new Promise((resolve, reject) => {
@@ -62,11 +62,11 @@ const actions = {
     })
   },
 
-  updateEntry ({commit, dispatch}, {id, form}) {
+  updateEntry ({ commit, dispatch }, { id, form }) {
     commit('UPDATE_ENTRY')
 
     return new Promise((resolve, reject) => {
-      axios.post(Config.apiPath + 'entry/' + id, {_method: 'PUT', ...form})
+      axios.post(Config.apiPath + 'entry/' + id, { _method: 'PUT', ...form })
         .then(
           response => {
             commit('UPDATE_ENTRY_OK', response.data.entry)
@@ -79,11 +79,11 @@ const actions = {
     })
   },
 
-  deleteEntry ({commit, dispatch}, id) {
+  deleteEntry ({ commit, dispatch }, id) {
     commit('DELETE_ENTRY')
 
     return new Promise((resolve, reject) => {
-      axios.post(Config.apiPath + 'entry/' + id, {_method: 'DELETE'})
+      axios.post(Config.apiPath + 'entry/' + id, { _method: 'DELETE' })
         .then(
           response => {
             commit('DELETE_ENTRY_OK', id)
@@ -94,7 +94,7 @@ const actions = {
           reject(error.response.data)
         })
     })
-  }
+  },
 
 }
 
@@ -113,5 +113,5 @@ const mutations = {
 export default {
   state,
   actions,
-  mutations
+  mutations,
 }

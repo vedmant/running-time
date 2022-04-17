@@ -2119,6 +2119,11 @@ charenc@0.0.2:
   resolved "https://registry.yarnpkg.com/charenc/-/charenc-0.0.2.tgz#c0a1d2f3a7092e03774bfa83f14c0fc5790a8667"
   integrity sha1-wKHS86cJLgN3S/qD8UwPxXkKhmc=
 
+chart.js@^3.7.1:
+  version "3.7.1"
+  resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-3.7.1.tgz#0516f690c6a8680c6c707e31a4c1807a6f400ada"
+  integrity sha512-8knRegQLFnPQAheZV8MjxIXc5gQEfDFD897BJgv/klO/vtIyFFmgMXrNfgrXpbTr/XbTturxRgxIXx/Y+ASJBA==
+
 check-more-types@^2.24.0:
   version "2.24.0"
   resolved "https://registry.yarnpkg.com/check-more-types/-/check-more-types-2.24.0.tgz#1420ffb10fd444dcfc79b43891bbfffd32a84600"
@@ -4487,7 +4492,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash@^4.17.14, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.3.0:
+lodash@^4.17.14, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -6541,13 +6546,10 @@ vm-browserify@^1.0.1:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
 
-vue-charts@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/vue-charts/-/vue-charts-0.2.1.tgz#4748e1f485b5d4671e314a24c0099db86633bd31"
-  integrity sha1-R0jh9IW11GceMUokwAmduGYzvTE=
-  dependencies:
-    lodash "^4.3.0"
-    vue "^2.0.3"
+vue-chartjs@^4.0.5:
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/vue-chartjs/-/vue-chartjs-4.0.5.tgz#ebb73abdc481cbb57f65b27f0ae114b118f3c01b"
+  integrity sha512-02DuKqHrmfy8TXIaKJocnsGA1yS5AHhiPQ2XXhvZc78n4nBiR+yFL1edYvMDbvdPtku7qptd4y0Ew2iDyyyLZQ==
 
 vue-eslint-parser@^8.0.1:
   version "8.2.0"
@@ -6593,11 +6595,6 @@ vue-template-compiler@^2.6.14:
   dependencies:
     de-indent "^1.0.2"
     he "^1.1.0"
-
-vue@^2.0.3:
-  version "2.6.14"
-  resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.14.tgz#e51aa5250250d569a3fbad3a8a5a687d6036e235"
-  integrity sha512-x2284lgYvjOMj3Za7kqzRcUSxBboHqtgRE2zlos1qWaOye5yUmHn42LB1250NJBLRwEcdrB0JRwyPTEPhfQjiQ==
 
 vue@^3.2.30:
   version "3.2.30"

@@ -6,18 +6,18 @@ const state = {
   loading: false,
   dashboard: {},
   admin_dashboard: {
-    fastest_run: {user: {}},
-    longest_run: {user: {}},
+    fastest_run: { user: {} },
+    longest_run: { user: {} },
   },
 }
 
 const actions = {
 
-  stopLoading ({commit}) {
+  stopLoading ({ commit }) {
     commit('STOP_LOADING')
   },
 
-  loadDashboard ({commit, dispatch}) {
+  loadDashboard ({ commit, dispatch }) {
     commit('LOAD_DASHBOARD')
 
     return new Promise((resolve, reject) => {
@@ -34,7 +34,7 @@ const actions = {
     })
   },
 
-  loadAdminDashboard ({commit, dispatch}) {
+  loadAdminDashboard ({ commit, dispatch }) {
     commit('LOAD_ADMIN_DASHBOARD')
 
     return new Promise((resolve, reject) => {
@@ -130,5 +130,5 @@ const mutations = {
 export default {
   state,
   actions,
-  mutations
+  mutations,
 }

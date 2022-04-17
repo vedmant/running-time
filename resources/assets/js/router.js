@@ -62,8 +62,8 @@ const routes = [
   },
 
   {
-    path: "/:catchAll(.*)", // Unrecognized path automatically matches 404
-    component: Error404
+    path: '/:catchAll(.*)', // Unrecognized path automatically matches 404
+    component: Error404,
   },
 ]
 

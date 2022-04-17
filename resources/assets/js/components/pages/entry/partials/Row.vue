@@ -6,8 +6,9 @@
     <td>{{ Number(row.speed).toFixed(2) }} km/h</td>
     <td>{{ Number(row.pace).toFixed(2) }} min/km</td>
     <td>
-      <router-link class="btn btn-primary btn-xs" :to="'/entry/edit/' + row.id">
-        <i class="glyphicon glyphicon-pencil" /></router-link>
+      <RouterLink class="btn btn-primary btn-xs" :to="'/entry/edit/' + row.id">
+        <i class="glyphicon glyphicon-pencil" /></RouterLink>
+      &nbsp;
       <button class="btn btn-danger btn-xs" @click="$emit('onDelete', row.id)">
         <i class="glyphicon glyphicon-remove" /></button>
     </td>
@@ -15,16 +16,16 @@
 </template>
 
 <script>
-  export default {
+export default {
 
-    props: {
-      row: {
-        type: Object,
-        required: true,
-      }
+  props: {
+    row: {
+      type: Object,
+      required: true,
     },
+  },
 
-    computed: {},
+  computed: {},
 
-  }
+}
 </script>

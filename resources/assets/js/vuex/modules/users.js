@@ -11,11 +11,11 @@ const state = {
 
 const actions = {
 
-  loadUsers ({commit, dispatch}, params) {
+  loadUsers ({ commit, dispatch }, params) {
     commit('LOAD_USERS')
 
     return new Promise((resolve, reject) => {
-      axios.get(Config.apiPath + 'user', {params})
+      axios.get(Config.apiPath + 'user', { params })
         .then(
           response => {
             commit('LOAD_USERS_OK', response.data.users)
@@ -28,7 +28,7 @@ const actions = {
     })
   },
 
-  loadUser ({commit, dispatch}, id) {
+  loadUser ({ commit, dispatch }, id) {
     commit('LOAD_USER')
 
     return new Promise((resolve, reject) => {
@@ -45,11 +45,11 @@ const actions = {
     })
   },
 
-  updateUser ({commit, dispatch}, {id, form}) {
+  updateUser ({ commit, dispatch }, { id, form }) {
     commit('UPDATE_USER')
 
     return new Promise((resolve, reject) => {
-      axios.post(Config.apiPath + 'user/' + id, {_method: 'PUT', ...form})
+      axios.post(Config.apiPath + 'user/' + id, { _method: 'PUT', ...form })
         .then(
           response => {
             commit('UPDATE_USER_OK', response.data.user)
@@ -62,11 +62,11 @@ const actions = {
     })
   },
 
-  deleteUser ({commit, dispatch}, id) {
+  deleteUser ({ commit, dispatch }, id) {
     commit('DELETE_USER')
 
     return new Promise((resolve, reject) => {
-      axios.post(Config.apiPath + 'user/' + id, {_method: 'DELETE'})
+      axios.post(Config.apiPath + 'user/' + id, { _method: 'DELETE' })
         .then(
           response => {
             commit('DELETE_USER_OK', id)
@@ -100,5 +100,5 @@ const mutations = {
 export default {
   state,
   actions,
-  mutations
+  mutations,
 }

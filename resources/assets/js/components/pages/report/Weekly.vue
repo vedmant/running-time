@@ -4,11 +4,11 @@
     <hr>
 
     <div class="panel panel-default">
-      <vue-chart
-        chart-type="LineChart"
-        :columns="columns"
-        :rows="report.chart"
-        :options="options"
+      <div class="panel-heading">My Performance</div>
+      <Line
+        :chart-options="{responsive: true, maintainAspectRatio: false}"
+        :chart-data="chartData"
+        :height="500"
       />
     </div>
 
@@ -43,59 +43,64 @@
 </template>
 
 <script>
-  import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
+import 'chart.js/auto'
+import { Line } from 'vue-chartjs'
 
-  export default {
+export default {
 
-    data () {
+  components: {
+    Line,
+  },
+
+  computed: {
+
+    ...mapState({
+      report: state => state.reports.weekly,
+    }),
+
+    params () {
       return {
-        columns: [{
-          'type': 'string',
-          'label': 'Week'
-        }, {
-          'type': 'number',
-          'label': 'Avg. Speed'
-        }, {
-          'type': 'number',
-          'label': 'Avg. Distance'
-        }],
-        options: {
-          title: 'My Performance',
-          height: 500,
-          curveType: 'function',
-          vAxis: {title: 'Speed, Pace'},
-          hAxis: {title: 'Week'}
-        },
+        year: this.report.year,
       }
     },
 
-    computed: {
-
-      ...mapState({
-        report: state => state.reports.weekly,
-      }),
-
-      params () {
-        return {
-          year: this.report.year,
-        }
+    chartData () {
+      if (! this.report.chart) return {}
+      return {
+        labels: this.report.chart.map(i => i[0]),
+        datasets: [
+          {
+            label: 'Speed',
+            borderColor: '#f87979',
+            data: this.report.chart.map(i => i[1]),
+            tension: 0.2,
+          },
+          {
+            label: 'Distance',
+            borderColor: '#7acbf9',
+            data: this.report.chart.map(i => i[2]),
+            tension: 0.2,
+          },
+        ],
       }
-
     },
 
-    mounted () {
-      this.report.data.length || this.loadWeeklyReport(this.params)
+  },
+
+  mounted () {
+    this.report.data.length || this.loadWeeklyReport(this.params)
+  },
+
+  methods: {
+
+    ...mapActions([
+      'loadWeeklyReport',
+    ]),
+
+    onLoadWeeklyReport (year) {
+      this.loadWeeklyReport({ ...this.params, year })
     },
-
-    methods: {
-
-      ...mapActions([
-        'loadWeeklyReport',
-      ]),
-
-      onLoadWeeklyReport (year) {
-        this.loadWeeklyReport({...this.params, year})
-      },
-    }
-  }
+  },
+}
 </script>

@@ -21,5 +21,5 @@ export default new createStore({
     users,
     general,
     reports,
-  }
+  },
 })

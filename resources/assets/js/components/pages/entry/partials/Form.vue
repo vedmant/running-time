@@ -28,11 +28,32 @@
       <label class="col-md-4 control-label">Time</label>
       <div class="col-md-6">
         <div class="input-group">
-          <input id="time_hours" v-model="form.time_hours" type="text" maxlength="2" class="form-control date-filter" placeholder="Hours">
+          <input
+            id="time_hours"
+            v-model="form.time_hours"
+            type="text"
+            maxlength="2"
+            class="form-control date-filter"
+            placeholder="Hours"
+          >
           <span class="input-group-addon">:</span>
-          <input id="time_minutes" v-model="form.time_minutes" type="text" maxlength="2" class="form-control date-filter" placeholder="Minutes">
+          <input
+            id="time_minutes"
+            v-model="form.time_minutes"
+            type="text"
+            maxlength="2"
+            class="form-control date-filter"
+            placeholder="Minutes"
+          >
           <span class="input-group-addon">:</span>
-          <input id="time_seconds" v-model="form.time_seconds" type="text" maxlength="2" class="form-control date-filter" placeholder="Seconds">
+          <input
+            id="time_seconds"
+            v-model="form.time_seconds"
+            type="text"
+            maxlength="2"
+            class="form-control date-filter"
+            placeholder="Seconds"
+          >
         </div>
         <div v-if="errors.time" class="help-block">
           <div v-for="(error, index) in errors.time" :key="index"><strong>{{ error }}</strong></div>
@@ -49,34 +70,26 @@
 </template>
 
 <script>
-  import padStart from 'lodash-es/padStart'
+import padStart from 'lodash-es/padStart'
 
-  export default {
+export default {
 
-    props: {
-      form: {
-        type: Object,
-        required: true,
-      },
-      errors: {
-        type: Object,
-        default: () => ({}),
-      }
-    },
+  props: {
+    form: { type: Object, required: true },
+    errors: { type: Object, default: () => ({}) },
+  },
 
-    methods: {
-
-      onSubmit () {
-        this.$emit('onSubmit', {
-          date: this.form.date,
-          distance: this.form.distance,
-          time: padStart(this.form.time_hours, 2, '0') +
+  methods: {
+    onSubmit () {
+      this.$emit('onSubmit', {
+        date: this.form.date,
+        distance: this.form.distance,
+        time: padStart(this.form.time_hours, 2, '0') +
           ':' + padStart(this.form.time_minutes, 2, '0') +
           ':' + padStart(this.form.time_seconds, 2, '0'),
-        })
-      }
-
+      })
     },
+  },
 
-  }
+}
 </script>

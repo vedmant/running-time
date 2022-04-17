@@ -10,11 +10,11 @@ const state = {
 
 const actions = {
 
-  loadAllEntries ({commit, dispatch}, params) {
+  loadAllEntries ({ commit, dispatch }, params) {
     commit('LOAD_ALL_ENTRIES')
 
     return new Promise((resolve, reject) => {
-      axios.get(Config.apiPath + 'entry/all', {params})
+      axios.get(Config.apiPath + 'entry/all', { params })
         .then(
           response => {
             commit('LOAD_ALL_ENTRIES_OK', response.data.entries)
@@ -40,5 +40,5 @@ const mutations = {
 export default {
   state,
   actions,
-  mutations
+  mutations,
 }

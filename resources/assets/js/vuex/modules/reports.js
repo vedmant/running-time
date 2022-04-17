@@ -13,11 +13,11 @@ const state = {
 
 const actions = {
 
-  loadWeeklyReport ({commit, dispatch}, params) {
+  loadWeeklyReport ({ commit, dispatch }, params) {
     commit('LOAD_WEEKLY_REPORT')
 
     return new Promise((resolve, reject) => {
-      axios.get(Config.apiPath + 'report/weekly', {params})
+      axios.get(Config.apiPath + 'report/weekly', { params })
         .then(
           response => {
             commit('LOAD_WEEKLY_REPORT_OK', response.data.weekly)
@@ -43,5 +43,5 @@ const mutations = {
 export default {
   state,
   actions,
-  mutations
+  mutations,
 }

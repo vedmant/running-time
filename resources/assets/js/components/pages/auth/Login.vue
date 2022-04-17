@@ -49,50 +49,50 @@
 </template>
 
 <script>
-  import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
-  export default {
+export default {
 
-    data () {
-      return {
-        form: {
-          email: Laravel.demoMode ? 'admin@gmail.com' : '',
-          password: Laravel.demoMode ? '123456' : '',
-        },
-        error: '',
-        errors: {},
-      }
-    },
-
-    computed: {
-      ...mapState({
-        me: state => state.auth.me,
-      })
-    },
-
-    methods: {
-
-      ...mapActions([
-        'login',
-        'addToastMessage',
-      ]),
-
-      onSubmit () {
-        this.errors = {}
-        this.login(this.form)
-          .then(() => {
-            this.addToastMessage({
-              text: 'You logged in!',
-              type: 'success'
-            })
-            this.$router.replace('/dashboard')
-          })
-          .catch((data) => {
-            this.error = data.message
-            this.errors = data.errors || {}
-          })
+  data () {
+    return {
+      form: {
+        email: Laravel.demoMode ? 'admin@gmail.com' : '',
+        password: Laravel.demoMode ? '123456' : '',
       },
-
+      error: '',
+      errors: {},
     }
-  }
+  },
+
+  computed: {
+    ...mapState({
+      me: state => state.auth.me,
+    }),
+  },
+
+  methods: {
+
+    ...mapActions([
+      'login',
+      'addToastMessage',
+    ]),
+
+    onSubmit () {
+      this.errors = {}
+      this.login(this.form)
+        .then(() => {
+          this.addToastMessage({
+            text: 'You logged in!',
+            type: 'success',
+          })
+          this.$router.replace('/dashboard')
+        })
+        .catch((data) => {
+          this.error = data.message
+          this.errors = data.errors || {}
+        })
+    },
+
+  },
+}
 </script>
