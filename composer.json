@@ -9,6 +9,7 @@
   "license": "MIT",
   "require": {
     "php": "^8.0",
+    "fakerphp/faker": "^1.19",
     "fruitcake/laravel-cors": "^2.0.5",
     "guzzlehttp/guzzle": "^7.2",
     "laravel/framework": "^9.0",
@@ -20,7 +21,6 @@
   "require-dev": {
     "barryvdh/laravel-ide-helper": "^2.12",
     "codedungeon/phpunit-result-printer": "^0.31.0",
-    "fakerphp/faker": "^1.9.1",
     "laravel/browser-kit-testing": "^6.3",
     "laravel/sail": "^1.0.1",
     "mockery/mockery": "^1.4.4",
