@@ -10,13 +10,12 @@
   "require": {
     "php": "^8.0",
     "fakerphp/faker": "^1.19",
-    "fruitcake/laravel-cors": "^2.0.5",
     "guzzlehttp/guzzle": "^7.2",
-    "laravel/framework": "^9.0",
-    "laravel/sanctum": "^2.14",
-    "laravel/telescope": "^4.7",
+    "laravel/framework": "^10.0",
+    "laravel/sanctum": "^3.2",
+    "laravel/telescope": "^v4.16.0",
     "laravel/tinker": "^2.7",
-    "laravel/ui": "^3.4"
+    "laravel/ui": "^v4.2.2"
   },
   "require-dev": {
     "barryvdh/laravel-ide-helper": "^2.12",
@@ -26,7 +25,7 @@
     "mockery/mockery": "^1.4.4",
     "nunomaduro/collision": "^6.1",
     "phpunit/phpunit": "^9.5.10",
-    "spatie/laravel-ignition": "^1.0"
+    "spatie/laravel-ignition": "^2.0"
   },
   "autoload": {
     "psr-4": {
@@ -66,8 +65,12 @@
   "config": {
     "optimize-autoloader": true,
     "preferred-install": "dist",
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "pestphp/pest-plugin": true,
+      "php-http/discovery": true
+    }
   },
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "prefer-stable": true
 }

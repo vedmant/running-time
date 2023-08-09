@@ -1,10 +1,8 @@
-version: '2'
+version: '3'
 services:
 
   php:
     build: ./
-    container_name: running_time_php
-    image: running_time_php
     volumes:
       - .:/app:cached
       - ./docker/php.ini:/usr/local/etc/php/conf.d/custom.ini
@@ -16,9 +14,8 @@ services:
 
   nginx:
     image: nginx:alpine
-    container_name: running_time_nginx
     ports:
-      - 8080:80
+      - 8000:80
     volumes:
       - .:/app
       - ./docker/default.conf:/etc/nginx/conf.d/default.conf
@@ -27,7 +24,6 @@ services:
 
   mariadb:
     image: mariadb:latest
-    container_name: running_time_mysql
     ports:
      - 33060:3306
     volumes:
@@ -40,13 +36,11 @@ services:
 
   mailcatcher:
     image: schickling/mailcatcher
-    container_name: running_time_mailcatcher
     ports:
       - 1080:1080
 
   redis:
     image: redis:3-alpine
-    container_name: running_time_redis
     ports:
       - 63790:6379
 

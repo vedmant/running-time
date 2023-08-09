@@ -1,6 +1,6 @@
 ![actions workflow](https://github.com/vedmant/running-time/workflows/Test/badge.svg)
 
-## Laravel 9 & Vue.js 3 (Options API) + Vuex Sample Project ##
+## Laravel 10 & Vue.js 3 (Options API) + Vuex Sample Project ##
 
 **Laravel & Vue Sample Project** is a tutorial Single Page Application (SPA) for Laravel 6 and Vue.js 2.6 Frontend
 
@@ -48,15 +48,15 @@ If you don't have installed yarn, run `npm install -g yarn`
 * Simple reports
 * Full Phpunit test coverage
 * E2E tests with Cypress
-* Continuous integration with Travis CI
+* Continuous integration with GitHub Actions
 * Development configuration with Docker
 
 
 ### Includes ###
 
-* [Laravel Passport](https://laravel.com/docs/5.4/passport) API Authentication
+* [Laravel Sanctum](https://laravel.com/docs/10.x/sanctum) API Authentication
 * [API Docs Gerator](https://github.com/mpociot/laravel-apidoc-generator) Laravel API Documentation Generator
-* [Laravel Telescope](https://laravel.com/docs/6.x/telescope) Laravel Telescope for debugging
+* [Laravel Telescope](https://laravel.com/docs/10.x/telescope) Laravel Telescope for debugging
 * [Vue.js](https://vuejs.org/) The Progressive JavaScript Framework
 * [Vuex](https://vuex.vuejs.org/en/intro.html) State management pattern + library for Vue.js
 * [Vue-Router](https://router.vuejs.org/en/) Router library for Vue.js
