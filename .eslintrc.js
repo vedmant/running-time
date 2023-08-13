@@ -1,56 +1,81 @@
-// http://eslint.org/docs/user-guide/configuring
-
 module.exports = {
   root: true,
-  parserOptions: {
-    parser: 'babel-eslint',
-    sourceType: 'module',
-    ecmaVersion: 2017,
-  },
-  env: {
-    browser: true,
-  },
-  extends: [
-    'plugin:vue/recommended',
+  extends: ['@antfu', 'plugin:tailwindcss/recommended'],
+  plugins: [
+    'tailwindcss',
   ],
-  // add your custom rules here
-  rules: {
-    // allow paren-less arrow functions
-    'arrow-parens': 0,
-    // allow async-await
-    'generator-star-spacing': 0,
-    // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-
-    'comma-dangle': 0,
-
-    'no-multiple-empty-lines': 0,
-
-    'space-unary-ops': [2, {
-      'words': true,
-      'nonwords': true,
-      'overrides': {
-        '++': false,
-        '--': false,
-      },
-    }],
-
-    'vue/singleline-html-element-content-newline': 0,
-    'vue/multiline-html-element-content-newline': 0,
-    'vue/max-attributes-per-line': ['error', {
-      'singleline': 6,
-      'multiline': 1,
-    }],
-    'vue/multi-word-component-names': 0,
-    'vue/no-mutating-props': ['warn'],
-  },
-
   globals: {
-    '$': false,
-    'jQuery': false,
-    'Together': false,
-    'bootbox': false,
-    'Stripe': false,
-    'Laravel': false,
+    defineNuxtConfig: 'readonly',
+  },
+  rules: {
+    'vue/component-tags-order': ['error', {
+      order: ['template', 'script', 'style'],
+    }],
+    'camelcase': ['warn'],
+    'import/newline-after-import': ['warn'],
+    'no-unused-vars': ['warn'],
+    'vue/no-unused-vars': ['warn'],
+    'vue/new-line-between-multi-line-property': ['warn', { minLineOfMultilineProperty: 3 }],
+    'vue/max-attributes-per-line': ['error', { singleline: { max: 5 }, multiline: { max: 1 } }],
+    'vue/first-attribute-linebreak': ['error', { singleline: 'beside' }],
+    'vue/component-definition-name-casing': ['error', 'PascalCase'],
+    'vue/component-name-in-template-casing': ['error', 'PascalCase', {
+      registeredComponentsOnly: false,
+      ignores: [
+        'v-date-picker',
+      ],
+    }],
+    'vue/match-component-import-name': ['error'],
+    'tailwindcss/classnames-order': 'warn',
+    'tailwindcss/no-custom-classname': 0,
+    'tailwindcss/no-contradicting-classname': 'error',
+    'tailwindcss/migration-from-tailwind-2': 0,
+    'vue/order-in-components': ['warn', {
+      order: [
+        'el',
+        'name',
+        'key',
+        'parent',
+        'functional',
+        ['delimiters', 'comments'],
+        ['components', 'directives', 'filters'],
+        'extends',
+        'mixins',
+        ['provide', 'inject'],
+        'ROUTER_GUARDS',
+        'layout',
+        'middleware',
+        'validate',
+        'scrollToTop',
+        'transition',
+        'loading',
+        'inheritAttrs',
+        'model',
+        ['props', 'propsData'],
+        'emits',
+        'setup',
+        'asyncData',
+        'data',
+        'fetch',
+        'computed',
+        'watch',
+        'watchQuery',
+        'LIFECYCLE_HOOKS',
+        'methods',
+        ['template', 'render'],
+        'renderError',
+        'head',
+      ],
+    }],
+    'space-before-function-paren': ['error', 'always'],
+    '@typescript-eslint/space-before-function-paren': ['error', 'always'],
+    '@typescript-eslint/brace-style': ['error', '1tbs', { allowSingleLine: true }],
+    'brace-style': ['error', '1tbs', { allowSingleLine: true }],
+    'vue/quote-props': ['error', 'as-needed'],
+    'curly': ['error', 'all'],
+    'no-sequences': 0,
+    'max-statements-per-line': ['error', { max: 2 }],
+    'space-unary-ops': ['error', { words: true, nonwords: false, overrides: { '!': true, '!!': true } }],
+    'no-alert': 0,
   },
 }

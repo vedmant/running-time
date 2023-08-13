@@ -50,8 +50,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-import EntryForm from '../entry/partials/Form'
+import EntryForm from '../entry/partials/Form.vue'
 import 'chart.js/auto'
 import { Line } from 'vue-chartjs'
 

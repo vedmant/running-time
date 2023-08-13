@@ -33,5 +33,8 @@ jobs:
           php artisan key:generate
           php artisan migrate
 
+      - name: Run Code Sniffer
+        run: vendor/bin/phpcs
+
       - name: Run Testsuite
         run: vendor/bin/phpunit tests/

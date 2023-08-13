@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import padStart from 'lodash-es/padStart'
+import padStart from 'lodash/padStart'
 
 export default {
 

@@ -21,10 +21,9 @@ class DashboardController extends Controller
      *
      * Get user dashboard data
      *
-     * @param Request $request
      * @return mixed
      */
-    public function data(Request $request)
+    public function data()
     {
         /** @var User $me */
         $me = auth()->user();
@@ -54,15 +53,16 @@ class DashboardController extends Controller
      *
      * Get admin dashboard data
      *
-     * @param Request $request
      * @return mixed
      */
-    public function adminData(Request $request)
+    public function adminData()
     {
         /** @var User $me */
         $me = auth()->user();
 
-        if ( ! $me->isAdmin() && ! $me->isManager()) abort(401);
+        if (! $me->isAdmin() && ! $me->isManager()) {
+            abort(401);
+        }
 
         $usersCount = User::count();
         $entriesCount = Entry::count();

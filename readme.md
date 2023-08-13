@@ -1,8 +1,8 @@
 ![actions workflow](https://github.com/vedmant/running-time/workflows/Test/badge.svg)
 
-## Laravel 10 & Vue.js 3 (Options API) + Vuex Sample Project ##
+## Laravel 10 & Vue.js 3 (Options API) + Pinia Sample Project ##
 
-**Laravel & Vue Sample Project** is a tutorial Single Page Application (SPA) for Laravel 6 and Vue.js 2.6 Frontend
+**Laravel & Vue Sample Project** is a tutorial Single Page Application (SPA) for Laravel 10 and Vue.js 3 Frontend
 
 [Demo](https://running-time.vedmant.com/)
 
@@ -39,15 +39,17 @@ If you don't have installed yarn, run `npm install -g yarn`
 
 ### Main features ###
 
-* Fully separate Backend and Frontend
-* Authentication based on Laravel Passport
+* Separate Laravel Backend and Vue 3 Frontend
+* Authentication based on Laravel Sanctum Access tokens
 * List pages with filters and CRUD editing
 * Backend validation
-* Admin panel
+* Admin area (for admin user)
 * Simple widgets
 * Simple reports
-* Full Phpunit test coverage
+* Charts
+* Full PHPUnit test coverage
 * E2E tests with Cypress
+* PHP Code Sniffer for PHP code standard check
 * Continuous integration with GitHub Actions
 * Development configuration with Docker
 
@@ -58,7 +60,7 @@ If you don't have installed yarn, run `npm install -g yarn`
 * [API Docs Gerator](https://github.com/mpociot/laravel-apidoc-generator) Laravel API Documentation Generator
 * [Laravel Telescope](https://laravel.com/docs/10.x/telescope) Laravel Telescope for debugging
 * [Vue.js](https://vuejs.org/) The Progressive JavaScript Framework
-* [Vuex](https://vuex.vuejs.org/en/intro.html) State management pattern + library for Vue.js
+* [Pinia](https://pinia.vuejs.org/) State management
 * [Vue-Router](https://router.vuejs.org/en/) Router library for Vue.js
 * [Axios](https://github.com/axios/axios) HTTP client
 * [Docker](https://www.docker.com/) Development setup with Docker
@@ -79,7 +81,6 @@ If you don't have installed yarn, run `npm install -g yarn`
 * Global loader overlay for all requests
 * Eslint code standard check
 * Lodash-es to allow tree shaking for bundle size optimization
-* Support IE11 with Polyfills
 
 
 ### Development ###
@@ -137,7 +138,7 @@ To run the project in Docker just run:
 
     docker-compose up
 
-And open http://localhost:8080
+And open http://localhost:8000
 
 To run all the Artisan or Test commands you can use `docker-compose run php` before the command to run it in the container.
 If you want to run command in currently running container, use `docker-compose exec php`.
@@ -174,7 +175,6 @@ For testing application the database is seeded with sample users:
 
 ### TODO ###
 
-- Upgrade Bootstrap to v4
 - Setup Travis to run Cypress tests
 - Add more E2E cypress tests
 

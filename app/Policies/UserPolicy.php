@@ -13,10 +13,9 @@ class UserPolicy
      * Before all
      *
      * @param User $user
-     * @param      $ability
      * @return bool
      */
-    public function before(User $user, $ability)
+    public function before(User $user, $ability) // phpcs:ignore
     {
         if ($user->isAdmin() || $user->isManager()) {
             return true;
@@ -29,7 +28,7 @@ class UserPolicy
      * @param  \App\User  $user
      * @return mixed
      */
-    public function viewAll(User $user)
+    public function viewAll(User $user) // phpcs:ignore
     {
         return false;
     }
@@ -52,7 +51,7 @@ class UserPolicy
      * @param  \App\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user) // phpcs:ignore
     {
         return false;
     }
@@ -76,7 +75,7 @@ class UserPolicy
      * @param  \App\User  $onUser
      * @return mixed
      */
-    public function delete(User $user, User $onUser)
+    public function delete(User $user, User $onUser) // phpcs:ignore
     {
         return false;
     }

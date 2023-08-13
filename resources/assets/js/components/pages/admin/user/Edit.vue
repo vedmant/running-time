@@ -12,7 +12,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">Edit User</div>
           <div class="panel-body">
-            <user-form :form="form" :errors="errors" @onSubmit="onSubmit" />
+            <UserForm v-model:form="form" :errors="errors" @onSubmit="onSubmit" />
           </div>
         </div>
       </div>
@@ -21,14 +21,12 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-import UserForm from './partials/Form.vue'
+import UserForm from './partials/UserForm.vue'
+import { useToastStore } from '~/stores/toast'
 
 export default {
 
-  components: {
-    UserForm,
-  },
+  components: { UserForm },
 
   data () {
     return {
@@ -37,7 +35,6 @@ export default {
   },
 
   computed: {
-
     id () {
       return this.$route.params.id
     },
@@ -55,7 +52,6 @@ export default {
         role: this.user.role,
       }
     },
-
   },
 
   mounted () {
@@ -63,17 +59,15 @@ export default {
   },
 
   methods: {
-
     ...mapActions([
       'loadUser',
       'updateUser',
-      'addToastMessage',
     ]),
 
     onSubmit (form) {
       this.updateUser({ id: this.id, form })
         .then(() => {
-          this.addToastMessage({
+          useToastStore().addToastMessage({
             text: 'User was updated!',
             type: 'success',
           })

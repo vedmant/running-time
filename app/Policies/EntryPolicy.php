@@ -17,7 +17,7 @@ class EntryPolicy
      * @param      $ability
      * @return bool
      */
-    public function before(User $user, $ability)
+    public function before(User $user, $ability) // phpcs:ignore
     {
         if ($user->isAdmin()) {
             return true;
@@ -30,7 +30,7 @@ class EntryPolicy
      * @param  \App\User  $user
      * @return mixed
      */
-    public function all(User $user)
+    public function all(User $user) // phpcs:ignore
     {
         return false;
     }
@@ -53,7 +53,7 @@ class EntryPolicy
      * @param  \App\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user) // phpcs:ignore
     {
         return true;
     }

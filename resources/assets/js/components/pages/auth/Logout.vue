@@ -3,7 +3,8 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from 'pinia'
+import { useAuthStore } from '../../../stores/auth'
 
 export default {
 
@@ -13,7 +14,7 @@ export default {
   },
 
   methods: {
-    ...mapActions([
+    ...mapActions(useAuthStore, [
       'logout',
     ]),
   },

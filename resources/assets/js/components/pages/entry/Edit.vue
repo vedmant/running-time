@@ -21,10 +21,8 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-import moment from 'moment-mini'
-import padStart from 'lodash-es/padStart'
-import EntryForm from './partials/Form'
+import padStart from 'lodash/padStart'
+import EntryForm from './partials/Form.vue'
 
 export default {
 

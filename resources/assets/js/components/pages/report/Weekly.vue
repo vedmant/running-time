@@ -43,7 +43,6 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
 import 'chart.js/auto'
 import { Line } from 'vue-chartjs'
 

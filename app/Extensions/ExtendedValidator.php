@@ -14,9 +14,8 @@ class ExtendedValidator extends Validator
      * @param $parameters
      * @return bool
      */
-    public function validateTimeRequired($attribute, $value, $parameters)
+    public function validateTimeRequired($attribute, $value, $parameters) // phpcs:ignore
     {
         return time2secconds($value) > 0;
     }
-
 }

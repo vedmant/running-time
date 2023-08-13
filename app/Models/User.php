@@ -42,10 +42,11 @@ class User extends Model implements
      *
      * @return void
      */
-    protected static function boot() {
+    protected static function boot()
+    {
         parent::boot();
 
-        static::deleting(function($user) {
+        static::deleting(function ($user) {
             $user->entries()->delete();
         });
     }

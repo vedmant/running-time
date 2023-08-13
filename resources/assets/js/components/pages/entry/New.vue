@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
 import EntryForm from './partials/Form.vue'
 
 export default {

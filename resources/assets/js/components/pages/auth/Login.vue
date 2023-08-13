@@ -49,7 +49,9 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapActions, mapState } from 'pinia'
+import { useAuthStore } from '~/stores/auth'
+import { useToastStore } from '../../../stores/toast'
 
 export default {
 
@@ -65,26 +67,17 @@ export default {
   },
 
   computed: {
-    ...mapState({
-      me: state => state.auth.me,
-    }),
+    ...mapState(useAuthStore, ['me']),
   },
 
   methods: {
-
-    ...mapActions([
-      'login',
-      'addToastMessage',
-    ]),
+    ...mapActions(useAuthStore, ['login']),
 
     onSubmit () {
       this.errors = {}
       this.login(this.form)
         .then(() => {
-          this.addToastMessage({
-            text: 'You logged in!',
-            type: 'success',
-          })
+          useToastStore().addToastMessage({ text: 'You logged in!', type: 'success' })
           this.$router.replace('/dashboard')
         })
         .catch((data) => {
@@ -92,7 +85,6 @@ export default {
           this.errors = data.errors || {}
         })
     },
-
   },
 }
 </script>

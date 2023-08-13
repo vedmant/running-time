@@ -32,7 +32,8 @@ class ReportController extends Controller
 
         /** @var LengthAwarePaginator $weekly */
         $query = DB::table('entries')
-            ->select($sqlite ?
+            ->select(
+                $sqlite ?
                 DB::raw('STRFTIME("%W", `date`) as `week`, STRFTIME("%Y", `date`) as `year`, avg(`speed`) as `avg_speed`, avg(`distance`) as `avg_distance`')
                 : DB::raw('WEEK(`date`) as `week`, YEAR(`date`) as `year`, avg(`speed`) as `avg_speed`, avg(`distance`) as `avg_distance`')
             )

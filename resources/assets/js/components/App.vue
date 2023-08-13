@@ -1,12 +1,12 @@
 <template>
   <div>
-    <spinner />
-    <toast position="nw" />
+    <Spinner />
+    <Toast position="nw" />
 
-    <navbar />
+    <Navbar />
 
-    <transition name="fade" mode="out-in">
-      <router-view />
-    </transition>
+    <Transition name="fade" mode="out-in">
+      <RouterView />
+    </Transition>
   </div>
 </template>

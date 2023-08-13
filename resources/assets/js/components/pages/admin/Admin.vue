@@ -31,7 +31,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from 'pinia'
+import { useAuthStore } from '../../../stores/auth'
 
 export default {
 
@@ -40,9 +41,7 @@ export default {
   },
 
   computed: {
-    ...mapState({
-      me: state => state.auth.me,
-    }),
+    ...mapState(useAuthStore, ['me']),
   },
 
   methods: {},

@@ -1,5 +1,5 @@
 import moment from 'moment-mini'
-import padStart from 'lodash-es/padStart'
+import padStart from 'lodash/padStart'
 
 export default {
   methods: {

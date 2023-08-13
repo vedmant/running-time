@@ -1,32 +1,31 @@
 import { createWebHashHistory, createRouter } from 'vue-router'
-import store from './vuex/store'
-import { sync } from 'vuex-router-sync'
 
-import Front from './components/pages/front/Front'
+import Front from './components/pages/front/Front.vue'
 
-import Login from './components/pages/auth/Login'
-import Logout from './components/pages/auth/Logout'
-import Register from './components/pages/auth/Register'
+import Login from './components/pages/auth/Login.vue'
+import Logout from './components/pages/auth/Logout.vue'
+import Register from './components/pages/auth/Register.vue'
 
-import Dashboard from './components/pages/dashboard/Dashboard'
+import Dashboard from './components/pages/dashboard/Dashboard.vue'
 
-import EntryList from './components/pages/entry/List'
-import EntryNew from './components/pages/entry/New'
-import EntryEdit from './components/pages/entry/Edit'
+import EntryList from './components/pages/entry/List.vue'
+import EntryNew from './components/pages/entry/New.vue'
+import EntryEdit from './components/pages/entry/Edit.vue'
 
-import ReportWeekly from './components/pages/report/Weekly'
+import ReportWeekly from './components/pages/report/Weekly.vue'
 
-import Admin from './components/pages/admin/Admin'
-import AdminDashboard from './components/pages/admin/dashboard/Dashboard'
-import UserList from './components/pages/admin/user/List'
-import UserShow from './components/pages/admin/user/Show'
-import UserEdit from './components/pages/admin/user/Edit'
+import Admin from './components/pages/admin/Admin.vue'
+import AdminDashboard from './components/pages/admin/dashboard/Dashboard.vue'
+import UserList from './components/pages/admin/user/List.vue'
+import UserShow from './components/pages/admin/user/Show.vue'
+import UserEdit from './components/pages/admin/user/Edit.vue'
 
-import AdminEntryList from './components/pages/admin/entry/List'
-import AdminEntryEdit from './components/pages/admin/entry/Edit'
+import AdminEntryList from './components/pages/admin/entry/List.vue'
+import AdminEntryEdit from './components/pages/admin/entry/Edit.vue'
 
-import Error404 from './components/pages/404'
-import Profile from './components/pages/auth/Profile'
+import Error404 from './components/pages/404.vue'
+import Profile from './components/pages/auth/Profile.vue'
+import { useAuthStore } from './stores/auth'
 
 const routes = [
   { path: '/', component: Front },
@@ -73,28 +72,27 @@ const router = createRouter({
   routes,
 })
 
-// Sync Vuex and vue-router;
-sync(store, router)
-
 /**
  * Authenticated routes
  */
 router.beforeEach(async (to, from, next) => {
-  if (! store.state.auth.me && ! store.state.auth.authChecked) {
-    await store.dispatch('checkLogin')
-      .catch(() => {
-      })
+  const authStore = useAuthStore()
+
+  if (! authStore.me && ! authStore.authChecked) {
+    try {
+      await authStore.checkLogin()
+    } catch (e) {}
   }
-  const me = store.state.auth.me
+  const me = authStore.me
 
   if (to.matched.some(record => record.meta.guestOnly) && me) {
-    // Guest only page, dont follow there when user is authenticated
+    // Guest only page, don't follow there when user is authenticated
     next(false)
   } else if (to.matched.some(record => record.meta.requiresAuth) && ! me) {
     // if route requires auth and user isn't authenticated
     next('/login')
   } else if (to.matched.some(record => record.meta.requiresAdmin) &&
-    (! me || ! ['admin', 'manager'].includes(store.state.auth.me.role))) {
+    (! me || ! ['admin', 'manager'].includes(authStore.me.role))) {
     // if route required admin or manager role
     next('/login')
   } else {

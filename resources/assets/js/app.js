@@ -1,30 +1,13 @@
-import 'core-js/stable'
-import 'regenerator-runtime/runtime'
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import axios from 'axios'
-import jQuery from 'jquery'
-import moment from 'moment-mini'
-import store from './vuex/store' // vuex store instance
 import router from './router' // vue-router instance
 import './mixins'
-import App from './components/App'
-import Navbar from './components/layout/Navbar'
-import Spinner from './components/layout/Spinner'
-import Toast from './components/layout/Toast'
+import App from './components/App.vue'
+import Navbar from './components/layout/Navbar.vue'
+import Spinner from './components/layout/Spinner.vue'
+import Toast from './components/layout/Toast.vue'
 import mixins from './mixins'
-
-/**
- * Assing global variables
- */
-
-window.$ = window.jQuery = jQuery
-window.moment = moment
-
-/**
- * Require jQuery and Vue dependant libaries
- */
-
-require('bootstrap-sass')
 
 /**
  * Vue Settings
@@ -56,7 +39,7 @@ axios.interceptors.response.use(response => response, error => {
  */
 const app = createApp(App)
 app.use(router)
-app.use(store)
+app.use(createPinia())
 
 // Global Vue Components
 app.component('Navbar', Navbar)

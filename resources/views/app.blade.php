@@ -11,9 +11,9 @@
    <title>{{ config('app.name', 'Running Times') }}</title>
 
    <!-- Styles -->
-   <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    @vite(['resources/assets/sass/app.scss'])
 
-   <!-- Scripts -->
+    <!-- Scripts -->
    <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(), 'demoMode' => env('APP_DEMO')]) !!};</script>
 </head>
 <body>
@@ -21,8 +21,6 @@
 <div id="app"></div>
 
 <!-- Scripts -->
-<script src="{{ mix('js/manifest.js') }}"></script>
-<script src="{{ mix('js/vendor.js') }}"></script>
-<script src="{{ mix('js/app.js') }}"></script>
+@vite(['resources/assets/js/app.js'])
 </body>
 </html>

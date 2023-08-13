@@ -1,10 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 // Fonts
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
-// Variables
-@import "variables";
-// Bootstrap
-$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
 /**
  * Transitions
@@ -26,9 +25,6 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 .marginpulltop15{ margin-top: -15px; }
 .marginpulltop20{ margin-top: -20px; }
 .marginright10{ margin-right: 10px; }
-@media (max-width: $screen-sm-max){
-   .input-group-stack-sm{ display: block; }
-}
 
 /**
  * Spinner

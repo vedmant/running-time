@@ -71,7 +71,9 @@ class Entry extends Model
     public function scopeFilter($query, $filters)
     {
         foreach ($filters as $filter => $value) {
-            if ( ! $value) continue;
+            if (! $value) {
+                continue;
+            }
             switch ($filter) {
                 case 'dateFrom':
                     $query->where('date', '>=', Carbon::parse($value)->toDateString());

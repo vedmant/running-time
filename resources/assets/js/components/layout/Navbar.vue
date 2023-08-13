@@ -113,7 +113,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from 'pinia'
+import { useAuthStore } from '../../stores/auth'
 
 export default {
 
@@ -122,16 +123,7 @@ export default {
   },
 
   computed: {
-    ...mapState({
-      me: state => state.auth.me,
-      route: state => state.route,
-    }),
-  },
-
-  watch: {
-    route () {
-      this.$forceUpdate() // Tempopary fix for wrong router navigation after login
-    },
+    ...mapState(useAuthStore, ['me']),
   },
 
   mounted () {

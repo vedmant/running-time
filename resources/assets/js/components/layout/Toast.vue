@@ -1,5 +1,53 @@
+<template>
+  <div class="toast" :class="positionClass">
+    <transition-group name="toast" appear>
+      <div v-for="m in messages" :key="m.id" class="toast-message" :class="messageTypeClass(m)" role="note">
+        <div class="toast-message-text">{{ m.text }}</div>
+        <button class="toast-button" aria-label="Close" type="button" @click="close(m.id)" />
+      </div>
+    </transition-group>
+  </div>
+</template>
+
+<script>
+import { mapActions, mapGetters } from 'pinia'
+import { useToastStore } from '~/stores/toast'
+
+export default {
+  props: {
+    position: {
+      validator (value) {
+        return /^(:?n|s|nw|ne|sw|se)$/.test(value)
+      },
+      default: 'ne',
+    },
+  },
+
+  computed: {
+    ...mapGetters(useToastStore, ['messages']),
+
+    positionClass () {
+      return `toast-position-${this.position}`
+    },
+  },
+
+  methods: {
+    ...mapActions(useToastStore, {
+      close: 'removeToastMessage',
+    }),
+
+    messageTypeClass (message) {
+      return `toast-type-${message.type}`
+    },
+  },
+}
+</script>
+
 <style lang="scss">
+@use "sass:math";
+
 $width: 350px;
+
 .toast {
   position: fixed;
   width: $width;
@@ -52,13 +100,13 @@ $width: 350px;
 .toast-position-n {
   top: 10px;
   left: 50%;
-  margin-left: -$width / 2;
+  margin-left: math.div(-$width, 2);
 }
 
 .toast-position-s {
   bottom: 10px;
   left: 50%;
-  margin-left: -$width / 2;
+  margin-left: math.div(-$width, 2);
 }
 
 .toast-position-ne {
@@ -125,47 +173,3 @@ $width: 350px;
 }
 </style>
 
-<template>
-  <div class="toast" :class="positionClass">
-    <transition-group name="toast" appear>
-      <div v-for="m in messages" :key="m.id" class="toast-message" :class="messageTypeClass(m)" role="note">
-        <div class="toast-message-text">{{ m.text }}</div>
-        <button class="toast-button" aria-label="Close" type="button" @click="close(m.id)" />
-      </div>
-    </transition-group>
-  </div>
-</template>
-
-<script>
-import { mapGetters, mapActions } from 'vuex'
-import { h } from 'vue'
-
-export default {
-  props: {
-    position: {
-      validator (value) {
-        return /^(:?n|s|nw|ne|sw|se)$/.test(value)
-      },
-      default: 'ne',
-    },
-  },
-
-  computed: {
-    ...mapGetters({
-      messages: 'toastMessages',
-    }),
-    positionClass () {
-      return `toast-position-${this.position}`
-    },
-  },
-
-  methods: {
-    ...mapActions({
-      close: 'removeToastMessage',
-    }),
-    messageTypeClass (message) {
-      return `toast-type-${message.type}`
-    },
-  },
-}
-</script>
