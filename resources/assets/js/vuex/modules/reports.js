@@ -1,6 +1,6 @@
 import axios from 'axios'
-import * as Config from '../../config'
 import moment from 'moment-mini'
+import * as Config from '../../config'
 
 const state = {
   weekly: {
@@ -13,17 +13,17 @@ const state = {
 
 const actions = {
 
-  loadWeeklyReport ({ commit, dispatch }, params) {
+  loadWeeklyReport({ commit, dispatch }, params) {
     commit('LOAD_WEEKLY_REPORT')
 
     return new Promise((resolve, reject) => {
-      axios.get(Config.apiPath + 'report/weekly', { params })
+      axios.get(`${Config.apiPath  }report/weekly`, { params })
         .then(
-          response => {
+          (response) => {
             commit('LOAD_WEEKLY_REPORT_OK', response.data.weekly)
             resolve()
           })
-        .catch(error => {
+        .catch((error) => {
           commit('LOAD_WEEKLY_REPORT_FAIL')
           reject(error.response.data)
         })
@@ -34,7 +34,7 @@ const actions = {
 
 const mutations = {
 
-  LOAD_WEEKLY_REPORT_OK (state, report) {
+  LOAD_WEEKLY_REPORT_OK(state, report) {
     state.weekly = report
   },
 

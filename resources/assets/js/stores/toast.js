@@ -1,6 +1,4 @@
 import { defineStore } from 'pinia'
-import axios from 'axios'
-import * as Config from '../config'
 
 let maxToastId = 0
 
@@ -10,7 +8,7 @@ export const useToastStore = defineStore('toast', {
   }),
 
   actions: {
-    addToastMessage ({ text, type = 'info', dismissAfter = 5000 }) {
+    addToastMessage({ text, type = 'info', dismissAfter = 5000 }) {
       const id = ++maxToastId
 
       this.messages.push({
@@ -25,7 +23,7 @@ export const useToastStore = defineStore('toast', {
       }, dismissAfter)
     },
 
-    removeToastMessage (id) {
+    removeToastMessage(id) {
       this.messages = this.messages.filter(m => m.id !== id)
     },
   },

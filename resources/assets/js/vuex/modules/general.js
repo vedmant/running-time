@@ -13,38 +13,38 @@ const state = {
 
 const actions = {
 
-  stopLoading ({ commit }) {
+  stopLoading({ commit }) {
     commit('STOP_LOADING')
   },
 
-  loadDashboard ({ commit, dispatch }) {
+  loadDashboard({ commit, dispatch }) {
     commit('LOAD_DASHBOARD')
 
     return new Promise((resolve, reject) => {
-      axios.get(Config.apiPath + 'dashboard/data')
+      axios.get(`${Config.apiPath  }dashboard/data`)
         .then(
-          response => {
+          (response) => {
             commit('LOAD_DASHBOARD_OK', response.data)
             resolve()
           })
-        .catch(error => {
+        .catch((error) => {
           commit('LOAD_DASHBOARD_FAIL')
           reject(error.response.data)
         })
     })
   },
 
-  loadAdminDashboard ({ commit, dispatch }) {
+  loadAdminDashboard({ commit, dispatch }) {
     commit('LOAD_ADMIN_DASHBOARD')
 
     return new Promise((resolve, reject) => {
-      axios.get(Config.apiPath + 'dashboard/admin-data')
+      axios.get(`${Config.apiPath  }dashboard/admin-data`)
         .then(
-          response => {
+          (response) => {
             commit('LOAD_ADMIN_DASHBOARD_OK', response.data)
             resolve()
           })
-        .catch(error => {
+        .catch((error) => {
           commit('LOAD_ADMIN_DASHBOARD_FAIL')
           reject(error.response.data)
         })
@@ -115,12 +115,12 @@ const mutations = {
     state.loading = false
   }),
 
-  LOAD_DASHBOARD_OK (state, dashboard) {
+  LOAD_DASHBOARD_OK(state, dashboard) {
     state.dashboard = dashboard
     state.loading = false
   },
 
-  LOAD_ADMIN_DASHBOARD_OK (state, dashboard) {
+  LOAD_ADMIN_DASHBOARD_OK(state, dashboard) {
     state.admin_dashboard = dashboard
     state.loading = false
   },

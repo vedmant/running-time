@@ -3,11 +3,11 @@ import padStart from 'lodash/padStart'
 
 export default {
   methods: {
-    range (begin, end) {
-      begin = parseInt(begin)
-      end = parseInt(end)
+    range(begin, end) {
+      begin = Number.parseInt(begin)
+      end = Number.parseInt(end)
 
-      let result = []
+      const result = []
 
       if (begin < end) {
         for (let i = begin; i <= end; i++) {
@@ -22,16 +22,16 @@ export default {
       return result
     },
 
-    secondsToTime (seconds) {
-      const duration = moment.duration(parseInt(seconds), 'seconds')
+    secondsToTime(seconds) {
+      const duration = moment.duration(Number.parseInt(seconds), 'seconds')
       const hours = Math.floor(duration.asHours())
 
-      return (hours ? hours + ':' : '') +
-        padStart(duration.minutes(), 2, '0') +
-        ':' + padStart(duration.seconds(), 2, '0')
+      return `${(hours ? `${hours  }:` : '') +
+        padStart(duration.minutes(), 2, '0') 
+        }:${  padStart(duration.seconds(), 2, '0')}`
     },
 
-    formatDate (date) {
+    formatDate(date) {
       return moment(date).format('MM/DD/YYYY')
     },
   },

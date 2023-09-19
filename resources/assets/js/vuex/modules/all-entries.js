@@ -10,17 +10,17 @@ const state = {
 
 const actions = {
 
-  loadAllEntries ({ commit, dispatch }, params) {
+  loadAllEntries({ commit, dispatch }, params) {
     commit('LOAD_ALL_ENTRIES')
 
     return new Promise((resolve, reject) => {
-      axios.get(Config.apiPath + 'entry/all', { params })
+      axios.get(`${Config.apiPath  }entry/all`, { params })
         .then(
-          response => {
+          (response) => {
             commit('LOAD_ALL_ENTRIES_OK', response.data.entries)
             resolve()
           })
-        .catch(error => {
+        .catch((error) => {
           commit('LOAD_ALL_ENTRIES_FAIL')
           reject(error.response.data)
         })
@@ -31,7 +31,7 @@ const actions = {
 
 const mutations = {
 
-  LOAD_ALL_ENTRIES_OK (state, entries) {
+  LOAD_ALL_ENTRIES_OK(state, entries) {
     state.entries = entries
   },
 

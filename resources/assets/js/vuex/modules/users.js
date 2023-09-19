@@ -11,68 +11,68 @@ const state = {
 
 const actions = {
 
-  loadUsers ({ commit, dispatch }, params) {
+  loadUsers({ commit, dispatch }, params) {
     commit('LOAD_USERS')
 
     return new Promise((resolve, reject) => {
-      axios.get(Config.apiPath + 'user', { params })
+      axios.get(`${Config.apiPath  }user`, { params })
         .then(
-          response => {
+          (response) => {
             commit('LOAD_USERS_OK', response.data.users)
             resolve()
           })
-        .catch(error => {
+        .catch((error) => {
           commit('LOAD_USERS_FAIL')
           reject(error.response.data)
         })
     })
   },
 
-  loadUser ({ commit, dispatch }, id) {
+  loadUser({ commit, dispatch }, id) {
     commit('LOAD_USER')
 
     return new Promise((resolve, reject) => {
-      axios.get(Config.apiPath + 'user/' + id)
+      axios.get(`${Config.apiPath  }user/${  id}`)
         .then(
-          response => {
+          (response) => {
             commit('LOAD_USER_OK', response.data.user)
             resolve()
           })
-        .catch(error => {
+        .catch((error) => {
           commit('LOAD_USER_FAIL')
           reject(error.response.data)
         })
     })
   },
 
-  updateUser ({ commit, dispatch }, { id, form }) {
+  updateUser({ commit, dispatch }, { id, form }) {
     commit('UPDATE_USER')
 
     return new Promise((resolve, reject) => {
-      axios.post(Config.apiPath + 'user/' + id, { _method: 'PUT', ...form })
+      axios.post(`${Config.apiPath  }user/${  id}`, { _method: 'PUT', ...form })
         .then(
-          response => {
+          (response) => {
             commit('UPDATE_USER_OK', response.data.user)
             resolve()
           })
-        .catch(error => {
+        .catch((error) => {
           commit('UPDATE_USER_FAIL')
           reject(error.response.data)
         })
     })
   },
 
-  deleteUser ({ commit, dispatch }, id) {
+  deleteUser({ commit, dispatch }, id) {
     commit('DELETE_USER')
 
     return new Promise((resolve, reject) => {
-      axios.post(Config.apiPath + 'user/' + id, { _method: 'DELETE' })
+      axios.post(`${Config.apiPath  }user/${  id}`, { _method: 'DELETE' })
         .then(
-          response => {
+          (response) => {
             commit('DELETE_USER_OK', id)
             resolve()
           })
-        .catch(error => {
+        .catch((error) => {
           commit('DELETE_USER_FAIL')
           reject(error.response.data)
         })
@@ -83,15 +83,15 @@ const actions = {
 
 const mutations = {
 
-  LOAD_USERS_OK (state, users) {
+  LOAD_USERS_OK(state, users) {
     state.users = users
   },
 
-  LOAD_USER_OK (state, user) {
+  LOAD_USER_OK(state, user) {
     state.user = user
   },
 
-  UPDATE_USER_OK (state, user) {
+  UPDATE_USER_OK(state, user) {
     state.user = user
   },
 

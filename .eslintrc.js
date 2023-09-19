@@ -1,16 +1,10 @@
 module.exports = {
   root: true,
-  extends: ['@antfu', 'plugin:tailwindcss/recommended'],
-  plugins: [
-    'tailwindcss',
-  ],
+  extends: ['@antfu'],
   globals: {
     defineNuxtConfig: 'readonly',
   },
   rules: {
-    'vue/component-tags-order': ['error', {
-      order: ['template', 'script', 'style'],
-    }],
     'camelcase': ['warn'],
     'import/newline-after-import': ['warn'],
     'no-unused-vars': ['warn'],
@@ -19,17 +13,11 @@ module.exports = {
     'vue/max-attributes-per-line': ['error', { singleline: { max: 5 }, multiline: { max: 1 } }],
     'vue/first-attribute-linebreak': ['error', { singleline: 'beside' }],
     'vue/component-definition-name-casing': ['error', 'PascalCase'],
-    'vue/component-name-in-template-casing': ['error', 'PascalCase', {
-      registeredComponentsOnly: false,
-      ignores: [
-        'v-date-picker',
-      ],
-    }],
+    'vue/component-name-in-template-casing': ['error', 'PascalCase', { registeredComponentsOnly: false }],
     'vue/match-component-import-name': ['error'],
-    'tailwindcss/classnames-order': 'warn',
-    'tailwindcss/no-custom-classname': 0,
-    'tailwindcss/no-contradicting-classname': 'error',
-    'tailwindcss/migration-from-tailwind-2': 0,
+    'vue/component-tags-order': ['error', {
+      order: ['template', 'script', 'style'],
+    }],
     'vue/order-in-components': ['warn', {
       order: [
         'el',
@@ -67,10 +55,9 @@ module.exports = {
         'head',
       ],
     }],
-    'space-before-function-paren': ['error', 'always'],
-    '@typescript-eslint/space-before-function-paren': ['error', 'always'],
     '@typescript-eslint/brace-style': ['error', '1tbs', { allowSingleLine: true }],
     'brace-style': ['error', '1tbs', { allowSingleLine: true }],
+    '@stylistic/ts/brace-style': ['error', '1tbs', { allowSingleLine: true }],
     'vue/quote-props': ['error', 'as-needed'],
     'curly': ['error', 'all'],
     'no-sequences': 0,

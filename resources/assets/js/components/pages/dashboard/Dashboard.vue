@@ -23,14 +23,13 @@
             <p>Longest run: <strong>{{ dashboard.max_time }}</strong></p>
           </div>
         </div>
-
       </div>
       <div class="col-sm-6">
 
         <div class="panel panel-default">
           <div class="panel-heading">My Performance</div>
-          <Line
-            :chart-options="{responsive: true, maintainAspectRatio: false}"
+          <LineChart
+            :chart-options="{ responsive: true, maintainAspectRatio: false }"
             :chart-data="chartData"
             :height="250"
           />
@@ -39,29 +38,32 @@
         <div class="panel panel-default">
           <div class="panel-heading">Add new Time Record</div>
           <div class="panel-body">
-            <entry-form :form="form" :errors="errors" @onSubmit="onSubmit" />
+            <EntryForm :form="form" :errors="errors" @onSubmit="onSubmit" />
           </div>
         </div>
-
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
 import EntryForm from '../entry/partials/Form.vue'
 import 'chart.js/auto'
-import { Line } from 'vue-chartjs'
+import { Line as LineChart } from 'vue-chartjs'
+import { useAuthStore } from '~/stores/auth'
+import { mapActions, mapState } from 'pinia'
+import { useGeneralStore } from '~/stores/general'
+import { useEntriesStore } from '~/stores/entries'
+import { useToastStore } from '~/stores/toast'
 
 export default {
 
   components: {
     EntryForm,
-    Line,
+    LineChart,
   },
 
-  data () {
+  data() {
     return {
       errors: {},
       form: {
@@ -75,12 +77,10 @@ export default {
   },
 
   computed: {
-    ...mapState({
-      me: state => state.auth.me,
-      dashboard: state => state.general.dashboard,
-    }),
+    ...mapState(useAuthStore, ['me']),
+    ...mapState(useGeneralStore, ['dashboard']),
 
-    chartData () {
+    chartData() {
       if (! this.dashboard.week_chart) return {}
       return {
         labels: this.dashboard.week_chart.map(i => i[0]),
@@ -102,36 +102,33 @@ export default {
     },
   },
 
-  mounted () {
+  mounted() {
     this.loadDashboard()
   },
 
   methods: {
-    ...mapActions([
-      'loadDashboard',
-      'storeEntry',
-      'addToastMessage',
-    ]),
+    ...mapActions(useGeneralStore, ['loadDashboard']),
+    ...mapActions(useEntriesStore, { storeEntry: 'store' }),
 
-    onSubmit (form) {
-      this.storeEntry(form)
-        .then(() => {
-          this.loadDashboard()
-          this.addToastMessage({
-            text: 'New time record was added!',
-            type: 'success',
-          })
-          this.form = {
-            date: '',
-            distance: '',
-            time_minutes: '00',
-            time_seconds: '00',
-          }
-          this.errors = {}
+    async onSubmit(form) {
+      try {
+        await this.storeEntry(form)
+        useToastStore().addToastMessage({
+          text: 'New time record was added!',
+          type: 'success',
         })
-        .catch((data) => {
-          this.errors = data.errors || {}
-        })
+        this.form = {
+          date: '',
+          distance: '',
+          time_minutes: '00',
+          time_seconds: '00',
+        }
+        this.errors = {}
+        this.loadDashboard()
+      } catch (e) {
+        this.errors = e.errors || {}
+      }
+
     },
   },
 }

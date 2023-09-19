@@ -54,7 +54,6 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
 import Row from './partials/Row.vue'
 
 export default {

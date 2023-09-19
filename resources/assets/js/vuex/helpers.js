@@ -5,9 +5,9 @@
  * @param fn
  * @return {{}}
  */
-export function makeMutations (types, fn) {
+export function makeMutations(types, fn) {
   const res = {}
-  types.forEach(type => {
+  types.forEach((type) => {
     res[type] = fn
   })
 
