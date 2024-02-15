@@ -24,13 +24,14 @@ import UserEdit from './components/pages/admin/user/Edit'
 
 import AdminEntryList from './components/pages/admin/entry/List'
 import AdminEntryEdit from './components/pages/admin/entry/Edit'
-
 import Error404 from './components/pages/404'
 import Profile from './components/pages/auth/Profile'
+import Policy from '~/components/pages/Policy'
 
 const routes = [
   { path: '/', component: Front },
 
+  { path: '/policy', component: Policy },
   { path: '/login', component: Login, meta: { guestOnly: true } },
   { path: '/logout', component: Logout, meta: { requiresAuth: true } },
   { path: '/register', component: Register, meta: { guestOnly: true } },
