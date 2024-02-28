@@ -27,11 +27,13 @@ import AdminEntryEdit from './components/pages/admin/entry/Edit'
 import Error404 from './components/pages/404'
 import Profile from './components/pages/auth/Profile'
 import Policy from './components/pages/Policy'
+import DeleteAccount from './components/pages/DeleteAccount'
 
 const routes = [
   { path: '/', component: Front },
 
   { path: '/policy', component: Policy },
+  { path: '/delete-account', component: DeleteAccount },
   { path: '/login', component: Login, meta: { guestOnly: true } },
   { path: '/logout', component: Logout, meta: { requiresAuth: true } },
   { path: '/register', component: Register, meta: { guestOnly: true } },
