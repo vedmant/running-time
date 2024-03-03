@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->manager()
                        ->has(Entry::factory()->count(30))
-                       ->create(['name' => 'Manager', 'email' => 'manager@gmail.com']);
+                       ->create(['name' => 'Manager', 'email' => 'user@gmail.com']);
 
         User::factory()->count(5)
                        ->has(Entry::factory()->count(30))
