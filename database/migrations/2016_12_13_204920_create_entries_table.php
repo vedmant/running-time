@@ -22,7 +22,7 @@ class CreateEntriesTable extends Migration
             $table->time('time');
             $table->decimal('speed');
             $table->decimal('pace');
-            $table->json('locations')->default(null);
+            $table->json('locations')->nullable();
             $table->timestamps();
         });
     }
