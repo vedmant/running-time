@@ -17,7 +17,7 @@ class Entry extends Model
      * @var array
      */
     protected $fillable = [
-        'date', 'distance', 'time',
+        'date', 'distance', 'time', 'locations',
     ];
 
     /**
@@ -26,12 +26,13 @@ class Entry extends Model
      * @var array
      */
     protected $casts = [
-        'user_id'  => 'int',
-        'date'     => 'date',
-        'distance' => 'float',
-        'time'     => 'string',
-        'speed'    => 'float',
-        'pace'     => 'float',
+        'user_id'   => 'int',
+        'date'      => 'date',
+        'distance'  => 'float',
+        'time'      => 'string',
+        'speed'     => 'float',
+        'pace'      => 'float',
+        'locations' => 'json',
     ];
 
 

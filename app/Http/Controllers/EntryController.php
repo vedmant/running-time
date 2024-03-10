@@ -72,7 +72,7 @@ class EntryController extends Controller
             'time'     => 'required|date_format:H:i:s|time_required',
         ]);
 
-        $entry = new Entry($request->only('distance', 'time'));
+        $entry = new Entry($request->only('distance', 'time', 'locations'));
         $entry->user_id = auth()->id();
         $entry->date = Carbon::parse($request->get('date'));
         $entry->speed = $entry->distance / ($entry->seconds() / 3600);
