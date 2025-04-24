@@ -16,8 +16,8 @@ jobs:
       image: kirschbaumdevelopment/laravel-test-runner:8.1
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
         with:
           path: '**/vendor'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/composer.lock') }}
