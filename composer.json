@@ -13,6 +13,7 @@
     "guzzlehttp/guzzle": "^7.2",
     "laravel/framework": "^10.0",
     "laravel/sanctum": "^3.2",
+    "laravel/socialite": "^5.12",
     "laravel/telescope": "^v4.16.0",
     "laravel/tinker": "^2.7",
     "laravel/ui": "^v4.2.2"
