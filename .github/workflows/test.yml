@@ -13,7 +13,7 @@ jobs:
   phpunit:
     runs-on: ubuntu-latest
     container:
-      image: kirschbaumdevelopment/laravel-test-runner:8.1
+      image: kirschbaumdevelopment/laravel-test-runner:8.3
 
     steps:
       - uses: actions/checkout@v4
