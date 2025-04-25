@@ -26,6 +26,7 @@ Route::group(['prefix' => 'v1'], function () {
      */
     Route::post('auth/login', [AuthController::class, 'login']);
     Route::post('auth/register', [AuthController::class, 'register']);
+    Route::post('/login/google', [AuthController::class, 'google']);
 
     /*
      * Authenticated area

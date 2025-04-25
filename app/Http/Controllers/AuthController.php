@@ -6,8 +6,12 @@ use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
+use Laravel\Socialite\Facades\Socialite;
 
 /**
  * Class AuthController
@@ -23,7 +27,7 @@ class AuthController extends Controller
      *
      * Handle a login request to the application.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Contracts\Auth\Authenticatable|array
      */
     public function login(Request $request)
@@ -62,7 +66,7 @@ class AuthController extends Controller
      *
      * Handle a registration request for the application.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function register(Request $request)
@@ -75,9 +79,37 @@ class AuthController extends Controller
     }
 
     /**
+     * Login with Google
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws ValidationException
+     */
+    public function google(Request $request)
+    {
+        $this->validate($request, [
+            'access_token' => 'required|string',
+        ]);
+
+        $gUser = Socialite::driver('google')->stateless()->userFromToken($request->get('access_token'));
+        /** @var User $user */
+        $user = User::where('email', $gUser->email)->first();
+
+        if (! $user) {
+            $user = User::create([
+                'name'     => $gUser->name,
+                'email'    => $gUser->email,
+                'password' => Hash::make(Str::random()),
+            ]);
+        }
+
+        return response()->json(['user' => $user->getListData(), 'token' => $user->makeApiToken()]);
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -92,14 +124,14 @@ class AuthController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
      * @return User
      */
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'name'     => $data['name'],
+            'email'    => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
     }

@@ -82,6 +82,12 @@ class UserController extends Controller
             'password' => 'nullable|min:6|confirmed',
         ]);
 
+        // Do not udpate test users email or password
+        if (in_array($user->email, ['user@gmail.com', 'admin@gmail.com'])) {
+            $request->offsetUnset('email');
+            $request->offsetUnset('password');
+        }
+
         $user->fill($request->only('name', 'email'));
         if ($request->get('password')) {
             $user->password = bcrypt($request->get('password'));
